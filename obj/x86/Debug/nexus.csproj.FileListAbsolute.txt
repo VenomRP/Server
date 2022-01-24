@@ -1,0 +1,51 @@
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.csproj.AssemblyReference.cache
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.AssemblyInfoInputs.cache
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.AssemblyInfo.cs
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.csproj.CoreCompileInputs.cache
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\nexus.deps.json
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.json
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.dev.json
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\nexus.dll
+C:\Users\mahru\OneDrive\Desktop\server-files\server-files\bridge\resources\VMP_CNR\nexus.pdb
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.csproj.CopyComplete
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.dll
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.pdb
+C:\Users\mahru\OneDrive\Desktop\server-files\Venom-Roleplay\obj\x86\Debug\nexus.genruntimeconfig.cache
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.deps.json
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.json
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.dev.json
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.dll
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.pdb
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.csproj.AssemblyReference.cache
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.AssemblyInfoInputs.cache
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.AssemblyInfo.cs
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.csproj.CoreCompileInputs.cache
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.csproj.CopyComplete
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.dll
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.pdb
+C:\Users\mahru\OneDrive\Desktop\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.genruntimeconfig.cache
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.deps.json
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.json
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.dev.json
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.dll
+D:\Zeugs\server files 1.1\Venom Roleplay\server-files\bridge\resources\VMP_CNR\nexus.pdb
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.csproj.AssemblyReference.cache
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.GeneratedMSBuildEditorConfig.editorconfig
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.AssemblyInfoInputs.cache
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.AssemblyInfo.cs
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.csproj.CoreCompileInputs.cache
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.csproj.CopyComplete
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.dll
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.pdb
+D:\Zeugs\server files 1.1\Venom Roleplay\Venom-Roleplay\obj\x86\Debug\nexus.genruntimeconfig.cache
