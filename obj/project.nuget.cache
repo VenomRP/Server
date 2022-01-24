@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rni8drYzZqECyw+HJgONGoKb0IHCUKpW1iZA4bGfdG3WCW59DskH2EBKYJu3FI+rm62lgdsKXdtv765IjJ91TA==",
+  "dgSpecHash": "ZfUlayVD2GERCT61xHycxy1jK9UYt4OXn6gJ+keLnbkmwrB+aSZJ5bZW2VrVr9O0z5V/wErfgiel1o0j+JdMxQ==",
   "success": true,
-  "projectFilePath": "D:\\Zeugs\\server files 1.1\\Venom Roleplay\\Venom-Roleplay\\nexus.csproj",
+  "projectFilePath": "D:\\Zeugs\\Venom Roleplay\\Server\\nexus.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\mahru\\.nuget\\packages\\ben.demystifier\\0.1.0\\ben.demystifier.0.1.0.nupkg.sha512",
     "C:\\Users\\mahru\\.nuget\\packages\\bouncycastle.netcore\\1.8.3\\bouncycastle.netcore.1.8.3.nupkg.sha512",

@@ -58,7 +58,7 @@ namespace GVRP.Module.Anticheat
 
             Discord.SendMessage($"{dbPlayer.Player.Name} hat ein Anticheat-Log ausgelöst! ({cheatCode}) @here", "", DiscordHandler.Channels.ANTICHEAT);
             Logger.AddActionLogg(dbPlayer.Id, cheatCode);
-            Players.Players.Instance.SendMessageToAuthorizedUsers("log", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({l_Cheat}) gegeben.");
+            Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({l_Cheat}) gegeben.");
             
 
         }
