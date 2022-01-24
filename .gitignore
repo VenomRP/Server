@@ -15,3 +15,13 @@ obj/x86/Debug/nexus.dll
 obj/x86/Debug/nexus.GeneratedMSBuildEditorConfig.editorconfig
 obj/x86/Debug/nexus.genruntimeconfig.cache
 obj/x86/Debug/nexus.pdb
+obj/nexus.csproj.nuget.dgspec.json
+obj/nexus.csproj.nuget.g.props
+obj/nexus.csproj.nuget.g.targets
+obj/project.assets.json
+obj/x86/Debug/nexus.assets.cache
+obj/x86/Debug/nexus.csproj.AssemblyReference.cache
+obj/x86/Debug/nexus.csproj.CoreCompileInputs.cache
+obj/x86/Debug/nexus.csproj.FileListAbsolute.txt
+obj/x86/Debug/nexus.GeneratedMSBuildEditorConfig.editorconfig
+obj/x86/Debug/nexus.pdb
