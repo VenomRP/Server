@@ -11,6 +11,7 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
 using GVRP.Module.Vehicles.Garages;
+using GVRP.Module.Injury;
 
 namespace GVRP.Module.AsyncEventTasks
 {
@@ -18,122 +19,131 @@ namespace GVRP.Module.AsyncEventTasks
     {
         public static void EnterColShapeTask(ColShape shape, Player player)
         {
-            DbPlayer iPlayer = player.GetPlayer();
-            if (iPlayer == null || !iPlayer.IsValid()) return;
-
-            if (shape.HasData("notificationId"))
+            try
             {
-                var notification =
-                    PlayerNotifications.Instance.GetById((int)shape.GetData<Int16>("notificationId"));
-                iPlayer.SendNotification(notification);
-            }
-
-            if (Modules.Instance.OnColShapeEvent(iPlayer, shape, ColShapeState.Enter)) return;
-
-            if (shape.HasData("clothShopId"))
-            {
-                iPlayer.SetData("clothShopId", (uint)shape.GetData<Int16>("clothShopId"));
-                iPlayer.SendNewNotification("Benutze E um Kleidung zu kaufen!", title: "Kleidungsstore");
-                return;
-            }
-
-            if (shape.HasData("teamWardrobe"))
-            {
-                HashSet<int> teams = shape.GetData<HashSet<int>>("teamWardrobe");
-                if (!teams.Contains((int)iPlayer.TeamId)) return;
-                iPlayer.SetData("teamWardrobe", teams);
-                iPlayer.SendNewNotification("Benutze E um Kleidung zu kaufen!", title: "Fraktionskleiderschrank");
-                return;
-            }
-
-            if (shape.HasData("ammunationId"))
-            {
-                iPlayer.SendNewNotification("Benutze E um Waffen zu kaufen!", title: "Ammunation");
-
-                int ammunationId = shape.GetData<Int16>("ammunationId");
-                iPlayer.SetData("ammunationId", ammunationId);
-                return;
-            }
-
-            if (shape.HasData("name_change"))
-            {
-                iPlayer.SetData("name_change", true);
-                iPlayer.SendNewNotification(title:"Namensänderung beantragen", text:"Drücke E um eine Namensänderung zu beantragen.");
-                return;
-            }
+                DbPlayer iPlayer = player.GetPlayer();
+                if (iPlayer == null || !iPlayer.IsValid()) return;
+                if (iPlayer.isInjured()) return;
 
 
-            if (shape.HasData("garageId"))
-            {
-                try
+                if (shape.HasData("notificationId"))
                 {
-                    uint garageId = shape.GetData<uint>("garageId");
-                    if (!GarageModule.Instance.Contains(garageId)) return;
-                    var garage = GarageModule.Instance[garageId];
-                    if (garage == null) return;
-                    var labelText = "";
+                    var notification =
+                        PlayerNotifications.Instance.GetById((int)shape.GetData<UInt32>("notificationId"));
+                    iPlayer.SendNotification(notification);
+                }
 
-                    if (garage.PublicTeamRestriction > 0 && iPlayer.TeamId != garage.PublicTeamRestriction)
+                if (Modules.Instance.OnColShapeEvent(iPlayer, shape, ColShapeState.Enter)) return;
+
+                if (shape.HasData("clothShopId"))
+                {
+                    iPlayer.SetData("clothShopId", (uint)shape.GetData<UInt32>("clothShopId"));
+                    iPlayer.SendNewNotification("Benutze E um Kleidung zu kaufen!", title: "Kleidungsstore");
+                    return;
+                }
+
+                if (shape.HasData("teamWardrobe"))
+                {
+                    HashSet<int> teams = shape.GetData<HashSet<int>>("teamWardrobe");
+                    if (!teams.Contains((int)iPlayer.TeamId)) return;
+                    iPlayer.SetData("teamWardrobe", teams);
+                    iPlayer.SendNewNotification("Benutze E um Kleidung zu kaufen!", title: "Fraktionskleiderschrank");
+                    return;
+                }
+
+                if (shape.HasData("ammunationId"))
+                {
+                    iPlayer.SendNewNotification("Benutze E um Waffen zu kaufen!", title: "Ammunation");
+
+                    int ammunationId = shape.GetData<Int16>("ammunationId");
+                    iPlayer.SetData("ammunationId", ammunationId);
+                    return;
+                }
+
+                if (shape.HasData("name_change"))
+                {
+                    iPlayer.SetData("name_change", true);
+                    iPlayer.SendNewNotification(title: "Namensänderung beantragen", text: "Drücke E um eine Namensänderung zu beantragen.");
+                    return;
+                }
+
+
+                if (shape.HasData("garageId"))
+                {
+                    try
+                    {
+                        uint garageId = shape.GetData<uint>("garageId");
+                        if (!GarageModule.Instance.Contains(garageId)) return;
+                        var garage = GarageModule.Instance[garageId];
+                        if (garage == null) return;
+                        var labelText = "";
+
+                        if (garage.PublicTeamRestriction > 0 && iPlayer.TeamId != garage.PublicTeamRestriction)
+                        {
+                            return;
+                        }
+
+                        if (!garage.DisableInfos)
+                        {
+
+                            if (garage.IsTeamGarage())
+                            {
+                                labelText = labelText + " (Fraktionsgarage)";
+                            }
+                            else if (garage.Type == GarageType.VehicleCollection)
+                            {
+                                labelText = "Fahrzeug fuer 2500$ Kaution freikaufen";
+                            }
+                            else if (garage.Type == GarageType.VehicleAdminGarage)
+                            {
+                                labelText = "Fahrzeug fuer 5000$ Kaution freikaufen";
+                            }
+                            else
+                            {
+                                labelText = "Benutze E um die Garage zu öffnen!";
+                            }
+                        }
+                        iPlayer.SetData("garageId", garageId);
+                        return;
+                    }
+                    catch (Exception e) {
+                        Logger.Crash(e);
+                    }
+                }
+
+                if (shape.HasData("bankId"))
+                {
+                    var bankId = shape.GetData<Int16>("bankId");
+                    if (bankId == null)
                     {
                         return;
                     }
 
-                    if (!garage.DisableInfos)
+                    var parseBankId = uint.TryParse(bankId.ToString(), out uint bankIdNew);
+                    if (!parseBankId)
                     {
-
-                        if (garage.IsTeamGarage())
-                        {
-                            labelText = labelText + " (Fraktionsgarage)";
-                        }
-                        else if (garage.Type == GarageType.VehicleCollection)
-                        {
-                            labelText = "Fahrzeug fuer 2500$ Kaution freikaufen";
-                        }
-                        else if (garage.Type == GarageType.VehicleAdminGarage)
-                        {
-                            labelText = "Fahrzeug fuer 5000$ Kaution freikaufen";
-                        }
-                        else
-                        {
-                            labelText = "Benutze E um die Garage zu öffnen!";
-                        }
+                        return;
                     }
-                    iPlayer.SetData("garageId", garageId);
+
+                    var bank = BankModule.Instance.Get(bankIdNew);
+                    iPlayer.SendNewNotification("Benutze E um auf dein Konto zuzugreifen!", title: bank.Name);
+                    iPlayer.SetData("bankId", bankId);
                     return;
                 }
-                catch(Exception e) {
-                    Logger.Crash(e);
+
+                if (shape.HasData("ArmoryId"))
+                {
+                    int ArmoryId = shape.GetData<Int16>("ArmoryId");
+                    var Armory = ArmoryModule.Instance.Get(ArmoryId);
+                    if (Armory == null) return;
+                    iPlayer.SendNewNotification("Benutze E zum interagieren!", title: "Waffenkammer");
+                    iPlayer.SetData("ArmoryId", ArmoryId);
+                    return;
                 }
             }
-            
-            if (shape.HasData("bankId"))
+            catch (Exception ex)
             {
-                var bankId = shape.GetData<Int16>("bankId");
-                if (bankId == null)
-                {
-                    return;
-                }
-
-                var parseBankId = uint.TryParse(bankId.ToString(), out uint bankIdNew);
-                if (!parseBankId)
-                {
-                    return;
-                }
-
-                var bank = BankModule.Instance.Get(bankIdNew);
-                iPlayer.SendNewNotification("Benutze E um auf dein Konto zuzugreifen!", title: bank.Name);
-                iPlayer.SetData("bankId", bankId);
-                return;
-            }
-
-            if (shape.HasData("ArmoryId"))
-            {
-                int ArmoryId = shape.GetData<Int16>("ArmoryId");
-                var Armory = ArmoryModule.Instance.Get(ArmoryId);
-                if (Armory == null) return;
-                iPlayer.SendNewNotification("Benutze E zum interagieren!", title: "Waffenkammer");
-                iPlayer.SetData("ArmoryId", ArmoryId);
-                return;
+                Console.WriteLine(ex);
             }
         }
     }

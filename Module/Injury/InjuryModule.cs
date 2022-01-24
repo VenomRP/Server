@@ -68,157 +68,163 @@ namespace GVRP.Module.Injury
 
         public override void OnPlayerDeath(DbPlayer dbPlayer, NetHandle killer, uint hash)
         {
-            
-            dbPlayer.CancelPhoneCall();
-            NAPI.Player.SetPlayerCurrentWeapon(dbPlayer.Player, WeaponHash.Unarmed);
-
-            var killedByPlayer = killer.ToPlayer() != dbPlayer.Player;
-            DbPlayer iKiller = killer.ToPlayer().GetPlayer();
-
-            if (hash == 3452007600)
+            try
             {
-                if (iKiller != null && iKiller.IsValid() && iKiller.Player.IsInVehicle)
+                dbPlayer.CancelPhoneCall();
+                NAPI.Player.SetPlayerCurrentWeapon(dbPlayer.Player, WeaponHash.Unarmed);
+
+                var killedByPlayer = killer.ToPlayer() != dbPlayer.Player;
+                DbPlayer iKiller = killer.ToPlayer().GetPlayer();
+
+                if (hash == 3452007600)
                 {
-                    hash = 133987706; // Run over by car (if other player is involved in Fall)
-                }
-            }
-
-            string killerweapon = Convert.ToString((WeaponHash)hash) != "" ? Convert.ToString((WeaponHash)hash) : "unbekannt";
-
-            if (iKiller != null && iKiller.IsValid() && iKiller.IsACop() && killerweapon == "SMG")
-            {
-                dbPlayer.SetData("SMGkilledPos", dbPlayer.Player.Position);
-                dbPlayer.SetData("SMGkilledDim", dbPlayer.Player.Dimension);
-                return;
-            }
-
-            if (dbPlayer.DimensionType[0] == DimensionType.RacingArea || dbPlayer.HasData("inRacing"))
-            {
-                dbPlayer.RemoveFromRacing();
-                dbPlayer.dead_x[0] = RacingModule.RacingMenuPosition.X;
-                dbPlayer.dead_y[0] = RacingModule.RacingMenuPosition.Y;
-                dbPlayer.dead_z[0] = RacingModule.RacingMenuPosition.Z;
-            }
-
-            if (dbPlayer.NeuEingereist())
-            {
-                dbPlayer.revive();
-                return;
-            }
-
-            // SetTMP Dimension
-            dbPlayer.SetData("tmpDeathDimension", dbPlayer.Player.Dimension);
-
-            if (!dbPlayer.isAlive()) return; // Erneuter Tot verhindern
-
-            // if death in jail add jailtime +10
-            if (dbPlayer.jailtime[0] > 0)
-            {
-                dbPlayer.jailtime[0] += 10;
-            }
-
-            dbPlayer.Player.TriggerEvent("startScreenEffect", "DeathFailMPIn", 5000, true);
-
-
-            var rnd = new Random();
-            var injuryCauseOfDeath = InjuryCauseOfDeathModule.Instance.GetAll().Values.ToList().Find(iCoD => iCoD.Hash == hash) ??
-                                     InjuryCauseOfDeathModule.Instance.GetAll()[5];
-
-            var injuryType = injuryCauseOfDeath.InjuryTypes.OrderBy(x => rnd.Next()).ToList().First() ??
-                             injuryCauseOfDeath.InjuryTypes.First(i => i.Id == 1);
-            
-            // Player Died in Gangwar
-            // TODO: Move to according Module
-            if (GangwarTownModule.Instance.IsTeamInGangwar(dbPlayer.Team))
-            {
-                // in GW Gebiet
-                if (dbPlayer.HasData("gangwarId"))
-                {
-                    GangwarTown gangwarTown = GangwarTownModule.Instance.Get(dbPlayer.GetData("gangwarId"));
-                    if (gangwarTown != null)
+                    if (iKiller != null && iKiller.IsValid() && iKiller.Player.IsInVehicle)
                     {
-                        // Player is in Range
-                        injuryType = InjuryTypeModule.Instance.Get(InjuryGangwar);
+                        hash = 133987706; // Run over by car (if other player is involved in Fall)
+                    }
+                }
 
-                        if (dbPlayer.Team.Id == gangwarTown.AttackerTeam.Id)
+                string killerweapon = Convert.ToString((WeaponHash)hash) != "" ? Convert.ToString((WeaponHash)hash) : "unbekannt";
+
+                if (iKiller != null && iKiller.IsValid() && iKiller.IsACop() && killerweapon == "SMG")
+                {
+                    dbPlayer.SetData("SMGkilledPos", dbPlayer.Player.Position);
+                    dbPlayer.SetData("SMGkilledDim", dbPlayer.Player.Dimension);
+                    return;
+                }
+
+                if (dbPlayer.DimensionType[0] == DimensionType.RacingArea || dbPlayer.HasData("inRacing"))
+                {
+                    dbPlayer.RemoveFromRacing();
+                    dbPlayer.dead_x[0] = RacingModule.RacingMenuPosition.X;
+                    dbPlayer.dead_y[0] = RacingModule.RacingMenuPosition.Y;
+                    dbPlayer.dead_z[0] = RacingModule.RacingMenuPosition.Z;
+                }
+
+                if (dbPlayer.NeuEingereist())
+                {
+                    dbPlayer.revive();
+                    return;
+                }
+
+                // SetTMP Dimension
+                dbPlayer.SetData("tmpDeathDimension", dbPlayer.Player.Dimension);
+
+                if (!dbPlayer.isAlive()) return; // Erneuter Tot verhindern
+
+                // if death in jail add jailtime +10
+                if (dbPlayer.jailtime[0] > 0)
+                {
+                    dbPlayer.jailtime[0] += 10;
+                }
+
+                dbPlayer.Player.TriggerEvent("startScreenEffect", "DeathFailMPIn", 5000, true);
+
+
+                var rnd = new Random();
+                var injuryCauseOfDeath = InjuryCauseOfDeathModule.Instance.GetAll().Values.ToList().Find(iCoD => iCoD.Hash == hash) ??
+                                         InjuryCauseOfDeathModule.Instance.GetAll()[5];
+
+                var injuryType = injuryCauseOfDeath.InjuryTypes.OrderBy(x => rnd.Next()).ToList().First() ??
+                                 injuryCauseOfDeath.InjuryTypes.First(i => i.Id == 1);
+
+                // Player Died in Gangwar
+                // TODO: Move to according Module
+                if (GangwarTownModule.Instance.IsTeamInGangwar(dbPlayer.Team))
+                {
+                    // in GW Gebiet
+                    if (dbPlayer.HasData("gangwarId"))
+                    {
+                        GangwarTown gangwarTown = GangwarTownModule.Instance.Get(dbPlayer.GetData("gangwarId"));
+                        if (gangwarTown != null)
                         {
-                            gangwarTown.IncreasePoints(GangwarModule.Instance.KillPoints, 0);
-                            gangwarTown.DefenderTeam.SendNotification($"+ {GangwarModule.Instance.KillPoints} Punkte fuer toeten eines Gegners!");
+                            // Player is in Range
+                            injuryType = InjuryTypeModule.Instance.Get(InjuryGangwar);
+
+                            if (dbPlayer.Team.Id == gangwarTown.AttackerTeam.Id)
+                            {
+                                gangwarTown.IncreasePoints(GangwarModule.Instance.KillPoints, 0);
+                                gangwarTown.DefenderTeam.SendNotification($"+ {GangwarModule.Instance.KillPoints} Punkte fuer toeten eines Gegners!");
+                            }
+                            else if (dbPlayer.Team.Id == gangwarTown.DefenderTeam.Id)
+                            {
+                                gangwarTown.IncreasePoints(0, GangwarModule.Instance.KillPoints);
+                                gangwarTown.AttackerTeam.SendNotification($"+ {GangwarModule.Instance.KillPoints} Punkte fuer toeten eines Gegners!");
+                            }
                         }
-                        else if (dbPlayer.Team.Id == gangwarTown.DefenderTeam.Id)
+                    }
+                }
+
+                // Blacklist
+                // TODO: Move to according Module
+                if (iKiller != null && iKiller.IsValid() && iKiller.IsAGangster())
+                {
+                    if (dbPlayer.IsOnBlacklist((int)iKiller.TeamId))
+                    {
+                        iKiller.Team.IncreaseBlacklist(dbPlayer);
+
+                        int type = dbPlayer.GetBlacklistType((int)iKiller.TeamId);
+                        int blCosts = 0;
+
+                        // Costs on Blacklist Death
+                        if (type == 1)
                         {
-                            gangwarTown.IncreasePoints(0, GangwarModule.Instance.KillPoints);
-                            gangwarTown.AttackerTeam.SendNotification($"+ {GangwarModule.Instance.KillPoints} Punkte fuer toeten eines Gegners!");
+                            blCosts = 5000;
                         }
+                        else if (type == 2)
+                        {
+                            blCosts = 8000;
+                        }
+                        else
+                        {
+                            blCosts = 3000;
+                        }
+                        // multiplier w level  R: (Kosten/25 * Level) + Kosten
+                        // BSP: Level 31 bei Type 1(ist eigtl typ 2 da aber mit 0 bla..)  Sind es 5000 + (5000/25 * Level) = 11.200$
+                        blCosts = ((blCosts / 25) * dbPlayer.Level) + blCosts;
+
+                        dbPlayer.TakeBankMoney(blCosts);
+                        dbPlayer.SendNewNotification($"Durch deinen Blacklisteintrag hast du nun ${blCosts} zusätzlich gezahlt!");
                     }
                 }
-            }
 
-            // Blacklist
-            // TODO: Move to according Module
-            if (iKiller != null && iKiller.IsValid() && iKiller.IsAGangster())
-            {
-                if (dbPlayer.IsOnBlacklist((int)iKiller.TeamId))
+                // Assign Injurys Data to Player (Zeit wird hochgesetzt beim Tot aufzählend... von Daher nicht nötig die Deadtime zu setzen)
+                dbPlayer.Injury = injuryType;
+                dbPlayer.dead_x[0] = dbPlayer.Player.Position.X;
+                dbPlayer.dead_y[0] = dbPlayer.Player.Position.Y;
+                dbPlayer.dead_z[0] = dbPlayer.Player.Position.Z;
+                dbPlayer.deadtime[0] = 0;
+
+                if (injuryType.Id != InjuryTeamfight && dbPlayer.jailtime[0] <= 0 && dbPlayer.Container.GetItemAmount(174) > 0 && !dbPlayer.phoneSetting.flugmodus && injuryType.Id != InjuryGangwar)
                 {
-                    iKiller.Team.IncreaseBlacklist(dbPlayer);
 
-                    int type = dbPlayer.GetBlacklistType((int)iKiller.TeamId);
-                    int blCosts = 0;
-                    
-                    // Costs on Blacklist Death
-                    if (type == 1)
-                    {
-                        blCosts = 5000;
-                    }
-                    else if (type == 2)
-                    {
-                        blCosts = 8000;
-                    }
-                    else
-                    {
-                        blCosts = 3000;
-                    }
-                    // multiplier w level  R: (Kosten/25 * Level) + Kosten
-                    // BSP: Level 31 bei Type 1(ist eigtl typ 2 da aber mit 0 bla..)  Sind es 5000 + (5000/25 * Level) = 11.200$
-                    blCosts = ((blCosts / 25) * dbPlayer.Level) + blCosts;
+                    string deathmessage = $"Verletzung: {dbPlayer.Injury.Name} | {dbPlayer.Injury.TimeToDeath - dbPlayer.deadtime[0]} Min";
 
-                    dbPlayer.TakeBankMoney(blCosts);
-                    dbPlayer.SendNewNotification($"Durch deinen Blacklisteintrag hast du nun ${blCosts} zusätzlich gezahlt!");
+                    //TeamModule.Instance.SendMessageToTeam("Es wurde eine Schwerverletze Person gemeldet!", teams.TEAM_MEDIC);
+
+                    ServiceModule.Instance.CancelOwnService(dbPlayer, (uint)teams.TEAM_MEDIC);
+
+                    // Add Service
+                    Service.Service service = new Service.Service(dbPlayer.Player.Position, deathmessage, (uint)teams.TEAM_MEDIC, dbPlayer);
+                    ServiceModule.Instance.Add(dbPlayer, (uint)teams.TEAM_MEDIC, service);
                 }
-            }
 
-            // Assign Injurys Data to Player (Zeit wird hochgesetzt beim Tot aufzählend... von Daher nicht nötig die Deadtime zu setzen)
-            dbPlayer.Injury = injuryType;
-            dbPlayer.dead_x[0] = dbPlayer.Player.Position.X;
-            dbPlayer.dead_y[0] = dbPlayer.Player.Position.Y;
-            dbPlayer.dead_z[0] = dbPlayer.Player.Position.Z;
-            dbPlayer.deadtime[0] = 0;
-
-            if (injuryType.Id != InjuryTeamfight && dbPlayer.jailtime[0] <= 0 && dbPlayer.Container.GetItemAmount(174) > 0 && !dbPlayer.phoneSetting.flugmodus && injuryType.Id != InjuryGangwar)
-            {
-
-                string deathmessage = $"Verletzung: {dbPlayer.Injury.Name} | {dbPlayer.Injury.TimeToDeath - dbPlayer.deadtime[0]} Min";
-
-                //TeamModule.Instance.SendMessageToTeam("Es wurde eine Schwerverletze Person gemeldet!", teams.TEAM_MEDIC);
-
-                ServiceModule.Instance.CancelOwnService(dbPlayer, (uint)teams.TEAM_MEDIC);
-
-                // Add Service
-                Service.Service service = new Service.Service(dbPlayer.Player.Position, deathmessage, (uint)teams.TEAM_MEDIC, dbPlayer);
-                ServiceModule.Instance.Add(dbPlayer, (uint)teams.TEAM_MEDIC, service);
-            }
-            
-            dbPlayer.ApplyDeathEffects();
+                dbPlayer.ApplyDeathEffects();
 
 
-            var l_WeaponDatas = WeaponDataModule.Instance.GetAll().Values.ToList();
-            foreach (var l_Data in l_WeaponDatas)
-            {
-                if (dbPlayer.Weapons.Exists(d => d.WeaponDataId == l_Data.Id))
+                var l_WeaponDatas = WeaponDataModule.Instance.GetAll().Values.ToList();
+                foreach (var l_Data in l_WeaponDatas)
                 {
-                    WeaponDetail l_Detail = dbPlayer.Weapons.Find(d => d.WeaponDataId == l_Data.Id);
-                    dbPlayer.Player.TriggerEvent("getWeaponAmmo", l_Detail.Ammo);
+                    if (dbPlayer.Weapons.Exists(d => d.WeaponDataId == l_Data.Id))
+                    {
+                        WeaponDetail l_Detail = dbPlayer.Weapons.Find(d => d.WeaponDataId == l_Data.Id);
+                        dbPlayer.Player.TriggerEvent("getWeaponAmmo", l_Detail.Ammo);
+                    }
                 }
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("OnPlayerDeath Injury" + e);
             }
         }
 

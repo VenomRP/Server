@@ -316,33 +316,38 @@ namespace GVRP.Module
 
         public void OnPlayerDeath(DbPlayer dbPlayer, NetHandle killer, uint weapon)
         {
-
-            bool IgnoreFutureDeath = false;
-            foreach (var module in modules.Values)
+            try
             {
-                try
-                {
-                    IgnoreFutureDeath = (!IgnoreFutureDeath) ? module.OnPlayerDeathBefore(dbPlayer, killer, weapon) : IgnoreFutureDeath;
-                }
-                catch (Exception e)
-                {
-                    Logger.Print(e.Message);
-                }
-            }
-
-            if (!IgnoreFutureDeath)
-            {
+                bool IgnoreFutureDeath = false;
                 foreach (var module in modules.Values)
                 {
                     try
                     {
-                        module.OnPlayerDeath(dbPlayer, killer, weapon);
+                        IgnoreFutureDeath = (!IgnoreFutureDeath) ? module.OnPlayerDeathBefore(dbPlayer, killer, weapon) : IgnoreFutureDeath;
                     }
                     catch (Exception e)
                     {
                         Logger.Print(e.Message);
                     }
                 }
+
+                if (!IgnoreFutureDeath)
+                {
+                    foreach (var module in modules.Values)
+                    {
+                        try
+                        {
+                            module.OnPlayerDeath(dbPlayer, killer, weapon);
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.Print(e.Message);
+                        }
+                    }
+                }
+            }catch (Exception e)
+            {
+                Console.WriteLine("OnPlayerDeath Modules" + e);
             }
         }
         
