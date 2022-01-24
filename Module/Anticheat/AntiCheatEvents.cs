@@ -56,7 +56,7 @@ namespace GVRP.Module.Anticheat
                     break;
             }
 
-            Discord.SendMessage($"{dbPlayer.Player.Name} hat ein Anticheat-Log ausgelöst! ({cheatCode}) @here", "", DiscordHandler.Channels.ANTICHEAT);
+            Discord.SendMessage($"{dbPlayer.Player.Name} hat ein Anticheat-Log ausgelöst! ({cheatCode})", "", DiscordHandler.Channels.ANTICHEAT);
             Logger.AddActionLogg(dbPlayer.Id, cheatCode);
             Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({l_Cheat}) gegeben.");
             
@@ -70,7 +70,7 @@ namespace GVRP.Module.Anticheat
             if(!dbPlayer.Player.Exists) { return; }
 
             Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health}).");
-            Discord.SendMessage($"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health}) @here", "", DiscordHandler.Channels.ANTICHEAT);
+            Discord.SendMessage($"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health})", "", DiscordHandler.Channels.ANTICHEAT);
         }
     }
 }

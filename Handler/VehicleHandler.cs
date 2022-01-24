@@ -135,13 +135,20 @@ namespace GVRP.Handler
 
         public override void OnPlayerDeath(DbPlayer dbPlayer, NetHandle killer, uint weapon)
         {
-            if (dbPlayer != null && dbPlayer.IsValid() && dbPlayer.Player.IsInVehicle)
+            try
             {
-                SxVehicle sxVeh = dbPlayer.Player.Vehicle.GetVehicle();
-                if (sxVeh != null && dbPlayer.IsValid())
+                if (dbPlayer != null && dbPlayer.IsValid() && dbPlayer.Player.IsInVehicle)
                 {
-                    RemovePlayerFromOccupants(sxVeh, dbPlayer);
+                    SxVehicle sxVeh = dbPlayer.Player.Vehicle.GetVehicle();
+                    if (sxVeh != null && dbPlayer.IsValid())
+                    {
+                        RemovePlayerFromOccupants(sxVeh, dbPlayer);
+                    }
                 }
+            }
+            catch(Exception e) 
+            {
+                Console.WriteLine("OnPlayerDeath Occupants" + e); 
             }
         }
 

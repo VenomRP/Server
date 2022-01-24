@@ -896,31 +896,39 @@ namespace GVRP
         [ServerEvent(Event.PlayerDeath)]
         public void OnPlayerDeath(Player player, Player killer, uint weapon)
         {
-            DbPlayer iPlayer = player.GetPlayer();
-            if (iPlayer == null || !iPlayer.IsValid()) return;
-
-            iPlayer.SetData("Teleport", 2);
-
-            iPlayer.SetData("killer", killer);
-
-            if(!killer.Exists) {
-                Discord.SendMessage($"{player.Name} ist gestorben ({killer.CurrentWeapon})", "", DiscordHandler.Channels.KILL);
-            }
-
-            if (killer.Exists && killer.IsInVehicle && killer.CurrentWeapon == WeaponHash.Unarmed)
+            try
             {
+                DbPlayer iPlayer = player.GetPlayer();
+                if (iPlayer == null || !iPlayer.IsValid()) return;
 
-                Discord.SendMessage($"{killer.Name} hat {player.Name} überfahren. ({killer.CurrentWeapon})", "DRIVE-BY KILL-LOG", DiscordHandler.Channels.KILL);
-                int speed = killer.GetSpeed();
-                Players.Instance.SendMessageToAuthorizedUsers("log", $"{killer.Name} hat {player.Name} überfahren. ({speed}) km/h)", 3500);
+                iPlayer.SetData("Teleport", 2);
+
+
+                if (!killer.Exists)
+                {
+                    Discord.SendMessage($"{player.Name} ist gestorben ({killer.CurrentWeapon})", "", DiscordHandler.Channels.KILL);
+                }
+
+                if (killer.Exists && killer.IsInVehicle && killer.CurrentWeapon == WeaponHash.Unarmed)
+                {
+                    iPlayer.SetData("killer", killer);
+                    Discord.SendMessage($"{killer.Name} hat {player.Name} überfahren. ({killer.CurrentWeapon})", "DRIVE-BY KILL-LOG", DiscordHandler.Channels.KILL);
+                    int speed = killer.GetSpeed();
+                    Players.Instance.SendMessageToAuthorizedUsers("log", $"{killer.Name} hat {player.Name} überfahren. ({speed}) km/h)", 3500);
+                }
+                else if (killer.Exists && !killer.IsInVehicle)
+                {
+                    iPlayer.SetData("killer", killer);
+                    Discord.SendMessage($"{killer.Name} hat {player.Name} getötet. ({killer.CurrentWeapon})", "KILL-LOG", DiscordHandler.Channels.KILL);
+                }
+
+                // Normal Module Death Handling
+                Modules.Instance.OnPlayerDeath(iPlayer, killer, weapon);
             }
-            else if (killer.Exists && !killer.IsInVehicle)
+            catch (Exception ex)
             {
-                Discord.SendMessage($"{killer.Name} hat {player.Name} getötet. ({killer.CurrentWeapon})", "KILL-LOG", DiscordHandler.Channels.KILL);
+                Console.WriteLine("OnPlayerDeath" + ex);
             }
-
-            // Normal Module Death Handling
-            Modules.Instance.OnPlayerDeath(iPlayer, killer, weapon);
         }
 
         #region Menu
