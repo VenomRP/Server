@@ -1370,7 +1370,7 @@ namespace GVRP.Module.Players
                     if (dbPlayer.Player.Dimension != 0)
                     {
                         //DBLogging.LogAdminAction(player, dbPlayer.GetName(), adminLogTypes.perm, "Community-Ausschluss Juwelier Auto Cheat", 0, Configurations.Configuration.Instance.DevMode);
-                        Players.Instance.SendMessageToAuthorizedUsers("anticheat",
+                        Players.Instance.SendMessageToAuthorizedUsers("teamchat",
                             "Haus Bug Use " + dbPlayer.GetName());
                         dbPlayer.warns[0] = 3;
                         SocialBanHandler.Instance.AddEntry(dbPlayer.Player);
@@ -1400,7 +1400,7 @@ namespace GVRP.Module.Players
                     if (dbPlayer.Player.Dimension != 0)
                     {
                         //DBLogging.LogAdminAction(player, dbPlayer.GetName(), adminLogTypes.perm, "Community-Ausschluss Staatsbank Auto Cheat", 0, Configurations.Configuration.Instance.DevMode);
-                        Players.Instance.SendMessageToAuthorizedUsers("anticheat",
+                        Players.Instance.SendMessageToAuthorizedUsers("teamchat",
                             "Haus Bug Use " + dbPlayer.GetName());
                         dbPlayer.warns[0] = 3;
                         SocialBanHandler.Instance.AddEntry(dbPlayer.Player);

@@ -28,7 +28,7 @@ namespace GVRP.Module.AsyncEventTasks
 
             if (!vehicle.HasData("serverhash") || (string)vehicle.GetData<string>("serverhash") != "1312asdbncaw13JADGWSh1")
             {
-                Players.Players.Instance.SendMessageToAuthorizedUsers("anticheat", $"ANTI CARHACK " + player.Name);
+                Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"ANTI CARHACK " + player.Name);
                 vehicle.Delete();
                 return;
             }
