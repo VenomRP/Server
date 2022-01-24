@@ -63,14 +63,14 @@ namespace GVRP.Module.Anticheat
 
         }
 
-        [RemoteEvent("server:CheatDetection")]
-        public void CheatDetection(Player player, string CheatCode)
+        [RemoteEvent("server:Healkeydetection")]
+        public void HealkeyDetection(Player player, int allowedhealth, int health)
         {
             var dbPlayer = player.GetPlayer();
             if(!dbPlayer.Player.Exists) { return; }
 
-            Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({CheatCode}) gegeben.");
-            Discord.SendMessage($"{dbPlayer.Player.Name} hat ein Anticheat-Log ausgelöst! ({CheatCode}) @here", "", DiscordHandler.Channels.ANTICHEAT);
+            Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health}).");
+            Discord.SendMessage($"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health}) @here", "", DiscordHandler.Channels.ANTICHEAT);
         }
     }
 }
