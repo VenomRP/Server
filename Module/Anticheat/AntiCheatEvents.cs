@@ -64,19 +64,13 @@ namespace GVRP.Module.Anticheat
         }
 
         [RemoteEvent("server:CheatDetection")]
-        public void CheatDetection(Player player, int CheatCode)
+        public void CheatDetection(Player player, string CheatCode)
         {
             var dbPlayer = player.GetPlayer();
             if(!dbPlayer.Player.Exists) { return; }
-            Console.WriteLine("1 Anticheat");
-            Logger.AddActionLogg(dbPlayer.Id, CheatCode);
-            Console.WriteLine("2 Anticheat");
-             Players.Players.Instance.SendMessageToAuthorizedUsers("log", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({CheatCode}) gegeben.");
-            Console.WriteLine("3 Anticheat");
-            // Players.Instance.SendMessageToAuthorizedUsers("support", $"", time: 20000);
+
+            Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({CheatCode}) gegeben.");
             Discord.SendMessage($"{dbPlayer.Player.Name} hat ein Anticheat-Log ausgelöst! ({CheatCode}) @here", "", DiscordHandler.Channels.ANTICHEAT);
-            Console.WriteLine("4 Anticheat");
         }
-        //server:CheatDetection
     }
 }

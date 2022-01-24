@@ -191,7 +191,7 @@ namespace GVRP.Module.Items.Scripts
                 if (iPlayer.Player.Dimension != 0)
                 {
                     //DBLogging.LogAdminAction(iPlayer.Player, iPlayer.GetName(), adminLogTypes.perm, "Community-Ausschluss Shop Auto Cheat", 0, Configurations.Configuration.Instance.DevMode);
-                    Players.Players.Instance.SendMessageToAuthorizedUsers("anticheat",
+                    Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat",
                         "Haus Bug Use " + iPlayer.GetName());
                     iPlayer.warns[0] = 3;
                     SocialBanHandler.Instance.AddEntry(iPlayer.Player);
