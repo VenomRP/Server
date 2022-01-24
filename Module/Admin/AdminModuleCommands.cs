@@ -3606,6 +3606,7 @@ $"VALUES ('Brusthaare', '{i}', '200', '7');";
 
             dbPlayer.SendNewNotification("Sie haben " + findPlayer.Player.Name + " revived!", title: "ADMIN", notificationType: PlayerNotification.NotificationType.ADMIN);
             findPlayer.SendNewNotification("Administrator " + dbPlayer.Player.Name + " hat Sie revived!", title: "ADMIN", notificationType: PlayerNotification.NotificationType.ADMIN);
+            Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"{dbPlayer.Rank.Name} {dbPlayer.Player.Name} hat {findPlayer.Player.Name} wiederbelebt.");
 
             PlayerSpawn.OnPlayerSpawn(findPlayer.Player);
             
