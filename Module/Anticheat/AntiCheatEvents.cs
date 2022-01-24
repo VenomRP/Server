@@ -70,7 +70,7 @@ namespace GVRP.Module.Anticheat
             if(!dbPlayer.Player.Exists) { return; }
 
             Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health}).");
-            Discord.SendMessage($"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health})", "", DiscordHandler.Channels.ANTICHEAT);
+            Discord.SendMessage($"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({health - allowedhealth})", "", DiscordHandler.Channels.ANTICHEAT);
         }
     }
 }
