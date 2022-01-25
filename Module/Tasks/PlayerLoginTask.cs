@@ -224,7 +224,7 @@ namespace GVRP.Module.Tasks
             if (returnstring == null)
                 player.Kick();
 
-            MySQLHandler.ExecuteAsync($"INSERT INTO player (Name, SCName, ) Values({player.Name}, {player.SocialClubName})");
+            MySQLHandler.ExecuteAsync($"INSERT INTO player (Name, SCName, ) Values({returnstring}, {player.SocialClubName})");
 
             //var Sha = HashThis.CreateSHA256Hash(returnstring);
             //var MDNigger = HashThis.CreateMD5Hash(returnstring);
