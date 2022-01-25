@@ -69,7 +69,7 @@ namespace GVRP.Module.Players.Buffs
         
         public void SetCustomDrugEffect(DbPlayer dbPlayer)
         {
-            dbPlayer.Player.TriggerEvent("startScreenEffect", NewDrugEffect, 60000, true);
+            dbPlayer.Player.TriggerEvent("startScreenEffectJoint", NewDrugEffect, 60000, true);
 
             Random rnd = new Random();
             if(rnd.Next(1, 100) <= 5)
@@ -81,7 +81,7 @@ namespace GVRP.Module.Players.Buffs
         
         public void RemoveEffect(DbPlayer dbPlayer)
         {
-            dbPlayer.Player.TriggerEvent("stopScreenEffect", NewDrugEffect);
+            dbPlayer.Player.TriggerEvent("stopScreenEffectJoint", NewDrugEffect);
         }
         
     }
