@@ -93,7 +93,7 @@ namespace GVRP.Module.Computer.Apps.VehicleImpoundApp
         {
             if (sxVehicle.IsPlayerVehicle())
             {
-                sxVehicle.SetPrivateCarGarage(1, 31);
+                sxVehicle.SetPrivateCarGarage(1, 1000);
             }
             else
             {

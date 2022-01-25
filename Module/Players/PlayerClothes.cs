@@ -79,6 +79,12 @@ namespace GVRP.Module.Players
                 {
                     switch (iPlayer.VisibleArmorType)
                     {
+                        case 1:
+                            if (iPlayer.IsFemale())
+                                iPlayer.SetClothes(9, 17, 2);
+                            else
+                                iPlayer.SetClothes(9, 15, 2);
+                            break;
                         case 2:                     //Police Weste //Rang 0
                             if (iPlayer.IsFemale())
                                 iPlayer.SetClothes(9, 11, 3);

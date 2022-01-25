@@ -29,7 +29,7 @@ namespace GVRP.Module.AsyncEventTasks
                 if (shape.HasData("notificationId"))
                 {
                     var notification =
-                        PlayerNotifications.Instance.GetById((int)shape.GetData<uint>("notificationId"));
+                        PlayerNotifications.Instance.GetById((int)shape.GetData<int>("notificationId"));
                     iPlayer.SendNotification(notification);
                 }
 
