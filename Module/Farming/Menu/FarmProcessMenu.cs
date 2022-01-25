@@ -87,7 +87,7 @@ namespace GVRP.Module.Business.Raffinery
                                 iPlayer.SendNewNotification("Fahrzeug muss zugeschlossen sein!");
                                 return false;
                             }
-                            if (sxVehicle.entity.HasData("Door_KRaum") && sxVehicle.entity.GetData<Int16>("Door_KRaum") == 1)
+                            if (sxVehicle.entity.HasData("Door_KRaum") && sxVehicle.entity.GetData<int>("Door_KRaum") == 1)
                             {
                                 iPlayer.SendNewNotification("Der Kofferaum muss zugeschlossen sein!");
                                 return false;

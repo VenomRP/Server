@@ -236,7 +236,7 @@ namespace GVRP.Module.Houses
                 }
                 else
                 {
-                    string housestring = Convert.ToString(colShape.GetData<Int16>("houseId"));
+                    string housestring = Convert.ToString(colShape.GetData<int>("houseId"));
                     if (!UInt32.TryParse(housestring, out uint houseid))
                     {
                         return false;

@@ -44,6 +44,8 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.Player.TriggerEvent("freezePlayer", false);
             iPlayer.SetCannotInteract(false);
             NAPI.Player.StopPlayerAnimation(iPlayer.Player);
+            if (iPlayer.VisibleArmorType != 0)
+                iPlayer.SaveArmorType(1);
             iPlayer.SetArmor(100);
 
             return true;
@@ -85,8 +87,8 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.SetCannotInteract(false);
             NAPI.Player.StopPlayerAnimation(iPlayer.Player);
             if (iPlayer.VisibleArmorType != 0)
-                iPlayer.SaveArmorType(0);
-            iPlayer.VisibleArmorType = 0;
+                iPlayer.SaveArmorType(30);
+            iPlayer.VisibleArmorType = 30;
             iPlayer.SetArmor(120, true);
 
             return true;

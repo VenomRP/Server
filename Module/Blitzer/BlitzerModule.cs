@@ -114,7 +114,7 @@ namespace GVRP.Module.Blitzer
                     if (colShape.HasData("blitzer"))
                     {
                         if (dbPlayer.HasData("inBlitzerRange")) return false;
-                        dbPlayer.SetData("inBlitzerRange", colShape.GetData<Int16>("blitzer"));
+                        dbPlayer.SetData("inBlitzerRange", colShape.GetData<int>("blitzer"));
 
                         Blitzer xBlitzer = BlitzerModule.Instance.BlitzerList[colShape.GetData<int>("blitzer")];
                         if (xBlitzer == null)

@@ -228,7 +228,7 @@ namespace GVRP.Module.JobFactions.Mine
                         sxVehicle.CanInteract = true;
                         sxVehicle.SyncExtension.SetEngineStatus(true);
 
-                        int amount = sxVehicle.entity.GetData<Int16>("mine1_loadage");
+                        int amount = sxVehicle.entity.GetData<int>("mine1_loadage");
                         sxVehicle.entity.ResetData("mine1_loadage");
 
                         AddPlayerMineStorageAmount(dbPlayer, amount);

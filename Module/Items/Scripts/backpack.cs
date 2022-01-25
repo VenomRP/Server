@@ -95,7 +95,7 @@ namespace GVRP.Module.Items.Scripts
             backpackList = new List<BackpackConfiguration>();
             backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_alicepack"), 6000,  40000, 12));
             backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_louisbeton"), 8000, 40000, 12));
-            backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bbp_bellybag"), 8000, 40000, 12));
+            backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_bellybag"), 8000, 40000, 12));
             backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_armypack"), 10000, 50000, 14));
             backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_bropack"), 0, 100000000, 48));
         }

@@ -285,7 +285,7 @@ namespace GVRP.Module.Injury
                     SxVehicle sxVehicle = dbPlayer.Player.Vehicle.GetVehicle();
                     if (sxVehicle == null || !sxVehicle.IsTeamVehicle()) return false;
                     
-                    InjuryDeliver injuryDelivery = InjuryDeliverModule.Instance.Get((uint)colShape.GetData<Int16>("injuryDeliverId"));
+                    InjuryDeliver injuryDelivery = InjuryDeliverModule.Instance.Get((uint)colShape.GetData<int>("injuryDeliverId"));
 
                     if (injuryDelivery == null) return false;
 

@@ -2712,7 +2712,7 @@ namespace GVRP.Module.Players
                 var horn = 0;
                 if (dbPlayer.HasData("n_horn"))
                 {
-                    horn = dbPlayer.Player.GetData<Int16>("n_horn");
+                    horn = dbPlayer.Player.GetData<int>("n_horn");
                 }
 
                 if (horn < 0) return;

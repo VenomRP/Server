@@ -118,7 +118,7 @@ namespace GVRP.Module.Players.JumpPoints
         {
             if (!colShape.HasData("jumpPointId")) return false;
             if (!Configuration.Instance.JumpPointsEnabled) return false;
-            int jumpPointId = colShape.GetData<Int16>("jumpPointId");
+            int jumpPointId = colShape.GetData<int>("jumpPointId");
             switch (colShapeState)
             {
                 case ColShapeState.Enter:

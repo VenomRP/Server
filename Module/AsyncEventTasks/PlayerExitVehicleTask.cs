@@ -34,8 +34,8 @@ namespace GVRP.Module.AsyncEventTasks
                 {
                     if (vehicle.HasData("color1") && vehicle.HasData("color2"))
                     {
-                        int color1 = vehicle.GetData<Int16>("color1");
-                        int color2 = vehicle.GetData<Int16>("color2");
+                        int color1 = vehicle.GetData<int>("color1");
+                        int color2 = vehicle.GetData<int>("color2");
                         vehicle.PrimaryColor = color1;
                         vehicle.SecondaryColor = color2;
                         vehicle.ResetData("color1");

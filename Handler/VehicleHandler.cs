@@ -335,7 +335,7 @@ namespace GVRP.Handler
         public List<SxVehicle> GetClosestVehiclesFromTeamWithContainerOpen(Vector3 position, int teamid, float range = 8.0f)
         {
             List<SxVehicle> sxVehicles = new List<SxVehicle>();
-            sxVehicles = GetTeamVehicles((uint)teamid).Where(sxVeh => sxVeh.entity.Position.DistanceTo(position) <= range && !sxVeh.SyncExtension.Locked && sxVeh.entity.HasData("Door_KRaum") && sxVeh.entity.GetData<Int16>("Door_KRaum") == 1).ToList();
+            sxVehicles = GetTeamVehicles((uint)teamid).Where(sxVeh => sxVeh.entity.Position.DistanceTo(position) <= range && !sxVeh.SyncExtension.Locked && sxVeh.entity.HasData("Door_KRaum") && sxVeh.entity.GetData<int>("Door_KRaum") == 1).ToList();
             return sxVehicles;
         }
 

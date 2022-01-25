@@ -29,7 +29,7 @@ namespace GVRP.Module.AsyncEventTasks
                 if (shape.HasData("notificationId"))
                 {
                     var notification =
-                        PlayerNotifications.Instance.GetById((int)shape.GetData<UInt32>("notificationId"));
+                        PlayerNotifications.Instance.GetById((int)shape.GetData<uint>("notificationId"));
                     iPlayer.SendNotification(notification);
                 }
 
@@ -37,7 +37,7 @@ namespace GVRP.Module.AsyncEventTasks
 
                 if (shape.HasData("clothShopId"))
                 {
-                    iPlayer.SetData("clothShopId", (uint)shape.GetData<UInt32>("clothShopId"));
+                    iPlayer.SetData("clothShopId", (uint)shape.GetData<uint>("clothShopId"));
                     iPlayer.SendNewNotification("Benutze E um Kleidung zu kaufen!", title: "Kleidungsstore");
                     return;
                 }
@@ -55,7 +55,7 @@ namespace GVRP.Module.AsyncEventTasks
                 {
                     iPlayer.SendNewNotification("Benutze E um Waffen zu kaufen!", title: "Ammunation");
 
-                    int ammunationId = shape.GetData<Int16>("ammunationId");
+                    int ammunationId = shape.GetData<int>("ammunationId");
                     iPlayer.SetData("ammunationId", ammunationId);
                     return;
                 }
@@ -113,7 +113,7 @@ namespace GVRP.Module.AsyncEventTasks
 
                 if (shape.HasData("bankId"))
                 {
-                    var bankId = shape.GetData<Int16>("bankId");
+                    var bankId = shape.GetData<int>("bankId");
                     if (bankId == null)
                     {
                         return;
@@ -133,7 +133,7 @@ namespace GVRP.Module.AsyncEventTasks
 
                 if (shape.HasData("ArmoryId"))
                 {
-                    int ArmoryId = shape.GetData<Int16>("ArmoryId");
+                    int ArmoryId = shape.GetData<int>("ArmoryId");
                     var Armory = ArmoryModule.Instance.Get(ArmoryId);
                     if (Armory == null) return;
                     iPlayer.SendNewNotification("Benutze E zum interagieren!", title: "Waffenkammer");

@@ -190,7 +190,7 @@ namespace GVRP.Module.Items
                 var delVeh = VehicleHandler.Instance.GetClosestVehicle(dbPlayer.Player.Position);
                 if (delVeh != null && delVeh.IsValid() && !delVeh.SyncExtension.Locked && dbPlayer.Player.Position.DistanceTo(delVeh.entity.Position) < 15.0f && dbPlayer.Player.Dimension == delVeh.entity.Dimension)
                 {
-                    if (delVeh.entity.HasData("Door_KRaum") && delVeh.entity.GetData<Int16>("Door_KRaum") == 1)
+                    if (delVeh.entity.HasData("Door_KRaum") && delVeh.entity.GetData<int>("Door_KRaum") == 1)
                     {
                         return delVeh.Container;
                     }
@@ -203,7 +203,7 @@ namespace GVRP.Module.Items
                 {
                     if (!delVeh.SyncExtension.Locked)
                     {
-                        if (delVeh.entity.HasData("Door_KRaum") && delVeh.entity.GetData<Int16>("Door_KRaum") == 1)
+                        if (delVeh.entity.HasData("Door_KRaum") && delVeh.entity.GetData<int>("Door_KRaum") == 1)
                         {
                             return delVeh.Container;
                         }

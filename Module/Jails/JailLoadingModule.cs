@@ -48,19 +48,19 @@ namespace GVRP.Module.Jails
                 int jailcosts = CrimeModule.Instance.CalcJailCosts(dbPlayer.Crimes);
                 
                 // Checke auf Jailtime
-                if (jailtime > 0 && jailtime <= 29 && colShape.GetData<Int16>("jailGroup") != 5)
+                if (jailtime > 0 && jailtime <= 29 && colShape.GetData<int>("jailGroup") != 5)
                 {
                     dbPlayer.jailtime[0] = jailtime;
                     dbPlayer.ArrestPlayer(null, true, false);
                     dbPlayer.ApplyCharacter();
-                    dbPlayer.SetData("inJailGroup", colShape.GetData<Int16>("jailGroup"));
+                    dbPlayer.SetData("inJailGroup", colShape.GetData<int>("jailGroup"));
                 } // group 5 == sg
-                else if(colShape.GetData<Int16>("jailGroup") == 5 && jailtime >= 30)
+                else if(colShape.GetData<int>("jailGroup") == 5 && jailtime >= 30)
                 {
                     dbPlayer.jailtime[0] = jailtime;
                     dbPlayer.ArrestPlayer(null, true, false);
                     dbPlayer.ApplyCharacter();
-                    dbPlayer.SetData("inJailGroup", colShape.GetData<Int16>("jailGroup"));
+                    dbPlayer.SetData("inJailGroup", colShape.GetData<int>("jailGroup"));
                 }
                 
             }

@@ -186,7 +186,7 @@ namespace GVRP.Module.Racing
             if (!dbPlayer.Player.IsInVehicle) return false;
             if (dbPlayer.DimensionType[0] == DimensionType.RacingArea && colShape.HasData("racingColshape") && colShapeState == ColShapeState.Enter)
             {
-                if(colShape.GetData<Int16>("racingColshape") == 1) // Start - End Colshape
+                if(colShape.GetData<int>("racingColshape") == 1) // Start - End Colshape
                 {
                     if(dbPlayer.HasData("racingState") && dbPlayer.GetData("racingState") == 10 && dbPlayer.HasData("racingRoundStartTime")) // has state 4 and is at start shape
                     {
@@ -221,11 +221,11 @@ namespace GVRP.Module.Racing
                 {
                     if(dbPlayer.HasData("racingState"))
                     {
-                        if (colShape.GetData<Int16>("racingColshape") - 1 != dbPlayer.GetData("racingState"))
+                        if (colShape.GetData<int>("racingColshape") - 1 != dbPlayer.GetData("racingState"))
                         {
                             dbPlayer.SetData("racingState", 1);
                         }
-                        else dbPlayer.SetData("racingState", colShape.GetData<Int16>("racingColshape"));
+                        else dbPlayer.SetData("racingState", colShape.GetData<int>("racingColshape"));
                     }
                     else dbPlayer.SetData("racingState", 1);
                 }

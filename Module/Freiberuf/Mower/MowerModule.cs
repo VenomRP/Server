@@ -68,7 +68,7 @@ namespace GVRP.Module.Freiberuf.Mower
 
                         Random random = new Random();
                         int rnd = random.Next(1, 5);
-                        iPlayer.Player.Vehicle.SetData("loadage", (iPlayer.Player.Vehicle.GetData<Int16>("loadage") + rnd));
+                        iPlayer.Player.Vehicle.SetData("loadage", (iPlayer.Player.Vehicle.GetData<int>("loadage") + rnd));
                         iPlayer.SendNewNotification($"Rasen gemaeht! (Inhalt {iPlayer.Player.Vehicle.GetData<int>("loadage") - rnd} (+{rnd}))");
                     }
                 }

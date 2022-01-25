@@ -99,7 +99,7 @@ namespace GVRP.Module.Schwarzgeld
             }
 
             // Get values
-            int currentVehicleLoadage = FreiberufFunctions.GetJobVehicle(dbPlayer, ExchangeJobVehMarkId).entity.GetData<Int16>("schwarzgeldLoadout");
+            int currentVehicleLoadage = FreiberufFunctions.GetJobVehicle(dbPlayer, ExchangeJobVehMarkId).entity.GetData<int>("schwarzgeldLoadout");
 
             // Check if vehicle can store schwarzgeld
             if (currentVehicleLoadage + ExchangeValue > MaxExchangeVehicleAmount)
@@ -146,7 +146,7 @@ namespace GVRP.Module.Schwarzgeld
             SxVehicle JobVehicle = FreiberufFunctions.GetJobVehicle(dbPlayer, ExchangeJobVehMarkId);
 
             // Get new amount and reset user data
-            int schwarzgeld = JobVehicle.entity.GetData<Int16>("schwarzgeldLoadout") + dbPlayer.GetData("schwarzgeld");
+            int schwarzgeld = JobVehicle.entity.GetData<int>("schwarzgeldLoadout") + dbPlayer.GetData("schwarzgeld");
             dbPlayer.ResetData("schwarzgeld");
 
             // Add amount to vehicle
@@ -163,7 +163,7 @@ namespace GVRP.Module.Schwarzgeld
             dbPlayer.Player.TriggerEvent("setPlayerGpsMarker", Exchange.ExchangeDestroyLocation.X, Exchange.ExchangeDestroyLocation.Y);
 
             // Inform user
-            dbPlayer.SendNewNotification($"Das Fahrzeug wurde mit Ware beladen: {JobVehicle.entity.GetData<Int16>("schwarzgeldLoadout")}/{MaxExchangeVehicleAmount}");
+            dbPlayer.SendNewNotification($"Das Fahrzeug wurde mit Ware beladen: {JobVehicle.entity.GetData<int>("schwarzgeldLoadout")}/{MaxExchangeVehicleAmount}");
         }
 
         public void VehicleTakeOut(DbPlayer dbPlayer)
@@ -174,7 +174,7 @@ namespace GVRP.Module.Schwarzgeld
             SxVehicle JobVehicle = FreiberufFunctions.GetJobVehicle(dbPlayer, ExchangeJobVehMarkId);
 
             // Check if vehicle got stuff loaded
-            if (JobVehicle.entity.GetData<Int16>("schwarzgeldLoadout") < ExchangeValue)
+            if (JobVehicle.entity.GetData<int>("schwarzgeldLoadout") < ExchangeValue)
             {
                 dbPlayer.SendNewNotification("Das Fahrzeug enthält keine weiteren Waren!");
                 return;
@@ -188,7 +188,7 @@ namespace GVRP.Module.Schwarzgeld
             }
 
             // Take stuff out of vehicle
-            int newLoadout = JobVehicle.entity.GetData<Int16>("schwarzgeldLoadout") - ExchangeValue;
+            int newLoadout = JobVehicle.entity.GetData<int>("schwarzgeldLoadout") - ExchangeValue;
             JobVehicle.entity.SetData("schwarzgeldLoadout", newLoadout);
 
             // Add object to player
@@ -265,7 +265,7 @@ namespace GVRP.Module.Schwarzgeld
             // Remove vehicle and marker
             if (ExchangeVehicle != null)
             {
-                if (ExchangeVehicle.entity.GetData<Int16>("schwarzgeldLoadout") != 0)
+                if (ExchangeVehicle.entity.GetData<int>("schwarzgeldLoadout") != 0)
                 {
                     // Notify user that the vehicle isnt empty
                     dbPlayer.SendNewNotification("Der Lieferwagen enthält weitere Waren. Gehe diese zerstören!");

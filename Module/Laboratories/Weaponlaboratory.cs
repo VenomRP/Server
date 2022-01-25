@@ -369,7 +369,7 @@ namespace GVRP.Module.Laboratories
                     closestVeh.entity.Model == (uint)VehicleHash.Gburrito2)
                     && closestVeh.teamid == dbPlayer.TeamId &&
                     (!closestVeh.entity.HasData("Door_KRaum") ||
-                    closestVeh.entity.GetData<Int16>("Door_KRaum") != 1) && closestVeh.Container != null)
+                    closestVeh.entity.GetData<int>("Door_KRaum") != 1) && closestVeh.Container != null)
             {
                 dbPlayer.SendNewNotification("Du benötigst ein Lagerfahrzeug (Burrito, Brickade, ...) mit offenem Kofferraum.");
                 ImpoundInProgress = false;
@@ -409,7 +409,7 @@ namespace GVRP.Module.Laboratories
                     closestVeh.entity.Model == (uint)VehicleHash.Gburrito2)
                     && closestVeh.teamid == dbPlayer.TeamId &&
                     (!closestVeh.entity.HasData("Door_KRaum") ||
-                    closestVeh.entity.GetData<Int16>("Door_KRaum") != 1) && closestVeh.Container != null)
+                    closestVeh.entity.GetData<int>("Door_KRaum") != 1) && closestVeh.Container != null)
             {
                 dbPlayer.SendNewNotification("Du benötigst ein Lagerfahrzeug (Burrito, Brickade, ...) mit offenem Kofferraum.");
                 ImpoundInProgress = false;
