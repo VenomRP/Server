@@ -113,7 +113,7 @@ namespace GVRP.Module.AsyncEventTasks
 
                 if (shape.HasData("bankId"))
                 {
-                    var bankId = shape.GetData<int>("bankId");
+                    var bankId = shape.GetData<uint>("bankId");
                     if (bankId == null)
                     {
                         return;
