@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Github\\Server\\nexus.csproj": {}
+    "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj": {}
   },
   "projects": {
-    "D:\\Github\\Server\\nexus.csproj": {
+    "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Github\\Server\\nexus.csproj",
+        "projectUniqueName": "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj",
         "projectName": "nexus",
-        "projectPath": "D:\\Github\\Server\\nexus.csproj",
-        "packagesPath": "C:\\Users\\Kayano\\.nuget\\packages\\",
-        "outputPath": "D:\\Github\\Server\\obj\\",
+        "projectPath": "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj",
+        "packagesPath": "C:\\Users\\Paco\\.nuget\\packages\\",
+        "outputPath": "D:\\Venom 1.1\\Server Side\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Kayano\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Paco\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -132,7 +132,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

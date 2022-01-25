@@ -66,3 +66,20 @@ D:\Zeugs\Venom Roleplay\Server\obj\x86\Debug\nexus.csproj.CopyComplete
 D:\Zeugs\Venom Roleplay\Server\obj\x86\Debug\nexus.dll
 D:\Zeugs\Venom Roleplay\Server\obj\x86\Debug\nexus.pdb
 D:\Zeugs\Venom Roleplay\Server\obj\x86\Debug\nexus.genruntimeconfig.cache
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.csproj.AssemblyReference.cache
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.GeneratedMSBuildEditorConfig.editorconfig
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.AssemblyInfoInputs.cache
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.AssemblyInfo.cs
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.csproj.CoreCompileInputs.cache
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.dll
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.pdb
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\nexus.deps.json
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.json
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.dev.json
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\nexus.dll
+D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\nexus.pdb
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.csproj.CopyComplete
+D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.genruntimeconfig.cache

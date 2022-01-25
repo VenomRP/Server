@@ -224,7 +224,7 @@ namespace GVRP.Module.Tasks
         }
 
         [RemoteEvent]
-        public void addacc(MySqlDataReader reader, Client player, string returnstring)
+        public void addacc(MySqlDataReader reader, Player player, string returnstring)
         {
 
 
