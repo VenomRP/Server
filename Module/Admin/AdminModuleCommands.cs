@@ -3357,7 +3357,7 @@ $"VALUES ('Brusthaare', '{i}', '200', '7');";
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void fixxveh(Player player)
+        public void fixveh(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.CanAccessMethod()) return;
