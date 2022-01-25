@@ -6633,6 +6633,36 @@ $"VALUES ('Brusthaare', '{i}', '200', '7');";
 
         }
 
+        [CommandPermission(PlayerRankPermission = false)]
+        [Command]
+        public void testeffect(Player player, string commandParams)
+        {
+            var iPlayer = player.GetPlayer();
+            if (!iPlayer.IsValid()) return;
+            if (!Devmode)
+            {
+                return;
+            }
+
+            iPlayer.Player.TriggerEvent("startScreenEffectJoint", commandParams, 5000, true);
+
+        }
+
+        [CommandPermission(PlayerRankPermission = false)]
+        [Command]
+        public void testeffectstop(Player player, string commandParams)
+        {
+            var iPlayer = player.GetPlayer();
+            if (!iPlayer.IsValid()) return;
+            if (!Devmode)
+            {
+                return;
+            }
+
+            iPlayer.Player.TriggerEvent("stopScreenEffectJoint", commandParams);
+
+        }
+
 
 
         /*[CommandPermission]
