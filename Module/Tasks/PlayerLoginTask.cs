@@ -199,7 +199,14 @@ namespace GVRP.Module.Tasks
                     DbPlayer iPlayer = player.GetPlayer();
 
 
-                    ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = "Account Eingabe", Callback = "addacc", Message = "Gebe einen Benutzernamen ein! " });
+                    //ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = "Account Eingabe", Callback = "addacc", Message = "Gebe einen Benutzernamen ein! " });
+                    TextInputBoxObject textInputBoxObject = new TextInputBoxObject
+                    {
+                        Title = "Anmeldeformular",
+                        Message =
+                        "Gebe bitte deinen Benutzernamen ein (Beispiel: Vorname_Nachname). Falls du noch nicht registriert bist, wirst du automatisch registriert.",
+                        Callback = "addacc"
+                    };
                     return;
                     //player.SendNotification("Sie benoetigen einen Account (Beta Zugang)! Name richtig gesetzt? Vorname_Nachname");
                     //player.Kick(
