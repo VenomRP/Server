@@ -179,13 +179,35 @@ namespace GVRP.Module.Tasks
                 }
                 else
                 {
-                    player.SendNotification("Sie benoetigen einen Account (Beta Zugang)! Name richtig gesetzt? Vorname_Nachname");
-                    player.Kick(
-                        "Sie benoetigen einen Account (Beta Zugang)! Name richtig gesetzt? Vorname_Nachname " + player.SocialClubName + " " + player.Name);
-                    Logger.Debug($"Player was kicked, no Account found for {player.Name}");
+                    using (var conn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
+                    using (var cmd = conn.CreateCommand())
+                    {
+                        conn.Open();
+                        cmd.CommandText = $"SELECT * FROM player WHERE SCName = '{MySqlHelper.EscapeString(player.SocialClubName)}';";
+                        using (var reader2 = cmd.ExecuteReader())
+                        {
+                            if (reader2.HasRows)
+                            {
+                                player.Kick("Du hast bereits einen Account!");
+                                conn.Close();
+                                return;
+
+                            }
+                        }
+                        conn.Close();
+                    }
+                    DbPlayer iPlayer = player.GetPlayer();
+
+
+                    ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = "Account Eingabe", Callback = "addacc", Message = "Gebe einen Benutzernamen ein! " });
+                    return;
+                    //player.SendNotification("Sie benoetigen einen Account (Beta Zugang)! Name richtig gesetzt? Vorname_Nachname");
+                    //player.Kick(
+                    //    "Sie benoetigen einen Account (Beta Zugang)! Name richtig gesetzt? Vorname_Nachname " + player.SocialClubName + " " + player.Name);
+                    //Logger.Debug($"Player was kicked, no Account found for {player.Name}");
                 }
 
-             }
+            }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
@@ -195,21 +217,28 @@ namespace GVRP.Module.Tasks
         }
 
         [RemoteEvent]
-        public void addpw(Player player, string returnstring)
+        public void addacc(MySqlDataReader reader, Client player, string returnstring)
         {
-            DbPlayer iPlayer = player.GetPlayer();
 
-            //ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = "Passwort Eingabe", Callback = "addpw", Message = "Gebe dein Passwort ein! " });
 
             if (returnstring == null)
                 player.Kick();
+
+            MySQLHandler.ExecuteAsync($"INSERT INTO player (Name, SCName, ) Values({player.Name}, {player.SocialClubName})");
 
             //var Sha = HashThis.CreateSHA256Hash(returnstring);
             //var MDNigger = HashThis.CreateMD5Hash(returnstring);
 
             //MySQLHandler.ExecuteAsync($"UPDATE player SET Password = '{Sha}' WHERE id = '{iPlayer.Id}';");
-            //MySQLHandler.ExecuteAsync($"UPDATE player SET Password = '{MDNigger}' WHERE id = '{iPlayer.Id}';");
-            player.Kick("Passwort erfolgreich erstellt!"); 
+
+
+
+            //if (reader.GetString("SCName") == player.SocialClubName)
+
+
+
+            //var query = MySQLHandler.ExecuteAsync("SELECT * FROM player WHERE Social = @user LIMIT 1");
+            player.Kick("Account erfolgreich erstellt!");
 
         }
     }
