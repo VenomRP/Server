@@ -71,7 +71,7 @@ namespace GVRP.Module.Shops
         public uint ItemId { get; set; }
         public int Price { get; set; }
         public string Name { get; set; }
-        public string Img { get; set; }
+        public string img { get; set; } = "";
         public int Stored { get; set; }
         public int StoredMax { get; set; }
         public bool IsStoredItem { get; set; }
@@ -86,7 +86,7 @@ namespace GVRP.Module.Shops
             Name = ItemModelModule.Instance.Get(ItemId).Name;
             Price = reader.GetInt32("price");
             //Img = ItemModelModule.Instance.Get(ItemId).ImagePath;
-            Img = "Bauchtasche.png";
+            img = "Bauchtasche.png";
             Stored = reader.GetInt32("stored");
             StoredMax = reader.GetInt32("max_stored");
             EKPrice = reader.GetInt32("ek_price");
