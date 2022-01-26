@@ -88,6 +88,7 @@ namespace GVRP.Module.Configurations
                 ? "server='localhost'; uid='root'; pwd=''; database='gvrp';max pool size=999;SslMode=none;"
                 : "server='localhost'; uid='root'; pwd=''; database='gvrp';max pool size=999;SslMode=none;";
         }
+        //
 
         public string GetMySqlConnectionForum()
         {
