@@ -94,14 +94,16 @@
 	<PackageReference Include="MSTest.TestFramework" Version="1.4.0" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Bootstrapper">
-      <HintPath>..\..\..\server-files\server-files\bridge\resources\VMP_CNR\Bootstrapper.dll</HintPath>
-    </Reference>
 
 
 	  <!--<Reference Include="Bootstrapper">
       <HintPath>..\..\RageMP\Own Testserver\server-files\1.1\dotnet\runtime\Bootstrapper.dll</HintPath>
     </Reference>-->
+
+
+	  <Reference Include="Bootstrapper">
+	    <HintPath>C:\Users\mahru\.nuget\packages\gtanetwork.api\0.3.5\lib\netcoreapp2.0\Bootstrapper.dll</HintPath>
+	  </Reference>
 
 
 	  <Reference Include="MySql.Data">
