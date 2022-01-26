@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj": {}
+    "D:\\Github\\Server\\nexus.csproj": {}
   },
   "projects": {
-    "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj": {
+    "D:\\Github\\Server\\nexus.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj",
+        "projectUniqueName": "D:\\Github\\Server\\nexus.csproj",
         "projectName": "nexus",
-        "projectPath": "D:\\Venom 1.1\\Server Side\\Server\\nexus.csproj",
-        "packagesPath": "C:\\Users\\Paco\\.nuget\\packages\\",
-        "outputPath": "D:\\Venom 1.1\\Server Side\\Server\\obj\\",
+        "projectPath": "D:\\Github\\Server\\nexus.csproj",
+        "packagesPath": "C:\\Users\\Kayano\\.nuget\\packages\\",
+        "outputPath": "D:\\Github\\Server\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Paco\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Kayano\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -111,10 +111,6 @@
             "System.Xml.XmlSerializer": {
               "target": "Package",
               "version": "[4.3.0, )"
-            },
-            "VehicleInfoLoader.RageMP": {
-              "target": "Package",
-              "version": "[2.1.0.1, )"
             }
           },
           "imports": [
@@ -132,7 +128,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
         }
       }
     }

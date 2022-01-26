@@ -87,7 +87,7 @@
     <PackageReference Include="System.Text.Encoding.CodePages" Version="4.6.0" />
     <PackageReference Include="System.Threading.Tasks" Version="4.3.0" />
     <PackageReference Include="System.Xml.XmlSerializer" Version="4.3.0" />
-    <PackageReference Include="VehicleInfoLoader.RageMP" Version="2.1.0.1" />
+    <!--<PackageReference Include="VehicleInfoLoader.RageMP" Version="2.1.0.1" />-->
     <PackageReference Update="Microsoft.NETCore.App" Version="2.0.0" />
 	<PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.9.0" />
 	<PackageReference Include="MSTest.TestAdapter" Version="1.4.0" />
@@ -97,7 +97,14 @@
     <Reference Include="Bootstrapper">
       <HintPath>..\..\..\server-files\server-files\bridge\resources\VMP_CNR\Bootstrapper.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data">
+
+
+	  <!--<Reference Include="Bootstrapper">
+      <HintPath>..\..\RageMP\Own Testserver\server-files\1.1\dotnet\runtime\Bootstrapper.dll</HintPath>
+    </Reference>-->
+
+
+	  <Reference Include="MySql.Data">
       <HintPath>..\MySql.Data.dll</HintPath>
     </Reference>
   </ItemGroup>

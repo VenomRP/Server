@@ -83,3 +83,20 @@ D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\nexus.dll
 D:\Venom 1.1\Server Side\server-files\bridge\resources\VMP_CNR\nexus.pdb
 D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.csproj.CopyComplete
 D:\Venom 1.1\Server Side\Server\obj\x86\Debug\nexus.genruntimeconfig.cache
+D:\Github\Server\obj\x86\Debug\nexus.csproj.AssemblyReference.cache
+D:\Github\Server\obj\x86\Debug\nexus.GeneratedMSBuildEditorConfig.editorconfig
+D:\Github\Server\obj\x86\Debug\nexus.AssemblyInfoInputs.cache
+D:\Github\Server\obj\x86\Debug\nexus.AssemblyInfo.cs
+D:\Github\Server\obj\x86\Debug\nexus.csproj.CoreCompileInputs.cache
+D:\Github\Server\obj\x86\Debug\nexus.dll
+D:\Github\Server\obj\x86\Debug\nexus.pdb
+D:\Github\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTest.TestAdapter.dll
+D:\Github\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.Interface.dll
+D:\Github\server-files\bridge\resources\VMP_CNR\Microsoft.VisualStudio.TestPlatform.MSTestAdapter.PlatformServices.dll
+D:\Github\server-files\bridge\resources\VMP_CNR\nexus.deps.json
+D:\Github\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.json
+D:\Github\server-files\bridge\resources\VMP_CNR\nexus.runtimeconfig.dev.json
+D:\Github\server-files\bridge\resources\VMP_CNR\nexus.dll
+D:\Github\server-files\bridge\resources\VMP_CNR\nexus.pdb
+D:\Github\Server\obj\x86\Debug\nexus.csproj.CopyComplete
+D:\Github\Server\obj\x86\Debug\nexus.genruntimeconfig.cache

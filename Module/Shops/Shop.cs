@@ -86,7 +86,8 @@ namespace GVRP.Module.Shops
             Name = ItemModelModule.Instance.Get(ItemId).Name;
             Price = reader.GetInt32("price");
             //Img = ItemModelModule.Instance.Get(ItemId).ImagePath;
-            img = "https://cdn.discordapp.com/attachments/935214006950576168/935599742623305748/19e7551e602538c3ab196a5f8c41ee54_1.png";
+            //Das angegebene Image wird in dem Ordner img/itemImages/ gesucht.
+            img = "first-aid-kit.png";
             Stored = reader.GetInt32("stored");
             StoredMax = reader.GetInt32("max_stored");
             EKPrice = reader.GetInt32("ek_price");
