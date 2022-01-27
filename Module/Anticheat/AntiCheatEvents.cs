@@ -66,6 +66,7 @@ namespace GVRP.Module.Anticheat
         [RemoteEvent("server:Healkeydetection")]
         public void HealkeyDetection(Player player, int allowedhealth, int health)
         {
+            return;
             var dbPlayer = player.GetPlayer();
             if(!dbPlayer.Player.Exists) { return; }
 
