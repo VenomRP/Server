@@ -363,23 +363,19 @@ namespace GVRP.Module
             }
         }
 
-        public void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public void OnPlayerDisconnected(Player dbPlayer, string reason)
         {
-
-            Main.m_AsyncThread.AddToAsyncThread(new Task(() =>
+            foreach (var module in modules.Values)
             {
-                foreach (var module in modules.Values)
+                try
                 {
-                    try
-                    {
-                        module.OnPlayerDisconnected(dbPlayer, reason);
-                    }
-                    catch (Exception e)
-                    {
-                        Logger.Print(e.Message);
-                    }
+                    module.OnPlayerDisconnected(dbPlayer, reason);
                 }
-            }));
+                catch (Exception e)
+                {
+                    Logger.Print(e.Message);
+                }
+            }
         }
 
         public async Task<bool> OnKeyPressed(DbPlayer dbPlayer, Key key)

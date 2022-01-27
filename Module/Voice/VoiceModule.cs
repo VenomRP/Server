@@ -57,8 +57,9 @@ namespace GVRP.Module.Voice
             return true;
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             RemoveFromVoice(dbPlayer);
         }
 

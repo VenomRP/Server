@@ -42,8 +42,9 @@ namespace GVRP.Module.Meth
             return base.Load(reload);
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             if (dbPlayer.DimensionType[0] != DimensionType.Camper) return;
             dbPlayer.DimensionType[0] = DimensionType.World;
             var sxVehicle = VehicleHandler.Instance.GetByVehicleDatabaseId(dbPlayer.Player.Dimension);

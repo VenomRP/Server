@@ -1,6 +1,7 @@
 ﻿using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
+using GTANetworkAPI;
 using System;
 using System.Collections.Generic;
 
@@ -28,8 +29,9 @@ namespace GVRP.Module.Players
         }
 
         //TODO: disconnect is currently on main thread, but should be an task, none threaded stuff should happen in main event everything else in disconnect task
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid())
             {
                 return;

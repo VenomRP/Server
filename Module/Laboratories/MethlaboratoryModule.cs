@@ -43,8 +43,9 @@ namespace GVRP.Module.Laboratories
             HasAlreadyHacked = new List<Team>();
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             if (dbPlayer.DimensionType[0] != DimensionType.Methlaboratory) return;
             Methlaboratory methlaboratory = this.GetLaboratoryByDimension(dbPlayer.Player.Dimension);
             if (methlaboratory == null) return;

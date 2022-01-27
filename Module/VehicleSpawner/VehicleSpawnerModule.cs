@@ -1,6 +1,7 @@
 ﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
 using System;
 
@@ -8,43 +9,46 @@ namespace GVRP.Module.VehicleSpawner
 {
     public sealed class VehicleSpawnerModule : Module<VehicleSpawnerModule>
     {
-        /*public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
-            try { 
-            if (dbPlayer == null || !dbPlayer.IsValid())
-            { return;
-            }
+            try {
+                if (player == null || !player.Exists)
+                    return;
 
-            if (dbPlayer.Player.IsInVehicle)
-            {
-                if(dbPlayer.Player.VehicleSeat == 0) // driver
+                var dbPlayer = player.GetPlayer();
+
+                if (dbPlayer == null || !dbPlayer.IsValid())
+                        return;
+
+                if (player.IsInVehicle)
                 {
-                    SxVehicle sxVehicle = dbPlayer.Player.Vehicle.GetVehicle();
-                    if(sxVehicle != null && sxVehicle.GetSpeed() > 0 && sxVehicle.entity.Position.Z > 20.0f) 
+                    if(player.VehicleSeat == 0) // driver
                     {
-                        // Parke helis & flugzeuge ein...
-                        if(sxVehicle.Data.ClassificationId == 9 || sxVehicle.Data.ClassificationId == 8)
+                        SxVehicle sxVehicle = player.Vehicle.GetVehicle();
+                        if(sxVehicle != null && sxVehicle.GetSpeed() > 0 && sxVehicle.entity.Position.Z > 20.0f) 
                         {
-                            Task.Run(async () =>
+                            // Parke helis & flugzeuge ein...
+                            if(sxVehicle.Data.ClassificationId == 9 || sxVehicle.Data.ClassificationId == 8)
                             {
-                                await Task.Delay(60000);
-                                if (sxVehicle != null && sxVehicle.entity.IsSeatFree(0))
+                                NAPI.Task.Run(() =>
                                 {
-                                    if (sxVehicle.IsPlayerVehicle()) sxVehicle.SetPrivateCarGarage(1);
-                                    if (sxVehicle.IsTeamVehicle()) sxVehicle.SetTeamCarGarage(true);
-                                    else sxVehicle.entity.DeleteVehicle();
-                                }
-                            });
+                                    if (sxVehicle != null && sxVehicle.entity.IsSeatFree(0))
+                                    {
+                                        if (sxVehicle.IsPlayerVehicle()) sxVehicle.SetPrivateCarGarage(1);
+                                        if (sxVehicle.IsTeamVehicle()) sxVehicle.SetTeamCarGarage(true);
+                                        else sxVehicle.entity.DeleteVehicle();
+                                    }
+                                }, 60000);
+                            }
                         }
                     }
                 }
-            }
             }
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
             }
-        }*/
+        }
 
         public override void OnMinuteUpdate()
         {

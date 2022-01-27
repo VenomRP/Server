@@ -1,6 +1,7 @@
 ﻿using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using GTANetworkAPI;
 using GVRP.Module.Teams.Spawn;
 using MySql.Data.MySqlClient;
 using System;
@@ -72,8 +73,9 @@ namespace GVRP.Module.Teams
             dbPlayer.SetTeam(dbPlayer.TeamId);
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             dbPlayer.Team.RemoveMember(dbPlayer);
         }
 

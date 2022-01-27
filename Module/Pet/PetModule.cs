@@ -1,4 +1,6 @@
-﻿using GVRP.Module.Players.Db;
+﻿using GTANetworkAPI;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Pet
 {
@@ -14,8 +16,9 @@ namespace GVRP.Module.Pet
             return base.OnLoad();
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             dbPlayer.RemovePet();
         }
     }

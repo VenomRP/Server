@@ -30,8 +30,11 @@ namespace GVRP.Module.Houses
             HouseKeyHandler.Instance.LoadHouseKeys(dbPlayer);
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
+            if (dbPlayer == null)
+                return;
             if (dbPlayer.DimensionType[0] != DimensionType.House) return;
             var house = this[(uint)dbPlayer.Dimension[0]];
             house?.PlayersInHouse.Remove(dbPlayer);

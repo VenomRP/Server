@@ -754,7 +754,7 @@ namespace GVRP
 
             try
             {
-                Modules.Instance.OnPlayerDisconnected(iPlayer, reason);
+                Modules.Instance.OnPlayerDisconnected(player, reason);
             }
             catch (Exception ex)
             {

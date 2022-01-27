@@ -74,7 +74,7 @@ namespace GVRP.Module
 
         }
 
-        public virtual void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public virtual void OnPlayerDisconnected(Player dbPlayer, string reason)
         {
         }
 

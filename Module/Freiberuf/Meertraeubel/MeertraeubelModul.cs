@@ -74,8 +74,9 @@ namespace GVRP.Module.Freiberuf.Mower
             if (FishingPlayers.ToList().Contains(dbPlayer)) FishingPlayers.Remove(dbPlayer);
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             if (FishingPlayers.ToList().Contains(dbPlayer)) FishingPlayers.Remove(dbPlayer);
         }
 

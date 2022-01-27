@@ -2,6 +2,7 @@
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Zone;
+using GTANetworkAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -165,8 +166,9 @@ namespace GVRP.Module.Service
             return status;
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             if (dbPlayer.isInjured())
             {
                 CancelOwnService(dbPlayer, (int)teams.TEAM_MEDIC);

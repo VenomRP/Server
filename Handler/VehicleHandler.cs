@@ -112,8 +112,9 @@ namespace GVRP.Handler
             }
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             if (dbPlayer != null && dbPlayer.IsValid() && dbPlayer.Player.IsInVehicle)
             {
                 SxVehicle sxVeh = dbPlayer.Player.Vehicle.GetVehicle();

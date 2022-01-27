@@ -144,8 +144,9 @@ namespace GVRP.Module.Players.Seat
             dbPlayer.CurrentSeatIndex = -1;
         }
 
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        public override void OnPlayerDisconnected(Player player, string reason)
         {
+            var dbPlayer = player.GetPlayer();
             RemovePlayerSeatReservation(dbPlayer);
         }
 
