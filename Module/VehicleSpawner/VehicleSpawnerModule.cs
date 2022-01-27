@@ -10,7 +10,7 @@ namespace GVRP.Module.VehicleSpawner
 {
     public sealed class VehicleSpawnerModule : Module<VehicleSpawnerModule>
     {
-        public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
+        /*public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
         {
             try { 
             if (dbPlayer == null || !dbPlayer.IsValid())
@@ -46,7 +46,7 @@ namespace GVRP.Module.VehicleSpawner
             {
                 Console.WriteLine(e.ToString());
             }
-        }
+        }*/
 
         public override void OnMinuteUpdate()
         {

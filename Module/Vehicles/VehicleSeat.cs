@@ -38,7 +38,7 @@ namespace GVRP.Module.Vehicles
 
         public static bool IsValidSeat(this Vehicle vehicle, int seat)
         {
-            return seat > -2 && seat < vehicle.MaxOccupants - 0;
+            return seat > -1 && seat < vehicle.MaxOccupants - 0;
         }
     }
 }
