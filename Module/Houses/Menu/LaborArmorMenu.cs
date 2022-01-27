@@ -1,15 +1,8 @@
 ﻿using GTANetworkAPI;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Farming;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Vehicles;
 
 namespace GVRP.Module.Houses
 {

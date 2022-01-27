@@ -1,12 +1,9 @@
-﻿using System;
+﻿using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GVRP.Module.Computer.Apps.PoliceAktenSearchApp;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 using static GVRP.Module.Computer.Apps.PoliceAktenSearchApp.PoliceAddAktenApp;
-using static GVRP.Module.Computer.Apps.PoliceAktenSearchApp.PoliceOverviewApp;
 
 namespace GVRP.Module.Crime.PoliceAkten
 {
@@ -24,9 +21,9 @@ namespace GVRP.Module.Crime.PoliceAkten
             akten = new Dictionary<uint, PoliceServerAkte>();
 
             // Konvert into new
-            foreach(PoliceAkte pAkte in Instance.GetAll().Values)
+            foreach (PoliceAkte pAkte in Instance.GetAll().Values)
             {
-                if(!akten.ContainsKey(pAkte.Id))
+                if (!akten.ContainsKey(pAkte.Id))
                 {
                     akten.Add(pAkte.Id, new PoliceServerAkte(pAkte.Id, pAkte.PlayerId, pAkte.Title, pAkte.Text, pAkte.Created, pAkte.Closed, pAkte.Officer, pAkte.Open));
                 }
@@ -36,7 +33,7 @@ namespace GVRP.Module.Crime.PoliceAkten
         public void AddServerAkte(DbPlayer foundPlayer, ResponseAkteJson responseAkteJson)
         {
             uint newId = 1;
-            if(akten.Count() > 0) newId = akten.Keys.Max()+1;
+            if (akten.Count() > 0) newId = akten.Keys.Max() + 1;
 
             akten.Add(newId, new PoliceServerAkte(newId, foundPlayer.Id, responseAkteJson.Title, responseAkteJson.Text, responseAkteJson.Created, responseAkteJson.Closed, responseAkteJson.Officer, responseAkteJson.Open));
             CreateAkteDB(akten[newId]);
@@ -45,7 +42,7 @@ namespace GVRP.Module.Crime.PoliceAkten
         public List<ResponseAkteJson> GetPlayerClientJsonAkten(DbPlayer dbPlayer)
         {
             List<ResponseAkteJson> responseAkteJsons = new List<ResponseAkteJson>();
-            foreach(PoliceServerAkte akte in akten.Values.ToList().Where(a => a.PlayerId == dbPlayer.Id))
+            foreach (PoliceServerAkte akte in akten.Values.ToList().Where(a => a.PlayerId == dbPlayer.Id))
             {
                 responseAkteJsons.Add(new ResponseAkteJson() { AktenId = akte.Id, Officer = akte.Officer, Closed = akte.Closed, Created = akte.Created, Open = akte.Open, Text = akte.Text, Title = akte.Title });
             }
@@ -57,7 +54,7 @@ namespace GVRP.Module.Crime.PoliceAkten
         {
             ResponseAkteJson responseAkteJson = new ResponseAkteJson();
 
-            if(akten.Where(a => a.Value.Open && a.Value.PlayerId == dbPlayer.Id).Count() > 0)
+            if (akten.Where(a => a.Value.Open && a.Value.PlayerId == dbPlayer.Id).Count() > 0)
             {
                 PoliceServerAkte policeAkte = akten.Where(a => a.Value.Open && a.Value.PlayerId == dbPlayer.Id).First().Value;
 
@@ -85,7 +82,7 @@ namespace GVRP.Module.Crime.PoliceAkten
 
         public void SaveServerAkte(DbPlayer foundPlayer, ResponseAkteJson responseAkteJson)
         {
-            if(akten.ContainsKey(responseAkteJson.AktenId))
+            if (akten.ContainsKey(responseAkteJson.AktenId))
             {
                 // Gleiche Daten ab...
                 PoliceServerAkte policeServerAkte = akten[responseAkteJson.AktenId];

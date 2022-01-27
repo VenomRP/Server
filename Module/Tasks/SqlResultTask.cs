@@ -1,5 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Tasks
 {
@@ -16,7 +16,7 @@ namespace GVRP.Module.Tasks
                     using (var reader = command.ExecuteReader())
                     {
                         OnFinished(reader);
-                    } 
+                    }
                 }
             }
         }

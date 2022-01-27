@@ -1,9 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
-using GVRP.Module.Logging;
-using GVRP.Module.Teams;
-using GVRP.Module.Vehicles.Data;
 
 namespace GVRP.Module.Items
 {
@@ -65,7 +61,7 @@ namespace GVRP.Module.Items
 
             AllowedVehicleModels = new HashSet<uint>();
             var allowedVehicleModelString = reader.GetString("allowed_vehiclemodels");
-            
+
             if (!string.IsNullOrEmpty(allowedVehicleModelString))
             {
                 var splittedVehicleModels = allowedVehicleModelString.Split(',');
@@ -76,7 +72,7 @@ namespace GVRP.Module.Items
                 }
             }
         }
-        
+
         public override uint GetIdentifier()
         {
             return Id;
@@ -84,8 +80,8 @@ namespace GVRP.Module.Items
 
         public bool CanDrugInfect()
         {
-            return (Id == 1  || // Meth
-                    Id == 8  || // GWeed
+            return (Id == 1 || // Meth
+                    Id == 8 || // GWeed
                     Id == 16 || // Ephedrin
                     Id == 19 || // Weed
                     Id == 18 || // Hanfsamen

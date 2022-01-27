@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Houses;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using Logger = GVRP.Module.Logging.Logger;
 
 namespace GVRP.Module.Computer.Apps.HouseApp.Apps
 {
@@ -20,7 +15,7 @@ namespace GVRP.Module.Computer.Apps.HouseApp.Apps
         }
 
         [RemoteEvent]
-        public void requestHouseVehicles(Player client) 
+        public void requestHouseVehicles(Player client)
         {
             DbPlayer dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid())

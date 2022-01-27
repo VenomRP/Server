@@ -1,6 +1,5 @@
-﻿using Newtonsoft.Json;
-using GVRP.Module.GTAN;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
 
 namespace GVRP
 {
@@ -14,7 +13,7 @@ namespace GVRP
     {
         public static void SetPlayerPhoneData(DbPlayer iPlayer)
         {
-            var data = new PlayerPhoneData {Credit = iPlayer.guthaben[0], Number = iPlayer.handy[0]};
+            var data = new PlayerPhoneData { Credit = iPlayer.guthaben[0], Number = iPlayer.handy[0] };
             iPlayer.Player.TriggerEvent("RESPONSE_PHONE_SETTINGS", JsonConvert.SerializeObject(data));
         }
     }

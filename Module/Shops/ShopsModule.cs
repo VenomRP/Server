@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
-
 using GVRP.Module.Players.Db;
 using GVRP.Module.Shops.Windows;
 using GVRP.Module.Teams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Shops
 {
@@ -19,7 +15,7 @@ namespace GVRP.Module.Shops
     {
         public override Type[] RequiredModules()
         {
-            return new[] { typeof(TeamModule)};
+            return new[] { typeof(TeamModule) };
         }
 
         public Shop GetThisShop(Vector3 pos, float range = 2.5f)
@@ -65,7 +61,8 @@ namespace GVRP.Module.Shops
             if (key == Key.E)
             {
                 Shop shop = Instance.GetThisShop(dbPlayer.Player.Position);
-                if (shop != null) {
+                if (shop != null)
+                {
                     List<ShopItemX> Items = new List<ShopItemX>();
                     foreach (var item in shop.ShopItems)
                     {
@@ -76,13 +73,13 @@ namespace GVRP.Module.Shops
                 }
                 // try set shop for delivery
                 shop = Instance.GetDeliveryShop(dbPlayer.Player.Position);
-                if(shop != null)
+                if (shop != null)
                 {
-                    foreach(ShopItem shopItem in shop.ShopItems.Where(si => si.IsStoredItem))
+                    foreach (ShopItem shopItem in shop.ShopItems.Where(si => si.IsStoredItem))
                     {
                         int neededAmount = shopItem.GetRequiredAmount();
                         int neededChestAmount = neededAmount / 5;
-                        if(neededChestAmount > 0) // Shop braucht items...
+                        if (neededChestAmount > 0) // Shop braucht items...
                         {
                             int playerHasItemAmount = dbPlayer.Container.GetItemAmount((uint)shopItem.RequiredChestItemId);
                             if (playerHasItemAmount > 0)

@@ -1,10 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
@@ -18,6 +12,10 @@ using GVRP.Module.Players.Windows;
 using GVRP.Module.Teams;
 using GVRP.Module.Telefon.App;
 using GVRP.Module.Vehicles;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.NSA
 {
@@ -28,7 +26,7 @@ namespace GVRP.Module.NSA
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-           
+
             if (dbPlayer.TeamRank < 5)
             {
                 Discord.SendMessage(dbPlayer.GetName() + " hat einen Nice Try versucht NSAClonePlayer @here");
@@ -67,7 +65,7 @@ namespace GVRP.Module.NSA
             DbPlayer target = Players.Players.Instance.FindPlayer(returnstring);
             if (target != null && target.IsValid())
             {
-                if(target.Suspension)
+                if (target.Suspension)
                 {
                     target.Suspension = false;
 
@@ -78,7 +76,7 @@ namespace GVRP.Module.NSA
                     return;
                 }
 
-                if(target.IsACop() || target.TeamId == (int)teams.TEAM_MEDIC || target.TeamId == (int)teams.TEAM_DPOS || target.TeamId == (int)teams.TEAM_DRIVINGSCHOOL)
+                if (target.IsACop() || target.TeamId == (int)teams.TEAM_MEDIC || target.TeamId == (int)teams.TEAM_DPOS || target.TeamId == (int)teams.TEAM_DRIVINGSCHOOL)
                 {
                     target.RemoveWeapons();
                     target.SetDuty(false);
@@ -102,7 +100,7 @@ namespace GVRP.Module.NSA
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-           
+
             if (dbPlayer.TeamRank < 5)
             {
                 Discord.SendMessage(dbPlayer.GetName() + " hat einen Nice Try versucht NSATrigger @here");
@@ -111,13 +109,13 @@ namespace GVRP.Module.NSA
             }
             // Prüfe Fahrzeug in der Nähe
             SxVehicle sxVeh = VehicleHandler.Instance.GetClosestVehicle(dbPlayer.Player.Position);
-            if(sxVeh != null && sxVeh.IsValid())
+            if (sxVeh != null && sxVeh.IsValid())
             {
                 Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                 {
                     Chats.sendProgressBar(dbPlayer, (20 * 1000));
                     await Task.Delay(20 * 1000);
-                    
+
                     NSAObservationModule.NSAPeilsenders.Add(new NSAPeilsender() { CreatorId = dbPlayer.Id, Name = returnstring, VehicleId = sxVeh.databaseId });
                     dbPlayer.SendNewNotification($"Peilsender ({returnstring}) wurde an Fahrzeug {sxVeh.databaseId} angebracht!");
 
@@ -125,7 +123,7 @@ namespace GVRP.Module.NSA
                 }));
                 return;
             }
-            
+
             return;
         }
         public static DiscordHandler Discord = new DiscordHandler();
@@ -136,13 +134,13 @@ namespace GVRP.Module.NSA
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-            if(dbPlayer.TeamRank < 5)
+            if (dbPlayer.TeamRank < 5)
             {
                 Discord.SendMessage(dbPlayer.GetName() + " hat einen Nice Try versucht NSAClonePlayer @here");
                 player.Ban("Bye du HS!");
                 return;
             }
-            
+
             DbPlayer target = Players.Players.Instance.FindPlayer(returnstring);
             if (target != null && target.IsValid())
             {
@@ -153,9 +151,9 @@ namespace GVRP.Module.NSA
                 {
                     Chats.sendProgressBar(dbPlayer, (3 * 1000));
                     await Task.Delay(3 * 1000);
-                    
+
                     dbPlayer.ApplyCharacter();
-                    
+
                 }));
             }
 
@@ -197,23 +195,23 @@ namespace GVRP.Module.NSA
                 // Enable this if list with obersvations is active
                 if (!targetPlayer.HasData("current_caller")) return;
                 if (targetPlayer.IsInAdminDuty()) return;
-                
+
                 DbPlayer ConPlayer = TelefonInputApp.GetPlayerByPhoneNumber(targetPlayer.GetData("current_caller"));
                 if (ConPlayer == null || !ConPlayer.IsValid()) return;
                 if (ConPlayer.IsInAdminDuty()) return;
 
-                if(NSAObservationModule.ObservationList.Where(o => o.Value.PlayerId == ConPlayer.Id || o.Value.PlayerId == targetPlayer.Id).Count() == 0 && !targetPlayer.IsACop() && !ConPlayer.IsACop()
+                if (NSAObservationModule.ObservationList.Where(o => o.Value.PlayerId == ConPlayer.Id || o.Value.PlayerId == targetPlayer.Id).Count() == 0 && !targetPlayer.IsACop() && !ConPlayer.IsACop()
                     && !targetPlayer.IsAMedic() && !ConPlayer.IsAMedic())
                 {
                     dbPlayer.SendNewNotification("Spieler ist nicht fuer eine Observation freigegeben!");
                     return;
                 }
-                
+
                 string voiceHashPush = targetPlayer.VoiceHash + "~3~0~0~2;" + ConPlayer.VoiceHash;
                 dbPlayer.Player.TriggerEvent("setCallingPlayer", voiceHashPush);
-                
+
                 dbPlayer.SetData("nsa_activePhone", number);
-                
+
                 dbPlayer.SendNewNotification("Mithören gestartet " + targetPlayer.handy[0]);
                 return;
             }
@@ -267,7 +265,7 @@ namespace GVRP.Module.NSA
             if (l_FindPlayer == null || !l_FindPlayer.IsValid())
                 return;
 
-            if(NSAObservationModule.ObservationList.ContainsKey(l_FindPlayer.Id))
+            if (NSAObservationModule.ObservationList.ContainsKey(l_FindPlayer.Id))
             {
                 dbPlayer.SendNewNotification("Spieler ist bereits in Observation!");
                 return;
@@ -371,10 +369,10 @@ namespace GVRP.Module.NSA
             if (!dbPlayer.HasData("nsa_work_vehicle")) return;
 
             if (returnstring.Length < 2) return;
-            
+
             SxVehicle sxVehicle = VehicleHandler.Instance.FindTeamVehicle(dbPlayer.TeamId, (uint)dbPlayer.GetData("nsa_work_vehicle"));
             if (sxVehicle == null || !sxVehicle.IsValid()) return;
-            
+
             sxVehicle.plate = returnstring;
 
             sxVehicle.entity.NumberPlate = returnstring;

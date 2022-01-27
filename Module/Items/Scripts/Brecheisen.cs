@@ -1,19 +1,17 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
 using GVRP.Module.Doors;
-using GVRP.Module.GTAN;
 using GVRP.Module.Heist.Planning;
 using GVRP.Module.Injury;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Teams;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -36,25 +34,25 @@ namespace GVRP.Module.Items.Scripts
                     }
                     if (door.LastBreak.AddMinutes(5) > DateTime.Now) return false; // Bei einem Break, kann 5 min nicht interagiert werden
 
-                        Chats.sendProgressBar(iPlayer, 20000);
+                    Chats.sendProgressBar(iPlayer, 20000);
 
-                    
-                        iPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "missheistdockssetup1ig_3@talk", "oh_hey_vin_dockworker");
-                        iPlayer.Player.TriggerEvent("freezePlayer", true);
-                        iPlayer.SetData("userCannotInterrupt", true);
 
-                        await Task.Delay(20000);
-                        iPlayer.ResetData("userCannotInterrupt");
+                    iPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "missheistdockssetup1ig_3@talk", "oh_hey_vin_dockworker");
+                    iPlayer.Player.TriggerEvent("freezePlayer", true);
+                    iPlayer.SetData("userCannotInterrupt", true);
 
-                        if (iPlayer.IsCuffed || iPlayer.IsTied || iPlayer.isInjured()) return true;
+                    await Task.Delay(20000);
+                    iPlayer.ResetData("userCannotInterrupt");
 
-                        iPlayer.Player.TriggerEvent("freezePlayer", false);
+                    if (iPlayer.IsCuffed || iPlayer.IsTied || iPlayer.isInjured()) return true;
 
-                        door.Break();
-                        
-                        iPlayer.SendNewNotification("Tuer aufgebrochen!", notificationType:PlayerNotification.NotificationType.SUCCESS);
-                        NAPI.Player.StopPlayerAnimation(iPlayer.Player);
-                        return true;
+                    iPlayer.Player.TriggerEvent("freezePlayer", false);
+
+                    door.Break();
+
+                    iPlayer.SendNewNotification("Tuer aufgebrochen!", notificationType: PlayerNotification.NotificationType.SUCCESS);
+                    NAPI.Player.StopPlayerAnimation(iPlayer.Player);
+                    return true;
                 }
             }
 
@@ -133,7 +131,7 @@ namespace GVRP.Module.Items.Scripts
 
                     Chats.sendProgressBar(iPlayer, 30000);
 
-                    
+
                     iPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "missheistdockssetup1ig_3@talk", "oh_hey_vin_dockworker");
                     iPlayer.Player.TriggerEvent("freezePlayer", true);
                     iPlayer.SetCannotInteract(true);
@@ -147,7 +145,7 @@ namespace GVRP.Module.Items.Scripts
                     jumpPoint.Destination.Locked = false;
                     jumpPoint.Destination.LastBreak = DateTime.Now;
 
-                    iPlayer.SendNewNotification("Eingang aufgebrochen!", notificationType:PlayerNotification.NotificationType.SUCCESS);
+                    iPlayer.SendNewNotification("Eingang aufgebrochen!", notificationType: PlayerNotification.NotificationType.SUCCESS);
                     NAPI.Player.StopPlayerAnimation(iPlayer.Player);
                     return true;
                 }
@@ -163,8 +161,8 @@ namespace GVRP.Module.Items.Scripts
             if (l_Vehicle.SyncExtension.Locked)
             {
                 Chats.sendProgressBar(iPlayer, 30000);
-                
-                foreach(DbPlayer insidePlayer in l_Vehicle.Visitors.ToList())
+
+                foreach (DbPlayer insidePlayer in l_Vehicle.Visitors.ToList())
                 {
                     if (insidePlayer == null || !insidePlayer.IsValid() || insidePlayer.Dimension[0] == 0 || insidePlayer.DimensionType[0] != DimensionType.Camper) continue;
                     insidePlayer.SendNewNotification($"Irgendetwas rappelt an der Tür...");
@@ -181,13 +179,13 @@ namespace GVRP.Module.Items.Scripts
 
                 l_Vehicle.SyncExtension.SetLocked(false);
 
-                iPlayer.SendNewNotification("Fahrzeug aufgebrochen!", notificationType:PlayerNotification.NotificationType.SUCCESS);
+                iPlayer.SendNewNotification("Fahrzeug aufgebrochen!", notificationType: PlayerNotification.NotificationType.SUCCESS);
                 NAPI.Player.StopPlayerAnimation(iPlayer.Player);
                 return true;
             }
             else
             {
-                iPlayer.SendNewNotification( "Fahrzeug ist offen!");
+                iPlayer.SendNewNotification("Fahrzeug ist offen!");
                 return false;
             }
         }

@@ -1,19 +1,14 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.Business.FuelStations;
-using GVRP.Module.Chat;
-using GVRP.Module.Events.Halloween;
 using GVRP.Module.Injury;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
-using GVRP.Module.Node;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.RemoteEvents;
+using Newtonsoft.Json;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Vehicles
 {
@@ -387,7 +382,7 @@ namespace GVRP.Module.Vehicles
                     dbPlayer.SendNewNotification("Dein Fahrzeug wurde mit einer Parkkralle festgesetzt und rührt sich keinen Meter mehr vom Fleck...", notificationType: PlayerNotification.NotificationType.ERROR);
                     return;
                 }
-    
+
 
                 if (dbVehicle.SyncExtension.EngineOn == false)
                 {

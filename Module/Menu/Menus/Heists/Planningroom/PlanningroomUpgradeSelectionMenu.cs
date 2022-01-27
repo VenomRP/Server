@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using GVRP.Module.Heist.Planning;
+﻿using GVRP.Module.Heist.Planning;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Menu.Menus.Heists.Planningroom
 {
@@ -22,9 +21,9 @@ namespace GVRP.Module.Menu.Menus.Heists.Planningroom
             if (!PlanningUpgrades.Upgrades.TryGetValue(selection, out Upgrade upgrade)) return menu;
 
             Dictionary<int, int> upgrades = new Dictionary<int, int>();
-            for(int i = 0; i < upgrade.UpgradeNames.Count; i++)
+            for (int i = 0; i < upgrade.UpgradeNames.Count; i++)
             {
-                if(upgrade.UpgradeNames[i] == "Holzoptik")
+                if (upgrade.UpgradeNames[i] == "Holzoptik")
                 {
                     if (room.MainFloorMirrorLevel != 0 && room.MainFloorInteriorLevel != 0 && room.MainFloorSlotMachineLevel != 0)
                     {
@@ -35,7 +34,7 @@ namespace GVRP.Module.Menu.Menus.Heists.Planningroom
                 {
                     menu.Add($"{upgrade.UpgradeNames[i]} ausbauen");
                 }
-                
+
             }
             return menu;
         }

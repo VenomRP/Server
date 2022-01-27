@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkMethods;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.Logging;
+﻿using GVRP.Handler;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Vehicles.RegistrationOffice;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Items.Scripts
 {

@@ -1,19 +1,10 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.JobFactions.Carsell;
+﻿using GVRP.Module.JobFactions.Carsell;
 using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
 using GVRP.Module.Teams.Shelter;
-using GVRP.Module.Telefon.App;
 using GVRP.Module.Vehicles.Data;
+using System.Linq;
 
 namespace GVRP.Module.Carsell.Menu
 {
@@ -33,8 +24,8 @@ namespace GVRP.Module.Carsell.Menu
 
             foreach (VehicleData vehData in VehicleDataModule.Instance.data.Values.ToList().Where(vd => vd.IsShopVehicle && vd.CarsellCategory.Id == p_DbPlayer.GetData("carsellCat")))
             {
-                l_Menu.Add($"{(vehData.mod_car_name.Length <=0 ? vehData.Model : vehData.mod_car_name)}");
-            } 
+                l_Menu.Add($"{(vehData.mod_car_name.Length <= 0 ? vehData.Model : vehData.mod_car_name)}");
+            }
 
             return l_Menu;
         }
@@ -48,7 +39,7 @@ namespace GVRP.Module.Carsell.Menu
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(iPlayer);
                     return true;
@@ -57,11 +48,11 @@ namespace GVRP.Module.Carsell.Menu
                 int idx = 1;
                 foreach (VehicleData vehData in VehicleDataModule.Instance.data.Values.ToList().Where(vd => vd.IsShopVehicle && vd.CarsellCategory.Id == iPlayer.GetData("carsellCat")))
                 {
-                    if(idx == index)
+                    if (idx == index)
                     {
                         // Fahrzeug zum Bestellen
 
-                        if(!JobCarsellFactionModule.Instance.CanAddVehicle(iPlayer.TeamId))
+                        if (!JobCarsellFactionModule.Instance.CanAddVehicle(iPlayer.TeamId))
                         {
                             iPlayer.SendNewNotification("Sie haben bereits die maximale Anzahl an Vorführfahrzeugen erreicht!");
                             return true;

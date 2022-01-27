@@ -1,11 +1,10 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps
 {
@@ -21,7 +20,7 @@ namespace GVRP.Module.Computer.Apps
             }
         }
 
-        public IpadDesktopApp() : base("IpadDesktopApp", "IpadDesktopApp") {}
+        public IpadDesktopApp() : base("IpadDesktopApp", "IpadDesktopApp") { }
 
         public override Func<DbPlayer, List<ComputerAppClientObject>, bool> Show()
         {
@@ -29,7 +28,7 @@ namespace GVRP.Module.Computer.Apps
         }
 
         [RemoteEvent]
-        public void requestIpadApp(Player player) 
+        public void requestIpadApp(Player player)
         {
             DbPlayer iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.IsValid()) return;

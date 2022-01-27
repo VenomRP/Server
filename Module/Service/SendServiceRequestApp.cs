@@ -1,10 +1,9 @@
 ﻿using GTANetworkAPI;
-using System.Linq;
-using System.Text.RegularExpressions;
 using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Computer.Apps.MarketplaceApp;
 using GVRP.Module.Players;
 using GVRP.Module.Teams;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace GVRP.Module.Service
 {
@@ -37,12 +36,12 @@ namespace GVRP.Module.Service
             switch (department)
             {
                 case "police":
-                    
+
                     if ((dbPlayer.IsACop() || dbPlayer.TeamId == (uint)teams.TEAM_GOV) && dbPlayer.IsInDuty())
                     {
                         return;
                     }
-                    
+
                     if (TeamModule.Instance[(int)teams.TEAM_POLICE].Members.Where(c => c.Value.Duty).Count() > 0)
                     {
                         TeamModule.Instance[(int)teams.TEAM_POLICE].SendNotification($"Ein Notruf von { dbPlayer.GetName() } ({ dbPlayer.ForumId }) mit dem Grund: { message } ist eingegangen!");
@@ -203,16 +202,16 @@ namespace GVRP.Module.Service
 
                     break;
                 case "government":
-                    if (TeamModule.Instance[(int) teams.TEAM_GOV].Members.Where(c => c.Value.Duty).Count() > 0)
+                    if (TeamModule.Instance[(int)teams.TEAM_GOV].Members.Where(c => c.Value.Duty).Count() > 0)
                     {
-                        TeamModule.Instance[(int) teams.TEAM_GOV].SendNotification($"Eine Anfrage von { dbPlayer.GetName() } ({ dbPlayer.ForumId }) mit dem Grund: { message } ist eingegangen!");
+                        TeamModule.Instance[(int)teams.TEAM_GOV].SendNotification($"Eine Anfrage von { dbPlayer.GetName() } ({ dbPlayer.ForumId }) mit dem Grund: { message } ist eingegangen!");
                         requestSuccess = true;
                     }
 
                     if (requestSuccess)
                     {
-                        Service service = new Service(dbPlayer.Player.Position, message, (uint) teams.TEAM_GOV, dbPlayer, "", telnr);
-                        bool status = ServiceModule.Instance.Add(dbPlayer, (uint) teams.TEAM_GOV, service);
+                        Service service = new Service(dbPlayer.Player.Position, message, (uint)teams.TEAM_GOV, dbPlayer, "", telnr);
+                        bool status = ServiceModule.Instance.Add(dbPlayer, (uint)teams.TEAM_GOV, service);
 
                         dbPlayer.SetData("service", 14);
 

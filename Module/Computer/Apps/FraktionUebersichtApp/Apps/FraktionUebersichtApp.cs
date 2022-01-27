@@ -1,19 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using Google.Protobuf.WellKnownTypes;
-using MySql.Data.MySqlClient;
 using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Computer.Apps.FahrzeugUebersichtApp;
-using GVRP.Module.Computer.Apps.VehicleImpoundApp;
 using GVRP.Module.Configurations;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using Newtonsoft.Json;
-using GVRP.Module.Logging;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps.FraktionUebersichtApp.Apps
 {
@@ -23,7 +16,7 @@ namespace GVRP.Module.Computer.Apps.FraktionUebersichtApp.Apps
 
 
         [RemoteEvent]
-        public void requestFraktionMembers(Player client) 
+        public void requestFraktionMembers(Player client)
         {
             DbPlayer p_DbPlayer = client.GetPlayer();
             if (p_DbPlayer == null || !p_DbPlayer.IsValid())

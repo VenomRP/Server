@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
+﻿using System.Collections.Generic;
 using System.Xml.Serialization;
-using GTANetworkAPI;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles;
 
 namespace GVRP.Module.MapParser
 {
@@ -19,13 +12,13 @@ namespace GVRP.Module.MapParser
         public void ReadMenyooMap(string file)
         {
 
-            
+
         }
 
         public void ReadMap(string file)
         {
 
-            
+
         }
     }
 
@@ -40,11 +33,11 @@ namespace GVRP.Module.MapParser
     {
         [XmlElement("PositionRotation")]
         public PositionRotation PositionRotation { get; set; }
-        
+
         [XmlElement("HashName")]
         public string Hash { get; set; }
     }
-    
+
     public class PositionRotation
     {
         [XmlElement("X")]

@@ -1,34 +1,33 @@
 using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using GVRP.Handler;
+using GVRP.Module.Asservatenkammer;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Configurations;
+using GVRP.Module.DropItem;
+using GVRP.Module.Guenther;
 using GVRP.Module.Houses;
 using GVRP.Module.Injury;
 using GVRP.Module.Items.Scripts;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Buffs;
-using GVRP.Module.Configurations;
-using GVRP.Module.DropItem;
 using GVRP.Module.Players.Db;
+using GVRP.Module.Players.Phone;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.RemoteEvents;
-using GVRP.Module.Players.Phone;
-using GVRP.Module.Voice;
-using GVRP.Module.Guenther;
-using GVRP.Module.Asservatenkammer;
 using GVRP.Module.Vehicles;
+using GVRP.Module.Voice;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items
 {
     public class ItemsModuleEvents : Script
     {
-        public static void RequestInventory(Player player) 
+        public static void RequestInventory(Player player)
         {
             try
             {
@@ -89,7 +88,7 @@ namespace GVRP.Module.Items
 
         [RemoteEventPermission(AllowedOnCuff = false, AllowedOnTied = false, AllowedDeath = false)]
         [RemoteEvent]
-        public void requestInventory(Player player) 
+        public void requestInventory(Player player)
         {
 
 
@@ -111,7 +110,7 @@ namespace GVRP.Module.Items
             dbPlayer.ResetData("friskInvHouse");
         }
 
-        public async void actualizeInventory(Player player) 
+        public async void actualizeInventory(Player player)
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid())
@@ -173,12 +172,12 @@ namespace GVRP.Module.Items
             {
                 return; // Show Inventory
             }
-            
+
             if (slot < 0 || slot > 47)
             {
                 return;
             }
-            
+
             if (dbPlayer.HasData("disableFriskInv") && dbPlayer.GetData("disableFriskInv"))
             {
                 if (!dbPlayer.HasData("friskInvUserName") && !dbPlayer.HasData("friskInvVeh") && !dbPlayer.HasData("friskInvHouse"))
@@ -189,7 +188,7 @@ namespace GVRP.Module.Items
                         return;
                     }
                 }
-                
+
                 if (dbPlayer.HasData("friskInvVeh"))
                 {
                     SxVehicle vehicle = VehicleHandler.Instance.GetClosestVehicle(dbPlayer.Player.Position);
@@ -340,7 +339,7 @@ namespace GVRP.Module.Items
                             }
                             else
                             {
-                                if(findPlayer.IsACop())
+                                if (findPlayer.IsACop())
                                 {
                                     dbPlayer.SendNewNotification($"{findPlayer.Container.Slots[slot].Amount} - {findPlayer.Container.Slots[slot].Model.Name} wurden beschlagnahmt.");
                                     findPlayer.SendNewNotification($"{findPlayer.Container.Slots[slot].Amount} - {findPlayer.Container.Slots[slot].Model.Name} wurden beschlagnahmt.");
@@ -360,7 +359,7 @@ namespace GVRP.Module.Items
                                     dbPlayer.SendNewNotification("Sie haben nicht genug Platz für eine Beschlagnahmung!");
                                     return;
                                 }
-                                
+
                                 sxVehicle.Container.AddItem(BeschlagnahmtItem, findPlayer.Container.Slots[slot].Amount);
                                 dbPlayer.SendNewNotification($"{findPlayer.Container.Slots[slot].Amount} - {findPlayer.Container.Slots[slot].Model.Name} wurden beschlagnahmt.");
                                 findPlayer.SendNewNotification($"{findPlayer.Container.Slots[slot].Amount} - {findPlayer.Container.Slots[slot].Model.Name} wurden beschlagnahmt.");
@@ -379,11 +378,11 @@ namespace GVRP.Module.Items
                         findPlayer.Container.RemoveFromSlot(slot, amount);
 
                         // Komisches zeug für funk und apps
-                //        if (findPlayer.Container.GetItemById(174).Amount < 1)
-                  //      {
-                       //     PhoneCall.CancelPhoneCall(findPlayer);
-                      //      VoiceModule.Instance.turnOffFunk(findPlayer);
-                    //    }
+                        //        if (findPlayer.Container.GetItemById(174).Amount < 1)
+                        //      {
+                        //     PhoneCall.CancelPhoneCall(findPlayer);
+                        //      VoiceModule.Instance.turnOffFunk(findPlayer);
+                        //    }
                         findPlayer.UpdateApps();
                     }
                 }
@@ -462,7 +461,7 @@ namespace GVRP.Module.Items
                 return;
             }
 
-            
+
 
             DbPlayer destinationPlayer = Players.Players.Instance.FindPlayerById(dbPlayer.GetData("giveitem"));
             dbPlayer.ResetData("giveitem");
@@ -589,12 +588,12 @@ namespace GVRP.Module.Items
                 return;
             }
 
-        
+
             if (!dbPlayer.HasData("cooldowninvz"))
             {
                 dbPlayer.SetData("cooldowninvz", true);
                 await Task.Delay(3000);
-        dbPlayer.ResetData("cooldowninvz");
+                dbPlayer.ResetData("cooldowninvz");
 
             }
             if (dbPlayer.HasData("cooldowninvz"))
@@ -605,7 +604,7 @@ namespace GVRP.Module.Items
             }
 
 
-ContainerMoveTypes containerMoveType = (ContainerMoveTypes)inventoryType;
+            ContainerMoveTypes containerMoveType = (ContainerMoveTypes)inventoryType;
 
             // External Container
             Container eXternContainer = ItemsModule.Instance.findInventory(player);
@@ -691,7 +690,7 @@ ContainerMoveTypes containerMoveType = (ContainerMoveTypes)inventoryType;
                 dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
                 return false;
             }
-            
+
             if (slot < 0 || slot > 47)
             {
                 return false;
@@ -708,7 +707,7 @@ ContainerMoveTypes containerMoveType = (ContainerMoveTypes)inventoryType;
                     return false;
                 }
 
-                if(model.RestrictedToTeams.Count > 0)
+                if (model.RestrictedToTeams.Count > 0)
                 {
                     if (!model.RestrictedToTeams.Contains(dbPlayer.Team.Id)) return false;
                 }
@@ -1038,7 +1037,7 @@ ContainerMoveTypes containerMoveType = (ContainerMoveTypes)inventoryType;
 
 
         }
-        
+
         [RemoteEvent]
         public void CheckGuentherPassword(Player player, string returnString)
         {
@@ -1056,7 +1055,7 @@ ContainerMoveTypes containerMoveType = (ContainerMoveTypes)inventoryType;
             if (!int.TryParse(returnString, out int userPass)) return;
 
             int password = Utils.GeneratePassword(dbPlayer);
-            if(password != userPass)
+            if (password != userPass)
             {
                 dbPlayer.SendNewNotification("Falsches Passwort. Kein Zutritt für Dich!");
                 return;

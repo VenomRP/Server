@@ -1,8 +1,4 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Assets.Tattoo;
+﻿using System.Collections.Generic;
 
 namespace GVRP.Module.Customization
 {

@@ -1,11 +1,11 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Keys;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Handler
 {

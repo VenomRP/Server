@@ -1,12 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
 using GVRP.Module.Voice;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Players.Phone.Apps
 {
@@ -23,7 +19,7 @@ namespace GVRP.Module.Players.Phone.Apps
             PlayerId = dbPlayer.Id;
             Apps = new Dictionary<string, PhoneApp>();
             InitialApps = new Dictionary<string, PhoneApp>();
-            
+
             if (dbPlayer.TeamId != 0)
             {
                 AddDefault("TeamApp");
@@ -38,7 +34,7 @@ namespace GVRP.Module.Players.Phone.Apps
             {
                 AddDefault("FunkApp");
             }
-            
+
             AddDefault("GpsApp");
             AddDefault("ContactsApp");
             AddDefault("LifeInvaderApp");
@@ -91,7 +87,7 @@ namespace GVRP.Module.Players.Phone.Apps
                 temp.Remove(PhoneAppsModule.Instance["MessengerApp"]);
                 temp.Remove(PhoneAppsModule.Instance["TaxiApp"]);
                 temp.Remove(PhoneAppsModule.Instance["NewsApp"]);
-              temp.Remove(PhoneAppsModule.Instance["LifeInvaderApp"]);
+                temp.Remove(PhoneAppsModule.Instance["LifeInvaderApp"]);
                 if (VoiceModule.Instance.hasPlayerRadio(dbPlayer))
                 {
                     temp.Remove(PhoneAppsModule.Instance["FunkApp"]);
@@ -103,7 +99,7 @@ namespace GVRP.Module.Players.Phone.Apps
                 //ganz normal alle Apps
                 return JsonConvert.SerializeObject(Apps.Values.ToList());
             }
-            
+
         }
     }
 }

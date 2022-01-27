@@ -1,15 +1,13 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Racing.Menu;
 using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Racing
 {
@@ -80,7 +78,7 @@ namespace GVRP.Module.Racing
         public static Vector3 Checkpoint9_10 = new Vector3(-1739.62, 3158.89, 32.2286);
 
         public static Vector3 RacingMenuPosition = new Vector3(-1968.7, 3149.38, 32.0943);
-        
+
         public static float BoxVehHeading = 328.53f;
 
         public static Vector3 Box1Veh = new Vector3(-2140.28, 2880.91, 32.0861);
@@ -89,13 +87,13 @@ namespace GVRP.Module.Racing
         public static Vector3 Box4Veh = new Vector3(-2114.06, 2865.62, 32.0862);
         public static Vector3 Box5Veh = new Vector3(-2105.82, 2860.29, 32.0861);
         public static Vector3 Box6Veh = new Vector3(-2097.23, 2854.6, 32.0863);
-        
+
         public static List<RacingLobby> Lobbies = new List<RacingLobby>();
         public static int MaxLobbyPlayers = 10;
         public static int LobbyEnterPrice = 2500;
 
         public static uint RacingVehicleDataId = 1218;
-        
+
         protected override bool OnLoad()
         {
             Lobbies = new List<RacingLobby>();
@@ -112,13 +110,13 @@ namespace GVRP.Module.Racing
 
             return base.OnLoad();
         }
-        
+
         public override void OnTenSecUpdate()
         {
             if (RacingDeactivated) return;
-            foreach(RacingLobby racingLobby in Lobbies)
+            foreach (RacingLobby racingLobby in Lobbies)
             {
-                foreach(SxVehicle sxVehicle in racingLobby.RacingVehicles.ToList())
+                foreach (SxVehicle sxVehicle in racingLobby.RacingVehicles.ToList())
                 {
                     if (sxVehicle == null || !sxVehicle.IsValid()) return;
 
@@ -133,22 +131,22 @@ namespace GVRP.Module.Racing
                     }
                 }
 
-                foreach(DbPlayer dbPlayer in racingLobby.RacingPlayers.ToList())
+                foreach (DbPlayer dbPlayer in racingLobby.RacingPlayers.ToList())
                 {
                     if (dbPlayer == null || !dbPlayer.IsValid())
                     {
                         if (racingLobby.RacingPlayers.Contains(dbPlayer)) racingLobby.RacingPlayers.Remove(dbPlayer);
                         continue;
                     }
-                    
+
                     if (dbPlayer.DimensionType[0] != DimensionType.RacingArea)
                     {
                         racingLobby.RacingPlayers.Remove(dbPlayer);
                         continue;
                     }
-                    if(dbPlayer.DimensionType[0] == DimensionType.RacingArea && !dbPlayer.Player.IsInVehicle)
+                    if (dbPlayer.DimensionType[0] == DimensionType.RacingArea && !dbPlayer.Player.IsInVehicle)
                     {
-                        if(dbPlayer.HasData("racingLeaveCheck"))
+                        if (dbPlayer.HasData("racingLeaveCheck"))
                         {
                             dbPlayer.RemoveFromRacing();
                             dbPlayer.ResetData("racingLeaveCheck");
@@ -159,15 +157,15 @@ namespace GVRP.Module.Racing
                 }
             }
         }
-        
+
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
             if (RacingDeactivated) return false;
             if (dbPlayer.Dimension[0] == 0 && key == Key.E)
             {
-                if(dbPlayer.Player.Position.DistanceTo(RacingMenuPosition) < 2.0f)
+                if (dbPlayer.Player.Position.DistanceTo(RacingMenuPosition) < 2.0f)
                 {
-                    if(Crime.CrimeModule.Instance.CalcJailTime(dbPlayer.Crimes) > 0)
+                    if (Crime.CrimeModule.Instance.CalcJailTime(dbPlayer.Crimes) > 0)
                     {
                         dbPlayer.SendNewNotification("Gesucht können Sie nicht an einem Rennen teilnehmen!");
                         return true;
@@ -186,9 +184,9 @@ namespace GVRP.Module.Racing
             if (!dbPlayer.Player.IsInVehicle) return false;
             if (dbPlayer.DimensionType[0] == DimensionType.RacingArea && colShape.HasData("racingColshape") && colShapeState == ColShapeState.Enter)
             {
-                if(colShape.GetData<int>("racingColshape") == 1) // Start - End Colshape
+                if (colShape.GetData<int>("racingColshape") == 1) // Start - End Colshape
                 {
-                    if(dbPlayer.HasData("racingState") && dbPlayer.GetData("racingState") == 10 && dbPlayer.HasData("racingRoundStartTime")) // has state 4 and is at start shape
+                    if (dbPlayer.HasData("racingState") && dbPlayer.GetData("racingState") == 10 && dbPlayer.HasData("racingRoundStartTime")) // has state 4 and is at start shape
                     {
                         // Track Time
                         DateTime startTime = dbPlayer.GetData("racingRoundStartTime");
@@ -199,7 +197,7 @@ namespace GVRP.Module.Racing
                         int totalmil = Convert.ToInt32(DateTime.Now.Subtract(startTime).TotalMilliseconds);
                         dbPlayer.SendNewNotification($"Rundenzeit: {min}:{sec} {milsec} ms!");
 
-                        if(dbPlayer.RacingBestTimeSeconds == 0 || dbPlayer.RacingBestTimeSeconds > totalmil)
+                        if (dbPlayer.RacingBestTimeSeconds == 0 || dbPlayer.RacingBestTimeSeconds > totalmil)
                         {
                             dbPlayer.SetBestTime(totalmil);
                             dbPlayer.SendNewNotification($"Glückwunsch, neue Bestzeit!");
@@ -219,7 +217,7 @@ namespace GVRP.Module.Racing
                 }
                 else
                 {
-                    if(dbPlayer.HasData("racingState"))
+                    if (dbPlayer.HasData("racingState"))
                     {
                         if (colShape.GetData<int>("racingColshape") - 1 != dbPlayer.GetData("racingState"))
                         {

@@ -1,10 +1,10 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System.Linq;
 using GVRP.Module.Customization;
 using GVRP.Module.Einreiseamt;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace GVRP.Module.Clothes.Character
 {
@@ -17,7 +17,7 @@ namespace GVRP.Module.Clothes.Character
             if (iPlayer == null || !iPlayer.IsValid()) return;
 
             var character = iPlayer.Character;
-            
+
             var Armor = iPlayer.Player.Armor;
             character.Skin = gender == 0 ? PedHash.FreemodeMale01 : PedHash.FreemodeFemale01;
             client.SetSkin(character.Skin);
@@ -33,7 +33,7 @@ namespace GVRP.Module.Clothes.Character
             var iPlayer = client.GetPlayer();
             if (iPlayer == null || !iPlayer.IsValid()) return;
 
-            
+
             var character = iPlayer.Character;
             var price = 500 * iPlayer.Level;
 
@@ -49,10 +49,10 @@ namespace GVRP.Module.Clothes.Character
                     xPlayer.SendNewNotification("Spieler ist aus der Schoenheitsklinik: " + iPlayer.GetName());
                 }
             }
-            
+
             if (price > 0 && !iPlayer.TakeMoney(price))
             {
-                iPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(price), notificationType:PlayerNotification.NotificationType.ERROR);
+                iPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(price), notificationType: PlayerNotification.NotificationType.ERROR);
                 // revert back to last save data
                 if (iPlayer.HasData("ChangedGender"))
                 {
@@ -65,9 +65,9 @@ namespace GVRP.Module.Clothes.Character
             }
             else
             {
-                iPlayer.SendNewNotification("Sie haben ihren Character fuer $" + price + " geaendert!", notificationType:PlayerNotification.NotificationType.SUCCESS);
+                iPlayer.SendNewNotification("Sie haben ihren Character fuer $" + price + " geaendert!", notificationType: PlayerNotification.NotificationType.SUCCESS);
             }
-            
+
             if (character == null) return;
 
             // gender
@@ -84,7 +84,7 @@ namespace GVRP.Module.Clothes.Character
             // features
             var featureData = JsonConvert.DeserializeObject<float[]>(featuredData);
             iPlayer.Customization.Features = featureData;
-            
+
             // appearance
             var appearanceData =
                 JsonConvert.DeserializeObject<AppearanceItem[]>(appearenceData);
@@ -164,7 +164,7 @@ namespace GVRP.Module.Clothes.Character
             iPlayer.SaveCustomization();
             iPlayer.StopCustomization();
         }
-        
+
         [RemoteEvent]
         public void LeaveCreator(Player client, object[] args)
         {

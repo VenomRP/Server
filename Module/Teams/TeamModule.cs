@@ -1,12 +1,10 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Linq;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams.Shelter;
 using GVRP.Module.Teams.Spawn;
-using System.Collections.Generic;
+using MySql.Data.MySqlClient;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Teams
 {
@@ -19,7 +17,7 @@ namespace GVRP.Module.Teams
 
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(TeamSpawnModule), typeof(ItemModelModule) };
+            return new[] { typeof(TeamSpawnModule), typeof(ItemModelModule) };
         }
 
         protected override string GetQuery()
@@ -36,7 +34,7 @@ namespace GVRP.Module.Teams
         {
             return 2;
         }
-        
+
         protected override bool OnLoad()
         {
             var result = base.OnLoad();
@@ -87,7 +85,7 @@ namespace GVRP.Module.Teams
                     || string.Equals(team.ShortName, name, StringComparison.CurrentCultureIgnoreCase)
                     || team.Name.ToLower().Contains(name.ToLower())) return team;
             }
-            
+
             return null;
         }
 
@@ -101,7 +99,7 @@ namespace GVRP.Module.Teams
             return null;
         }
 
-       
+
 
         public void SendChatMessage(string message, params uint[] ids)
         {
@@ -115,7 +113,7 @@ namespace GVRP.Module.Teams
         {
             Team team = Get((uint)teamId);
 
-            team.SendNotification(message, time:time, rang: requiredRang);
+            team.SendNotification(message, time: time, rang: requiredRang);
             return;
         }
 
@@ -133,7 +131,7 @@ namespace GVRP.Module.Teams
             foreach (var team in GetAll())
             {
                 if (!team.Value.IsCops()) continue;
-                
+
                 team.Value.SendNotification(sourceDbPlayer.Team.ShortName + " Rang " +
                         sourceDbPlayer.TeamRank + " | " + sourceDbPlayer.GetName() + ": " + message);
             }
@@ -148,7 +146,7 @@ namespace GVRP.Module.Teams
                 team.Value.SendNotification(message, 10000);
             }
         }
-        
+
         public DbPlayer CheckIfDutyCopIsInRange(DbPlayer sourceDbPlayer, float range)
         {
             foreach (var team in GetAll())
@@ -156,8 +154,8 @@ namespace GVRP.Module.Teams
                 if (!team.Value.IsCops()) continue;
                 foreach (var dbPlayer in team.Value.Members.Values)
                 {
-                    if (dbPlayer.Duty && 
-                        dbPlayer.Player.Position.DistanceTo(sourceDbPlayer.Player.Position) < range && 
+                    if (dbPlayer.Duty &&
+                        dbPlayer.Player.Position.DistanceTo(sourceDbPlayer.Player.Position) < range &&
                         dbPlayer.Player.Dimension == sourceDbPlayer.Player.Dimension &&
                         dbPlayer.DimensionType == sourceDbPlayer.DimensionType) return dbPlayer;
                 }
@@ -167,14 +165,14 @@ namespace GVRP.Module.Teams
 
         public override void OnFifteenMinuteUpdate()
         {
-           
+
         }
         public void SendChatMessageToDutyTeamMembers(DbPlayer sourceDbPlayer, string message)
         {
             foreach (var dbPlayer in sourceDbPlayer.Team.Members)
             {
                 if (dbPlayer.Value.IsACop() && !dbPlayer.Value.Duty) continue;
-                dbPlayer.Value.SendNewNotification( sourceDbPlayer.Team.ShortName + " Rang " +
+                dbPlayer.Value.SendNewNotification(sourceDbPlayer.Team.ShortName + " Rang " +
                     sourceDbPlayer.TeamRank + " | " + sourceDbPlayer.GetName() + ": " + message);
             }
         }

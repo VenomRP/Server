@@ -1,11 +1,11 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Kasino
 {
@@ -100,7 +100,7 @@ namespace GVRP.Module.Kasino
                 return;
             }
 
-            
+
             if (DateTime.Now >= kasinoDice.StartTime.AddSeconds(15))
             {
                 dbPlayer.SendNewNotification("Diese Runde ist bereits abgelaufen.", PlayerNotification.NotificationType.CASINO, KasinoDiceModule.Instance.DiceString);

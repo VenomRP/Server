@@ -1,21 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Configurations;
 using GVRP.Module.Government;
-using GVRP.Module.GTAN;
-using GVRP.Module.Helper;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles.Data;
 using GVRP.Module.Vehicles.Garages;
-using GVRP.Module.Weapons.Data;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 //Todo: refactor users and vehicles to new system
 //DbPlayer
@@ -34,7 +30,7 @@ namespace GVRP.Module.Vehicles
         private readonly Dictionary<int, ServerVehicle> vehicles;
 
         private int uniqueCount;
-        
+
         public VehiclesModule()
         {
             vehicles = new Dictionary<int, ServerVehicle>();
@@ -48,7 +44,7 @@ namespace GVRP.Module.Vehicles
                 {
                     var query = $"SELECT * FROM `fvehicles` WHERE `team` = '{dbPlayer.Team.Id}' AND `id` = {vehicleid};";
 
-                    using (var conn =new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
+                    using (var conn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
                     using (var cmd = conn.CreateCommand())
                     {
                         conn.Open();
@@ -68,16 +64,16 @@ namespace GVRP.Module.Vehicles
                                         continue;
                                     }
 
-                                    if(garage.IsTeamGarage() && reader.GetInt32("defcon_level") > 0 && reader.GetInt32("defcon_level") < GovernmentModule.Defcon.Level)
+                                    if (garage.IsTeamGarage() && reader.GetInt32("defcon_level") > 0 && reader.GetInt32("defcon_level") < GovernmentModule.Defcon.Level)
                                     {
                                         dbPlayer.SendNewNotification("Die aktuelle Defcon Stufe für dieses Fahrzeug ist nicht erreicht!");
                                         continue;
                                     }
-                                    
-                                    
+
+
                                     var color1 = reader.GetInt32("color1");
-                                    var color2 = reader.GetInt32("color2");                            
-                                    var tuning = reader.GetString("tuning");                                                          
+                                    var color2 = reader.GetInt32("color2");
+                                    var tuning = reader.GetString("tuning");
                                     var dbid = reader.GetUInt32("id");
                                     var team = reader.GetUInt32("team");
                                     var zustand = reader.GetInt32("zustand");
@@ -98,7 +94,7 @@ namespace GVRP.Module.Vehicles
                                             color1, color2, spawnPosition.Dimension, gpstracker, true, true,
                                             dbPlayer.Team.Id, dbPlayer.Team.ShortName,
                                             dbid, 0, 0, fuel, zustand, tuning, "", km,
-                                            ContainerManager.LoadContainer(dbid, ContainerTypes.FVEHICLE, data.InventorySize, data.InventoryWeight), 
+                                            ContainerManager.LoadContainer(dbid, ContainerTypes.FVEHICLE, data.InventorySize, data.InventoryWeight),
                                             plate, false, false, wheelclamp, alarmSystem, garage.Id, planningVehicle, carSellPrice);
 
                                         xVeh.SetTeamCarGarage(false);
@@ -177,8 +173,8 @@ namespace GVRP.Module.Vehicles
                                         "", vehicleId,
                                         0, ownerId, 100,
                                         zustand, tuning, neon,
-                                        km, ContainerManager.LoadContainer(vehicleId, ContainerTypes.VEHICLE, data.InventorySize, data.InventoryWeight), 
-                                        plate, false, InTuning, WheelClamp:wheelClamp, AlarmSystem:alarmSystem, garage.Id);
+                                        km, ContainerManager.LoadContainer(vehicleId, ContainerTypes.VEHICLE, data.InventorySize, data.InventoryWeight),
+                                        plate, false, InTuning, WheelClamp: wheelClamp, AlarmSystem: alarmSystem, garage.Id);
 
                                         await Task.Delay(2000);
                                         if (sxVeh != null)
@@ -202,7 +198,7 @@ namespace GVRP.Module.Vehicles
                 Logger.Print(e.StackTrace);
             }
         }
-        
+
         public void OnPlayerExitVehicle(Player player, NetHandle vehicleNetHandle, int seat)
         {
             var vehicle = NAPI.Entity.GetEntityFromHandle<Vehicle>(vehicleNetHandle);
@@ -216,13 +212,13 @@ namespace GVRP.Module.Vehicles
                 //Save vehicle
             }
         }
-        
+
         public Vehicle Create(VehicleHash hash, Vector3 position, float heading,
             int colorPrimary, int colorSecondary)
         {
             return hash.Create(position, heading, colorPrimary, colorSecondary);
         }
-        
+
         public JobVehicle CreateJobVehicle(Vehicle vehicle, int jobId)
         {
             var jobVehicle = new JobVehicle(uniqueCount++, vehicle, jobId);
@@ -306,7 +302,7 @@ namespace GVRP.Module.Vehicles
                 loadedVehicle.Delete();
                 vehicle.ResetData("loadedVehicle");
             }
-            
+
         }
     }
 
@@ -322,7 +318,7 @@ namespace GVRP.Module.Vehicles
 
         public static VehicleHash GetModel(this Vehicle vehicle)
         {
-            return (VehicleHash) vehicle.Model;
+            return (VehicleHash)vehicle.Model;
         }
     }
 }

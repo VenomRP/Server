@@ -12,7 +12,7 @@ namespace GVRP.Module.Weapons.Type
             Id = reader.GetUInt32("id");
             Name = reader.GetString("name");
         }
-            
+
         public override uint GetIdentifier()
         {
             return Id;

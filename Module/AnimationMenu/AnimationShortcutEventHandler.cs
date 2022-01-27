@@ -1,9 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Module.Injury;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.RemoteEvents;

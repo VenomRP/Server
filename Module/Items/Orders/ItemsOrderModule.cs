@@ -7,7 +7,7 @@ namespace GVRP.Module.Items
     {
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
-            if(key == Key.E)
+            if (key == Key.E)
             {
                 if (!dbPlayer.HasData("Itemorderflood"))
                 {

@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using GVRP.Module.Events.Halloween;
+﻿using GTANetworkAPI;
 using GVRP.Module.GTAN;
 using GVRP.Module.Houses;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Doors
 {
@@ -36,7 +34,7 @@ namespace GVRP.Module.Doors
         {
             return "SELECT * FROM `doors`;";
         }
-                
+
         public override bool OnColShapeEvent(DbPlayer dbPlayer, ColShape colShape, ColShapeState colShapeState)
         {
             if (colShapeState == ColShapeState.Exit)
@@ -90,8 +88,8 @@ namespace GVRP.Module.Doors
             var door = Get(doorId);
             if (door == null) return false;
 
-            if ((door.Teams.Contains(dbPlayer.Team) && dbPlayer.TeamRank >= door.RangRestriction) || 
-                dbPlayer.Rank.CanAccessFeature("enter_all") || 
+            if ((door.Teams.Contains(dbPlayer.Team) && dbPlayer.TeamRank >= door.RangRestriction) ||
+                dbPlayer.Rank.CanAccessFeature("enter_all") ||
                 (door.Houses.Count > 0 && CanOpenHouseDoor(dbPlayer, door))) return true;
             if (dbPlayer.GovLevel == "A" || dbPlayer.GovLevel == "B")
             {
@@ -123,10 +121,10 @@ namespace GVRP.Module.Doors
 
             // Add
             door.LastUseds.Add(new LastUsedFrom() { Name = dbPlayer.GetName(), DateTime = DateTime.Now, Opened = !door.Locked });
-            if(door.Pair > 0)
+            if (door.Pair > 0)
             {
                 Door pair = Get(door.Pair);
-                if(pair != null)
+                if (pair != null)
                 {
                     pair.LastUseds.Add(new LastUsedFrom() { Name = dbPlayer.GetName(), DateTime = DateTime.Now, Opened = !pair.Locked });
                 }

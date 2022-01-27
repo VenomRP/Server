@@ -1,14 +1,8 @@
-﻿using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Freiberuf;
-using GVRP.Module.Freiberuf.Mower;
-using GVRP.Module.Houses;
-using GVRP.Module.InteriorProp;
+﻿using GVRP.Module.InteriorProp;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Storage;
-using GVRP.Module.Vehicles.Data;
 
 namespace GVRP
 {
@@ -50,19 +44,19 @@ namespace GVRP
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
                 StorageRoom storageRoom = StorageRoomModule.Instance.GetClosest(iPlayer);
-                if(storageRoom != null)
+                if (storageRoom != null)
                 {
-                    if(index == 0)
+                    if (index == 0)
                     {
                         //Kaufen
-                        if(storageRoom.IsBuyable())
+                        if (storageRoom.IsBuyable())
                         {
-                            if(iPlayer.GetStoragesOwned().Count >= StorageModule.Instance.LimitPlayerStorages)
+                            if (iPlayer.GetStoragesOwned().Count >= StorageModule.Instance.LimitPlayerStorages)
                             {
                                 iPlayer.SendNewNotification($"Sie haben die maximale Anzahl an Lager gekauft ({StorageModule.Instance.LimitPlayerStorages})!");
                                 return true;
                             }
-                            if(iPlayer.TakeBankMoney(storageRoom.Price))
+                            if (iPlayer.TakeBankMoney(storageRoom.Price))
                             {
                                 storageRoom.SetOwnerTo(iPlayer);
                                 iPlayer.SendNewNotification("Lager für $" + storageRoom.Price + " gekauft!");
@@ -79,7 +73,7 @@ namespace GVRP
                                 iPlayer.Player.SetRotation(StorageModule.Instance.InteriorHeading);
                                 iPlayer.Player.Dimension = storageRoom.Id;
 
-                                if(storageRoom.CocainLabor)
+                                if (storageRoom.CocainLabor)
                                 {
                                     InteriorPropModule.Instance.LoadInteriorForPlayer(iPlayer, InteriorPropListsType.Kokainlabor);
                                 }
@@ -96,7 +90,7 @@ namespace GVRP
                             }
                         }
                     }
-                    else if(index == 1)
+                    else if (index == 1)
                     {
                         if (iPlayer.Id != storageRoom.OwnerId) return true;
                         storageRoom.Upgrade(iPlayer);

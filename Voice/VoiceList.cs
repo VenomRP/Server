@@ -1,16 +1,15 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Configurations;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP
 {
     public sealed class VoiceListHandler
     {
         public static VoiceListHandler Instance { get; } = new VoiceListHandler();
-        
+
         public Dictionary<int, DbPlayer> voiceHashList { get; set; }
 
         // Voice Ranges
@@ -19,15 +18,15 @@ namespace GVRP
         public const float VoiceRangeShout = 45.0f;
 
         public readonly Dictionary<uint, string> PlayerVoiceList;
-        
+
         public static readonly Random Random = new Random();
-        
+
         private VoiceListHandler()
         {
             PlayerVoiceList = new Dictionary<uint, string>();
             voiceHashList = new Dictionary<int, DbPlayer>();
         }
-        
+
         public static void AddToDeath(DbPlayer iPlayer)
         {
             if (!iPlayer.Player.HasSharedData("isInjured"))
@@ -43,7 +42,7 @@ namespace GVRP
                 iPlayer.Player.ResetSharedData("isInjured");
             }
         }
-        
+
         public void InitPlayerVoice(DbPlayer iPlayer)
         {
             iPlayer.Player.TriggerEvent("setVoiceData", 1, "Ingame", "123");
@@ -55,8 +54,8 @@ namespace GVRP
                 voiceHashList.Add(i, iPlayer);
 
 
-                    iPlayer.VoiceHash = "" + ((i < 100) ? "00" + i : "" + i);
-                    PlayerVoiceList.Add(iPlayer.Id, "" + i);
+                iPlayer.VoiceHash = "" + ((i < 100) ? "00" + i : "" + i);
+                PlayerVoiceList.Add(iPlayer.Id, "" + i);
 
 
 
@@ -68,7 +67,7 @@ namespace GVRP
         private string GeneratePlayerHash()
         {
             var hash = RandomString(10);
-            while(PlayerVoiceList.ContainsValue(hash))
+            while (PlayerVoiceList.ContainsValue(hash))
             {
                 hash = RandomString(10);
             }

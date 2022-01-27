@@ -1,14 +1,6 @@
-﻿using System;
+﻿using GVRP.Module.Players.Db;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Items;
-using GVRP.Module.Logging;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.ReversePhone
 {

@@ -1,6 +1,6 @@
-﻿using System;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Menu.Menus.Heists.Planningroom
 {
@@ -38,7 +38,7 @@ namespace GVRP.Module.Menu.Menus.Heists.Planningroom
                     MenuManager.DismissCurrent(iPlayer);
                     return false;
                 }
-                else if(index >= 1)
+                else if (index >= 1)
                 {
                     int idx = 1;
 

@@ -1,6 +1,5 @@
 ﻿using GVRP.Module.Clothes;
 using GVRP.Module.Clothes.Shops;
-using GVRP.Module.GTAN;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
 
@@ -35,7 +34,7 @@ namespace GVRP
             {
                 if (index == 0)
                 {
-                    MenuManager.DismissMenu(iPlayer.Player, (uint) PlayerMenu.TeamWardrobeProps);
+                    MenuManager.DismissMenu(iPlayer.Player, (uint)PlayerMenu.TeamWardrobeProps);
                     ClothModule.SaveCharacter(iPlayer);
                     return false;
                 }

@@ -11,7 +11,7 @@ namespace GVRP.Module.Menu.Menus.Business
 
         public override Menu Build(DbPlayer iPlayer)
         {
-            var biz = BusinessModule.Instance.GetById((uint) -iPlayer.Player.Dimension);
+            var biz = BusinessModule.Instance.GetById((uint)-iPlayer.Player.Dimension);
             if (biz == null) return null;
 
             var menu = new Menu(Menu, "Business Tower");
@@ -34,10 +34,10 @@ namespace GVRP.Module.Menu.Menus.Business
                 switch (index)
                 {
                     case 0:
-                    {
+                        {
                             // Menue später fuer Tresor    
                             break;
-                    }
+                        }
                     default:
                         break;
                 }

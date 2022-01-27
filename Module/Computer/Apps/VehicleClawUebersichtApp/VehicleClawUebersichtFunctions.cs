@@ -1,11 +1,8 @@
-﻿using System;
+﻿using GVRP.Module.ClawModule;
+using GVRP.Module.Players.Db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GVRP.Module.ClawModule;
-using GVRP.Module.Computer.Apps.FahrzeuguebersichtApp;
-using GVRP.Module.Configurations;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Computer.Apps.VehicleClawUebersichtApp
 {

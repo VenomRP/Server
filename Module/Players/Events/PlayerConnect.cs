@@ -1,9 +1,5 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Threading.Tasks;
 using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
 using GVRP.Module.Tasks;
 
 namespace GVRP.Module.Players.Events
@@ -11,7 +7,7 @@ namespace GVRP.Module.Players.Events
     public class PlayerConnect : Script
     {
         //[ServerEvent(Event.PlayerConnected)]
-        public static void OnPlayerConnected(Player player) 
+        public static void OnPlayerConnected(Player player)
         {
 
             // Console.WriteLine(player.Name);
@@ -52,7 +48,7 @@ namespace GVRP.Module.Players.Events
                     Logging.Logger.Crash(e);
                 }
             }
-            
+
             //     if (!Configuration.Instance.IsServerOpen)
             //     {
             //         player.SendNotification("Server wird heruntergefahren");

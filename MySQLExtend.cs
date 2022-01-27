@@ -1,6 +1,6 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
 using GVRP.Module.PlayerName;
+using MySql.Data.MySqlClient;
 
 /// <summary>
 /// This function checks for any sleeping connections beyond a reasonable time and kills them.
@@ -53,7 +53,7 @@ namespace GVRP
                     xtype = "Arev";
                     break;
             }
-            
+
             string query = "";
 
             // Special Whisperlog
@@ -95,7 +95,7 @@ namespace GVRP
             // Special Whisperlog
             query = string.Format(
                     "INSERT INTO `log_admin` (`admin`, `user`, `type`, `reason`) VALUES ('{0}', '{1}', '{2}', '{3}')",
-                    admin.Name, MySqlHelper.EscapeString(user), (int) type, MySqlHelper.EscapeString(xtype + ":: " + reason));
+                    admin.Name, MySqlHelper.EscapeString(user), (int)type, MySqlHelper.EscapeString(xtype + ":: " + reason));
             MySQLHandler.ExecuteAsync(query);
         }
 

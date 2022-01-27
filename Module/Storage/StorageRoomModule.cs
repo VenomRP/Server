@@ -1,8 +1,7 @@
-﻿using System;
-using System.Linq;
-using GVRP.Module.Items;
-using GVRP.Module.Logging;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Storage
 {

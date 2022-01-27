@@ -1,8 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Module.Injury;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
@@ -10,6 +6,10 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
 using GVRP.Module.Teams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Robbery
 {
@@ -98,18 +98,18 @@ namespace GVRP.Module.Robbery
                 jpInside = null,
                 jpOutside = null
             });
-            
+
             IsActive = false;
             TimeLeft = 0;
             RobberyTime = Configurations.Configuration.Instance.DevMode ? 3 : 20;
             return true;
         }
-        
+
         public void LoadContainerBankInv(Container container)
         {
             Random rnd = new Random();
             container.ClearInventory();
-            container.AddItem(487, rnd.Next(18,33));
+            container.AddItem(487, rnd.Next(18, 33));
             container.AddItem(880, 1); // Banknotencodes
         }
 
@@ -122,7 +122,7 @@ namespace GVRP.Module.Robbery
             if (Configurations.Configuration.Instance.DevMode) return true;
 
             // Check other Robs
-            if(RobberyModule.Instance.Robberies.Where(r => r.Value.Type == RobType.Juwelier && RobberyModule.Instance.IsActive(r.Value.Id)).Count() > 0)
+            if (RobberyModule.Instance.Robberies.Where(r => r.Value.Type == RobType.Juwelier && RobberyModule.Instance.IsActive(r.Value.Id)).Count() > 0)
             {
                 return false;
             }
@@ -267,24 +267,24 @@ namespace GVRP.Module.Robbery
 
         public override void OnMinuteUpdate()
         {
-            if(IsActive)
+            if (IsActive)
             {
                 // Check if Teamplayer is in Reange
-                if(RobberTeam == null || RobberTeam.Members.Where(p => p.Value != null && p.Value.IsValid() && !p.Value.isInjured() && p.Value.Player.Position.DistanceTo(RobPosition) < 15.0f).Count() <= 0)
+                if (RobberTeam == null || RobberTeam.Members.Where(p => p.Value != null && p.Value.IsValid() && !p.Value.isInjured() && p.Value.Player.Position.DistanceTo(RobPosition) < 15.0f).Count() <= 0)
                 {
                     CancelRob();
                     return;
                 }
 
-                if(TimeLeft == 45) // nach 15 min weil 60 XX
+                if (TimeLeft == 45) // nach 15 min weil 60 XX
                 {
                     // Get Players For Respect
                     int playersAtRob = RobberTeam.Members.Where(m => m.Value.Player.Position.DistanceTo(RobPosition) < 300f).Count();
                     RobberTeam.TeamMetaData.AddRespect(playersAtRob * 100);
                     TeamModule.Instance.SendMessageToTeam("Durch den Überfall erhält ihr Team Ansehen! (" + playersAtRob * 100 + "P)", (teams)RobberTeam.Id);
-                    
+
                 }
-                if(TimeLeft == 60)
+                if (TimeLeft == 60)
                 {
                     CloseRob();
                 }
@@ -295,10 +295,10 @@ namespace GVRP.Module.Robbery
 
             // Schließe Tunnel wieder... nach 15 min
             StaatsbankTunnel staatsbankTunnel = StaatsbankTunnels.Where(
-                t => t.IsActiveForTeam != null && t.IsInsideOpen && t.IsOutsideOpen 
+                t => t.IsActiveForTeam != null && t.IsInsideOpen && t.IsOutsideOpen
                  && t.TunnelCreated != null && t.TunnelCreated.AddMinutes(15) < DateTime.Now).FirstOrDefault();
 
-            if(staatsbankTunnel != null)
+            if (staatsbankTunnel != null)
             {
                 NAPI.Task.Run(() =>
                 {

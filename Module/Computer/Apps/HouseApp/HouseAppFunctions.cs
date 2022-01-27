@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Computer.Apps.VehicleTaxApp;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Houses;
 using GVRP.Module.PlayerName;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Computer.Apps.HouseApp
 {
@@ -33,7 +31,7 @@ namespace GVRP.Module.Computer.Apps.HouseApp
 
                 return tenants;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }

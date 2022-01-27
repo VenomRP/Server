@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
+﻿using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 
 namespace GVRP.Module.VehicleRent
 {
@@ -28,7 +18,7 @@ namespace GVRP.Module.VehicleRent
 
             menu.Add($"Schließen");
 
-            foreach(SxVehicle SxVeh in VehicleHandler.Instance.GetPlayerVehicles(iPlayer.Id))
+            foreach (SxVehicle SxVeh in VehicleHandler.Instance.GetPlayerVehicles(iPlayer.Id))
             {
                 menu.Add($"{SxVeh.databaseId} {(SxVeh.Data.mod_car_name == "" ? SxVeh.Data.Model : SxVeh.Data.mod_car_name)}");
             }
@@ -44,7 +34,7 @@ namespace GVRP.Module.VehicleRent
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(iPlayer);
                     return false;
@@ -55,7 +45,7 @@ namespace GVRP.Module.VehicleRent
 
                     foreach (SxVehicle SxVeh in VehicleHandler.Instance.GetPlayerVehicles(iPlayer.Id))
                     {
-                        if(idx == index)
+                        if (idx == index)
                         {
                             MenuManager.DismissCurrent(iPlayer);
                             iPlayer.SetData("vehicleRentId", SxVeh.databaseId);

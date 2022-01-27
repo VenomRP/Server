@@ -1,13 +1,9 @@
-﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.Business;
+﻿using GVRP.Module.Business;
 using GVRP.Module.Clothes;
 using GVRP.Module.Customization;
-using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System.Linq;
 
 namespace GVRP.Module.Tattoo
 {
@@ -17,7 +13,7 @@ namespace GVRP.Module.Tattoo
         {
             MySQLHandler.ExecuteAsync($"UPDATE tattoo_shops SET business_id = '{tattooShop.BusinessId}' WHERE id = '{tattooShop.Id}'");
         }
-        
+
         public static void SetBusiness(this TattooShop tattooShop, int businessId)
         {
             tattooShop.BusinessId = businessId;
@@ -28,12 +24,12 @@ namespace GVRP.Module.Tattoo
         {
             MySQLHandler.ExecuteAsync($"UPDATE tattoo_shops SET tattoo_licenses = '{JsonConvert.SerializeObject(tattooShop.tattooLicenses)}' WHERE id = '{tattooShop.Id}'");
         }
-        
+
         public static void AddBank(this TattooShop tattooShop, int value)
         {
             tattooShop.SetBank(tattooShop.Bank + value);
         }
-        
+
         public static void MinusBank(this TattooShop tattooShop, int value)
         {
             tattooShop.SetBank(tattooShop.Bank - value);
@@ -44,7 +40,7 @@ namespace GVRP.Module.Tattoo
             tattooShop.Bank = bank;
             tattooShop.SaveBank();
         }
-        
+
         public static void SaveBank(this TattooShop tattooShop)
         {
             MySQLHandler.ExecuteAsync($"UPDATE tattoo_shops SET bank = '{tattooShop.Bank}' WHERE id = '{tattooShop.Id}'");
@@ -58,7 +54,7 @@ namespace GVRP.Module.Tattoo
 
             return TattooShopModule.Instance.GetAll().First(t => t.Value.BusinessId == bizId).Value;
         }
-        
+
         public static bool HasTattooShop(this DbPlayer iPlayer)
         {
             return (iPlayer.GetActiveBusinessMember().Owner);

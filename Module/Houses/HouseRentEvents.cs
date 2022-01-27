@@ -1,11 +1,10 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Linq;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Windows;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Houses
 {
@@ -55,7 +54,7 @@ namespace GVRP.Module.Houses
         }
 
         [RemoteEvent]
-        public void HouseRentAddTenant(Player player) 
+        public void HouseRentAddTenant(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;

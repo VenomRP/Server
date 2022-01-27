@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Text;
-using System.Text.RegularExpressions;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.GTAN;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Vehicles;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 namespace GVRP.Module.Computer.Apps.KennzeichenUebersichtApp
 {
@@ -24,7 +20,7 @@ namespace GVRP.Module.Computer.Apps.KennzeichenUebersichtApp
             {
                 dbPlayer.SendNewNotification("Das Kennzeichen muss zwischen 1 und 8 Zeichen lang sein");
                 return;
-            }            
+            }
 
             if (!Regex.IsMatch(returnString, @"^[a-zA-Z0-9\s]+$"))
             {

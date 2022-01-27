@@ -1,15 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Houses;
 using GVRP.Module.Items;
-using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Freiberuf.Mower
 {
@@ -66,7 +65,7 @@ namespace GVRP.Module.Freiberuf.Mower
                 return;
             }
 
-            if(!FishingPlayers.ToList().Contains(dbPlayer)) FishingPlayers.Add(dbPlayer);
+            if (!FishingPlayers.ToList().Contains(dbPlayer)) FishingPlayers.Add(dbPlayer);
         }
 
         public override void OnPlayerExitVehicle(DbPlayer dbPlayer, Vehicle vehicle)
@@ -121,10 +120,10 @@ namespace GVRP.Module.Freiberuf.Mower
             int random = new Random().Next(1, 80);
             uint itemId = 344;//Meertr.
             if (random == 6) itemId = 520; // Portmonie
-            else if (random == 7) itemId = 521; 
-            else if (random == 8) itemId = 522; 
-            else if (random == 9) itemId = 514; 
-            else if (random == 10 || random == 11) itemId = 523; 
+            else if (random == 7) itemId = 521;
+            else if (random == 8) itemId = 522;
+            else if (random == 9) itemId = 514;
+            else if (random == 10 || random == 11) itemId = 523;
             else if (random == 11) itemId = 517; // 
             else if (random == 12 || random == 13) itemId = 468; // 
             else if (random == 14 || random == 15) itemId = 168; // 

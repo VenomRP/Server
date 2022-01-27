@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
+using GVRP.Module.Menu;
+using GVRP.Module.Players.Db;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.RemoteEvents;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.AnimationMenu
 {
@@ -35,11 +31,12 @@ namespace GVRP.Module.AnimationMenu
                 {
                     if (!dbPlayer.AnimationShortcuts.ContainsKey(i)) dbPlayer.AnimationShortcuts.Add(i, 0);
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }
-            
+
         }
 
     }
@@ -57,11 +54,12 @@ namespace GVRP.Module.AnimationMenu
             try
             {
                 dbPlayer.Player.TriggerEvent("setNMenuItems", dbPlayer.GetJsonAnimationsShortcuts());
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }
-            
+
         }
 
         public static string GetJsonAnimationsShortcuts(this DbPlayer dbPlayer)
@@ -111,7 +109,8 @@ namespace GVRP.Module.AnimationMenu
                 }
                 return NAPI.Util.ToJson(animationShortCutJsons);
 
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logging.Logger.Crash(ex);
             }

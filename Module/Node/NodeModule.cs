@@ -1,6 +1,5 @@
-﻿using GTANetworkAPI;
+﻿using GVRP.Module.Players.Db;
 using System.Threading.Tasks;
-using GVRP.Module.Players.Db;
 
 
 namespace GVRP.Module.Node
@@ -33,9 +32,9 @@ namespace GVRP.Module.Node
 
         public void Trigger(DbPlayer dbPlayer, string eventName, params string[] args)
         {
-            
+
         }
-        
+
         public void SetPlayerProp(DbPlayer dbPlayer, int prop, int drawable, int texture)
         {
             Request.SetPlayerProps(dbPlayer.Player.Value.ToString(), prop.ToString(), drawable.ToString(), texture.ToString());

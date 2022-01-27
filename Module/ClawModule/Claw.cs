@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using GTANetworkAPI;
-using GTANetworkMethods;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Banks;
-using GVRP.Module.Spawners;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.ClawModule
 {

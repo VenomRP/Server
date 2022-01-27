@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Clothes.Props;
+﻿using GVRP.Module.Clothes.Props;
 using GVRP.Module.Configurations;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Clothes.Shops
 {
@@ -22,7 +20,7 @@ namespace GVRP.Module.Clothes.Shops
 
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(ClothModule), typeof(PropModule)};
+            return new[] { typeof(ClothModule), typeof(PropModule) };
         }
 
         protected override bool OnLoad()
@@ -190,7 +188,7 @@ namespace GVRP.Module.Clothes.Shops
             {
                 if (!iPlayer.HasData("clothesActualItem-" + i)) continue;
                 var cloth =
-                    ClothModule.Instance[(uint) iPlayer.GetData("clothesActualItem-" + i)];
+                    ClothModule.Instance[(uint)iPlayer.GetData("clothesActualItem-" + i)];
                 if (!character.Wardrobe.Contains(cloth.Id))
                 {
                     maxprice += cloth.Price;
@@ -201,7 +199,7 @@ namespace GVRP.Module.Clothes.Shops
             {
                 if (!iPlayer.HasData("propsActualItem-" + i)) continue;
                 var prop =
-                    PropModule.Instance[(uint) iPlayer.GetData("propsActualItem-" + i)];
+                    PropModule.Instance[(uint)iPlayer.GetData("propsActualItem-" + i)];
                 if (!character.Props.Contains(prop.Id))
                 {
                     maxprice += prop.Price;
@@ -218,7 +216,7 @@ namespace GVRP.Module.Clothes.Shops
                 if (!iPlayer.HasData("clothesActualItem-" + i)) continue;
 
                 var cloth =
-                    ClothModule.Instance[(uint) iPlayer.GetData("clothesActualItem-" + i)];
+                    ClothModule.Instance[(uint)iPlayer.GetData("clothesActualItem-" + i)];
 
                 // Resett slot
                 iPlayer.ResetData("clothesActualItem-" + i);
@@ -239,7 +237,7 @@ namespace GVRP.Module.Clothes.Shops
                 if (!iPlayer.HasData("propsActualItem-" + i)) continue;
 
                 var props =
-                    PropModule.Instance[(uint) iPlayer.GetData("propsActualItem-" + i)];
+                    PropModule.Instance[(uint)iPlayer.GetData("propsActualItem-" + i)];
 
                 // Resett slot
                 iPlayer.ResetData("propsActualItem-" + i);

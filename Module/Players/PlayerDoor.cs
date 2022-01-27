@@ -1,6 +1,5 @@
 ﻿
 using GTANetworkAPI;
-using System;
 using GVRP.Module.Doors;
 
 namespace GVRP.Module.Players

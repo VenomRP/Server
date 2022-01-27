@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module.ClawModule
+﻿namespace GVRP.Module.ClawModule
 {
     public sealed class ClawModule : SqlModule<ClawModule, Claw, uint>
     {

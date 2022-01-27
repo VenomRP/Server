@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Computer.Apps.KennzeichenUebersichtApp;
 using GVRP.Module.LeitstellenPhone;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Computer.Apps.VehicleClawUebersichtApp.Apps
 {

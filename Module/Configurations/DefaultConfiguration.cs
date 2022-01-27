@@ -41,7 +41,7 @@ namespace GVRP.Module.Configurations
         public float MeeleDamageMultiplier { get; set; }
         public string RESET_API_KEY { get; set; }
         public string CLEAR_API_KEY { get; set; }
-        
+
         public DefaultConfiguration(IReadOnlyDictionary<string, dynamic> data)
         {
             DevLog = bool.Parse(data["devlog"]);
@@ -81,7 +81,7 @@ namespace GVRP.Module.Configurations
             RESET_API_KEY = data.ContainsKey("reset_api_key") ? data["reset_api_key"] : "";
             CLEAR_API_KEY = data.ContainsKey("clear_api_key") ? data["clear_api_key"] : "";
         }
-        
+
         public string GetMySqlConnection()
         {
             return Ptr

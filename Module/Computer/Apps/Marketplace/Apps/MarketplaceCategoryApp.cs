@@ -1,13 +1,11 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Computer.Apps.Marketplace;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Computer.Apps.MarketplaceApp
 {

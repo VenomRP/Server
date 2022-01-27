@@ -1,15 +1,12 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Handler;
 using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Business.FuelStations
 {
@@ -67,7 +64,7 @@ namespace GVRP.Module.Business.FuelStations
             Price = amount;
             MySQLHandler.ExecuteAsync($"UPDATE business_fuelstations SET `price` = '{amount}' WHERE `id` = '{Id}'");
         }
-        
+
         public void SetFuelName(string name)
         {
             Name = name;
@@ -102,7 +99,7 @@ namespace GVRP.Module.Business.FuelStations
 
         public void LogFuelStationProgress(DbPlayer dbPlayer, int amount, int price, bool duty = false)
         {
-            MySQLHandler.ExecuteAsync($"INSERT INTO `business_fuelstations_logs` (player_id, fuelsum_amount, fuelsum_price, fuel_duty, fuel_id) VALUES ('{dbPlayer.Id}', '{amount}', '{price}', '{(duty ? 1:0)}', '{Id}')");
+            MySQLHandler.ExecuteAsync($"INSERT INTO `business_fuelstations_logs` (player_id, fuelsum_amount, fuelsum_price, fuel_duty, fuel_id) VALUES ('{dbPlayer.Id}', '{amount}', '{price}', '{(duty ? 1 : 0)}', '{Id}')");
         }
     }
 }

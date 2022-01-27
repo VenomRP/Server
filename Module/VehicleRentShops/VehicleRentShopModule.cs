@@ -1,9 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module.VehicleRentShops
+﻿namespace GVRP.Module.VehicleRentShops
 {
     /*
     public class VehicleRentShopModule : SqlModule<VehicleRentShopModule, VehicleRentShop, uint>

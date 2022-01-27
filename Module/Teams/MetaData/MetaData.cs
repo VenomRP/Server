@@ -1,12 +1,8 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Teams.MetaData
 {
@@ -31,31 +27,31 @@ namespace GVRP.Module.Teams.MetaData
 
         public void AddRespect(int respect)
         {
-            if (Respect+respect < -10000 || Respect+respect > 10000) // Cap
-                return; 
+            if (Respect + respect < -10000 || Respect + respect > 10000) // Cap
+                return;
             else
                 Respect += respect;
-            
+
             SaveRespect();
         }
 
         public async void CheckPlayerCopDeath(DbPlayer dbPlayer, DbPlayer iKiller)
-        { 
-            
-                if (!dbPlayer.Team.IsGangsters() || dbPlayer.Team.TeamMetaData == null) return;
-                if (iKiller == null || !iKiller.IsValid()) return;
+        {
 
-                // Killer is cop && team is not in active rob
-                if (iKiller.IsACop() && !dbPlayer.Team.IsInRobbery() && dbPlayer.jailtime[0] == 0)
+            if (!dbPlayer.Team.IsGangsters() || dbPlayer.Team.TeamMetaData == null) return;
+            if (iKiller == null || !iKiller.IsValid()) return;
+
+            // Killer is cop && team is not in active rob
+            if (iKiller.IsACop() && !dbPlayer.Team.IsInRobbery() && dbPlayer.jailtime[0] == 0)
+            {
+                if (!dbPlayer.Team.IsNearSpawn(dbPlayer.Player.Position))
                 {
-                    if (!dbPlayer.Team.IsNearSpawn(dbPlayer.Player.Position))
-                    {
-                        // minus respect
-                        dbPlayer.Team.TeamMetaData.AddRespect(-30);
-                        dbPlayer.SendNewNotification("Durch dein Gefecht, hat dein Team an Ansehen verloren!");
-                    }
+                    // minus respect
+                    dbPlayer.Team.TeamMetaData.AddRespect(-30);
+                    dbPlayer.SendNewNotification("Durch dein Gefecht, hat dein Team an Ansehen verloren!");
                 }
-            
+            }
+
         }
 
         public TeamMetaData(uint dbTeamId)

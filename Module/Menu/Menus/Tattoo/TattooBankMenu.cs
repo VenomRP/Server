@@ -1,18 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
+﻿using GVRP.Module.Assets.Tattoo;
 using GVRP.Module.Banks.Windows;
 using GVRP.Module.Business;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Tattoo;
 using GVRP.Module.Tattoo.Windows;
+using System.Collections.Generic;
 
 namespace GVRP
 {

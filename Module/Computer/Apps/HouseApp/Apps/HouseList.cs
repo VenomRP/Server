@@ -1,10 +1,10 @@
 ﻿using GTANetworkAPI;
-using System.Linq;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Houses;
 using GVRP.Module.PlayerName;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Linq;
 
 namespace GVRP.Module.Computer.Apps.HouseApp.Apps
 {
@@ -17,7 +17,7 @@ namespace GVRP.Module.Computer.Apps.HouseApp.Apps
         }
 
         [RemoteEvent]
-        public void requestTenants(Player client) 
+        public void requestTenants(Player client)
         {
             DbPlayer dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid())
@@ -53,7 +53,7 @@ namespace GVRP.Module.Computer.Apps.HouseApp.Apps
                 dbPlayer.SendNewNotification($"Sie haben den Mietpreis des Mietslots {houseRent.SlotId} auf ${price} geändert!");
 
                 var findPlayer = Players.Players.Instance.FindPlayer(houseRent.PlayerId);
-                
+
                 if (findPlayer != null && findPlayer.IsValid())
                 {
                     findPlayer.SendNewNotification($"Dein Mietvertrag wurde geändert, neuer Mietpreis ${price}!");

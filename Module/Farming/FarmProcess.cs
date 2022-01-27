@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.NpcSpawner;
-using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Farming
 {
@@ -29,7 +27,7 @@ namespace GVRP.Module.Farming
             NpcPosition = new Vector3(reader.GetFloat("npc_pos_x"), reader.GetFloat("npc_pos_y"), reader.GetFloat("npc_pos_z"));
             NpcHeading = reader.GetFloat("npc_float");
             ProcessName = reader.GetString("npc_name");
-            NpcPed = (PedHash) Enum.Parse(typeof(PedHash), reader.GetString("npc_pedhash"), true);
+            NpcPed = (PedHash)Enum.Parse(typeof(PedHash), reader.GetString("npc_pedhash"), true);
             RewardItemId = reader.GetUInt32("reward_item_id");
             RewardItemAmount = reader.GetInt32("reward_item_amount");
             RequiredTime = reader.GetInt32("required_time");
@@ -53,7 +51,7 @@ namespace GVRP.Module.Farming
                     }
                 }
             }
-            else if(itemsString != "")
+            else if (itemsString != "")
             {
                 if (itemsString.Contains(":"))
                 {

@@ -1,16 +1,11 @@
-﻿using System;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Configurations;
+﻿using GTANetworkAPI;
 using GVRP.Module.Forum;
-using GVRP.Module.Items;
 using GVRP.Module.LifeInvader.App;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Staatskasse;
 using GVRP.Module.Teams;
 using GVRP.Module.Teams.Permission;
+using System;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -49,7 +44,7 @@ namespace GVRP.Module.Players.Windows
             if (Main.adLastSend.AddSeconds(15) > DateTime.Now)
             {
                 dbPlayer.SendNewNotification(
-                    
+
                     "Aktuell kann keine Werbung gesendet werden, bitte warte kurz!");
                 return;
             }
@@ -62,7 +57,7 @@ namespace GVRP.Module.Players.Windows
             if (ad.Length < 10 || ad.Length > 96)
             {
                 dbPlayer.SendNewNotification(
-                    
+
                     "Werbungen muessen zwischen 10 und 96 Zeichen lang sein!");
                 return;
             }
@@ -108,16 +103,16 @@ namespace GVRP.Module.Players.Windows
             var teamRankPermission = editDbPlayer.TeamRankPermission;
             if (teamRankPermission.Manage < 1)
             {
-                dbPlayer.SendNewNotification("Die Person ist nicht berechtigt dich einzuladen!", title:"Fraktion", notificationType:PlayerNotification.NotificationType.ERROR);
+                dbPlayer.SendNewNotification("Die Person ist nicht berechtigt dich einzuladen!", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
-     //       if (dbPlayer.IsHomeless())
-     //       {
-     //           dbPlayer.SendNewNotification("Ohne einen Wohnsitz kannst du keiner Fraktion beitreten!", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
-     //           editDbPlayer.SendNewNotification($"{ dbPlayer.GetName()} hat keinen Wohnsitz und kann daher nicht der Fraktion beitreten!", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
-     //           return;
-     //       }
-            if (dbPlayer.TeamId != (uint) TeamList.Zivilist)
+            //       if (dbPlayer.IsHomeless())
+            //       {
+            //           dbPlayer.SendNewNotification("Ohne einen Wohnsitz kannst du keiner Fraktion beitreten!", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
+            //           editDbPlayer.SendNewNotification($"{ dbPlayer.GetName()} hat keinen Wohnsitz und kann daher nicht der Fraktion beitreten!", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
+            //           return;
+            //       }
+            if (dbPlayer.TeamId != (uint)TeamList.Zivilist)
             {
                 dbPlayer.SendNewNotification("Du bist bereits in einer Fraktion!", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
                 editDbPlayer.SendNewNotification($"{dbPlayer.GetName()} ist bereits in einer Fraktion!", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
@@ -129,7 +124,7 @@ namespace GVRP.Module.Players.Windows
                 dbPlayer.SendNewNotification($"{editDbPlayer.GetName()} hat dich in die falsche Fraktion eingeladen! :(", title: "Fraktion", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
-            
+
             dbPlayer.SetTeam(editDbPlayer.TeamId);
             dbPlayer.UpdateApps();
             dbPlayer.Team.AddMember(dbPlayer);
@@ -142,6 +137,6 @@ namespace GVRP.Module.Players.Windows
 
             dbPlayer.Team.SendNotification($"{dbPlayer.GetName()} ist jetzt ein Mitglied - {fraktion}!");
         }
-        
+
     }
 }

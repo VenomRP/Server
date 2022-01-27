@@ -1,14 +1,11 @@
-﻿using System;
+﻿using GTANetworkAPI;
+using GVRP.Module.Chat;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Weapons.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
-using GVRP.Module.Events.Halloween;
-using GVRP.Module.Players;
-
-using GVRP.Module.Players.Db;
-using GVRP.Module.Weapons.Data;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -30,7 +27,7 @@ namespace GVRP.Module.Items.Scripts
                 iPlayer.SendNewNotification("Diese Waffe können Sie nicht ausrüsten!");
                 return false;
             }
-            
+
             iPlayer.SendNewNotification("Sie haben Ihre Waffe ausgeruestet!");
 
             int defaultammo = 0;
@@ -114,7 +111,7 @@ namespace GVRP.Module.Items.Scripts
             if (iPlayer.Player == null || !NAPI.Pools.GetAllPlayers().Contains(iPlayer.Player) || !iPlayer.Player.Exists) return false;
 
             iPlayer.Container.RemoveItem(ItemData, 1);
-            iPlayer.Container.AddItem(WeaponItemId, 1, new Dictionary<string, dynamic>() { { "fingerprint" , iPlayer.GetName() } });
+            iPlayer.Container.AddItem(WeaponItemId, 1, new Dictionary<string, dynamic>() { { "fingerprint", iPlayer.GetName() } });
 
             iPlayer.Player.TriggerEvent("freezePlayer", false);
             iPlayer.SetData("userCannotInterrupt", false);

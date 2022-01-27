@@ -1,8 +1,7 @@
-﻿using System.Linq;
-using GVRP.Module.Chat;
-using GVRP.Module.Meth;
+﻿using GVRP.Module.Meth;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Linq;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -29,13 +28,13 @@ namespace GVRP.Module.Items.Scripts
                         return false;
                     }
 
-                    if(MethModule.CookingPlayers.ToList().Where(p => p != null && p.IsValid() && p.Player.Dimension == iPlayer.Player.Dimension).Count() >= 8)
+                    if (MethModule.CookingPlayers.ToList().Where(p => p != null && p.IsValid() && p.Player.Dimension == iPlayer.Player.Dimension).Count() >= 8)
                     {
                         iPlayer.SendNewNotification("Hier ist kein Platz mehr? Wo willst du deinen Kocher hinstellen, alla?");
                         return false;
                     }
 
-                    iPlayer.SendNewNotification( "Sie kochen nun Meth");
+                    iPlayer.SendNewNotification("Sie kochen nun Meth");
                     iPlayer.SetData("cooking", true);
                     if (!MethModule.CookingPlayers.Contains(iPlayer)) MethModule.CookingPlayers.Add(iPlayer);
                     return true;
@@ -44,7 +43,7 @@ namespace GVRP.Module.Items.Scripts
             else
             {
                 iPlayer.ResetData("cooking");
-                iPlayer.SendNewNotification( "Meth kochen beendet!");
+                iPlayer.SendNewNotification("Meth kochen beendet!");
                 if (MethModule.CookingPlayers.Contains(iPlayer)) MethModule.CookingPlayers.Remove(iPlayer);
             }
             return false;

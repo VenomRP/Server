@@ -17,7 +17,7 @@ namespace GVRP.Module.Menu.Menus.Heists.Planningroom
 
             menu.Add($"Schließen");
 
-            if(!room.Bought)
+            if (!room.Bought)
             {
                 menu.Add($"Planungsraum erwerben (2.000.000$)");
             }

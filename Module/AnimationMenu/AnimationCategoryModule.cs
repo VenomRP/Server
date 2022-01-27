@@ -1,6 +1,4 @@
-﻿using GVRP.Module.Assets.Tattoo;
-
-namespace GVRP.Module.AnimationMenu
+﻿namespace GVRP.Module.AnimationMenu
 {
     public class AnimationCategoryModule : SqlModule<AnimationCategoryModule, AnimationCategory, uint>
     {

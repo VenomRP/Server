@@ -1,27 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.Assets.Hair;
-using GVRP.Module.Assets.HairColor;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Barber.Windows;
+﻿using GTANetworkAPI;
 using GVRP.Module.Chat;
-using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Commands;
 using GVRP.Module.Configurations;
-using GVRP.Module.Customization;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
-using GVRP.Module.Menu;
 using GVRP.Module.Players;
-
-using GVRP.Module.Players.Db;
-using GVRP.Module.Tattoo.Windows;
-using GVRP.Module.Teams;
 using GVRP.Module.Vehicles;
+using MySql.Data.MySqlClient;
+using System;
 using static GVRP.Module.Chat.Chats;
 
 namespace GVRP.Module.Government
@@ -30,7 +14,7 @@ namespace GVRP.Module.Government
     {
         public int Level { get; set; }
         public int Caller { get; set; }
-        
+
     }
 
     public sealed class GovernmentModule : Module<GovernmentModule>
@@ -40,7 +24,7 @@ namespace GVRP.Module.Government
 
         public override bool Load(bool reload = false)
         {
-            Defcon = new DefconLevel() { Level = 5, Caller = 0};
+            Defcon = new DefconLevel() { Level = 5, Caller = 0 };
 
             using (var conn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
             using (var cmd = conn.CreateCommand())
@@ -59,9 +43,9 @@ namespace GVRP.Module.Government
                 }
                 conn.Close();
             }
-            
+
             SetDefcon(Defcon.Level, Defcon.Caller);
-            
+
             return reload;
         }
 
@@ -80,12 +64,12 @@ namespace GVRP.Module.Government
 
             Defcon.Caller = CallerId;
             Defcon.Level = Level;
-            
-            if(save) MySQLHandler.ExecuteAsync($"INSERT INTO defcon (`level`, `caller`) VALUES ('{Level}', '{CallerId}')");
+
+            if (save) MySQLHandler.ExecuteAsync($"INSERT INTO defcon (`level`, `caller`) VALUES ('{Level}', '{CallerId}')");
 
             Chats.SendGlobalMessage($"Regierungsmitteilung: Die aktuelle Defcon Stufe {Level} wurde ausgerufen!", COLOR.LIGHTBLUE, ICON.GOV);
         }
-        
+
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
         public void Commandsetdefcon(Player player, string level)
@@ -98,7 +82,7 @@ namespace GVRP.Module.Government
 
             if (defcons <= 0 || defcons > 5) return;
 
-            switch(defcons)
+            switch (defcons)
             {
                 case 5:
                 case 4:

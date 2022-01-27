@@ -1,13 +1,11 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Module.GTAN;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Business.Raffinery
 {
@@ -24,7 +22,7 @@ namespace GVRP.Module.Business.Raffinery
         {
             MenuManager.Instance.AddBuilder(new RaffineryMenuBuilder());
         }
-        
+
         protected override string GetQuery()
         {
             return "SELECT * FROM `business_raffinery`;";
@@ -34,7 +32,7 @@ namespace GVRP.Module.Business.Raffinery
         {
             return Instance.GetAll().Values.FirstOrDefault(fs => fs.Position.DistanceTo(position) < 5.0f);
         }
-        
+
         public override void OnFifteenMinuteUpdate()
         {
             foreach (Raffinery raffinery in Instance.GetAll().Values)
@@ -47,7 +45,7 @@ namespace GVRP.Module.Business.Raffinery
                     if (maxAddableMenge <= 0) continue;
 
                     if (maxFörderMenge > maxAddableMenge) maxFörderMenge = maxAddableMenge;
-                    raffinery.Container.AddItem(RohölItemModelId, raffinery.FörderMengeMin*15);
+                    raffinery.Container.AddItem(RohölItemModelId, raffinery.FörderMengeMin * 15);
                 }
             }
         }
@@ -65,7 +63,7 @@ namespace GVRP.Module.Business.Raffinery
                     if (Raffinery.IsOwnedByBusines())
                     {
                         Business business = Raffinery.GetOwnedBusiness();
-                        dbPlayer.SendNewNotification($"Besitzer: {business.Name}", title:$"Oelfoerderpumpe");
+                        dbPlayer.SendNewNotification($"Besitzer: {business.Name}", title: $"Oelfoerderpumpe");
                     }
                     else
                     {

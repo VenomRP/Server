@@ -1,7 +1,5 @@
 ﻿using GTANetworkAPI;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GVRP.Module.Vehicles
 {
@@ -36,7 +34,7 @@ namespace GVRP.Module.Vehicles
         public void SetEngineStatus(bool status)
         {
             NAPI.Vehicle.SetVehicleEngineStatus(this.Entity, status);
-            
+
             this.EngineOn = status;
             Entity.SetSharedData("engineStatus", status);
         }

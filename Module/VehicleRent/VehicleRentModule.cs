@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Menu;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.VehicleRent
 {
@@ -14,7 +14,7 @@ namespace GVRP.Module.VehicleRent
         public static uint VehicleRentItemId = 626;
 
         protected override bool OnLoad()
-        { 
+        {
             PlayerVehicleRentKeys = new List<PlayerVehicleRentKey>();
             MenuManager.Instance.AddBuilder(new VehicleRentMenuBuilder());
             return true;
@@ -34,7 +34,8 @@ namespace GVRP.Module.VehicleRent
     {
         public static void AddPlayerVehicleKeyForPlayer(this DbPlayer owner, DbPlayer Renter, uint vehicleId, DateTime endDate)
         {
-            try {
+            try
+            {
                 if (owner == null || !owner.IsValid() || Renter == null || !Renter.IsValid())
                 {
                     owner.SendNewNotification("Fehler!");
@@ -56,7 +57,7 @@ namespace GVRP.Module.VehicleRent
                 MySQLHandler.ExecuteAsync($"INSERT INTO `player_vehicle_rent` (`owner_id`, `player_id`, `vehicle_id`, `begin_date`, `ending_date`) VALUES('{owner.Id}', '{Renter.Id}', '{vehicleId}', '{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}', '{endDate.ToString("yyyy-MM-dd HH:mm:ss")}');");
 
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return;
             }

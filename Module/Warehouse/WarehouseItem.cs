@@ -1,7 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GVRP.Module.Warehouse
 {
@@ -16,7 +13,7 @@ namespace GVRP.Module.Warehouse
         public int ResultItemPrice { get; set; }
         public int ResultItemBestand { get; set; }
         public int RequiredToResultItemAmount { get; set; }
-        
+
         public WarehouseItem(MySqlDataReader reader) : base(reader)
         {
             Id = reader.GetUInt32("id");

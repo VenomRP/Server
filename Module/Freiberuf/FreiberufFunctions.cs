@@ -1,12 +1,9 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Handler;
-using GVRP.Module.Chat;
 using GVRP.Module.Freiberuf.Mower;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Freiberuf
 {

@@ -41,11 +41,11 @@ namespace GVRP.Module.Players
             if (iPlayer.AccountStatus != AccountStatus.LoggedIn) return;
 
             // Armor Types
-            if(Armor > 100)
+            if (Armor > 100)
             {
                 iPlayer.ArmorType = ArmorType.Strong;
             }
-            else if(Armor > 200)
+            else if (Armor > 200)
             {
                 iPlayer.ArmorType = ArmorType.Admin;
             }

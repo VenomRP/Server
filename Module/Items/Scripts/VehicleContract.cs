@@ -14,6 +14,6 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.SendNewNotification(info, PlayerNotification.NotificationType.INFO, "Fahrzeugkaufvertrag", 15000);
 
             return false;
-        } 
+        }
     }
 }

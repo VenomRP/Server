@@ -1,11 +1,9 @@
-﻿using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Chat;
-using GVRP.Module.Events.Halloween;
 using GVRP.Module.Gangwar;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -54,7 +52,7 @@ namespace GVRP.Module.Items.Scripts
         public static async Task<bool> BArmor(DbPlayer iPlayer, ItemModel ItemData)
         {
             if (iPlayer.Player.IsInVehicle || !iPlayer.IsACop()) return true;
-           
+
             Chats.sendProgressBar(iPlayer, 4000);
             iPlayer.PlayAnimation(
                 (int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["fixing"].Split()[0], Main.AnimationList["fixing"].Split()[1]);
@@ -66,7 +64,7 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.SetCannotInteract(false);
             NAPI.Player.StopPlayerAnimation(iPlayer.Player);
             iPlayer.SetArmor(100, true);
-            
+
             return true;
         }
 

@@ -1,9 +1,7 @@
-﻿using System;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Players.Buffs;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Items;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -29,7 +27,7 @@ namespace GVRP.Module.Items.Scripts
             {
                 return false;
             }
-            
+
             iPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["joint_start"].Split()[0], Main.AnimationList["joint_start"].Split()[1]);
             iPlayer.Player.TriggerEvent("freezePlayer", true);
             await Task.Delay(8000);
@@ -52,7 +50,7 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.Armor[0] = newArmor;
 
             ItemModelModule.Instance.LogItem((int)ItemData.Id, (int)iPlayer.TeamId, 1);
-            
+
 
             return true;
         }

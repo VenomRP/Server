@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.NpcSpawner
 {
@@ -22,7 +20,7 @@ namespace GVRP.Module.NpcSpawner
 
             // Add To NPCList
             Main.ServerNpcs.Add(this);
-            foreach(DbPlayer dbPlayer in Players.Players.Instance.GetValidPlayers())
+            foreach (DbPlayer dbPlayer in Players.Players.Instance.GetValidPlayers())
             {
                 dbPlayer.Player.TriggerEvent("loadNpc", PedHash, Position.X, Position.Y, Position.Z, Heading, Dimension);
             }

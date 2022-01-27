@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using GVRP.Module.Chat;
-using GVRP.Module.Houses;
+﻿using GVRP.Module.Chat;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Threading.Tasks;
 
 namespace GVRP
 {
@@ -20,10 +17,10 @@ namespace GVRP
         {
             ItemOrderNpc itemOrderNpc = ItemOrderNpcModule.Instance.GetByPlayerPosition(iPlayer);
             if (itemOrderNpc == null) return null;
-            
+
             var menu = new Menu(Menu, "Fertiggestellt");
-            
-            foreach(ItemOrder itemOrder in ItemOrderModule.Instance.GetPlayerFinishedListByNpc(iPlayer, itemOrderNpc))
+
+            foreach (ItemOrder itemOrder in ItemOrderModule.Instance.GetPlayerFinishedListByNpc(iPlayer, itemOrderNpc))
             {
                 menu.Add($"{itemOrder.ItemAmount} {itemOrder.Item.Name}");
             }
@@ -57,7 +54,7 @@ namespace GVRP
                             return false;
                         }
 
-                        if(ItemOrderModule.Instance.DeleteOrder(itemOrder))
+                        if (ItemOrderModule.Instance.DeleteOrder(itemOrder))
                         {
                             iPlayer.Container.AddItem(itemOrder.Item, itemOrder.ItemAmount);
 

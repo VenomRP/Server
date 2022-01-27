@@ -1,11 +1,10 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Configurations;
 using GVRP.Module.Vehicles.Data;
 using GVRP.Module.Vehicles.Shops;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Vehicles.Mod
 {
@@ -49,9 +48,9 @@ namespace GVRP.Module.Vehicles.Mod
         public IEnumerable<VehicleModType> GetAvailableVehicleModTypes(SxVehicle vehicle)
         {
             return from type in types
-                let availableMods = GetModsForVehicleAndModType(vehicle, type.Key)
-                where availableMods != null && availableMods.Count > 0
-                select type.Value;
+                   let availableMods = GetModsForVehicleAndModType(vehicle, type.Key)
+                   where availableMods != null && availableMods.Count > 0
+                   select type.Value;
         }
 
         public Dictionary<int, string> GetModsForVehicleAndModType(SxVehicle vehicle, int type)

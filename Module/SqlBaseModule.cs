@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GVRP.Module.Configurations;
 using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
+using System;
 
 namespace GVRP.Module
 {

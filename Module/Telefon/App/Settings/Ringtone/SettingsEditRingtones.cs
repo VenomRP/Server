@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
@@ -15,7 +12,7 @@ namespace GVRP.Module.Telefon.App.Settings
 
 
         [RemoteEvent]
-        public void requestRingtoneList(Player player) 
+        public void requestRingtoneList(Player player)
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null) return;

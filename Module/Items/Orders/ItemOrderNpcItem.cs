@@ -1,9 +1,6 @@
-﻿
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using GVRP.Module.Logging;
 
 namespace GVRP.Module.Items
 {
@@ -42,7 +39,7 @@ namespace GVRP.Module.Items
                     if (xItemData.Contains(":"))
                     {
                         var xItemSplit = xItemData.Split(':');
-                        
+
                         if (xItemSplit == null || xItemSplit.Length < 2) continue;
                         ItemModel itemModel = ItemModelModule.Instance.Get(Convert.ToUInt32(xItemSplit[0]));
                         if (itemModel == null) continue;

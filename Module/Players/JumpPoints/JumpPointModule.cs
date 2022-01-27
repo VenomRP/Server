@@ -1,11 +1,11 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using GVRP.Module.Configurations;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players.JumpPoints
 {
@@ -16,7 +16,7 @@ namespace GVRP.Module.Players.JumpPoints
 
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(TeamModule)};
+            return new[] { typeof(TeamModule) };
         }
 
         protected override bool OnLoad()
@@ -131,7 +131,7 @@ namespace GVRP.Module.Players.JumpPoints
                     }
                     else
                     {
-                        if(jumpPoint.Teams.Count > 0)
+                        if (jumpPoint.Teams.Count > 0)
                         {
                             if (jumpPoint.Teams.Contains(dbPlayer.Team))
                             {

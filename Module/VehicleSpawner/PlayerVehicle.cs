@@ -1,9 +1,6 @@
 ﻿using GTANetworkAPI;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Vehicles;
 
 namespace GVRP.Module.VehicleSpawner
 {
@@ -33,10 +30,10 @@ namespace GVRP.Module.VehicleSpawner
         public int WheelClamp { get; set; }
         public bool AlarmSystem { get; set; }
 
-        
+
         public PlayerVehicle(MySqlDataReader reader) : base(reader)
         {
-            if(!Enum.TryParse(reader.GetString("vehiclehash"), true, out VehicleHash hash))
+            if (!Enum.TryParse(reader.GetString("vehiclehash"), true, out VehicleHash hash))
             {
                 hash = VehicleHash.Faggio;
             }

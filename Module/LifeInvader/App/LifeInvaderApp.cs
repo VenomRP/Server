@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using Newtonsoft.Json;
 using System;
-using GVRP.Module.Teams;
 using System.Linq;
 
 namespace GVRP.Module.LifeInvader.App
@@ -42,7 +40,7 @@ namespace GVRP.Module.LifeInvader.App
         }
 
         [RemoteEvent]
-        public void requestAd(Player player) 
+        public void requestAd(Player player)
         {
             SendAdsList(player);
         }
@@ -59,7 +57,7 @@ namespace GVRP.Module.LifeInvader.App
             title = title.Replace("\"\"", "");
             content = content.Replace("\"\"", "");
 
-            Main.adList.Add(new AdsFound((uint) Main.adList.Count + 1, title, content, DateTime.Now));
+            Main.adList.Add(new AdsFound((uint)Main.adList.Count + 1, title, content, DateTime.Now));
 
             Main.adList.Sort(delegate (AdsFound x, AdsFound y)
             {
@@ -71,7 +69,7 @@ namespace GVRP.Module.LifeInvader.App
         }
 
 
-        private void SendAdsList(Player player) 
+        private void SendAdsList(Player player)
         {
             var l_AdsCopy = Main.adList.ToList();
             TriggerEvent(player, "updateLifeInvaderAds", NAPI.Util.ToJson(l_AdsCopy));

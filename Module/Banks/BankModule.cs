@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module.Banks
+﻿namespace GVRP.Module.Banks
 {
     public sealed class BankModule : SqlModule<BankModule, Bank, uint>
     {

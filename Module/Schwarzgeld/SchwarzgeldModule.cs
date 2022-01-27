@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Houses;
@@ -12,6 +9,9 @@ using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.Robbery;
 using GVRP.Module.Teams;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Schwarzgeld
 {
@@ -67,7 +67,7 @@ namespace GVRP.Module.Schwarzgeld
 
                         Random rnd = new Random();
                         int chance = rnd.Next(1, 1000);
-                        if (chance > (995 - (house.BlackMoneyTick*50))) // 0,5% + 5% * tick
+                        if (chance > (995 - (house.BlackMoneyTick * 50))) // 0,5% + 5% * tick
                         {
                             HousesVoltage housesVoltage = HousesVoltageModule.Instance.GetClosestFromPosition(house.Position);
                             if (housesVoltage != null)
@@ -113,11 +113,11 @@ namespace GVRP.Module.Schwarzgeld
                     // Bank to normal geld
                     if (dbPlayer.Player.Position.DistanceTo(SchwarzgeldModule.MarkedDollarWorkbench) < 1.5f)
                     {
-                        if(dbPlayer.Container.GetItemAmount(RobberyModule.MarkierteScheineID) <= 0)
+                        if (dbPlayer.Container.GetItemAmount(RobberyModule.MarkierteScheineID) <= 0)
                         {
                             return true;
                         }
-                        
+
                         Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                         {
                             Chats.sendProgressBar(dbPlayer, 60000);
@@ -144,11 +144,11 @@ namespace GVRP.Module.Schwarzgeld
                     }
                 }
             }
-            
+
             return false;
         }
     }
-    
+
     public enum SGLog
     {
         GIVEPLAYER, //Schwarzgeld to player

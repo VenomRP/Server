@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Spawners;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players
 {
@@ -45,7 +45,7 @@ namespace GVRP.Module.Players
         {
             return notifications.TryGetValue(id, out var notification) ? notification : null;
         }
-        
+
         public void Remove(int id)
         {
             notifications.Remove(id);

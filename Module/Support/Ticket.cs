@@ -1,6 +1,6 @@
-﻿using System;
+﻿using GVRP.Module.Players.Db;
+using System;
 using System.Collections.Generic;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Support
 {

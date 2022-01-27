@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.ConstrainedExecution;
-using System.Text;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Vehicles.RegistrationOffice
 {
@@ -21,7 +19,7 @@ namespace GVRP.Module.Vehicles.RegistrationOffice
         public static int REGISTRATION_COST_WISH = 10000;
 
         public static int RegistrationRadius = 20;
-        
+
         //Fahrzeug Registrierung
 
         public static bool registerVehicle(SxVehicle sxVehicle, DbPlayer owner, DbPlayer worker, String plate, bool wish)
@@ -163,11 +161,11 @@ namespace GVRP.Module.Vehicles.RegistrationOffice
         public static String GetRandomPlate(bool privateCar)
         {
             String plate = "";
-                do
-                {
-                    plate = RandomString(8);
-                    if (!IsPlateRegistered(plate, privateCar))break;
-                } while (true);
+            do
+            {
+                plate = RandomString(8);
+                if (!IsPlateRegistered(plate, privateCar)) break;
+            } while (true);
             return plate;
         }
 
@@ -185,7 +183,7 @@ namespace GVRP.Module.Vehicles.RegistrationOffice
             String updateString = $"UPDATE vehicles SET Registered = {(status == true ? "1" : "0")}, plate = '{(status ? plate : "")}' WHERE id = {sxVehicle.databaseId}; INSERT INTO vehicle_registrations (owner_id, vehicle_id, officer_id, plate, status) VALUES({ owner.Id}, { sxVehicle.databaseId}, { officer.Id}, '{plate}', { (status == true ? 1 : 0)})"; ;
             if (sxVehicle.IsTeamVehicle())
             {
-                updateString = $"UPDATE fvehicles SET Registered = {(status == true ? "1" : "0")}, plate = '{(status ? plate : "")}' WHERE id = {sxVehicle.databaseId}; INSERT INTO vehicle_registrations (owner_id, vehicle_id, officer_id, plate, status) VALUES({ (owner.Team.Id*-1)}, { sxVehicle.databaseId}, { officer.Id}, '{plate}', { (status == true ? 1 : 0)})";
+                updateString = $"UPDATE fvehicles SET Registered = {(status == true ? "1" : "0")}, plate = '{(status ? plate : "")}' WHERE id = {sxVehicle.databaseId}; INSERT INTO vehicle_registrations (owner_id, vehicle_id, officer_id, plate, status) VALUES({ (owner.Team.Id * -1)}, { sxVehicle.databaseId}, { officer.Id}, '{plate}', { (status == true ? 1 : 0)})";
             }
 
 
@@ -234,7 +232,7 @@ namespace GVRP.Module.Vehicles.RegistrationOffice
             }
             var info = $"Besitzer: {owner.Player.Name} Fahrzeug: {vehicle.GetName()} ({vehicle.databaseId}) am {DateTime.Now.ToString("dd.MM.yyyy HH:mm")} kauf durch {seller}";
 
-            if(vehicle != null && vehicle.IsValid() && vehicle.Container != null)
+            if (vehicle != null && vehicle.IsValid() && vehicle.Container != null)
                 vehicle.Container.AddItem(641, 1, new Dictionary<string, dynamic>() { { "Info", info } });
             else
                 owner.Container.AddItem(641, 1, new Dictionary<string, dynamic>() { { "Info", info } });

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
+using GVRP.Handler;
+using GVRP.Module.Injury;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
-using GVRP.Module.Injury;
-using GVRP.Handler;
+using System;
 
 
 namespace GVRP.Module

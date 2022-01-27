@@ -6,7 +6,7 @@
 
         protected Module()
         {
-            Instance = (T) this;
+            Instance = (T)this;
         }
     }
 }

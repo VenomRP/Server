@@ -1,6 +1,4 @@
-﻿using GVRP.Module.Assets.Tattoo;
-
-namespace GVRP.Module.Tattoo
+﻿namespace GVRP.Module.Tattoo
 {
     public class TattooLicenseModule : SqlModule<TattooLicenseModule, TattooLicense, uint>
     {

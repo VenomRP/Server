@@ -1,8 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Items
 {
@@ -51,14 +48,14 @@ namespace GVRP.Module.Items
             Data = data == null ? new Dictionary<string, dynamic>() : data;
         }
     }
-    
+
     public class SaveItem
     {
         public uint Id { get; set; }
         public int Durability { get; set; }
         public int Amount { get; set; }
         public Dictionary<string, dynamic> Data { get; }
-        
+
         [JsonConstructor]
         public SaveItem(uint id, int durability, int amount, Dictionary<string, dynamic> data)
         {

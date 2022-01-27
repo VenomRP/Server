@@ -1,11 +1,9 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Gangwar
 {
@@ -40,7 +38,7 @@ namespace GVRP.Module.Gangwar
         {
             return Instance.GetAll().FirstOrDefault(gt => gt.Value.IsAttacked && (gt.Value.AttackerTeam == team || gt.Value.DefenderTeam == team)).Value;
         }
-        
+
         public bool IsTeamInGangwar(Team team)
         {
             return GangwarTownModule.Instance.GetAll().Where(g => g.Value.AttackerTeam == team || g.Value.DefenderTeam == team).Count() > 0;
@@ -48,7 +46,7 @@ namespace GVRP.Module.Gangwar
 
         public GangwarTown FindByOwner(Team team)
         {
-            return Instance.GetAll().FirstOrDefault(gt => gt.Value.OwnerTeam  != null && gt.Value.OwnerTeam == team).Value;
+            return Instance.GetAll().FirstOrDefault(gt => gt.Value.OwnerTeam != null && gt.Value.OwnerTeam == team).Value;
         }
 
         public GangwarTown GetNearByPlayer(DbPlayer dbPlayer)

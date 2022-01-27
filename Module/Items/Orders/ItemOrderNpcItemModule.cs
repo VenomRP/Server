@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using GVRP.Module.Logging;
 
 namespace GVRP.Module.Items
 {
@@ -10,7 +8,7 @@ namespace GVRP.Module.Items
         {
             return new[] { typeof(ItemModelModule) };
         }
-        
+
         protected override string GetQuery()
         {
             return "SELECT * FROM `itemorder_npc_items`;";

@@ -1,17 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GVRP.Module.Armory;
-using GVRP.Module.GTAN;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Staatskasse;
-using GVRP.Module.Weapons.Component;
 using GVRP.Module.Weapons.Data;
+using System.Linq;
 
 namespace GVRP
 {
@@ -26,14 +21,14 @@ namespace GVRP
             var menu = new Menu(Menu, "Armory Waffen");
 
             menu.Add(MSG.General.Close(), "");
-            
+
             menu.Add("Zurueck", "");
-            
+
             if (!iPlayer.HasData("ArmoryId")) return menu;
             var ArmoryId = iPlayer.GetData("ArmoryId");
             Armory Armory = ArmoryModule.Instance.Get(ArmoryId);
             if (Armory == null) return menu;
-            
+
             foreach (var ArmoryWeapon in Armory.ArmoryWeapons)
             {
                 menu.Add("R: " + ArmoryWeapon.GetDefconRequiredRang() + " " + ArmoryWeapon.WeaponName + (ArmoryWeapon.Price > 0 ? (" ($" + ArmoryWeapon.Price + ") ") : ""));
@@ -65,7 +60,8 @@ namespace GVRP
                     MenuManager.DismissMenu(iPlayer.Player, (int)PlayerMenu.Armory);
                     return false;
                 }
-                else {
+                else
+                {
                     int actualIndex = 0;
                     foreach (ArmoryWeapon ArmoryWeapon in Armory.ArmoryWeapons)
                     {
@@ -92,7 +88,7 @@ namespace GVRP
                                 iPlayer.SendNewNotification(
                                     $"Die Waffenkammer hat nicht mehr genuegend Waffenkisten! (Benötigt: {ArmoryWeapon.Packets} )");
                                 return false;
-                            }                                                                                  
+                            }
 
                             if (ArmoryWeapon.Price > 0 && !iPlayer.TakeBankMoney(ArmoryWeapon.Price))
                             {
@@ -102,14 +98,14 @@ namespace GVRP
                             }
 
                             // Beamter Remove...
-                            if(iPlayer.IsACop())
+                            if (iPlayer.IsACop())
                             {
                                 WeaponData weaponData = WeaponDataModule.Instance.GetAll().Values.Where(wd => (WeaponHash)wd.Hash == ArmoryWeapon.Weapon).FirstOrDefault();
 
                                 if (weaponData != null)
                                 {
                                     // Spieler besitzt aktuelle Waffe
-                                    if(iPlayer.Weapons.Where(w => w.WeaponDataId == weaponData.Id).Count() > 0)
+                                    if (iPlayer.Weapons.Where(w => w.WeaponDataId == weaponData.Id).Count() > 0)
                                     {
                                         iPlayer.RemoveWeapon(ArmoryWeapon.Weapon);
                                         iPlayer.GiveBankMoney(ArmoryWeapon.Price);

@@ -10,7 +10,7 @@ namespace GVRP.Module.Players
 
             iPlayer.SendNewNotification(msg);
         }
-        
+
         public static void ClearChat(this DbPlayer iPlayer)
         {
             for (int i = 0; i < 10; i++)

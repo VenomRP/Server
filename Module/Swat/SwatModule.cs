@@ -1,22 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.Assets.Hair;
-using GVRP.Module.Assets.HairColor;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Barber.Windows;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Customization;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
-using GVRP.Module.Menu;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Players;
 
 using GVRP.Module.Players.Db;
-using GVRP.Module.Tattoo.Windows;
 using GVRP.Module.Teams.Apps;
 using GVRP.Module.Teams.Permission;
 using GVRP.Module.Vehicles;
@@ -56,7 +41,7 @@ namespace GVRP.Module.Swat
         public static void RemoveSwatRights(this DbPlayer dbPlayer)
         {
             dbPlayer.Swat = 0;
-            if(dbPlayer.TeamId == (int)teams.TEAM_SWAT)
+            if (dbPlayer.TeamId == (int)teams.TEAM_SWAT)
             {
                 dbPlayer.SetTeam((int)teams.TEAM_CIVILIAN);
                 dbPlayer.SetTeamRankPermission(false, 0, false, "");

@@ -2,7 +2,7 @@
 
 namespace GVRP.Module.Menu.Menus.Asservatenkammer
 {
-    class AsservatenkammerDeliverMenuBuilder :MenuBuilder
+    class AsservatenkammerDeliverMenuBuilder : MenuBuilder
     {
         public AsservatenkammerDeliverMenuBuilder() : base(PlayerMenu.AsservatenkammerDeliverMenu)
         {
@@ -31,7 +31,7 @@ namespace GVRP.Module.Menu.Menus.Asservatenkammer
                 {
                     // abgabe
                 }
-                else if(index == 2)
+                else if (index == 2)
                 {
                     // Informationen
                 }

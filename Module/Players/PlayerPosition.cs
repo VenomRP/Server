@@ -29,7 +29,7 @@ namespace GVRP.Module.Players
 
             //player.Dimension = originalDimension;
         }
-        
+
         public static void SetWaypoint(this DbPlayer iPlayer, float x, float y)
         {
             iPlayer.SetData("waypoint_x", x);

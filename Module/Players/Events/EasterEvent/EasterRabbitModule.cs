@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Players.Events.EasterEvent
 {
@@ -19,7 +17,7 @@ namespace GVRP.Module.Players.Events.EasterEvent
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
             if (dbPlayer.Player.IsInVehicle || dbPlayer.Dimension[0] != 0 || !isActive) return false;
-            
+
             EasterRabbit easterRabbit = EasterRabbitModule.Instance.GetAll().Values.Where(er => er.Position.DistanceTo(dbPlayer.Player.Position) < 1.5f).FirstOrDefault();
             if (easterRabbit != null)
             {
@@ -43,12 +41,12 @@ namespace GVRP.Module.Players.Events.EasterEvent
                     {
                         EasterEggId = 1035;
                     }
-                    else if(RCount > 20)
+                    else if (RCount > 20)
                     {
                         EasterEggId = 1036;
                     }
 
-                    if(dbPlayer.Container.CanInventoryItemAdded(EasterEggId))
+                    if (dbPlayer.Container.CanInventoryItemAdded(EasterEggId))
                     {
                         dbPlayer.Container.AddItem(EasterEggId);
                         dbPlayer.SendNewNotification($"Du hast ein {ItemModelModule.Instance.Get(EasterEggId).Name} bekommen! Frohe Ostern wünscht Venom Roleplay.");

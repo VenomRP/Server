@@ -19,7 +19,7 @@ namespace GVRP
         }
 
         // Names
-        public static string[] diamonds = { "Diamanten", ""};
+        public static string[] diamonds = { "Diamanten", "" };
         public static string[] meth = { "Meth", "" };
         public static string[] weedseed = { "Weedsamen", "" };
 
@@ -48,7 +48,7 @@ namespace GVRP
         public static string[] dead_use_deadtime = { "Um diese Zeit flexibel einzusehen benutzen Sie /deadtime!", "" };
         public static string[] user_is_dead()
         {
-            string[] xx = {Chats.MsgLeistelle + "Es wurde eine schwerverletzte Person gesichtet" };
+            string[] xx = { Chats.MsgLeistelle + "Es wurde eine schwerverletzte Person gesichtet" };
             return xx;
         }
 

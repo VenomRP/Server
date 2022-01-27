@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Gamescom
 {
@@ -87,7 +86,7 @@ namespace GVRP.Module.Gamescom
 
 
             return code.RewardId;
-        }    
+        }
 
 
 

@@ -1,33 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.AnimationMenu;
+using GVRP.Module.Commands;
+using GVRP.Module.Einreiseamt;
 using GVRP.Module.Gangwar;
-using GVRP.Module.GTAN;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Events;
 using GVRP.Module.Players.Phone;
+using GVRP.Module.Racing;
+using GVRP.Module.Service;
+using GVRP.Module.Teamfight;
 using GVRP.Module.Teams;
-using GVRP.Module.Voice;
+using GVRP.Module.Teams.Blacklist;
+using GVRP.Module.Vehicles;
 using GVRP.Module.Weapons;
 using GVRP.Module.Weapons.Data;
-using GVRP.Module.Service;
-using GVRP.Module.Zone;
-using GVRP.Module.Teamfight;
-using GVRP.Module.Vehicles;
-using GVRP.Module.Commands;
-using GVRP.Module.Teams.Blacklist;
-using GVRP.Module.Events.Halloween;
-using GVRP.Module.Racing;
-using GVRP.Module.Einreiseamt;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Injury
 {
@@ -55,9 +47,9 @@ namespace GVRP.Module.Injury
         public Vector3 GetClosestHospital(Vector3 Position)
         {
             Vector3 returnPos = HospitalPositions.First();
-            foreach(Vector3 pos in HospitalPositions)
+            foreach (Vector3 pos in HospitalPositions)
             {
-                if(Position.DistanceTo(pos) < Position.DistanceTo(returnPos))
+                if (Position.DistanceTo(pos) < Position.DistanceTo(returnPos))
                 {
                     returnPos = pos;
                 }
@@ -284,7 +276,7 @@ namespace GVRP.Module.Injury
                 {
                     SxVehicle sxVehicle = dbPlayer.Player.Vehicle.GetVehicle();
                     if (sxVehicle == null || !sxVehicle.IsTeamVehicle()) return false;
-                    
+
                     InjuryDeliver injuryDelivery = InjuryDeliverModule.Instance.Get((uint)colShape.GetData<int>("injuryDeliverId"));
 
                     if (injuryDelivery == null) return false;
@@ -376,7 +368,7 @@ namespace GVRP.Module.Injury
                     ServiceModule.Instance.CancelOwnService(dbPlayer, (uint)teams.TEAM_MEDIC);
 
                     // Add Service
-                    Service.Service service = new Service.Service(new Vector3(dbPlayer.dead_x[0] , dbPlayer.dead_y[0] , dbPlayer.dead_z[0]), deathmessage, (uint)teams.TEAM_MEDIC, dbPlayer);
+                    Service.Service service = new Service.Service(new Vector3(dbPlayer.dead_x[0], dbPlayer.dead_y[0], dbPlayer.dead_z[0]), deathmessage, (uint)teams.TEAM_MEDIC, dbPlayer);
                     ServiceModule.Instance.Add(dbPlayer, (uint)teams.TEAM_MEDIC, service);
                 }
             }
@@ -445,6 +437,6 @@ namespace GVRP.Module.Injury
             dbPlayer.SendNewNotification($"Sie haben {findPlayer.GetName()} eine Notfallmedizin Lizenz für 350.000$ ausgestellt!");
             findPlayer.SendNewNotification($"Arzt {dbPlayer.GetName()} hat ihnen eine Notfallmedizin Lizenz für 350.000$ ausgestellt!");
         }
-        
+
     }
 }

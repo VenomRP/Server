@@ -1,9 +1,9 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.NpcSpawner;
+using GVRP.Module.Players.Db;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
-using GVRP.Module.NpcSpawner;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Dealer
 {
@@ -60,23 +60,23 @@ namespace GVRP.Module.Dealer
             }
             else Maulwurf = false;
 
-            Random random       = new Random();
+            Random random = new Random();
             //                                       Ressource      Cap     Preisrange Normal                   Preisrange "Rein"               DateTime seitdem full - Init Wert
-            MethResource        = new DealerResource("Meth",        2500,   (uint)random.Next(230, 255),        (uint)random.Next(450, 480),    DateTime.Now);
-            MethCristallResource= new DealerResource("MethKristall",800,    (uint)random.Next(230, 255),        0,    DateTime.Now);
-            DiamondResource     = new DealerResource("Juwelen",     50,     (uint)random.Next(5500, 5700),      0,                              DateTime.Now);
-            GoldResource        = new DealerResource("Goldbarren",  100,    (uint)random.Next(11000, 13000),    0,                              DateTime.Now);
-            WeaponResource      = new DealerResource("Waffenset",   4,      (uint)random.Next(400, 430),        0,                              DateTime.Now);
-            CannabisResource    = new DealerResource("Cannabis",    4000,   (uint)random.Next(450, 480),        0,                              DateTime.Now);
+            MethResource = new DealerResource("Meth", 2500, (uint)random.Next(230, 255), (uint)random.Next(450, 480), DateTime.Now);
+            MethCristallResource = new DealerResource("MethKristall", 800, (uint)random.Next(230, 255), 0, DateTime.Now);
+            DiamondResource = new DealerResource("Juwelen", 50, (uint)random.Next(5500, 5700), 0, DateTime.Now);
+            GoldResource = new DealerResource("Goldbarren", 100, (uint)random.Next(11000, 13000), 0, DateTime.Now);
+            WeaponResource = new DealerResource("Waffenset", 4, (uint)random.Next(400, 430), 0, DateTime.Now);
+            CannabisResource = new DealerResource("Cannabis", 4000, (uint)random.Next(450, 480), 0, DateTime.Now);
 
             // WICHTIG! Wenn eine neue Ressource hinzugefügt wird zu einem Dealer, packt die DealerResource in die List<DealerResource> ein, sonst wird der Dealer nicht resettet!!!
-            DealerResources     = new List<DealerResource>()
+            DealerResources = new List<DealerResource>()
             {
                 MethResource, MethCristallResource, DiamondResource, GoldResource, WeaponResource, CannabisResource
             };
 
-            VehicleClawPrice    = 100000;
-            VehicleClawBought   = 0;
+            VehicleClawPrice = 100000;
+            VehicleClawBought = 0;
 
             new Npc(PedHash, Position, Heading, 0);
         }
@@ -98,12 +98,12 @@ namespace GVRP.Module.Dealer
 
         public DealerResource(string name, uint cap, uint price, uint purePrice, DateTime timeSinceFull)
         {
-            Name            = name;
-            Cap             = cap;
-            Price           = price;
-            PurePrice       = purePrice;
-            TimeSinceFull   = timeSinceFull;
-            Sold            = 0;
+            Name = name;
+            Cap = cap;
+            Price = price;
+            PurePrice = purePrice;
+            TimeSinceFull = timeSinceFull;
+            Sold = 0;
         }
 
         public bool IsFull()

@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Houses;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Doors
 {
@@ -58,7 +57,7 @@ namespace GVRP.Module.Doors
                 var splittedTeams = teamString.Split(',');
                 foreach (var teamIdString in splittedTeams)
                 {
-                    if (!uint.TryParse(teamIdString, out var teamId) || teamId == 0|| Teams.Contains(TeamModule.Instance[teamId])) continue;
+                    if (!uint.TryParse(teamIdString, out var teamId) || teamId == 0 || Teams.Contains(TeamModule.Instance[teamId])) continue;
                     Teams.Add(TeamModule.Instance[teamId]);
                 }
             }
@@ -76,7 +75,7 @@ namespace GVRP.Module.Doors
                     Houses.Add(houseid);
                 }
             }
-            
+
             Locked = reader.GetBoolean("locked");
             Name = reader.GetString("name");
             Pair = reader.GetUInt32("pair");
@@ -130,9 +129,9 @@ namespace GVRP.Module.Doors
 
         public void Refresh()
         {
-            foreach(DbPlayer player in Players.Players.Instance.GetValidPlayers())
+            foreach (DbPlayer player in Players.Players.Instance.GetValidPlayers())
             {
-                if(player.Player.Position.DistanceTo(Position) < Range*3) // Update for players in Range * 3
+                if (player.Player.Position.DistanceTo(Position) < Range * 3) // Update for players in Range * 3
                 {
                     //TriggerEvent does not accept int64 -> Workaround. Range between -2147483648 and 4294967295 allowed.
                     if (Model >= 0)

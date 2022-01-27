@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
-using GTANetworkAPI;
 using GVRP.Module.Players;
-using Newtonsoft.Json;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams.Permission;
-using System.Linq;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Teams.Apps
 {
@@ -26,7 +24,7 @@ namespace GVRP.Module.Teams.Apps
             public bool Inventory { get; }
 
             [JsonProperty(PropertyName = "bank")] public bool Bank { get; }
-            [JsonProperty(PropertyName = "manage")]public int Manage { get; }
+            [JsonProperty(PropertyName = "manage")] public int Manage { get; }
 
             public TeamMember(uint id, string name, uint rank, bool inventory, bool bank, int manage, uint number)
             {
@@ -41,7 +39,7 @@ namespace GVRP.Module.Teams.Apps
         }
 
         public void SendTeamMembers(DbPlayer dbPlayer)
-        {    
+        {
             var membersManageObject = new MembersManageObject { TeamMemberList = TeamListFunctions.GetTeamMembersForList(dbPlayer), ManagePermission = dbPlayer.TeamRankPermission.Manage };
             var membersJson = JsonConvert.SerializeObject(membersManageObject);
 
@@ -53,11 +51,11 @@ namespace GVRP.Module.Teams.Apps
         }
 
         [RemoteEvent]
-        public void requestTeamMembers(Player player) 
+        public void requestTeamMembers(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            if (dbPlayer.TeamId == (uint) TeamList.Zivilist) return;
+            if (dbPlayer.TeamId == (uint)TeamList.Zivilist) return;
             SendTeamMembers(dbPlayer);
         }
     }

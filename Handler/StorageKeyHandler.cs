@@ -1,12 +1,12 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Keys;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Storage;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Handler
 {
@@ -65,30 +65,30 @@ namespace GVRP.Handler
 
         public async Task LoadStorageKeys(DbPlayer iPlayer)
         {
-            
-                using (var keyConn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
-                using (var keyCmd = keyConn.CreateCommand())
+
+            using (var keyConn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
+            using (var keyCmd = keyConn.CreateCommand())
+            {
+                await keyConn.OpenAsync();
+                keyCmd.CommandText =
+                    $"SELECT storage_id FROM `{tableName}` WHERE player_id = '{iPlayer.Id}';";
+                using (var keyReader = keyCmd.ExecuteReader())
                 {
-                    await keyConn.OpenAsync();
-                    keyCmd.CommandText =
-                        $"SELECT storage_id FROM `{tableName}` WHERE player_id = '{iPlayer.Id}';";
-                    using (var keyReader = keyCmd.ExecuteReader())
+                    if (keyReader.HasRows)
                     {
-                        if (keyReader.HasRows)
+                        while (keyReader.Read())
                         {
-                            while (keyReader.Read())
+                            var keyId = (uint)keyReader.GetInt32(0);
+                            if (!iPlayer.StorageKeys.Contains(keyId))
                             {
-                                var keyId = (uint)keyReader.GetInt32(0);
-                                if (!iPlayer.StorageKeys.Contains(keyId))
-                                {
-                                    iPlayer.StorageKeys.Add(keyId);
-                                }
+                                iPlayer.StorageKeys.Add(keyId);
                             }
                         }
                     }
-                    await keyConn.CloseAsync();
                 }
-            
+                await keyConn.CloseAsync();
+            }
+
         }
 
         public List<VHKey> GetAllKeysPlayerHas(DbPlayer iPlayer)
@@ -108,7 +108,7 @@ namespace GVRP.Handler
         public List<VHKey> GetOwnStorageKey(DbPlayer iPlayer)
         {
             List<VHKey> storages = new List<VHKey>();
-            foreach(KeyValuePair<uint, StorageRoom> kvp in StorageRoomModule.Instance.GetAll().Where(st => st.Value.OwnerId == iPlayer.Id))
+            foreach (KeyValuePair<uint, StorageRoom> kvp in StorageRoomModule.Instance.GetAll().Where(st => st.Value.OwnerId == iPlayer.Id))
             {
                 storages.Add(new VHKey("" + kvp.Key, kvp.Key));
             }

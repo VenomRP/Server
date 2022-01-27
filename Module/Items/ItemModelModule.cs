@@ -1,9 +1,7 @@
-﻿using System;
+﻿using GVRP.Module.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using GVRP.Module.Logging;
-using GVRP.Module.Teams;
-using GVRP.Module.Vehicles.Data;
 
 namespace GVRP.Module.Items
 {
@@ -15,7 +13,7 @@ namespace GVRP.Module.Items
         {
             if (LogItems.ContainsKey(itemId))
             {
-                if(LogItems[itemId].ContainsKey(teamId))
+                if (LogItems[itemId].ContainsKey(teamId))
                 {
                     LogItems[itemId][teamId] += amount;
                 }
@@ -51,9 +49,9 @@ namespace GVRP.Module.Items
                 {
                     if (Instance.GetAll().ContainsKey(itemId)) return Instance.Get(itemId);
                 }
-                
+
                 // find by name
-                if(Instance.GetAll().Where(item => item.Value.Name.ToLower().Contains(name.ToLower())).Count() > 0)
+                if (Instance.GetAll().Where(item => item.Value.Name.ToLower().Contains(name.ToLower())).Count() > 0)
                 {
                     return Instance.GetAll().First(item => item.Value.Name.ToLower().Contains(name)).Value;
                 }
@@ -63,7 +61,7 @@ namespace GVRP.Module.Items
                 {
                     return Instance.GetAll().First(item => item.Value.Script.ToLower().Contains(name.ToLower())).Value;
                 }
-                
+
                 return null;
             }
             catch (Exception e)
@@ -95,10 +93,10 @@ namespace GVRP.Module.Items
                                     StringComparison.CurrentCultureIgnoreCase))
                     continue;
 
-                if(l_Data.Value != null) l_Result = l_Data.Value;
+                if (l_Data.Value != null) l_Result = l_Data.Value;
                 break;
             }
-                
+
             return l_Result;
         }
     }

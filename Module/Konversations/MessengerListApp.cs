@@ -1,13 +1,11 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.ClientUI.Apps;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Konversations
 {
@@ -19,7 +17,7 @@ namespace GVRP.Module.Konversations
         public void requestKonversations(Player p_Player)
         {
             try
-            {                    
+            {
                 DbPlayer iPlayer = p_Player.GetPlayer();
                 if (iPlayer == null || !iPlayer.IsValid()) return;
 
@@ -34,7 +32,7 @@ namespace GVRP.Module.Konversations
                         iPlayer.ResetData("nsa_smclone");
                         return;
                     }
-                    
+
 
 
                     foreach (var kvp in KonversationsModule.Instance.konversations.ToList().Where(ks => ks.Key.Player1 == targetPlayer.handy[0] || ks.Key.Player2 == targetPlayer.handy[0]))
@@ -125,7 +123,7 @@ namespace GVRP.Module.Konversations
                         clientKonversations.Add(clientKonversation);
                     }
                 }
-                
+
                 clientKonversations.Sort((a, b) =>
                 {
                     DateTime l_FirstElement = DateTime.Parse(a.KonversationUpdatedTime);
@@ -143,11 +141,11 @@ namespace GVRP.Module.Konversations
                 var l_Json = NAPI.Util.ToJson(clientKonversations);
                 TriggerEvent(p_Player, "responseKonversations", l_Json);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }
-            
+
         }
         public string GetUpdatedTimeFormated(DateTime dateTime, bool detailed = false)
         {
@@ -171,7 +169,7 @@ namespace GVRP.Module.Konversations
             // Heute 12:40 || Gestern 12:40 || 12.07 12:40 || Jetzt
         }
     }
-    
+
     public class ClientKonversation
     {
         [JsonProperty(PropertyName = "messagesId")]

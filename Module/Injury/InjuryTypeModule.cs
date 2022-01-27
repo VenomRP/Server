@@ -1,5 +1,4 @@
 ﻿using System;
-using GVRP.Module.Logging;
 
 namespace GVRP.Module.Injury
 {

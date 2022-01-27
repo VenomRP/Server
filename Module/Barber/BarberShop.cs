@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Barber
 {

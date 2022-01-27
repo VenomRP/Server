@@ -1,17 +1,7 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
-using GVRP.Module.PlayerName;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Teams.Blacklist.Menu
 {
@@ -28,7 +18,7 @@ namespace GVRP.Module.Teams.Blacklist.Menu
 
             var l_Menu = new Module.Menu.Menu(Menu, "Blacklist Hinzufügen");
             l_Menu.Add($"Schließen");
-            
+
             foreach (KeyValuePair<int, BlacklistType> kvp in BlacklistModule.Instance.blacklistTypes)
             {
                 l_Menu.Add($"{kvp.Value.Description}");
@@ -46,7 +36,7 @@ namespace GVRP.Module.Teams.Blacklist.Menu
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(iPlayer);
                     return true;
@@ -57,7 +47,7 @@ namespace GVRP.Module.Teams.Blacklist.Menu
                     DbPlayer target = Players.Players.Instance.GetByDbId(iPlayer.GetData("blsetplayer"));
                     if (target == null || !target.IsValid() || target.TeamId == iPlayer.TeamId) return false;
 
-                    if(target.IsOnBlacklist((int)iPlayer.TeamId))
+                    if (target.IsOnBlacklist((int)iPlayer.TeamId))
                     {
                         iPlayer.SendNewNotification("Person befindet sich bereits auf der Blacklist!");
                         return false;
@@ -66,9 +56,9 @@ namespace GVRP.Module.Teams.Blacklist.Menu
                     int idx = 1;
                     foreach (KeyValuePair<int, BlacklistType> kvp in BlacklistModule.Instance.blacklistTypes)
                     {
-                        if(idx == index)
+                        if (idx == index)
                         {
-                            if(kvp.Value.RequiredRang > iPlayer.TeamRank)
+                            if (kvp.Value.RequiredRang > iPlayer.TeamRank)
                             {
                                 iPlayer.SendNewNotification($"Diesen Eintrag können Sie erst ab Rang {kvp.Value.RequiredRang} setzen!");
                                 return false;
@@ -82,7 +72,7 @@ namespace GVRP.Module.Teams.Blacklist.Menu
                         idx++;
                     }
                 }
-                
+
                 return true;
             }
         }

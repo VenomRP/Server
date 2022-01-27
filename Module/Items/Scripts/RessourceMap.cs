@@ -1,7 +1,4 @@
-﻿using System;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
-using GVRP.Module.Farming;
+﻿using GVRP.Module.Farming;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;

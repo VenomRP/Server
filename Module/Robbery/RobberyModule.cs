@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Reflection;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.AnimationMenu;
+﻿using GTANetworkAPI;
+using GVRP.Module.Banks;
 using GVRP.Module.Chat;
 using GVRP.Module.Crime;
 using GVRP.Module.Injury;
@@ -14,14 +7,12 @@ using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Phone;
 using GVRP.Module.Shops;
 using GVRP.Module.Teams;
-using GVRP.Module.Voice;
-using GVRP.Module.Weapons;
-using GVRP.Module.Weapons.Data;
 using GVRP.Module.Zone;
-using GVRP.Module.Banks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace GVRP.Module.Robbery
@@ -35,13 +26,13 @@ namespace GVRP.Module.Robbery
         public const int Juwelier = -2;
 
         public Dictionary<int, Rob> Robberies;
-        
+
         public override bool Load(bool reload = false)
         {
             Robberies = new Dictionary<int, Rob>();
             return true;
         }
-        
+
         public bool CanJuweRobbed()
         {
             // Timecheck +- 30 min restarts
@@ -77,12 +68,12 @@ namespace GVRP.Module.Robbery
 
             return true;
         }
-        
+
         public Rob Get(int id)
         {
             return Robberies.TryGetValue(id, out var rob) ? rob : null;
         }
-        
+
         public void Add(int id, DbPlayer iPlayer, int startinterval, RobType type = RobType.Shop, int copinterval = 2, int endinterval = 30)
         {
             if (Robberies.ContainsKey(id))
@@ -156,7 +147,7 @@ namespace GVRP.Module.Robbery
         {
             var rnd = new Random();
             var hour = DateTime.Now.Hour;
-            
+
             var robs = GetActiveRobs();
             if (robs == null) return;
             var index = 0;
@@ -274,8 +265,8 @@ namespace GVRP.Module.Robbery
                         }
                     }
 
-                }                    
-                    
+                }
+
             }
         }
 
@@ -288,13 +279,13 @@ namespace GVRP.Module.Robbery
             var rnd = new Random();
 
             var Automat = BankModule.Instance.GetThisAutomat(iPlayer.Player.Position, 15.0f);
-             if (Automat != null && !iPlayer.isInjured() && (Math.Abs(iPlayer.Player.Position.Z - Automat.Position.Z) <= 2f))
-             {
+            if (Automat != null && !iPlayer.isInjured() && (Math.Abs(iPlayer.Player.Position.Z - Automat.Position.Z) <= 2f))
+            {
                 Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                 {
-                        //
+                    //
 
-                        // Was fehlt ist noch das Jeder Cop in diesen bereich eine benachrichtigung bekommt
+                    // Was fehlt ist noch das Jeder Cop in diesen bereich eine benachrichtigung bekommt
 
                     iPlayer.SendNewNotification("Sie beginnen nun damit den Automaten aufzuschweißen");
                     iPlayer.Player.TriggerEvent("freezePlayer", true);
@@ -313,14 +304,14 @@ namespace GVRP.Module.Robbery
             }
             else
             {
-                    //get next 50 meter Player die cop sind 
-                    //iPlayer.SendNewNotification("Der Raubueberfall auf den Automaten wurde abgebrochen!");
-                    //TeamModule.Instance.Get((int)teams.TEAM_POLICE).SendNotification("An Alle Einheiten, der Raubueberfall wurde erfolgreich verhindert!");
-                    //TeamModule.Instance.Get((int)teams.TEAM_COUNTYPD).SendNotification("An Alle Einheiten, der Raubueberfall wurde erfolgreich verhindert!");
+                //get next 50 meter Player die cop sind 
+                //iPlayer.SendNewNotification("Der Raubueberfall auf den Automaten wurde abgebrochen!");
+                //TeamModule.Instance.Get((int)teams.TEAM_POLICE).SendNotification("An Alle Einheiten, der Raubueberfall wurde erfolgreich verhindert!");
+                //TeamModule.Instance.Get((int)teams.TEAM_COUNTYPD).SendNotification("An Alle Einheiten, der Raubueberfall wurde erfolgreich verhindert!");
 
 
             }
-            
+
         }
     }
 }

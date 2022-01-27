@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Menu;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP.Module.AnimationMenu
 {
@@ -18,7 +16,7 @@ namespace GVRP.Module.AnimationMenu
 
             menu.Add($"Schließen");
 
-            foreach(KeyValuePair<uint, uint> kvp in iPlayer.AnimationShortcuts)
+            foreach (KeyValuePair<uint, uint> kvp in iPlayer.AnimationShortcuts)
             {
                 if (kvp.Key == 0 || kvp.Key == 1) continue;// system keys 
 
@@ -47,7 +45,7 @@ namespace GVRP.Module.AnimationMenu
                 {
                     if (kvp.Key == 0 || kvp.Key == 1) continue;// system keys 
 
-                    if(index == idx)
+                    if (index == idx)
                     {
                         // Open Secound Menu
                         iPlayer.SetData("animSlot", kvp.Key);

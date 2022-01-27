@@ -1,11 +1,5 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 
@@ -38,7 +32,7 @@ namespace GVRP.Module.NSA.Menu
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
                 if (!iPlayer.HasData("nsa_work_vehicle")) return true;
-                
+
                 switch (index)
                 {
                     case 0:

@@ -1,24 +1,15 @@
-﻿using GTANetworkAPI;
+﻿using GVRP.Module.Configurations;
+using GVRP.Module.Items;
+using GVRP.Module.JobFactions.Carsell;
+using GVRP.Module.Menu;
+using GVRP.Module.PlayerName;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Vehicles.Data;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Configurations;
-using GVRP.Module.Items;
-using GVRP.Module.JobFactions.Carsell;
-using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
-using GVRP.Module.PlayerName;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Teams.Shelter;
-using GVRP.Module.Telefon.App;
-using GVRP.Module.Vehicles.Data;
-using GVRP.Module.Vehicles.RegistrationOffice;
 
 namespace GVRP.Module.Carsell.Menu
 {
@@ -35,7 +26,7 @@ namespace GVRP.Module.Carsell.Menu
             l_Menu.Add($"Schließen");
 
             // Show finished orders from team
-            foreach(DeliveryOrder deliveryOrder in JobCarsellFactionModule.Instance.DeliverableOrderList.ToList().Where(o => o.TeamId == p_DbPlayer.TeamId))
+            foreach (DeliveryOrder deliveryOrder in JobCarsellFactionModule.Instance.DeliverableOrderList.ToList().Where(o => o.TeamId == p_DbPlayer.TeamId))
             {
                 VehicleData vehData = VehicleDataModule.Instance.GetDataById(deliveryOrder.VehicleDataId);
                 if (vehData == null) continue;
@@ -55,7 +46,7 @@ namespace GVRP.Module.Carsell.Menu
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(iPlayer);
                     return true;
@@ -71,7 +62,7 @@ namespace GVRP.Module.Carsell.Menu
                         VehicleData vehData = VehicleDataModule.Instance.GetDataById(deliveryOrder.VehicleDataId);
                         if (vehData == null) return false;
 
-                        if(!iPlayer.Container.CanInventoryItemAdded(641))
+                        if (!iPlayer.Container.CanInventoryItemAdded(641))
                         {
                             iPlayer.SendNewNotification("Sie haben keinen Platz für einen Kaufvertrag!");
                             return false;

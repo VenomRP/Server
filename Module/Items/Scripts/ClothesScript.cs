@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.Clothes;
+﻿using GVRP.Module.Clothes;
 using GVRP.Module.Clothes.Props;
-using GVRP.Module.Items.Scripts.Presents;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles.Data;
+using System.Linq;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -25,7 +20,7 @@ namespace GVRP.Module.Items.Scripts
             Cloth cloth = ClothModule.Instance.GetAll().Values.Where(c => c.Id == clothId).FirstOrDefault();
             if (cloth == null) return false;
 
-            if(iPlayer.Character.Wardrobe.Contains(clothId))
+            if (iPlayer.Character.Wardrobe.Contains(clothId))
             {
                 iPlayer.SendNewNotification("Sie besitzen dieses Kleidungsstück bereits!");
                 return false;

@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
@@ -14,7 +11,7 @@ namespace GVRP.Module.Telefon.App.Settings
         public SettingsEditWallpaper() : base("SettingsEditWallpaperApp") { }
 
         [RemoteEvent]
-        public void requestWallpaperList(Player player) 
+        public void requestWallpaperList(Player player)
         {
             DbPlayer dbPlayer = player.GetPlayer();
             TriggerEvent(player, "responseWallpaperList", WallpaperModule.Instance.getJsonWallpapersForPlayer(dbPlayer));
@@ -28,7 +25,7 @@ namespace GVRP.Module.Telefon.App.Settings
             dbPlayer.wallpaper = WallpaperModule.Instance.Get((uint)wallpaperId);
             dbPlayer.SaveWallpaper();
         }
-        
+
     }
 
 }

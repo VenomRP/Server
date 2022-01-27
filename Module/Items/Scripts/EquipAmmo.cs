@@ -1,12 +1,12 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Chat;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Weapons.Data;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 //Possible problem. Removed on use, but not possible to add without weapon. Readd item?
 namespace GVRP.Module.Items.Scripts
 {

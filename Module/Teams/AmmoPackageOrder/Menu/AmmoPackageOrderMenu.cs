@@ -1,18 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
-using GVRP.Module.Teams.Shelter;
+using System.Linq;
 
 namespace GVRP.Module.Teams.AmmoPackageOrder
 {
@@ -30,7 +20,7 @@ namespace GVRP.Module.Teams.AmmoPackageOrder
             var menu = new Menu.Menu(Menu, "Munitionsbestellung");
 
             menu.Add($"Schließen");
-            foreach(DbTeam dbTeam in TeamModule.Instance.GetAll().Values.Where(t => t.IsGangsters()))
+            foreach (DbTeam dbTeam in TeamModule.Instance.GetAll().Values.Where(t => t.IsGangsters()))
             {
                 menu.Add("Bestellung " + dbTeam.Name);
             }

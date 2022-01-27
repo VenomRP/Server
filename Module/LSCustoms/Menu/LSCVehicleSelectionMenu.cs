@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.Vehicles;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.LSCustoms.Menu
 {
@@ -34,7 +32,7 @@ namespace GVRP.Module.LSCustoms.Menu
             }
 
             p_DbPlayer.SetData("lsc_near_vehicles", l_NearVehicles);
-            foreach(var l_Vehicle in l_NearVehicles.Values)
+            foreach (var l_Vehicle in l_NearVehicles.Values)
                 l_Menu.Add($"{l_Vehicle.Data.Model} ({l_Vehicle.databaseId.ToString()})");
 
             return l_Menu;

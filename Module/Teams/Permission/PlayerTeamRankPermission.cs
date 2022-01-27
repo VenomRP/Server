@@ -14,7 +14,7 @@ namespace GVRP.Module.Teams.Permission
 
             iPlayer.TeamRankPermission.Save();
         }
-        
+
         public static void Save(this TeamRankPermission trp)
         {
             var query =

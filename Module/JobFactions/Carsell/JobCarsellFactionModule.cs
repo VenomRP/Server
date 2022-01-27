@@ -1,20 +1,15 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Handler;
 using GVRP.Module.Carsell.Menu;
 using GVRP.Module.Configurations;
-using GVRP.Module.Items;
 using GVRP.Module.Menu;
-using GVRP.Module.NSA.Menu;
-using GVRP.Module.PlayerName;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
-using GVRP.Module.Teams.Shelter;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Vehicles.Data;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.JobFactions.Carsell
 {
@@ -178,11 +173,11 @@ namespace GVRP.Module.JobFactions.Carsell
 
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
-            if(key == Key.E)
+            if (key == Key.E)
             {
-                if(!dbPlayer.Player.IsInVehicle)
+                if (!dbPlayer.Player.IsInVehicle)
                 {
-                    if(dbPlayer.Player.Position.DistanceTo(MenuPosition) < 3.0f && dbPlayer.Team.Id == (int)JobFactions.Carsell)
+                    if (dbPlayer.Player.Position.DistanceTo(MenuPosition) < 3.0f && dbPlayer.Team.Id == (int)JobFactions.Carsell)
                     {
                         Module.Menu.MenuManager.Instance.Build(GVRP.Module.Menu.PlayerMenu.CarsellMenu, dbPlayer).Show(dbPlayer);
                         return true;
@@ -228,7 +223,7 @@ namespace GVRP.Module.JobFactions.Carsell
             }
             return false;
         }
-        
+
         public void InsertOrderedVehicles()
         {
             using (var conn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
@@ -276,7 +271,8 @@ namespace GVRP.Module.JobFactions.Carsell
                     {
                         while (reader.Read())
                         {
-                            DeliverableOrderList.Add(new DeliveryOrder() { 
+                            DeliverableOrderList.Add(new DeliveryOrder()
+                            {
                                 Id = reader.GetUInt32("id"),
                                 PlayerId = reader.GetUInt32("player_id"),
                                 SellerId = reader.GetUInt32("seller_id"),

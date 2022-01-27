@@ -1,6 +1,4 @@
 ﻿using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.GTAN;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 
@@ -21,7 +19,7 @@ namespace GVRP.Module.Menu.Menus.Account
             foreach (SxVehicle Vehicle in VehicleHandler.Instance.GetPlayerVehicles(iPlayer.Id))
             {
                 if (Vehicle == null) continue;
-                
+
                 if (Vehicle.databaseId == 0) continue;
 
                 if (iPlayer.IsOwner(Vehicle))
@@ -62,7 +60,7 @@ namespace GVRP.Module.Menu.Menus.Account
                 var player = iPlayer.Player;
                 if (index == 0) // General Close
                 {
-                    MenuManager.DismissMenu(player, (int) PlayerMenu.AccountVehicleKeys);
+                    MenuManager.DismissMenu(player, (int)PlayerMenu.AccountVehicleKeys);
                     return false;
                 }
 
@@ -79,7 +77,7 @@ namespace GVRP.Module.Menu.Menus.Account
                                 iPlayer.SetData("sKeyId", Vehicle.databaseId);
 
                                 // Chose Menu
-                                MenuManager.DismissMenu(player, (int) PlayerMenu.AccountVehicleKeys);
+                                MenuManager.DismissMenu(player, (int)PlayerMenu.AccountVehicleKeys);
                                 MenuManager.Instance.Build(PlayerMenu.AccountKeyChooseMenu, iPlayer).Show(iPlayer);
                                 return false;
                             }
@@ -105,7 +103,7 @@ namespace GVRP.Module.Menu.Menus.Account
                                     VehicleHandler.Instance.GetPlayerVehicleNameByDatabaseId(key.Key) +
                                     " (" + key +
                                     ") fallen gelassen!");
-                                MenuManager.DismissMenu(player, (int) PlayerMenu.AccountVehicleKeys);
+                                MenuManager.DismissMenu(player, (int)PlayerMenu.AccountVehicleKeys);
                                 return false;
                             }
 

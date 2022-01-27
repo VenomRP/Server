@@ -1,11 +1,11 @@
-﻿using System;
+﻿using GVRP.Handler;
+using GVRP.Module.Configurations;
+using GVRP.Module.Logging;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Concurrent;
 using System.Threading;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
 
 namespace GVRP.Module.Sync
 {

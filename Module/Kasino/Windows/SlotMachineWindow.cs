@@ -1,12 +1,10 @@
-﻿using System;
-using GTANetworkAPI;
-using Newtonsoft.Json;
-using GVRP.Module.Chat;
-using GVRP.Module.Players.Db;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Windows;
-using GVRP.Module.RemoteEvents;
 using GVRP.Module.Kasino;
 using GVRP.Module.Logging;
+using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -45,7 +43,7 @@ namespace GVRP.Module.Players.Windows
 
 
         [RemoteEvent]
-        public void requestSlotInfo(Player player) 
+        public void requestSlotInfo(Player player)
         {
             Console.WriteLine("Init");
             var dbPlayer = player.GetPlayer();
@@ -110,7 +108,7 @@ namespace GVRP.Module.Players.Windows
                 dbPlayer.SendNewNotification($"{id} | Du hast gewonnen! | {slotMachineGame.WinSum}");
                 Logger.AddSlotMachineGameToDbLog(dbPlayer, slotMachineGame);
                 KasinoModule.Instance.SlotMachineGames.Remove(id);
-            }   
+            }
         }
 
         [RemoteEvent]

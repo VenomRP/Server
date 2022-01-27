@@ -1,25 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GTANetworkAPI;
-using GTANetworkMethods;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Attachments;
-using GVRP.Module.Dealer;
-using GVRP.Module.Delivery.Menu;
-using GVRP.Module.Freiberuf.Mower;
 using GVRP.Module.Houses;
-using GVRP.Module.Logging;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles.Data;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Delivery
 {
     public class DeliveryJobModule : SqlModule<DeliveryJobModule, DeliveryJob, uint>
-    {   
+    {
         public static int DeliverJobVehMarkId = 22;
         public Dictionary<DbPlayer, DeliveryOrder> DeliveryOrders = new Dictionary<DbPlayer, DeliveryOrder>();
 
@@ -36,7 +29,7 @@ namespace GVRP.Module.Delivery
 
         protected override bool OnLoad()
         {
-      //      MenuManager.Instance.AddBuilder(new DeliveryJobMenu());
+            //      MenuManager.Instance.AddBuilder(new DeliveryJobMenu());
             return base.OnLoad();
         }
 
@@ -91,7 +84,7 @@ namespace GVRP.Module.Delivery
                         if (dbPlayer.HasData("delivery_has_package") && !dbPlayer.HasData("delivery_tour_start"))
                         {
                             dbPlayer.SendNewNotification("Du lädst die Ware in dein Fahrzeug.", PlayerNotification.NotificationType.DELIVERY, deliveryJob.Name);
-                            AttachmentModule.Instance.RemoveAttachment(dbPlayer, (Attachment) Attachment.BOX);
+                            AttachmentModule.Instance.RemoveAttachment(dbPlayer, (Attachment)Attachment.BOX);
                             dbPlayer.Player.TriggerEvent("courierSetCarrying", false);
                             dbPlayer.ResetData("delivery_has_package");
 
@@ -133,7 +126,7 @@ namespace GVRP.Module.Delivery
                                     {
                                         dbPlayer.SendNewNotification("Du kannst die Ware erst in der unmittelbaren Umgebung des Zielorts entnehmen");
                                         return false;
-                                    }   
+                                    }
                                 }
 
                             }
@@ -151,7 +144,7 @@ namespace GVRP.Module.Delivery
                         if (dbPlayer.HasData("delivery_has_package") && dbPlayer.Player.Position.DistanceTo(deliveryOrder.NextPosition) < 3.0f && deliveryOrder.NextPosition != null)
                         {
                             //Spieler ist am Zielort.
-                            AttachmentModule.Instance.RemoveAttachment(dbPlayer, (Attachment) Attachment.BOX);
+                            AttachmentModule.Instance.RemoveAttachment(dbPlayer, (Attachment)Attachment.BOX);
                             dbPlayer.Player.TriggerEvent("courierSetCarrying", false);
                             dbPlayer.ResetData("delivery_has_package");
 
@@ -270,7 +263,7 @@ namespace GVRP.Module.Delivery
         {
             //Anzahl der zu beliefernden Positionen
             int deliveryAmount = Utils.RandomNumber(deliveryJobType.MinPositionAmount, deliveryJobType.MaxPositionAmount);
-            dbPlayer.SendNewNotification($"Du hast den Auftrag angenommen. Hol nun die Ware und belade dein Fahrzeug. Du hast {deliveryAmount} Ziele", PlayerNotification.NotificationType.DELIVERY, deliveryJobType.Name, duration:15000);
+            dbPlayer.SendNewNotification($"Du hast den Auftrag angenommen. Hol nun die Ware und belade dein Fahrzeug. Du hast {deliveryAmount} Ziele", PlayerNotification.NotificationType.DELIVERY, deliveryJobType.Name, duration: 15000);
 
 
             Dictionary<Vector3, bool> deliveryPositions = new Dictionary<Vector3, bool>();

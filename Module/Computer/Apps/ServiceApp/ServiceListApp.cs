@@ -1,10 +1,9 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Service;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps.ServiceApp
 {
@@ -13,46 +12,46 @@ namespace GVRP.Module.Computer.Apps.ServiceApp
         public ServiceListApp() : base("ServiceListApp") { }
 
         [RemoteEvent]
-        public async void requestOpenServices(Player client) 
+        public async void requestOpenServices(Player client)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int) teams.TEAM_GOV) return;
 
-                List<serviceObject> serviceList = new List<serviceObject>();
-                var teamServices = ServiceModule.Instance.GetAvailableServices(dbPlayer);
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+            if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int)teams.TEAM_GOV) return;
 
-                foreach (var service in teamServices)
-                {
-                    string accepted = string.Join(',', service.Accepted);
+            List<serviceObject> serviceList = new List<serviceObject>();
+            var teamServices = ServiceModule.Instance.GetAvailableServices(dbPlayer);
 
-                    serviceList.Add(new serviceObject() { id = (int)service.Player.Id, name = service.Player.GetName(), message = ServiceModule.Instance.GetSpecialDescriptionForPlayer(dbPlayer, service), posX = service.Position.X, posY = service.Position.Y, posZ = service.Position.Z, accepted = accepted, telnr = service.Telnr });
-                }
+            foreach (var service in teamServices)
+            {
+                string accepted = string.Join(',', service.Accepted);
 
-                var serviceJson = NAPI.Util.ToJson(serviceList);
-                TriggerEvent(client, "responseOpenServiceList", serviceJson);
-            
+                serviceList.Add(new serviceObject() { id = (int)service.Player.Id, name = service.Player.GetName(), message = ServiceModule.Instance.GetSpecialDescriptionForPlayer(dbPlayer, service), posX = service.Position.X, posY = service.Position.Y, posZ = service.Position.Z, accepted = accepted, telnr = service.Telnr });
+            }
+
+            var serviceJson = NAPI.Util.ToJson(serviceList);
+            TriggerEvent(client, "responseOpenServiceList", serviceJson);
+
         }
 
         [RemoteEvent]
         public async void acceptOpenService(Player client, string name)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int) teams.TEAM_GOV) return;
 
-                var findplayer = Players.Players.Instance.FindPlayer(name);
-                if (findplayer == null) return;
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+            if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int)teams.TEAM_GOV) return;
 
-                bool response = ServiceModule.Instance.Accept(dbPlayer, findplayer);
+            var findplayer = Players.Players.Instance.FindPlayer(name);
+            if (findplayer == null) return;
 
-                dbPlayer.SendNewNotification(response ? "Sie haben einen Service entgegengenommen!" : "Der Service konnte nicht entgegengenommen werden!");
-                findplayer.SendNewNotification("Ihr Service wurde entgegen genommen!");
+            bool response = ServiceModule.Instance.Accept(dbPlayer, findplayer);
 
-                dbPlayer.Team.SendNotification($"{dbPlayer.GetName()} hat den Notruf von {findplayer.GetName()} angenommen");
-            
+            dbPlayer.SendNewNotification(response ? "Sie haben einen Service entgegengenommen!" : "Der Service konnte nicht entgegengenommen werden!");
+            findplayer.SendNewNotification("Ihr Service wurde entgegen genommen!");
+
+            dbPlayer.Team.SendNotification($"{dbPlayer.GetName()} hat den Notruf von {findplayer.GetName()} angenommen");
+
         }
 
         public class serviceObject
@@ -65,7 +64,7 @@ namespace GVRP.Module.Computer.Apps.ServiceApp
 
             [JsonProperty(PropertyName = "message")]
             public string message { get; set; }
-            
+
             [JsonProperty(PropertyName = "posX")]
             public float posX { get; set; }
 
@@ -80,7 +79,7 @@ namespace GVRP.Module.Computer.Apps.ServiceApp
 
             [JsonProperty(PropertyName = "accepted")]
             public string accepted { get; set; }
-            [JsonProperty(PropertyName ="telnr")]
+            [JsonProperty(PropertyName = "telnr")]
             public string telnr { get; set; }
         }
     }

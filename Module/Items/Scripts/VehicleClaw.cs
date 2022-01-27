@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using Microsoft.VisualStudio.TestTools.UnitTesting.Logging;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.ClawModule;
@@ -16,6 +9,9 @@ using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.Teams;
 using GVRP.Module.Vehicles;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Logger = GVRP.Module.Logging.Logger;
 
 namespace GVRP.Module.Items.Scripts
@@ -26,8 +22,8 @@ namespace GVRP.Module.Items.Scripts
         public static bool VehicleClaw(DbPlayer iPlayer, ItemModel ItemData)
         {
             if (iPlayer.Player.IsInVehicle) return false;
-            Console.WriteLine("no asdasdasdas"); 
-  
+            Console.WriteLine("no asdasdasdas");
+
             bool isStaatClaw = ItemData.Id == 731;
 
 
@@ -83,7 +79,7 @@ namespace GVRP.Module.Items.Scripts
             }
 
             Chats.sendProgressBar(dbPlayer, 60000);
-            dbPlayer.PlayAnimation((int) (AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "amb@world_human_welding@male@idle_a", "idle_a");
+            dbPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "amb@world_human_welding@male@idle_a", "idle_a");
             dbPlayer.Player.TriggerEvent("freezePlayer", true);
             await Task.Delay(60000);
 
@@ -111,7 +107,7 @@ namespace GVRP.Module.Items.Scripts
             if (dbPlayer.isInjured() || dbPlayer.IsCuffed || dbPlayer.IsTied) return false;
 
             Chats.sendProgressBar(dbPlayer, 60000);
-            dbPlayer.PlayAnimation((int) (AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "mini@cpr@char_a@cpr_str", "cpr_kol_idle");
+            dbPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "mini@cpr@char_a@cpr_str", "cpr_kol_idle");
             dbPlayer.Player.TriggerEvent("freezePlayer", true);
 
             if (sxVehicle.AlarmSystem)

@@ -1,7 +1,7 @@
-using System.Collections.Generic;
 using GTANetworkAPI;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Menu
 {
@@ -119,11 +119,11 @@ namespace GVRP.Module.Menu
         HouseRentContract = 273,
         HackingVoltageMenu = 274,
         LaborArmorMenu = 275,
-        PlanningroomPurchaseMenu = 276,	
-        PlanningroomUpgradeMenu = 277,	
-        PlanningroomUpgradeSelectionMenu = 278,	
-        PlanningroomKellerUpgradeMenu = 279,	
-        ExchangeElectronicMenu = 280,	
+        PlanningroomPurchaseMenu = 276,
+        PlanningroomUpgradeMenu = 277,
+        PlanningroomUpgradeSelectionMenu = 278,
+        PlanningroomKellerUpgradeMenu = 279,
+        ExchangeElectronicMenu = 280,
         ExchangeTrashMenu = 281,
         PlanningroomVehicleModifyMenu = 282,
         PlanningroomVehicleTuningMenu = 283,
@@ -179,7 +179,7 @@ namespace GVRP.Module.Menu
             {
                 if (menuEventHandlers[menu].OnSelect(index, iPlayer))
                 {
-                    DismissMenu(iPlayer.Player, (uint) menu);
+                    DismissMenu(iPlayer.Player, (uint)menu);
                 }
             }
         }

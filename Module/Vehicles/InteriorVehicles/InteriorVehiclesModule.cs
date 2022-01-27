@@ -1,12 +1,9 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Vehicles.InteriorVehicles
 {
@@ -102,11 +99,11 @@ namespace GVRP.Module.Vehicles.InteriorVehicles
                             if (sxVeh == null) return false;
                             if (sxVeh.SyncExtension.Locked) return false;
 
-                            if(!sxVeh.Occupants.ContainsKey(-1)) // pilot
+                            if (!sxVeh.Occupants.ContainsKey(-1)) // pilot
                             {
                                 if (sxVeh.Visitors.Contains(dbPlayer))
                                     sxVeh.Visitors.Remove(dbPlayer);
-                                
+
                                 Task.Run(async () =>
                                 {
                                     dbPlayer.DimensionType[0] = DimensionType.World;
@@ -125,7 +122,7 @@ namespace GVRP.Module.Vehicles.InteriorVehicles
                                 });
                                 return true;
                             }
-                            else if(!sxVeh.Occupants.ContainsKey(0)) // copilot
+                            else if (!sxVeh.Occupants.ContainsKey(0)) // copilot
                             {
                                 Task.Run(async () =>
                                 {
@@ -155,7 +152,7 @@ namespace GVRP.Module.Vehicles.InteriorVehicles
                     }
 
                     sxVeh = VehicleHandler.Instance.GetClosestVehicleFromTeam(dbPlayer.Player.Position, (int)teams.TEAM_GOV, 17.0f);
-                    
+
 
                     if (sxVeh != null && sxVeh.IsValid() && sxVeh.databaseId != 0 && !sxVeh.SyncExtension.Locked && sxVeh.Data.Id == AirforceDataId)
                     {

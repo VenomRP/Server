@@ -6,7 +6,7 @@ namespace GVRP.Module.Players.Seat
     {
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(PlayerSeatModule)};
+            return new[] { typeof(PlayerSeatModule) };
         }
 
         protected override string GetQuery()

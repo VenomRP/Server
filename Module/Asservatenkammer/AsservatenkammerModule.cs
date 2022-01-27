@@ -1,17 +1,12 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Handler;
-using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
 using GVRP.Module.Vehicles;
+using System;
 
 namespace GVRP.Module.Asservatenkammer
 {
@@ -60,7 +55,7 @@ namespace GVRP.Module.Asservatenkammer
         {
             if (!colShape.HasData("aser_lspd"))
                 return false;
-            
+
             switch (colShapeState)
             {
                 case ColShapeState.Enter:
@@ -80,7 +75,7 @@ namespace GVRP.Module.Asservatenkammer
 
         public bool IsAserItem(uint ItemModelId)
         {
-            if(ItemModelId == AserAmmoId || ItemModelId == AserBigWeaponId || ItemModelId == AserDrugId ||
+            if (ItemModelId == AserAmmoId || ItemModelId == AserBigWeaponId || ItemModelId == AserDrugId ||
                 ItemModelId == AserItemId || ItemModelId == AserWeaponId)
             {
                 return true;
@@ -102,7 +97,7 @@ namespace GVRP.Module.Asservatenkammer
             SxVehicle sxVehicle = dbPlayer.Player.Vehicle.GetVehicle();
             if (sxVehicle == null || !sxVehicle.IsValid() || sxVehicle.teamid != dbPlayer.TeamId) return false;
 
-            if(sxVehicle.entity.Position.DistanceTo(new Vector3(447.292, -996.242, 25.7748)) < 4.0f)
+            if (sxVehicle.entity.Position.DistanceTo(new Vector3(447.292, -996.242, 25.7748)) < 4.0f)
             {
                 // Get Aserkammer
                 StaticContainer staticContainer = StaticContainerModule.Instance.Get((uint)StaticContainerTypes.ASERLSPD);
@@ -141,7 +136,7 @@ namespace GVRP.Module.Asservatenkammer
 
         public uint GetConvertionItemId(uint itemId, bool weapon = false, bool ammo = false)
         {
-            switch(itemId)
+            switch (itemId)
             {
                 case 72:
                 case 73:
@@ -186,7 +181,7 @@ namespace GVRP.Module.Asservatenkammer
                 case 1: // Meth
                     return AserDrugId;
                 default:
-                    return weapon? AserWeaponId : ( ammo? AserAmmoId : itemId);
+                    return weapon ? AserWeaponId : (ammo ? AserAmmoId : itemId);
             }
         }
     }

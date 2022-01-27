@@ -99,7 +99,7 @@ namespace GVRP
                         MenuManager.Instance.Build(PlayerMenu.AccountHouseKeys, iPlayer).Show(iPlayer);
                         break;
                     default:
-                        MenuManager.DismissMenu(iPlayer.Player, (int) PlayerMenu.Account);
+                        MenuManager.DismissMenu(iPlayer.Player, (int)PlayerMenu.Account);
                         break;
                 }
 

@@ -1,18 +1,14 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Handler;
-using GVRP.Module.GTAN;
-using GVRP.Module.Items;
-using GVRP.Module.NpcSpawner;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teamfight;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Gangwar
 {
@@ -52,7 +48,7 @@ namespace GVRP.Module.Gangwar
         public Blip Blip { get; set; }
 
         public int Cash { get; set; }
-        
+
         public List<DbPlayer> Visitors { get; set; }
         public List<SxVehicle> Vehicles { get; set; }
 
@@ -77,7 +73,7 @@ namespace GVRP.Module.Gangwar
 
             Visitors = new List<DbPlayer>();
             Vehicles = new List<SxVehicle>();
-            
+
             Color color = GangwarModule.Instance.StandardColor;
             Flag_1Marker = Spawners.Markers.Create(4, Flag_1, new Vector3(), new Vector3(), 1.0f, color.Alpha, color.Red, color.Green, color.Blue, GangwarModule.Instance.DefaultDimension);
             Flag_2Marker = Spawners.Markers.Create(4, Flag_2, new Vector3(), new Vector3(), 1.0f, color.Alpha, color.Red, color.Green, color.Blue, GangwarModule.Instance.DefaultDimension);
@@ -120,7 +116,7 @@ namespace GVRP.Module.Gangwar
                 return;
             }
 
-            if(GangwarTownModule.Instance.IsTeamInGangwar(attacker.Team))
+            if (GangwarTownModule.Instance.IsTeamInGangwar(attacker.Team))
             {
                 attacker.SendNewNotification("Sie greifen bereits ein Gebiet an!");
                 return;
@@ -131,7 +127,7 @@ namespace GVRP.Module.Gangwar
                 attacker.SendNewNotification("Dieses Team kämpft bereits!");
                 return;
             }
-            
+
             // Check min 15 Players each team needs
             if ((gangwarTown.OwnerTeam.Members.Count < 1 || attacker.Team.Members.Count < 1) && !Configurations.Configuration.Instance.DevMode)
             {
@@ -141,7 +137,7 @@ namespace GVRP.Module.Gangwar
 
             gangwarTown.StartFight(attacker.Team, gangwarTown.OwnerTeam);
         }
-        
+
         public static void StartFight(this GangwarTown gangwarTown, Team attackerTeam, Team defenderTeam)
         {
             // Set Attacker, Defender
@@ -182,7 +178,7 @@ namespace GVRP.Module.Gangwar
             gangwarTown.triggerClientOfTownMembers("initializeGangwar", attackerTeam.ShortName, defenderTeam.ShortName, attackerTeam.Id, defenderTeam.Id,
                 GangwarModule.Instance.GangwarTimeLimit * 60);
         }
-        
+
         public static bool CanAttacked(this GangwarTown gangwarTown)
         {
             if (Configurations.Configuration.Instance.DevMode) return true;
@@ -233,7 +229,7 @@ namespace GVRP.Module.Gangwar
             {
                 if (item.Value == null)
                     continue;
-                
+
                 TeamfightFunctions.RemoveFromGangware(item.Value);
             }
 
@@ -241,7 +237,7 @@ namespace GVRP.Module.Gangwar
             {
                 if (item.Value == null)
                     continue;
-                
+
                 TeamfightFunctions.RemoveFromGangware(item.Value);
             }
 
@@ -255,11 +251,11 @@ namespace GVRP.Module.Gangwar
             gangwarTown.IsAttacked = false;
 
             GangwarModule.Instance.ActiveGangwarTowns.Remove(gangwarTown);
-            
+
             gangwarTown.Blip.Color = gangwarTown.OwnerTeam.BlipColor;
-            
+
         }
-        
+
         public static void triggerClientOfAll(this GangwarTown gangwarTown, string eventName, params object[] args)
         {
             foreach (DbPlayer dbPlayer in gangwarTown.Visitors)

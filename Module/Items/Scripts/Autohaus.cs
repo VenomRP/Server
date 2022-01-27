@@ -1,11 +1,9 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles.Data;
+using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -21,7 +19,7 @@ namespace GVRP.Module.Items.Scripts
             }
 
             uint teamId = (uint)teams.TEAM_CARSELL1;
-            switch(AutohausId)
+            switch (AutohausId)
             {
                 case 1:
                     teamId = (uint)teams.TEAM_CARSELL1;
@@ -35,19 +33,19 @@ namespace GVRP.Module.Items.Scripts
                 default:
                     break;
             }
-            
-            if(item.Data == null || !item.Data.ContainsKey("orderId") || !item.Data.ContainsKey("vehName") || !item.Data.ContainsKey("customerName"))
+
+            if (item.Data == null || !item.Data.ContainsKey("orderId") || !item.Data.ContainsKey("vehName") || !item.Data.ContainsKey("customerName"))
             {
                 return false;
             }
 
-            if(iPlayer.TeamId == teamId) // Read Only
+            if (iPlayer.TeamId == teamId) // Read Only
             {
-                
+
 
                 string vehName = item.Data["vehName"];
                 string contractString = item.Data["orderId"];
-                if(!Int32.TryParse(contractString, out int contractId))
+                if (!Int32.TryParse(contractString, out int contractId))
                 {
                     return false;
                 }
@@ -79,7 +77,7 @@ namespace GVRP.Module.Items.Scripts
                         {
                             while (reader.Read())
                             {
-                                if(iPlayer.Id != reader.GetUInt32("player_id"))
+                                if (iPlayer.Id != reader.GetUInt32("player_id"))
                                 {
                                     iPlayer.SendNewNotification($"Dieser Lieferschein kann nur vom Besitzer eingelöst werden!");
                                     return false;
@@ -87,7 +85,7 @@ namespace GVRP.Module.Items.Scripts
 
                                 VehicleData vehData = VehicleDataModule.Instance.GetDataById(reader.GetUInt32("vehicle_data_id"));
                                 if (vehData == null) return false;
-                                
+
                                 // INSERT VEHICLE
                                 MySQLHandler.ExecuteAsync($"INSERT INTO `vehicles` (`team_id`, `owner`, `color1`, `color2`, `tuning`, `inGarage`, `garage_id`, `model`, `vehiclehash`) " +
                                     $"VALUES ('0', '{reader.GetInt32("player_id")}', '{reader.GetInt32("color1")}', '{reader.GetInt32("color2")}', '23:{reader.GetInt32("wheel")}', '1', '1', '{vehData.Id}', '{vehData.Model}');");
@@ -98,7 +96,7 @@ namespace GVRP.Module.Items.Scripts
                         }
                     }
                     conn.Close();
-                    
+
                 }
             }
             iPlayer.SendNewNotification($"Fehler, bitte im Support melden!");

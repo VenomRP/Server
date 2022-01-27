@@ -1,26 +1,18 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Module.Banks.BankHistory;
-using GVRP.Module.Business;
+﻿using GVRP.Module.Business;
 using GVRP.Module.Business.Tasks;
-using GVRP.Module.Configurations;
 using GVRP.Module.Crime;
 using GVRP.Module.Customization;
 using GVRP.Module.Houses;
 using GVRP.Module.Injury;
 using GVRP.Module.Jails;
-using GVRP.Module.Players.Buffs;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Events;
 using GVRP.Module.Staatskasse;
 using GVRP.Module.Storage;
 using GVRP.Module.Tasks;
 using GVRP.Module.Teams.Shelter;
-using GVRP.Module.UHaft;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Players.Sync
 {
@@ -33,7 +25,7 @@ namespace GVRP.Module.Players.Sync
             // Wenn DutyPaycheck dann prüfe auf onduty
             if (!iPlayer.Team.HasDuty || !iPlayer.IsInDuty()) return;
 
-            if(iPlayer.Team.Salary[(int)iPlayer.TeamRank] > 0) 
+            if (iPlayer.Team.Salary[(int)iPlayer.TeamRank] > 0)
             {
                 // Nachts doppeltes Gehalt
                 if (DateTime.Now.Hour >= 0 && DateTime.Now.Hour < 10 && iPlayer.Team.GetsExtraNightPayday())
@@ -46,7 +38,7 @@ namespace GVRP.Module.Players.Sync
                 iPlayer.GiveEarning(iPlayer.fgehalt[0] / 60);
             }
         }
-        
+
         public static void PlayerPayday(DbPlayer iPlayer)
         {
             // Start Bankhistories
@@ -58,7 +50,7 @@ namespace GVRP.Module.Players.Sync
                 iPlayer.Level++;
                 iPlayer.uni_points[0]++;
                 iPlayer.rp[0] = 0;
-                iPlayer.SendNewNotification($"Glueckwunsch, Sie haben nun Level {iPlayer.Level} erreicht!", title: "Level aufgestiegen!", notificationType:PlayerNotification.NotificationType.SERVER);
+                iPlayer.SendNewNotification($"Glueckwunsch, Sie haben nun Level {iPlayer.Level} erreicht!", title: "Level aufgestiegen!", notificationType: PlayerNotification.NotificationType.SERVER);
             }
             else
             {
@@ -71,7 +63,7 @@ namespace GVRP.Module.Players.Sync
 
             // Money Money Money
             var total = 0;
-            
+
             int salary = 0;
 
             // Gebe Server Gehalt für nicht Duty Fraktionen & staatlichen Gehalt
@@ -83,7 +75,7 @@ namespace GVRP.Module.Players.Sync
             // Gebe verdienst durch jbos gehalt etc
             if (iPlayer.paycheck[0] > 0)
             {
-                if(iPlayer.Team.IsBusinessTeam)
+                if (iPlayer.Team.IsBusinessTeam)
                 {
                     var teamShelter = TeamShelterModule.Instance.GetByTeam(iPlayer.TeamId);
                     if (teamShelter != null)
@@ -94,7 +86,7 @@ namespace GVRP.Module.Players.Sync
                             iPlayer.Team.AddBankHistory(-iPlayer.paycheck[0], $"Gehaltszahlung an {iPlayer.GetName()}");
                         }
                     }
-                } 
+                }
                 else
                 {
                     salary = salary + iPlayer.paycheck[0];
@@ -131,7 +123,7 @@ namespace GVRP.Module.Players.Sync
                     }
                 }
             }
-            
+
             //Gebe FGehalt für alle NICHT Duty Fraktionen (Gangs)
             if (iPlayer.Team.Id != (int)teams.TEAM_CIVILIAN && iPlayer.fgehalt[0] > 0 && !iPlayer.Team.HasDuty)
             {
@@ -180,7 +172,7 @@ namespace GVRP.Module.Players.Sync
                 Name = "Krankenversicherung",
                 Value = -75
             });
-            
+
 
             if (iPlayer.married[0] > 0 && iPlayer.Team.IsStaatsfraktion())
             {
@@ -224,11 +216,12 @@ namespace GVRP.Module.Players.Sync
             }
 
             int storageTax = 0;
-            foreach(KeyValuePair<uint, StorageRoom> kvp in iPlayer.GetStoragesOwned()) {
+            foreach (KeyValuePair<uint, StorageRoom> kvp in iPlayer.GetStoragesOwned())
+            {
                 storageTax += StorageRoomAusbaustufenModule.Instance.Get((uint)kvp.Value.Ausbaustufe).Tax;
             }
 
-            if(storageTax != 0)
+            if (storageTax != 0)
             {
                 total -= storageTax;
                 bankHistories.Add(new Banks.BankHistory.BankHistory
@@ -273,7 +266,7 @@ namespace GVRP.Module.Players.Sync
 
                     float taxRate = 0.003f;
 
-                    switch(iHouse.Type)
+                    switch (iHouse.Type)
                     {
                         case 1:
                             taxRate = 0.0005f;
@@ -297,7 +290,7 @@ namespace GVRP.Module.Players.Sync
                     wasser = wasser * activeTenants;
                     strom = strom * activeTenants;
                 }
-                
+
                 total -= tax;
                 bankHistories.Add(new Banks.BankHistory.BankHistory
                 {
@@ -311,7 +304,7 @@ namespace GVRP.Module.Players.Sync
                     Name = "Nebenkosten",
                     Value = -(strom + wasser)
                 });
-                
+
                 KassenModule.Instance.ChangeMoney(KassenModule.Kasse.STAATSKASSE, (strom + wasser + steuer + tax));
             }
             else if (iPlayer.IsTenant())
@@ -324,7 +317,7 @@ namespace GVRP.Module.Players.Sync
                     if (iHouse.OwnerId == 0)
                     {
                         iPlayer.RemoveTenant();
-                    }                    
+                    }
                     else if (iHouse.OwnerId == iPlayer.married[0])
                     {
                         bankHistories.Add(new Banks.BankHistory.BankHistory
@@ -385,7 +378,7 @@ namespace GVRP.Module.Players.Sync
                 bankHistories.Add(new Banks.BankHistory.BankHistory { Name = "Sozialbonus", Value = bonus });
             }
 
-            iPlayer.SendNewNotification("Sie haben ihren Payday erhalten, schauen Sie auf Ihrem Konto fuer mehr Informationen!", title: "Kontoveraenderung", notificationType:PlayerNotification.NotificationType.SUCCESS);
+            iPlayer.SendNewNotification("Sie haben ihren Payday erhalten, schauen Sie auf Ihrem Konto fuer mehr Informationen!", title: "Kontoveraenderung", notificationType: PlayerNotification.NotificationType.SUCCESS);
 
             iPlayer.AddPlayerBankHistories(bankHistories);
 
@@ -437,17 +430,17 @@ namespace GVRP.Module.Players.Sync
             if (iPlayer.Lic_PlaneB[0] < 0) iPlayer.Lic_PlaneB[0]++;
             if (iPlayer.Lic_LKW[0] < 0) iPlayer.Lic_LKW[0]++;
             if (iPlayer.Lic_Transfer[0] < 0) iPlayer.Lic_Transfer[0]++;
-                        
+
             //Jailtime
             if (iPlayer.jailtime[0] == 1)
             {
                 // Erneute Wanteds?
-                if(CrimeModule.Instance.CalcJailTime(iPlayer.Crimes) > 0)
+                if (CrimeModule.Instance.CalcJailTime(iPlayer.Crimes) > 0)
                 {
                     iPlayer.jailtime[0] += CrimeModule.Instance.CalcJailTime(iPlayer.Crimes);
                     iPlayer.SendNewNotification($"Durch erneute Verbrechen, haben Sie eine Haftzeitverlängerung von {CrimeModule.Instance.CalcJailTime(iPlayer.Crimes)} Minuten!");
                     iPlayer.RemoveAllCrimes();
-                    
+
                 }
                 else
                 {
@@ -470,7 +463,7 @@ namespace GVRP.Module.Players.Sync
                             iPlayer.ApplyCharacter();
                         }
                         // In Zellen
-                        else if(iPlayer.HasData("inJailGroup"))
+                        else if (iPlayer.HasData("inJailGroup"))
                         {
                             // Get JailSpawn
                             JailSpawn JailSpawn = JailSpawnModule.Instance.GetAll().Values.Where(js => js.Group == iPlayer.GetData("inJailGroup")).FirstOrDefault();
@@ -491,9 +484,9 @@ namespace GVRP.Module.Players.Sync
                     else // Check Manually
                     {
 
-                        JailCell JailCell = JailCellModule.Instance.GetAll().Values.Where(js => js.Position.DistanceTo(iPlayer.Player.Position) < js.Range+2).FirstOrDefault();
+                        JailCell JailCell = JailCellModule.Instance.GetAll().Values.Where(js => js.Position.DistanceTo(iPlayer.Player.Position) < js.Range + 2).FirstOrDefault();
 
-                        if(JailCell != null)
+                        if (JailCell != null)
                         {
                             // Get JailSpawn
                             JailSpawn JailSpawn = JailSpawnModule.Instance.GetAll().Values.Where(js => js.Group == JailCell.Group).FirstOrDefault();
@@ -521,7 +514,7 @@ namespace GVRP.Module.Players.Sync
 
             CheckSalary(iPlayer);
             CheckPayDay(iPlayer);
-            
+
             // Minus Staatskasse
             KassenModule.Instance.ChangeMoney(KassenModule.Kasse.STAATSKASSE, -KassenModule.Instance.StaatsKassenPaycheckAmountAll);
             KassenModule.Instance.StaatsKassenPaycheckAmountAll = 0;

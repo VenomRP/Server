@@ -1,6 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Attachments;
 using GVRP.Module.Chat;
@@ -11,6 +9,8 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
 using GVRP.Module.Vehicles.Data;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Schwarzgeld
 {

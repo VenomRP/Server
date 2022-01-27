@@ -1,11 +1,8 @@
-﻿using GTANetworkAPI;
+﻿using GVRP.Module.Logging;
 using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Text;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
 
 namespace GVRP.Handler
 {

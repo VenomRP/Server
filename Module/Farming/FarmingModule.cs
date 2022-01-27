@@ -1,9 +1,7 @@
-﻿using System;
+﻿using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Farming
 {
@@ -23,7 +21,7 @@ namespace GVRP.Module.Farming
         public override void OnFiveSecUpdate()
         {
             List<DbPlayer> RemovePlayer = new List<DbPlayer>();
-            foreach(DbPlayer xPlayer in FarmingList.ToList())
+            foreach (DbPlayer xPlayer in FarmingList.ToList())
             {
                 if (xPlayer == null || !xPlayer.IsValid()) continue;
                 if (!xPlayer.HasData("pressedEOnFarm")) continue;
@@ -32,7 +30,7 @@ namespace GVRP.Module.Farming
             foreach (DbPlayer xPlayer in RemovePlayer.ToList())
             {
                 if (xPlayer == null || !xPlayer.IsValid()) continue;
-                if(FarmingModule.FarmingList.Contains(xPlayer)) FarmingModule.FarmingList.Remove(xPlayer);
+                if (FarmingModule.FarmingList.Contains(xPlayer)) FarmingModule.FarmingList.Remove(xPlayer);
             }
         }
     }

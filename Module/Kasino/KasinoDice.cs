@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Kasino
 {

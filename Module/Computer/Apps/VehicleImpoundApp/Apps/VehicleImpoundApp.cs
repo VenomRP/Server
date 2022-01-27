@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
@@ -9,7 +7,7 @@ namespace GVRP.Module.Computer.Apps.VehicleImpoundApp.Apps
 {
     public class VehicleImpoundApp : SimpleApp
     {
-        public VehicleImpoundApp() : base ("VehicleImpoundApp") { }
+        public VehicleImpoundApp() : base("VehicleImpoundApp") { }
 
 
         [RemoteEvent]

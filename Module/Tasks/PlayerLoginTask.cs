@@ -1,22 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Clothes;
 using GVRP.Module.Configurations;
-using GVRP.Module.Helper;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.Time;
+using MySql.Data.MySqlClient;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Tasks
 {
@@ -24,7 +17,7 @@ namespace GVRP.Module.Tasks
     {
         private readonly Player player;
 
-        public PlayerLoginTask(Player player) 
+        public PlayerLoginTask(Player player)
         {
             this.player = player;
         }
@@ -59,7 +52,7 @@ namespace GVRP.Module.Tasks
 
 
                         //if (reader.GetInt32("pw") == 0)
-                            //player.SetData("KeinPW", true);
+                        //player.SetData("KeinPW", true);
 
                         if (player == null) return;
                         //Bei Warn hau wech
@@ -95,7 +88,7 @@ namespace GVRP.Module.Tasks
                             return;
                         }
 
-                        
+
 
                         /*if (reader.GetString("Pass") == null && reader.GetString("Salt") == null)
                         {
@@ -140,7 +133,7 @@ namespace GVRP.Module.Tasks
                             //DBLogging.LogAcpAdminAction("System", player.Name, adminLogTypes.perm, $"Social-Club-Name-Changed DB - {iPlayer.SocialClubName} - CLIENT - {iPlayer.Player.SocialClubName}");
                             iPlayer.Player.SendNotification("Bitte melde dich beim Support im Teamspeak (Social-Name-Changed)");
                             iPlayer.Player.Kick("Bitte melde dich beim Support im Teamspeak (Social-Name-Changed)");
-                              return;
+                            return;
                         }
 
 

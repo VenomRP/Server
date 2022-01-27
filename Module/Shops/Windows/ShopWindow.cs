@@ -1,20 +1,17 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Business.NightClubs;
+using GVRP.Module.ClientUI.Windows;
+using GVRP.Module.Items;
+using GVRP.Module.Logging;
+using GVRP.Module.NSA;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Teams;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GVRP.Module.ClientUI.Windows;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players;
-using GVRP.Module.Items;
-using GVRP.Module.Voice;
-using GVRP.Module.Chat;
-using GVRP.Module.Business.NightClubs;
 using System.Threading.Tasks;
-using GVRP.Module.Schwarzgeld;
-using GVRP.Module.NSA;
-using GVRP.Module.Teams;
 
 namespace GVRP.Module.Shops.Windows
 {
@@ -211,7 +208,7 @@ namespace GVRP.Module.Shops.Windows
                             shopItem.Stored -= item.count;
                             shopItem.SaveStoreds();
                         }
-                        Logger.AddShopBuyLog(iPlayer.Id, item.itemId, item.count, shopItem.Price*item.count );
+                        Logger.AddShopBuyLog(iPlayer.Id, item.itemId, item.count, shopItem.Price * item.count);
                     }
 
                     if (!iPlayer.Container.AddItem(itemData.Id, item.count))
@@ -221,7 +218,7 @@ namespace GVRP.Module.Shops.Windows
 
                     iPlayer.SendNewNotification($"{item.count} {itemData.Name} gekauft!");
 
-                    if(iPlayer.HasMoneyTransferWantedStatus() && !iPlayer.IsMasked())
+                    if (iPlayer.HasMoneyTransferWantedStatus() && !iPlayer.IsMasked())
                     {
                         TeamModule.Instance.SendMessageToTeam($"Finanz-Detection: Die Gesuchte Person {iPlayer.GetName()} hat einen Einkauf getätigt! (Standort: {accessedShop.Name})", teams.TEAM_FIB, 10000, 3);
                         NSAPlayerExtension.AddTransferHistory($"{iPlayer.GetName()} Shop {accessedShop.Name}", accessedShop.Position);

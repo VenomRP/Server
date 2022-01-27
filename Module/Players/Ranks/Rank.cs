@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players.Ranks
 {
@@ -14,7 +14,7 @@ namespace GVRP.Module.Players.Ranks
         public HashSet<string> Commands { get; }
 
         public HashSet<string> Events { get; }
-        
+
         public HashSet<string> Features { get; }
 
         public int Salary { get; }
@@ -35,7 +35,7 @@ namespace GVRP.Module.Players.Ranks
                     Commands.Add(command.ToLower());
                 }
             }
-            
+
             var eventString = reader.GetString("events");
             if (!string.IsNullOrEmpty(eventString))
             {
@@ -86,7 +86,7 @@ namespace GVRP.Module.Players.Ranks
         {
             return Features.Contains(feature);
         }
-        
+
         public bool CanAccessEvent(string eventName)
         {
             return Events.Contains(eventName);

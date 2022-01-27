@@ -1,9 +1,6 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 using GVRP.Module.Players;
+using System.Text.RegularExpressions;
 
 namespace GVRP.Module.Clothes.Outfits
 {

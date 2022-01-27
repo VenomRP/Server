@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
-using Newtonsoft.Json;
-using GVRP.Module.Menu;
 using GVRP.Module.RemoteEvents;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Jobs.Taxi.App
 {
@@ -33,12 +31,12 @@ namespace GVRP.Module.Jobs.Taxi.App
         }
 
         [RemoteEvent]
-        public void requestTaxiList(Player player) 
+        public void requestTaxiList(Player player)
         {
             SendTaxiList(player);
         }
-        
-        private void SendTaxiList(Player player) 
+
+        private void SendTaxiList(Player player)
         {
             var taxiList = new List<TaxiFound>();
             var Users = Players.Players.Instance.GetValidPlayers();
@@ -60,7 +58,7 @@ namespace GVRP.Module.Jobs.Taxi.App
             Console.WriteLine("Nigga not work2");
         }
 
-        
+
         [RemoteEventPermission]
         [RemoteEvent]
         public void requestTaxiDriver(Player client, string driverName, string message, int preis)
@@ -76,10 +74,10 @@ namespace GVRP.Module.Jobs.Taxi.App
             {
                 // taxifahrer gefunden yay
                 driverDbPlayer.SendNewNotification(
-                        "Sie haben eine Taxianfrage von " + dbPlayer.GetName() + 
-                        " (" + dbPlayer.ForumId + ") Ort: " + message +", benutzen Sie /acceptservice um diese anzunehmen!", duration: 20000);
+                        "Sie haben eine Taxianfrage von " + dbPlayer.GetName() +
+                        " (" + dbPlayer.ForumId + ") Ort: " + message + ", benutzen Sie /acceptservice um diese anzunehmen!", duration: 20000);
                 dbPlayer.SendNewNotification("Anfrage an den Taxifahrer wurde gestellt!");
-                Console.WriteLine("taxi_request"+ driverDbPlayer.GetName());
+                Console.WriteLine("taxi_request" + driverDbPlayer.GetName());
                 dbPlayer.SetData("taxi_request", driverDbPlayer.GetName());
                 Console.WriteLine("Kek lol not work");
                 dbPlayer.SetData("taxi_request_price", preis);

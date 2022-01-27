@@ -16,7 +16,7 @@ namespace GVRP.Module.Business.NightClubs
             if (iPlayer.Player.Dimension == 0) return null;
             NightClub nightClub = NightClubModule.Instance.Get(iPlayer.Player.Dimension);
             if (nightClub == null) return null;
-            
+
             // Check Rights
             if (!nightClub.IsOwnedByBusines() || !iPlayer.IsMemberOfBusiness() || !iPlayer.GetActiveBusinessMember().NightClub || iPlayer.ActiveBusiness.BusinessBranch.NightClubId != nightClub.Id) return null;
 
@@ -63,7 +63,7 @@ namespace GVRP.Module.Business.NightClubs
                 {
                     MenuManager.Instance.Build(PlayerMenu.NightClubAnpassung, iPlayer).Show(iPlayer);
                 }
-                
+
                 return false;
             }
         }

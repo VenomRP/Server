@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module.InteriorProp
+﻿namespace GVRP.Module.InteriorProp
 {
     public class InteriorPropsPropModule : SqlModule<InteriorPropsPropModule, InteriorPropsProp, uint>
     {

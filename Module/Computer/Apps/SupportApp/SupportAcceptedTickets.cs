@@ -1,9 +1,8 @@
 ﻿using GTANetworkAPI;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Support;
+using System.Collections.Generic;
 using static GVRP.Module.Computer.Apps.SupportApp.SupportOpenTickets;
 
 namespace GVRP.Module.Computer.Apps.SupportApp
@@ -13,32 +12,32 @@ namespace GVRP.Module.Computer.Apps.SupportApp
         public SupportAcceptedTickets() : base("SupportAcceptedTickets") { }
 
         [RemoteEvent]
-        public async void requestAcceptedTickets(Player client) 
+        public async void requestAcceptedTickets(Player client)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                if (dbPlayer.RankId == 0)
-                {
-                    dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                List<ticketObject> ticketList = new List<ticketObject>();
-                var tickets = TicketModule.Instance.GetAcceptedTickets(dbPlayer);
+            if (dbPlayer.RankId == 0)
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                foreach (var ticket in tickets)
-                {
-                    string accepted = string.Join(',', ticket.Accepted);
+            List<ticketObject> ticketList = new List<ticketObject>();
+            var tickets = TicketModule.Instance.GetAcceptedTickets(dbPlayer);
 
-                    ticketList.Add(new ticketObject() { id = (int)ticket.Player.Id, creator = ticket.Player.GetName(), text = ticket.Description, created_at = ticket.Created_at, accepted_by = accepted });
-                }
+            foreach (var ticket in tickets)
+            {
+                string accepted = string.Join(',', ticket.Accepted);
 
-                var serviceJson = NAPI.Util.ToJson(ticketList);
-                
-                TriggerEvent(client, "responseAcceptedTicketList", serviceJson);
-            
+                ticketList.Add(new ticketObject() { id = (int)ticket.Player.Id, creator = ticket.Player.GetName(), text = ticket.Description, created_at = ticket.Created_at, accepted_by = accepted });
+            }
+
+            var serviceJson = NAPI.Util.ToJson(ticketList);
+
+            TriggerEvent(client, "responseAcceptedTicketList", serviceJson);
+
         }
     }
 }

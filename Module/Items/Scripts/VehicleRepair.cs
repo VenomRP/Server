@@ -1,15 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Chat;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Vehicles;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -24,9 +18,9 @@ namespace GVRP.Module.Items.Scripts
             var closestVehicle = VehicleHandler.Instance.GetClosestVehicle(iPlayer.Player.Position, 3);
             if (closestVehicle != null)
             {
-                
+
                 iPlayer.PlayAnimation(
-                    (int) (AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "mini@repair", "fixing_a_ped");
+                    (int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "mini@repair", "fixing_a_ped");
                 iPlayer.Player.TriggerEvent("freezePlayer", true);
                 iPlayer.SetData("userCannotInterrupt", true);
 

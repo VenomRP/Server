@@ -1,21 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Crime;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
-
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Phone;
-using GVRP.Module.Teams;
 using GVRP.Module.Vehicles;
-using GVRP.Module.Voice;
-using GVRP.Module.Weapons;
-using GVRP.Module.Weapons.Data;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Blitzer
 {

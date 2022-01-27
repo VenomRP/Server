@@ -1,11 +1,10 @@
-﻿using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Chat;
 using GVRP.Module.Injury;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Buffs;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -38,12 +37,12 @@ namespace GVRP.Module.Items.Scripts
             if (iPlayer.IsCuffed || iPlayer.IsTied || iPlayer.isInjured()) return false;
 
             iPlayer.Player.TriggerEvent("freezePlayer", false);
-            
+
             NAPI.Player.StopPlayerAnimation(iPlayer.Player);
 
-            if(iPlayer.Buffs.LastDrugId == ItemData.Id)
+            if (iPlayer.Buffs.LastDrugId == ItemData.Id)
             {
-                if(iPlayer.Buffs.DrugBuildUsed < 10)
+                if (iPlayer.Buffs.DrugBuildUsed < 10)
                 {
                     iPlayer.Buffs.DrugBuildUsed++;
                 }
@@ -63,7 +62,7 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.SaveBuffs();
             return true;
         }
-        public static async Task<bool> CustomDrugMeth (DbPlayer iPlayer, ItemModel ItemData)
+        public static async Task<bool> CustomDrugMeth(DbPlayer iPlayer, ItemModel ItemData)
         {
             if (iPlayer.Player.IsInVehicle) return false;
 
@@ -134,7 +133,7 @@ namespace GVRP.Module.Items.Scripts
             NAPI.Player.StopPlayerAnimation(iPlayer.Player);
 
             CustomDrugModule.Instance.SetTrip(iPlayer, "s_m_y_clown_01", "clown");
-            
+
             return true;
         }
 

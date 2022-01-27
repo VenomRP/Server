@@ -1,21 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Common;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Chat;
-using GVRP.Module.Configurations;
-using GVRP.Module.PlayerName;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Ranks;
+﻿using System.Threading.Tasks;
 
 namespace GVRP.Module.ACP
 {
     public sealed class ACPModule : Module<ACPModule>
-    { 
+    {
         public override bool Load(bool reload = false)
         {
             return true;
@@ -24,15 +12,15 @@ namespace GVRP.Module.ACP
 
         enum ActionType
         {
-            KICK=0,
-            WHISPER=1,
+            KICK = 0,
+            WHISPER = 1,
             SETMONEY = 2,
         }
 
         public override async Task OnTenSecUpdateAsync()
         {
-       
-     
+
+
 
         }
     }

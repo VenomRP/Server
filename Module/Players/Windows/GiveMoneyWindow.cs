@@ -1,17 +1,17 @@
-﻿using System;
-using GTANetworkAPI;
-using Newtonsoft.Json;
-using GVRP.Module.Players.Db;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Windows;
+using GVRP.Module.Players.Db;
 using GVRP.Module.RemoteEvents;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Players.Windows
 {
 
     public enum TransferType
     {
-        BAR=0,
-        ÜBERWEISUNG=1
+        BAR = 0,
+        ÜBERWEISUNG = 1
     }
 
 

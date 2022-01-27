@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module
+﻿namespace GVRP.Module
 {
     public class TextInputBoxObject
     {

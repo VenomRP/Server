@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.NSA.Observation
 {
@@ -30,7 +29,7 @@ namespace GVRP.Module.NSA.Observation
         protected override void OnItemLoaded(NSADBObservation loadable)
         {
             // Add To global Dictionary on Loading...
-            if(!ObservationList.ContainsKey((uint)loadable.PlayerId))
+            if (!ObservationList.ContainsKey((uint)loadable.PlayerId))
             {
                 ObservationList.Add((uint)loadable.PlayerId, new NSAObservation()
                 {
@@ -65,7 +64,8 @@ namespace GVRP.Module.NSA.Observation
 
         public void RemoveObservation(DbPlayer dbPlayer, uint l_FindPlayerId)
         {
-            if (NSAObservationModule.ObservationList.ContainsKey(l_FindPlayerId)) {
+            if (NSAObservationModule.ObservationList.ContainsKey(l_FindPlayerId))
+            {
                 ObservationList.Remove(l_FindPlayerId);
             }
 
@@ -75,7 +75,7 @@ namespace GVRP.Module.NSA.Observation
 
         public static void CancelPhoneHearing(int number)
         {
-            foreach(DbPlayer xPlayer in TeamModule.Instance.Get((int)teams.TEAM_FIB).Members.Values.Where(p => p.HasData("nsa_activePhone") && p.GetData("nsa_activePhone") == number).ToList()) 
+            foreach (DbPlayer xPlayer in TeamModule.Instance.Get((int)teams.TEAM_FIB).Members.Values.Where(p => p.HasData("nsa_activePhone") && p.GetData("nsa_activePhone") == number).ToList())
             {
                 xPlayer.Player.TriggerEvent("setCallingPlayer", "");
                 xPlayer.ResetData("nsa_activePhone");

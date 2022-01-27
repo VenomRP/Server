@@ -1,6 +1,4 @@
-﻿using System;
-using GVRP.Handler;
-using GVRP.Module.Items;
+﻿using GVRP.Handler;
 
 namespace GVRP.Module.Vehicles
 {
@@ -24,7 +22,7 @@ namespace GVRP.Module.Vehicles
             if (sxVeh == null) return false;
             return sxVeh.jobid > 0;
         }
-        
+
         public static bool IsTeamVehicle(this SxVehicle sxVeh)
         {
             if (sxVeh == null) return false;
@@ -48,7 +46,7 @@ namespace GVRP.Module.Vehicles
                 MySQLHandler.ExecuteAsync(l_Query);
             }));
         }
-        
+
         public static void SetPrivateCarGarage(this SxVehicle sxVeh, uint? inGarage = null, uint? garageId = null)
         {
             if (sxVeh == null) return;
@@ -57,7 +55,7 @@ namespace GVRP.Module.Vehicles
             sxVeh.entity.Position.Y = 0;
             sxVeh.entity.Position.Z = 0;
             sxVeh.Save(false, inGarage, garageId);
-            
+
             if (sxVeh.entity != null && inGarage >= 1)
             {
                 VehicleHandler.Instance.DeleteVehicle(sxVeh, false);
@@ -70,7 +68,7 @@ namespace GVRP.Module.Vehicles
             if (sxVeh.teamid <= 0 || sxVeh.databaseId <= 0) return;
             string query = inGarage ? $"UPDATE `fvehicles` SET inGarage = '1', fuel = '{sxVeh.fuel}', pos_x = '0', pos_y = '0', pos_z = '0' WHERE id = '{sxVeh.databaseId}';" : $"UPDATE `fvehicles` SET inGarage = '0', fuel = '{sxVeh.fuel}' WHERE id = '{sxVeh.databaseId}';";
             MySQLHandler.ExecuteAsync(query);
-            
+
             if (sxVeh.entity != null && inGarage)
             {
                 VehicleHandler.Instance.DeleteVehicle(sxVeh);

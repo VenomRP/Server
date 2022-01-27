@@ -1,16 +1,8 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
+﻿using GVRP.Handler;
 using GVRP.Module.Menu;
 using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
 using GVRP.Module.Vehicles;
 
 namespace GVRP.Module.NSA.Menu
@@ -27,7 +19,7 @@ namespace GVRP.Module.NSA.Menu
             var l_Menu = new Module.Menu.Menu(Menu, "NSA Aktive Peilsender");
             l_Menu.Add($"Schließen");
 
-            foreach(NSAPeilsender nSAPeilsender in NSAObservationModule.NSAPeilsenders)
+            foreach (NSAPeilsender nSAPeilsender in NSAObservationModule.NSAPeilsenders)
             {
                 l_Menu.Add($"{nSAPeilsender.Name}");
             }
@@ -48,9 +40,9 @@ namespace GVRP.Module.NSA.Menu
 
                 foreach (NSAPeilsender nSAPeilsender in NSAObservationModule.NSAPeilsenders)
                 {
-                    if(i == index)
+                    if (i == index)
                     {
-                        if(nSAPeilsender.VehicleId != 0)
+                        if (nSAPeilsender.VehicleId != 0)
                         {
                             SxVehicle sxVeh = VehicleHandler.Instance.GetByVehicleDatabaseId(nSAPeilsender.VehicleId);
                             if (sxVeh == null || !sxVeh.IsValid()) return true;
@@ -60,7 +52,7 @@ namespace GVRP.Module.NSA.Menu
                             iPlayer.SendNewNotification("Peilsender geortet!");
                             return true;
                         }
-                        
+
                         return true;
                     }
                     i++;

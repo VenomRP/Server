@@ -1,21 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Clothes.Altkleider;
-using GVRP.Module.Clothes.Character;
+﻿using GTANetworkAPI;
 using GVRP.Module.Clothes.Props;
 using GVRP.Module.Clothes.Team;
 using GVRP.Module.Configurations;
-using GVRP.Module.Freiberuf.Mower;
 using GVRP.Module.Jails;
-using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Clothes
 {
@@ -26,10 +20,10 @@ namespace GVRP.Module.Clothes
             return
                 "SELECT * FROM `clothes` ORDER BY `clothes`.`default` DESC, `clothes`.`slot` ASC , `clothes`.`variation` ASC , `clothes`.`texture` ASC;";
         }
-        
+
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(PropModule), typeof(TeamSkinModule)};
+            return new[] { typeof(PropModule), typeof(TeamSkinModule) };
         }
 
         public Character.Character LoadCharacter(DbPlayer iPlayer)
@@ -61,7 +55,7 @@ namespace GVRP.Module.Clothes
 
                             string equipedClothesString = reader.GetString("equiped_clothes");
                             string equipedPropsString = reader.GetString("equiped_props");
-                            
+
                             // Migrating to New System
                             var wardrobeString = reader.GetString("wardrobe");
                             if (!string.IsNullOrEmpty(wardrobeString))
@@ -244,7 +238,7 @@ namespace GVRP.Module.Clothes
                 }
             }
         }
-        
+
         public static void ActualizeCharacterProps(DbPlayer dbPlayer)
         {
 
@@ -317,11 +311,11 @@ namespace GVRP.Module.Clothes
             if (character == null) return;
 
             var query = $"UPDATE `player_character` SET skin = '{Enum.GetName(typeof(PedHash), character.Skin)}', " +
-                $"`equiped_clothes` = '{string.Join(",",character.Clothes.Values)}', " +
-                $"`equiped_props` = '{string.Join(",",character.EquipedProps.Values)}'WHERE player_id = '{iPlayer.Id}';";
+                $"`equiped_clothes` = '{string.Join(",", character.Clothes.Values)}', " +
+                $"`equiped_props` = '{string.Join(",", character.EquipedProps.Values)}'WHERE player_id = '{iPlayer.Id}';";
             MySQLHandler.ExecuteAsync(query);
         }
-        
+
         public static Character.Character CreateCharacterForPlayer(DbPlayer iPlayer)
         {
 
@@ -391,7 +385,7 @@ namespace GVRP.Module.Clothes
         {
             return GetAll().Values.Where<Cloth>(cloth => cloth.Slot == slot).ToList();
         }
-        
+
         public List<Cloth> GetTeamWarerobe(DbPlayer iPlayer, int slot)
         {
             if (iPlayer == null || !iPlayer.IsValid())
@@ -407,7 +401,7 @@ namespace GVRP.Module.Clothes
             {
                 foreach (var cloth in GetAll().Values)
                 {
-                    if ((cloth.TeamId == (int) teams.TEAM_CIVILIAN || cloth.TeamId == iPlayer.TeamId) &&
+                    if ((cloth.TeamId == (int)teams.TEAM_CIVILIAN || cloth.TeamId == iPlayer.TeamId) &&
                         cloth.Slot == 3 &&
                         cloth.Gender == iPlayer.Customization.Gender)
                     {
@@ -432,7 +426,7 @@ namespace GVRP.Module.Clothes
                 {
                     var cloth = this[clothId];
                     if (cloth?.Slot != slot ||
-                        cloth.TeamId != (int) teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
+                        cloth.TeamId != (int)teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
                         cloth.Gender != 3 && cloth.Gender != iPlayer.Customization.Gender) continue;
                     if (!wardrobeClothes.Contains(cloth))
                     {
@@ -458,7 +452,7 @@ namespace GVRP.Module.Clothes
             {
                 foreach (var cloth in GetAll().Values)
                 {
-                    if ((cloth.TeamId == (int) teams.TEAM_CIVILIAN || cloth.TeamId == iPlayer.TeamId) &&
+                    if ((cloth.TeamId == (int)teams.TEAM_CIVILIAN || cloth.TeamId == iPlayer.TeamId) &&
                         cloth.Slot == 3 &&
                         cloth.Gender == iPlayer.Customization.Gender)
                     {
@@ -482,7 +476,7 @@ namespace GVRP.Module.Clothes
             {
                 var cloth = this[clothId];
                 if (cloth?.Slot != slot ||
-                    cloth.TeamId != (int) teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
+                    cloth.TeamId != (int)teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
                     cloth.Gender != 3 && cloth.Gender != iPlayer.Customization.Gender) continue;
                 if (!wardrobeClothes.Contains(cloth))
                 {
@@ -540,7 +534,7 @@ namespace GVRP.Module.Clothes
 
             var clotheslist = character.Clothes.ToList();
             var equipedAccessoires = character.EquipedProps;
-            
+
             if (clotheslist != null && clotheslist.Count > 0)
             {
                 foreach (var kvp in clotheslist)
@@ -763,7 +757,7 @@ namespace GVRP.Module.Clothes
         {
             iPlayer.Player.SetAccessories(prop, variation, texture);
         }
-        
+
         public void RefreshPlayerSpecials(DbPlayer iPlayer, Character.Character character)
         {
             iPlayer.ApplyArmorVisibility();
@@ -775,12 +769,12 @@ namespace GVRP.Module.Clothes
                 iPlayer.SetPlayerJailClothes();
             }
         }
-        
+
         public IEnumerable<Cloth> GetClothesForShop(uint shopId)
         {
             return from cloth in GetAll()
-                where cloth.Value.StoreId == shopId || cloth.Value.StoreId == -1 || cloth.Value.IsDefault
-                select cloth.Value;
+                   where cloth.Value.StoreId == shopId || cloth.Value.StoreId == -1 || cloth.Value.IsDefault
+                   select cloth.Value;
         }
     }
 

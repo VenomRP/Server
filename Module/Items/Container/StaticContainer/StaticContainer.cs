@@ -1,6 +1,6 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Items
 {

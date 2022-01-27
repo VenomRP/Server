@@ -1,21 +1,19 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Configurations;
 using GVRP.Module.Gangwar;
 using GVRP.Module.Items;
 using GVRP.Module.Laboratories.Windows;
-using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Laboratories
 {
@@ -59,7 +57,7 @@ namespace GVRP.Module.Laboratories
                 Console.WriteLine("debug: 6");
                 return true;
             }
-       
+
 
 
             if (dbPlayer.Player.Position.DistanceTo(Coordinates.CannabislaboratoryBatterieSwitch) < 1.0f)
@@ -81,20 +79,20 @@ namespace GVRP.Module.Laboratories
                         Console.WriteLine("debug: 18");
                         Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                         {
-                            
+
                             Chats.sendProgressBar(dbPlayer, 100 * addableAmount);
-                            
+
                             dbPlayer.Container.RemoveItem(15, addableAmount / 5);
 
                             dbPlayer.Player.TriggerEvent("freezePlayer", true);
                             dbPlayer.SetData("userCannotInterrupt", true);
 
                             await Task.Delay(100 * addableAmount);
-                            
+
                             if (dbPlayer == null || !dbPlayer.IsValid()) return;
                             dbPlayer.SetData("userCannotInterrupt", false);
                             dbPlayer.Player.TriggerEvent("freezePlayer", false);
-                            
+
                             NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
                             dbPlayer.Container.AddItem(966, addableAmount);
 
@@ -105,29 +103,29 @@ namespace GVRP.Module.Laboratories
                     }
                 }
             }
-            
+
             if (dbPlayer.Player.Position.DistanceTo(Coordinates.CannabislaboratoryCannabisPulver) < 1.0f)
             {
-                
+
                 int Hanfsamenamount = dbPlayer.Container.GetItemAmount(979);
                 int addableAmount = Hanfsamenamount / 2;
                 // 979 -> 997
                 if (Hanfsamenamount >= 2)
                 {
-                    
+
                     if (addableAmount > dbPlayer.Container.GetMaxItemAddedAmount(979))
                     {
                         addableAmount = dbPlayer.Container.GetMaxItemAddedAmount(979);
                     }
-                    
+
                     if (addableAmount > 0)
                     {
-                        
+
                         Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                         {
-                            
+
                             Chats.sendProgressBar(dbPlayer, 500 * addableAmount);
-                            
+
                             dbPlayer.Container.RemoveItem(979, addableAmount * 2);
 
                             dbPlayer.Player.TriggerEvent("freezePlayer", true);
@@ -141,7 +139,7 @@ namespace GVRP.Module.Laboratories
 
                             NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
                             dbPlayer.Container.AddItem(997, addableAmount);
-                            
+
                             dbPlayer.SendNewNotification($"{addableAmount * 2} {ItemModelModule.Instance.Get(979).Name} wurde zu {addableAmount} {ItemModelModule.Instance.Get(997).Name} verarbeitet.");
 
                         }));
@@ -149,7 +147,7 @@ namespace GVRP.Module.Laboratories
                     }
                 }
             }
-            
+
             return false;
         }
 

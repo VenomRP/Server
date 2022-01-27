@@ -1,16 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Handler;
 using GVRP.Module.GTAN;
 using GVRP.Module.Injury;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
-using GVRP.Module.Players.Buffs;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teamfight;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Gangwar
 {
@@ -22,7 +18,7 @@ namespace GVRP.Module.Gangwar
         public int KillPoints = 3; // if A kills B, A gets points
         public int TimerFlagPoints = 1; // each ten sec if a player is in range without a enemy
         public Color StandardColor = new Color(255, 140, 0, 255);
-        
+
         public int GangwarTimeLimit = 45;
         public int GangwarTownLimit = 3;
 
@@ -167,8 +163,8 @@ namespace GVRP.Module.Gangwar
                 gangwarTown.IncreasePoints(0, GangwarModule.Instance.TimerFlagPoints);
 
             }
-                
-            
+
+
         }
 
         public override void OnTenSecUpdate()

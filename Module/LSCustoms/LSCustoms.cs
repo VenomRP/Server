@@ -1,9 +1,7 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Configurations;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Configurations;
 
 namespace GVRP.Module.LSCustoms
 {
@@ -71,10 +69,11 @@ namespace GVRP.Module.LSCustoms
 
                 MySQLHandler.ExecuteAsync(l_InsertQuery);
                 return true;
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logging.Logger.Crash(ex);
-                
+
             }
             return false;
         }

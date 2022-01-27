@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GVRP.Module.Players.Db;
 using MySql.Data.MySqlClient;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Players
 {

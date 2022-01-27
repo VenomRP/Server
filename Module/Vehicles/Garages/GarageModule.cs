@@ -1,17 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.GTAN;
-using GVRP.Module.Helper;
-using GVRP.Module.Logging;
-using GVRP.Module.Vehicles.Data;
-using static GVRP.Main;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players;
+﻿using GVRP.Handler;
 using GVRP.Module.Spawners;
+using GVRP.Module.Vehicles.Data;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Vehicles.Garages
 {
@@ -19,7 +10,7 @@ namespace GVRP.Module.Vehicles.Garages
     {
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(VehicleClassificationModule)};
+            return new[] { typeof(VehicleClassificationModule) };
         }
 
         protected override string GetQuery()
@@ -85,7 +76,7 @@ namespace GVRP.Module.Vehicles.Garages
                         foreach (var garage in GetAll().Values.Where(garage => garage.HouseId == 0 && garage.Teams.Count() == 0))
                         {
                             if (garage.DisableAutomaticCarInsertion) continue;
-                            
+
                             if (garage.Classifications.Contains(sxVehicle.Data.ClassificationId))
                             {
                                 if (sxVehicle.entity.Position.DistanceTo(garage.Position) < 50.0f)

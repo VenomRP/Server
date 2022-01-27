@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using Newtonsoft.Json;
-using GVRP.Module.Assets.Beard;
+﻿using GVRP.Module.Assets.Beard;
 using GVRP.Module.Assets.Chest;
 using GVRP.Module.Assets.Hair;
 using GVRP.Module.Assets.HairColor;
-using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Barber
 {

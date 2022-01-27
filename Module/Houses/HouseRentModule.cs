@@ -1,11 +1,9 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Houses
 {
@@ -35,7 +33,7 @@ namespace GVRP.Module.Houses
                     }
                 }
             }
-            
+
             MenuManager.Instance.AddBuilder(new HouseRentContractMenuBuilder());
             return base.OnLoad();
         }
@@ -47,7 +45,7 @@ namespace GVRP.Module.Houses
         {
             return HouseRentModule.Instance.houseRents.ToList().Where(ht => ht.PlayerId == dbPlayer.Id).FirstOrDefault();
         }
-        
+
         public static bool IsTenant(this DbPlayer dbPlayer)
         {
             return HouseRentModule.Instance.houseRents.ToList().Where(ht => ht.PlayerId == dbPlayer.Id).FirstOrDefault() != null;
@@ -74,7 +72,7 @@ namespace GVRP.Module.Houses
             HouseRent houseRent = HouseRentModule.Instance.houseRents.ToList().Where(ht => ht.HouseId == house.Id && ht.SlotId == slot).FirstOrDefault();
 
             // Add if not exists
-            if(houseRent == null)
+            if (houseRent == null)
             {
                 houseRent = new HouseRent(house.Id, tenant.Id, slot, price);
                 HouseRentModule.Instance.houseRents.Add(houseRent);
@@ -107,7 +105,7 @@ namespace GVRP.Module.Houses
             houseRent.RentPrice = price;
             houseRent.Save();
         }
-        
+
         public static void ClearTenant(this House house, int slot)
         {
             // Find Tenant Slot on House
@@ -127,7 +125,8 @@ namespace GVRP.Module.Houses
 
             House house = HouseModule.Instance.Get(houseRent.HouseId);
 
-            if (house != null) {
+            if (house != null)
+            {
 
                 // alle Fahrzeuge in Pillbox beim ausmieten.
                 MySQLHandler.ExecuteAsync($"UPDATE vehicles SET inGarage = '1' WHERE inGarage = '{house.GarageId}' AND owner = '{houseRent.PlayerId}'");

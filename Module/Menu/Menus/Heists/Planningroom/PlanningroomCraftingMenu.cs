@@ -46,7 +46,7 @@ namespace GVRP.Module.Menu.Menus.Heists.Planningroom
 
                     return true;
                 }
-                else if(index == 2)
+                else if (index == 2)
                 {
                     if (room.CasinoPlanLevel == 1)
                     {

@@ -1,10 +1,10 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Keys;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GVRP.Handler
 {
@@ -74,48 +74,48 @@ namespace GVRP.Handler
 
         public async Task LoadPlayerVehicleKeys(DbPlayer iPlayer)
         {
-            
-                using (var keyConn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
-                using (var keyCmd = keyConn.CreateCommand())
-                {
-                    await keyConn.OpenAsync();
-                    keyCmd.CommandText =
-                        $"SELECT player_to_vehicle.vehicleID, vehicles.vehiclehash FROM player_to_vehicle INNER JOIN vehicles ON player_to_vehicle.vehicleID = vehicles.id WHERE playerID = '{iPlayer.Id}';";
-                    using (var keyReader = keyCmd.ExecuteReader())
-                    {
-                        if (keyReader.HasRows)
-                        {
-                            while (keyReader.Read())
-                            {
-                                var keyId = keyReader.GetUInt32(0);
-                                var keyName = keyReader.GetString(1);
-                                if (!iPlayer.VehicleKeys.ContainsKey(keyId))
-                                {
-                                    iPlayer.VehicleKeys.Add(keyId, keyName);
-                                }
-                            }
-                        }
-                    }
 
-                    keyCmd.CommandText = $"SELECT id, vehiclehash FROM `vehicles` WHERE owner = '{iPlayer.Id}';";
-                    using (var keyReader = keyCmd.ExecuteReader())
+            using (var keyConn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
+            using (var keyCmd = keyConn.CreateCommand())
+            {
+                await keyConn.OpenAsync();
+                keyCmd.CommandText =
+                    $"SELECT player_to_vehicle.vehicleID, vehicles.vehiclehash FROM player_to_vehicle INNER JOIN vehicles ON player_to_vehicle.vehicleID = vehicles.id WHERE playerID = '{iPlayer.Id}';";
+                using (var keyReader = keyCmd.ExecuteReader())
+                {
+                    if (keyReader.HasRows)
                     {
-                        if (keyReader.HasRows)
+                        while (keyReader.Read())
                         {
-                            while (keyReader.Read())
+                            var keyId = keyReader.GetUInt32(0);
+                            var keyName = keyReader.GetString(1);
+                            if (!iPlayer.VehicleKeys.ContainsKey(keyId))
                             {
-                                var keyId = keyReader.GetUInt32(0);
-                                var keyName = keyReader.GetString(1);
-                                if (!iPlayer.OwnVehicles.ContainsKey(keyId))
-                                {
-                                    iPlayer.OwnVehicles.Add(keyId, keyName);
-                                }
+                                iPlayer.VehicleKeys.Add(keyId, keyName);
                             }
                         }
                     }
-                    await keyConn.CloseAsync();
                 }
-            
+
+                keyCmd.CommandText = $"SELECT id, vehiclehash FROM `vehicles` WHERE owner = '{iPlayer.Id}';";
+                using (var keyReader = keyCmd.ExecuteReader())
+                {
+                    if (keyReader.HasRows)
+                    {
+                        while (keyReader.Read())
+                        {
+                            var keyId = keyReader.GetUInt32(0);
+                            var keyName = keyReader.GetString(1);
+                            if (!iPlayer.OwnVehicles.ContainsKey(keyId))
+                            {
+                                iPlayer.OwnVehicles.Add(keyId, keyName);
+                            }
+                        }
+                    }
+                }
+                await keyConn.CloseAsync();
+            }
+
         }
 
         public List<VHKey> GetAllKeysPlayerHas(DbPlayer iPlayer)

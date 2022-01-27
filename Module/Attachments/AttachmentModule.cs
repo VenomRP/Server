@@ -1,9 +1,8 @@
-﻿using GTANetworkAPI;
-using System.Linq;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
+using System.Linq;
 
 namespace GVRP.Module.Attachments
 {
@@ -86,7 +85,7 @@ namespace GVRP.Module.Attachments
         {
             HandleVehicleAttachment(Vehicle, (int)type, true);
         }
-        
+
         // Remove attachment
         public void RemoveAttachment(DbPlayer dbPlayer, Attachment type)
         {

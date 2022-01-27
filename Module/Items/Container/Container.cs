@@ -1,14 +1,9 @@
-﻿using GTANetworkAPI;
+﻿using GVRP.Module.Logging;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GTANetworkMethods;
-using GVRP.Module.Logging;
-using GVRP.Handler;
-using GVRP.Module.Vehicles;
 
 namespace GVRP.Module.Items
 {
@@ -55,7 +50,7 @@ namespace GVRP.Module.Items
                 }
 
                 IntelligentContainerSaving = new Dictionary<int, DateTime>();
-                
+
                 ContainerManager.CheckStaticContainerInserting(this);
             }
             catch (Exception e)
@@ -83,7 +78,7 @@ namespace GVRP.Module.Items
             }
 
             IntelligentContainerSaving = new Dictionary<int, DateTime>();
-            
+
             ContainerManager.CheckStaticContainerInserting(this);
         }
     }

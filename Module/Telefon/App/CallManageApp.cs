@@ -1,16 +1,14 @@
 ﻿using GTANetworkAPI;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Injury;
-using GVRP.Module.Logging;
 using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Phone;
 using GVRP.Module.ReversePhone;
 using GVRP.Module.Teams;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Telefon.App
 {
@@ -40,15 +38,15 @@ namespace GVRP.Module.Telefon.App
         }
 
         [RemoteEvent]
-        public async void resetPhoneData (Player player) 
+        public async void resetPhoneData(Player player)
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null) return;
-                await callEnded(player, 0);
+            await callEnded(player, 0);
         }
 
         [RemoteEvent]
-        public async void callDeclined (Player player) 
+        public async void callDeclined(Player player)
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || !dbPlayer.CanInteract()) return;
@@ -93,7 +91,7 @@ namespace GVRP.Module.Telefon.App
         }
 
         [RemoteEvent]
-        public async Task callEnded (Player player, int p_Ti)
+        public async Task callEnded(Player player, int p_Ti)
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || !dbPlayer.CanInteract()) return;
@@ -148,7 +146,7 @@ namespace GVRP.Module.Telefon.App
         }
 
         [RemoteEvent]
-        public async void callAccepted(Player player) 
+        public async void callAccepted(Player player)
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || !dbPlayer.CanInteract()) return;
@@ -166,7 +164,7 @@ namespace GVRP.Module.Telefon.App
                         dbPlayer.Player.TriggerEvent("setCallingPlayer", dbCalledPlayer.VoiceHash);
                         dbCalledPlayer.Player.TriggerEvent("setCallingPlayer", dbPlayer.VoiceHash);
 
-                        if((NSAObservationModule.ObservationList.ContainsKey(dbPlayer.Id) && NSAObservationModule.ObservationList[dbPlayer.Id].Agreed)
+                        if ((NSAObservationModule.ObservationList.ContainsKey(dbPlayer.Id) && NSAObservationModule.ObservationList[dbPlayer.Id].Agreed)
                             || (NSAObservationModule.ObservationList.ContainsKey(dbCalledPlayer.Id) && NSAObservationModule.ObservationList[dbCalledPlayer.Id].Agreed))
                         {
                             TeamModule.Instance.SendMessageToNSA($"[OBSERVATION] {dbPlayer.GetName()} hat einen Anruf mit {dbCalledPlayer.GetName()} gestartet!");

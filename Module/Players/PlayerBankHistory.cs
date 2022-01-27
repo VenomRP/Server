@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using GVRP.Module.Banks.BankHistory;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players
 {
@@ -17,7 +15,7 @@ namespace GVRP.Module.Players
         private static long ConvertToTimestamp(DateTime value)
         {
             var elapsedTime = value - Epoch;
-            return (long) elapsedTime.TotalSeconds;
+            return (long)elapsedTime.TotalSeconds;
         }
 
         public override void OnPlayerLoadData(DbPlayer dbPlayer, MySqlDataReader reader)
@@ -54,7 +52,7 @@ namespace GVRP.Module.Players
 
             return;
         }
-        
+
     }
 
     public static class BankhistoryExtensions

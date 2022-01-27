@@ -1,6 +1,6 @@
-﻿using System;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -18,10 +18,10 @@ namespace GVRP.Module.Items.Scripts
                     "Um eine Waffenkiste aufzubrechen benötigen Sie ein Brecheisen!");
                 return false;
             }
-            
+
             // Choose Items
             float size = 0;
-            
+
             while (size < ItemData.Weight)
             {
                 // Results: 

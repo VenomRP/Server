@@ -1,9 +1,8 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
 using GVRP.Module.Commands;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.NpcSpawner
 {
@@ -13,7 +12,7 @@ namespace GVRP.Module.NpcSpawner
         {
             foreach (Npc npc in Main.ServerNpcs)
             {
-               dbPlayer.Player.TriggerEvent("loadNpc", npc.PedHash, npc.Position.X, npc.Position.Y, npc.Position.Z, npc.Heading, npc.Dimension);
+                dbPlayer.Player.TriggerEvent("loadNpc", npc.PedHash, npc.Position.X, npc.Position.Y, npc.Position.Z, npc.Heading, npc.Dimension);
             }
         }
 
@@ -31,7 +30,7 @@ namespace GVRP.Module.NpcSpawner
             string z = player.Position.Z.ToString().Replace(",", ".");
             string rotz = player.Heading.ToString().Replace(",", ".");
 
-            if(Enum.TryParse(pedhash, true, out PedHash skin))
+            if (Enum.TryParse(pedhash, true, out PedHash skin))
             {
                 Main.ServerNpcs.Add(new Npc(skin, player.Position, player.Heading, player.Dimension));
 
@@ -42,7 +41,7 @@ namespace GVRP.Module.NpcSpawner
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandcreateeaster(Player player) 
+        public void Commandcreateeaster(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.CanAccessMethod()) return;
@@ -51,9 +50,9 @@ namespace GVRP.Module.NpcSpawner
 
             string x = player.Position.X.ToString().Replace(",", ".");
             string y = player.Position.Y.ToString().Replace(",", ".");
-            string z = (player.Position.Z-0.5f).ToString().Replace(",", ".");
+            string z = (player.Position.Z - 0.5f).ToString().Replace(",", ".");
             string rotz = player.Heading.ToString().Replace(",", ".");
-            
+
             Main.ServerNpcs.Add(new Npc(PedHash.Rabbit, new Vector3(player.Position.X, player.Position.Y, player.Position.Z), player.Heading, player.Dimension));
 
             MySQLHandler.ExecuteAsync(

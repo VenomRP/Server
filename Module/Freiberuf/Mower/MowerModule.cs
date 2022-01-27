@@ -1,23 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Assets.Hair;
-using GVRP.Module.Assets.HairColor;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Barber.Windows;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Customization;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
+﻿using GTANetworkAPI;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
-
 using GVRP.Module.Players.Db;
-using GVRP.Module.Tattoo.Windows;
 using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Freiberuf.Mower
 {
@@ -51,7 +39,7 @@ namespace GVRP.Module.Freiberuf.Mower
         }
 
         public override void OnTenSecUpdate()
-        {            
+        {
             foreach (DbPlayer iPlayer in PlayersInJob.ToList())
             {
                 if (iPlayer == null || !iPlayer.IsValid()) return;
@@ -72,7 +60,7 @@ namespace GVRP.Module.Freiberuf.Mower
                         iPlayer.SendNewNotification($"Rasen gemaeht! (Inhalt {iPlayer.Player.Vehicle.GetData<int>("loadage") - rnd} (+{rnd}))");
                     }
                 }
-            }            
+            }
         }
     }
 }

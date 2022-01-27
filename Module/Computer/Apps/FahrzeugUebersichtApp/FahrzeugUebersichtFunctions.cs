@@ -1,11 +1,11 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using GVRP.Module.Computer.Apps.FahrzeuguebersichtApp;
+﻿using GVRP.Module.Computer.Apps.FahrzeuguebersichtApp;
 using GVRP.Module.Configurations;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles.Garages;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 using static GVRP.Module.Computer.Apps.FahrzeuguebersichtApp.Apps.FahrzeugUebersichtApp;
 
 namespace GVRP.Module.Computer.Apps.FahrzeugUebersichtApp
@@ -16,7 +16,7 @@ namespace GVRP.Module.Computer.Apps.FahrzeugUebersichtApp
         {
             List<OverviewVehicle> overviewVehicles = new List<OverviewVehicle>();
 
-            if(dbPlayer.LastQueryBreak.AddSeconds(5) > DateTime.Now)
+            if (dbPlayer.LastQueryBreak.AddSeconds(5) > DateTime.Now)
             {
                 dbPlayer.SendNewNotification("Antispam: Bitte 5 Sekunden warten!");
                 return overviewVehicles;
@@ -49,7 +49,7 @@ namespace GVRP.Module.Computer.Apps.FahrzeugUebersichtApp
         private static List<OverviewVehicle> GetOverviewVehiclesFromDb(string statement)
         {
             List<OverviewVehicle> ownVehicles = new List<OverviewVehicle>();
-            
+
             using (var keyConn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
             using (var keyCmd = keyConn.CreateCommand())
             {
@@ -65,7 +65,7 @@ namespace GVRP.Module.Computer.Apps.FahrzeugUebersichtApp
                             {
                                 position_x = 0,
                                 position_y = 0,
-                                position_z =0
+                                position_z = 0
                             };
 
                             OverviewVehicle vehicle = new OverviewVehicle
@@ -82,7 +82,7 @@ namespace GVRP.Module.Computer.Apps.FahrzeugUebersichtApp
                                 CarCor = ccor
                             };
 
-                            if(vehicle != null) ownVehicles.Add(vehicle);
+                            if (vehicle != null) ownVehicles.Add(vehicle);
                         }
                     }
                 }

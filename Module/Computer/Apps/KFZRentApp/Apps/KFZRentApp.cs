@@ -1,17 +1,14 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.ClientUI.Apps;
+using GVRP.Module.PlayerName;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.VehicleRent;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Computer.Apps.FahrzeugUebersichtApp;
-using GVRP.Module.PlayerName;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.VehicleRent;
 
 namespace GVRP.Module.Computer.Apps.KFZRentApp.Apps
 {
@@ -52,7 +49,7 @@ namespace GVRP.Module.Computer.Apps.KFZRentApp.Apps
         public KFZRentApp() : base("KFZRentApp") { }
 
         [RemoteEvent]
-        public void requestkfzrent(Player client) 
+        public void requestkfzrent(Player client)
         {
             DbPlayer p_DbPlayer = client.GetPlayer();
             if (p_DbPlayer == null || !p_DbPlayer.IsValid())

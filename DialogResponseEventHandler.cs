@@ -1,19 +1,9 @@
-﻿using System;
-using System.IO;
-using GTANetworkAPI;
-using System;
-using System.IO;
-using GVRP.Handler;
-using GVRP.Module.Business;
-using GVRP.Module.Chat;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Menu;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
-using GVRP.Module.Teams.Shelter;
 using GVRP.Module.Players.Events;
+using GVRP.Module.Players.PlayerAnimations;
+using System;
 
 
 namespace GVRP
@@ -77,20 +67,20 @@ namespace GVRP
                         //var pass2 = iPlayer.Password;
                         //if (pass == pass2)
                         //{
-                            iPlayer.AccountStatus = AccountStatus.LoggedIn;
+                        iPlayer.AccountStatus = AccountStatus.LoggedIn;
 
-                            iPlayer.Player.ResetData("loginStatusCheck");
+                        iPlayer.Player.ResetData("loginStatusCheck");
 
-                            iPlayer.CloseUserDialog(Dialogs.menu_login);
+                        iPlayer.CloseUserDialog(Dialogs.menu_login);
 
-                            player.SetSharedData("AC_Status", true);
+                        player.SetSharedData("AC_Status", true);
 
-                            iPlayer.Firstspawn = true;
-                            PlayerSpawn.OnPlayerSpawn(player);
+                        iPlayer.Firstspawn = true;
+                        PlayerSpawn.OnPlayerSpawn(player);
 
-                            // send phone data
-                            Phone.SetPlayerPhoneData(iPlayer);
-                            return;
+                        // send phone data
+                        Phone.SetPlayerPhoneData(iPlayer);
+                        return;
                         //}
                     }
                 }
@@ -112,7 +102,7 @@ namespace GVRP
                 {
                     if (string.IsNullOrEmpty(response) || response == null)
                     {
-                        iPlayer.SendNewNotification("Geben Sie ein Passwort ein!", title:"SERVER", notificationType:PlayerNotification.NotificationType.SERVER);
+                        iPlayer.SendNewNotification("Geben Sie ein Passwort ein!", title: "SERVER", notificationType: PlayerNotification.NotificationType.SERVER);
                         return;
                     }
 
@@ -176,7 +166,7 @@ namespace GVRP
                              MSG.Money.NotEnoughMoney(price));
                         return;
                     }
-                    
+
                     iPlayer.SendNewNotification(
                   "Sie haben sich " + amount + " ");
                     iPlayer.PlayAnimation(AnimationScenarioType.Animation,
@@ -211,7 +201,7 @@ namespace GVRP
                 return;
             }
         }
-        
+
         public static void SendChatMessageToAll(string command, bool sponly = false)
         {
             var players = Players.Instance.GetValidPlayers();

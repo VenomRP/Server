@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GVRP.Module.PointsOfInterest
 {
@@ -18,7 +18,7 @@ namespace GVRP.Module.PointsOfInterest
         public float X { get; }
         [JsonProperty(PropertyName = "y")]
         public float Y { get; }
-        [JsonProperty(PropertyName ="blip")]
+        [JsonProperty(PropertyName = "blip")]
         public uint Blip { get; }
         [JsonProperty(PropertyName = "blip_color")]
         public uint BlipColor { get; }
@@ -56,7 +56,7 @@ namespace GVRP.Module.PointsOfInterest
             {
                 Id = reader.GetUInt32("id");
                 Name = reader.GetString("name");
-                
+
                 PointOfInterests = new List<PointOfInterest>();
             }
 

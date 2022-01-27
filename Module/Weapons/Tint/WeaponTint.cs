@@ -1,5 +1,5 @@
-﻿using System;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Weapons.Tint
 {
@@ -8,7 +8,7 @@ namespace GVRP.Module.Weapons.Tint
         public uint Id { get; }
         public uint TypeId { get; }
         public string Name { get; }
-        
+
         public Tuple<uint, uint> Tuple { get; }
 
         public WeaponTint(MySqlDataReader reader) : base(reader)
@@ -16,7 +16,7 @@ namespace GVRP.Module.Weapons.Tint
             Id = reader.GetUInt32("id");
             TypeId = reader.GetUInt32("type_id");
             Name = reader.GetString("name");
-            
+
             Tuple = new Tuple<uint, uint>(Id, TypeId);
         }
 

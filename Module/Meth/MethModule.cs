@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Buffs;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Spawners;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Meth
 {
@@ -94,7 +91,7 @@ namespace GVRP.Module.Meth
                 //Meth Cooking
                 if (iPlayer.HasData("cooking") && iPlayer.DimensionType[0] == DimensionType.Camper)
                 {
-                    if(iPlayer.Player.Position.DistanceTo(CamperInteriorPosition) > 20.0f)
+                    if (iPlayer.Player.Position.DistanceTo(CamperInteriorPosition) > 20.0f)
                     {
                         Players.Players.Instance.SendMessageToAuthorizedUsers("log",
                             iPlayer.GetName() + " Camper glitch (kochend entfernt) wurde gekickt!");
@@ -137,7 +134,7 @@ namespace GVRP.Module.Meth
                         else
                         {
                             var meth = random.Next(3, 7); //3 included, 7 excluded
-                            
+
                             iPlayer.Container.RemoveItem(15, 1);
                             iPlayer.Container.RemoveItem(14, 1);
                             iPlayer.Container.RemoveItem(16, 1);
@@ -164,7 +161,7 @@ namespace GVRP.Module.Meth
                                     sendMethVehs.Add(journeyDbId);
                                     var sxveh =
                                         VehicleHandler.Instance.GetByVehicleDatabaseId(journeyDbId);
-                                    
+
                                     if (sxveh != null && sxveh.entity != null)
                                     {
                                         if (!CookingVehicles.Contains(sxveh)) CookingVehicles.Add(sxveh);
@@ -186,7 +183,7 @@ namespace GVRP.Module.Meth
             foreach (var xPlayer in Players.Players.Instance.GetValidPlayers())
             {
                 if (xPlayer == null || !xPlayer.IsValid()) continue;
-                foreach(KeyValuePair<Vector3, string> kvp in Messages)
+                foreach (KeyValuePair<Vector3, string> kvp in Messages)
                 {
                     if (xPlayer.Player.Position.DistanceTo(kvp.Key) < 30)
                     {
@@ -213,8 +210,8 @@ namespace GVRP.Module.Meth
                         sxVeh = VehicleHandler.Instance.GetByVehicleDatabaseId(dbPlayer.Player.Dimension);
                         if (sxVeh == null) return false;
                         if (sxVeh.SyncExtension.Locked) return false;
-                        if (sxVeh.entity.Model != (uint) VehicleHash.Journey &&
-                            sxVeh.entity.Model != (uint) VehicleHash.Camper)
+                        if (sxVeh.entity.Model != (uint)VehicleHash.Journey &&
+                            sxVeh.entity.Model != (uint)VehicleHash.Camper)
 
                             if (sxVeh.Visitors.Contains(dbPlayer))
                                 sxVeh.Visitors.Remove(dbPlayer);
@@ -229,7 +226,7 @@ namespace GVRP.Module.Meth
                         }
                         if (CookingPlayers.Contains(dbPlayer)) CookingPlayers.Remove(dbPlayer);
 
-                        
+
                         dbPlayer.Player.SetPosition(new Vector3(sxVeh.entity.Position.X + 3.0f, sxVeh.entity.Position.Y,
                             sxVeh.entity.Position.Z + 0.5f));
                         dbPlayer.ResetData("CamperEnterPos");
@@ -239,11 +236,11 @@ namespace GVRP.Module.Meth
                     sxVeh = VehicleHandler.Instance.GetClosestVehicle(dbPlayer.Player.Position);
 
                     if (sxVeh == null || sxVeh.databaseId == 0) return false;
-                    if (sxVeh.entity.Model != (uint) VehicleHash.Journey &&
-                        sxVeh.entity.Model != (uint) VehicleHash.Camper)
+                    if (sxVeh.entity.Model != (uint)VehicleHash.Journey &&
+                        sxVeh.entity.Model != (uint)VehicleHash.Camper)
                         return false;
                     if (sxVeh.SyncExtension.Locked) return false;
-                    
+
                     Task.Run(async () =>
                     {
                         dbPlayer.SetData("CamperEnterPos", dbPlayer.Player.Position);
@@ -255,10 +252,10 @@ namespace GVRP.Module.Meth
                         dbPlayer.Player.TriggerEvent("freezePlayer", true);
                         dbPlayer.Player.SetPosition(CamperInteriorPosition);
 
-                        
+
                         dbPlayer.Player.SetPosition(CamperInteriorPosition);
 
-                        
+
                         dbPlayer.Player.TriggerEvent("freezePlayer", false);
                     });
                     // Set Player INTO

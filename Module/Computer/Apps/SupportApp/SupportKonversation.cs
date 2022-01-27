@@ -1,11 +1,10 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Support;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps.SupportApp
 {
@@ -16,94 +15,94 @@ namespace GVRP.Module.Computer.Apps.SupportApp
         [RemoteEvent]
         public async void requestSupportKonversation(Player client, string name)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                if (string.IsNullOrEmpty(name)) return;
 
-                if (dbPlayer.RankId == 0)
-                {
-                    dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+            if (string.IsNullOrEmpty(name)) return;
 
-                var findplayer = Players.Players.Instance.FindPlayer(name);
-                if (findplayer == null) return;
+            if (dbPlayer.RankId == 0)
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                List<konversationObject> konversationList = new List<konversationObject>();
-                var messages = KonversationModule.Instance.GetTicketKonversation(findplayer);
+            var findplayer = Players.Players.Instance.FindPlayer(name);
+            if (findplayer == null) return;
 
-                foreach (var message in messages)
-                {
-                    konversationList.Add(new konversationObject() { id = (int)message.Player.Id, sender = message.Player.GetName(), receiver = message.Receiver, message = message.Message, date = message.Created_at });
-                }
+            List<konversationObject> konversationList = new List<konversationObject>();
+            var messages = KonversationModule.Instance.GetTicketKonversation(findplayer);
 
-                var konvObject = new konvObject { konversation = konversationList, status = TicketModule.Instance.getCurrentChatStatus(findplayer) };
-                var konversationJson = NAPI.Util.ToJson(konvObject);
+            foreach (var message in messages)
+            {
+                konversationList.Add(new konversationObject() { id = (int)message.Player.Id, sender = message.Player.GetName(), receiver = message.Receiver, message = message.Message, date = message.Created_at });
+            }
 
-                TriggerEvent(client, "responseSupportKonversation", konversationJson);
-            
+            var konvObject = new konvObject { konversation = konversationList, status = TicketModule.Instance.getCurrentChatStatus(findplayer) };
+            var konversationJson = NAPI.Util.ToJson(konvObject);
+
+            TriggerEvent(client, "responseSupportKonversation", konversationJson);
+
         }
 
         [RemoteEvent]
         public async void supportMessageSent(Player client, string name, string message)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                if (string.IsNullOrEmpty(message)) return;
 
-                if (dbPlayer.RankId == 0)
-                {
-                    dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+            if (string.IsNullOrEmpty(message)) return;
 
-                var findplayer = Players.Players.Instance.FindPlayer(name);
-                if (findplayer == null) return;
+            if (dbPlayer.RankId == 0)
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                Konversation konversationMessage = new Konversation(dbPlayer, true, message);
-                bool response = KonversationModule.Instance.Add(findplayer, konversationMessage);
+            var findplayer = Players.Players.Instance.FindPlayer(name);
+            if (findplayer == null) return;
 
-                var konvMessage = new konversationObject() { id = (int)konversationMessage.Player.Id, sender = konversationMessage.Player.GetName(), receiver = konversationMessage.Receiver, message = konversationMessage.Message, date = konversationMessage.Created_at };
-                var messageJson = NAPI.Util.ToJson(konvMessage);
+            Konversation konversationMessage = new Konversation(dbPlayer, true, message);
+            bool response = KonversationModule.Instance.Add(findplayer, konversationMessage);
 
-                TriggerEvent(client, "updateSupportKonversation", messageJson);
+            var konvMessage = new konversationObject() { id = (int)konversationMessage.Player.Id, sender = konversationMessage.Player.GetName(), receiver = konversationMessage.Receiver, message = konversationMessage.Message, date = konversationMessage.Created_at };
+            var messageJson = NAPI.Util.ToJson(konvMessage);
 
-                findplayer.SendNewNotification($"Antwort von {dbPlayer.GetName()}: {message}", title: "ADMIN", notificationType: PlayerNotification.NotificationType.ADMIN, duration:20000);
-                dbPlayer.SendNewNotification($"Die Antwort wurde an {findplayer.GetName()} gesendet!", title:"Admin", notificationType: PlayerNotification.NotificationType.ADMIN);
-            
+            TriggerEvent(client, "updateSupportKonversation", messageJson);
+
+            findplayer.SendNewNotification($"Antwort von {dbPlayer.GetName()}: {message}", title: "ADMIN", notificationType: PlayerNotification.NotificationType.ADMIN, duration: 20000);
+            dbPlayer.SendNewNotification($"Die Antwort wurde an {findplayer.GetName()} gesendet!", title: "Admin", notificationType: PlayerNotification.NotificationType.ADMIN);
+
         }
 
         [RemoteEvent]
         public async void allowTicketResponse(Player client, string name, bool status)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                if (string.IsNullOrEmpty(name)) return;
 
-                if (dbPlayer.RankId == 0)
-                {
-                    dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+            if (string.IsNullOrEmpty(name)) return;
 
-                var findplayer = Players.Players.Instance.FindPlayer(name);
-                if (findplayer == null) return;
+            if (dbPlayer.RankId == 0)
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                switch (status)
-                {
-                    case false:
-                        TicketModule.Instance.ChangeChatStatus(findplayer, false);
-                        findplayer.SendNewNotification($"Das Team Mitglied {dbPlayer.GetName()} hat den Chat geschlossen! Der /chat Befehl steht dir nicht mehr zur verfügung!", PlayerNotification.NotificationType.ADMIN, duration: 10000);
-                        break;
-                    case true:
-                        TicketModule.Instance.ChangeChatStatus(findplayer, true);
-                        findplayer.SendNewNotification($"Das Team Mitglied {dbPlayer.GetName()} hat eine Konversation mit dir begonnen. Um zu kommunizieren nutze: /chat nachricht", PlayerNotification.NotificationType.ADMIN, duration:15000);
-                        break;
-                }
-            
+            var findplayer = Players.Players.Instance.FindPlayer(name);
+            if (findplayer == null) return;
+
+            switch (status)
+            {
+                case false:
+                    TicketModule.Instance.ChangeChatStatus(findplayer, false);
+                    findplayer.SendNewNotification($"Das Team Mitglied {dbPlayer.GetName()} hat den Chat geschlossen! Der /chat Befehl steht dir nicht mehr zur verfügung!", PlayerNotification.NotificationType.ADMIN, duration: 10000);
+                    break;
+                case true:
+                    TicketModule.Instance.ChangeChatStatus(findplayer, true);
+                    findplayer.SendNewNotification($"Das Team Mitglied {dbPlayer.GetName()} hat eine Konversation mit dir begonnen. Um zu kommunizieren nutze: /chat nachricht", PlayerNotification.NotificationType.ADMIN, duration: 15000);
+                    break;
+            }
+
         }
 
         public void sendMessage(Player client, string json)

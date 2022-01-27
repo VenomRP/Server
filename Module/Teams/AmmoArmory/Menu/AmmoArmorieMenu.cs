@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 using GVRP.Module.Teams.AmmoPackageOrder;
 using GVRP.Module.Teams.Shelter;
 
@@ -65,7 +55,7 @@ namespace GVRP.Module.Teams.AmmoArmory
                     int hasChests = iPlayer.Container.GetItemAmount(AmmoArmoryModule.AmmoChestItem);
                     if (hasChests > 0)
                     {
-                        if(ammoArmorie.Packets+(hasChests * AmmoPackageOrderModule.AmmoChestToPackageMultipliert) >= AmmoArmoryModule.MaxLagerBestand)
+                        if (ammoArmorie.Packets + (hasChests * AmmoPackageOrderModule.AmmoChestToPackageMultipliert) >= AmmoArmoryModule.MaxLagerBestand)
                         {
                             iPlayer.SendNewNotification("Maximale Anzahl erreicht! (" + AmmoArmoryModule.MaxLagerBestand + ")");
                             return false;
@@ -74,7 +64,7 @@ namespace GVRP.Module.Teams.AmmoArmory
                         {
                             ammoArmorie.ChangePackets(hasChests * AmmoPackageOrderModule.AmmoChestToPackageMultipliert);
                             iPlayer.Container.RemoveItem(AmmoArmoryModule.AmmoChestItem, hasChests);
-                            iPlayer.SendNewNotification($"Sie haben {hasChests} Kisten ({hasChests* AmmoPackageOrderModule.AmmoChestToPackageMultipliert} Pakete) eingelagert!");
+                            iPlayer.SendNewNotification($"Sie haben {hasChests} Kisten ({hasChests * AmmoPackageOrderModule.AmmoChestToPackageMultipliert} Pakete) eingelagert!");
                             return true;
                         }
                     }
@@ -88,7 +78,7 @@ namespace GVRP.Module.Teams.AmmoArmory
                     if (ammoArmorie == null || !iPlayer.Team.IsGangsters() || iPlayer.Team.Id != ammoArmorie.TeamId) return false;
 
                     if (iPlayer.TeamRank < 11) return false;
-                    
+
                     MenuManager.Instance.Build(PlayerMenu.AmmoArmoriePriceMenu, iPlayer).Show(iPlayer);
                     return false;
                 }
@@ -104,7 +94,7 @@ namespace GVRP.Module.Teams.AmmoArmory
                         {
                             int RequiredPackets = ammoArmorieItem.GetRequiredPacketsForTeam(iPlayer.Team);
 
-                            if(ammoArmorie.Packets < RequiredPackets)
+                            if (ammoArmorie.Packets < RequiredPackets)
                             {
                                 iPlayer.SendNewNotification("Nicht genug Waffenpakete!");
                                 return false;
@@ -113,7 +103,7 @@ namespace GVRP.Module.Teams.AmmoArmory
                             ItemModel resultItem = ItemModelModule.Instance.Get(ammoArmorieItem.ItemId);
                             if (resultItem == null) return false;
 
-                            if(iPlayer.Container.CanInventoryItemAdded(resultItem))
+                            if (iPlayer.Container.CanInventoryItemAdded(resultItem))
                             {
                                 if (ammoArmorieItem.TeamPrice > 0)
                                 {
@@ -132,7 +122,7 @@ namespace GVRP.Module.Teams.AmmoArmory
                                 ammoArmorie.ChangePackets(-RequiredPackets);
                                 iPlayer.Container.AddItem(resultItem);
                                 iPlayer.SendNewNotification($"Sie haben {resultItem.Name} für ${ammoArmorieItem.TeamPrice} (P: {RequiredPackets}) entnommen!");
-                                
+
                                 return false;
                             }
                             else

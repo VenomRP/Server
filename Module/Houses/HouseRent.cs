@@ -1,7 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GVRP.Module.Houses
 {
@@ -21,7 +18,7 @@ namespace GVRP.Module.Houses
             SlotId = reader.GetInt32("slot_id");
             RentPrice = reader.GetInt32("rent_price");
         }
-        
+
         public HouseRent(uint houseId, uint playerId, int slotId, int rentPrice)
         {
             HouseId = houseId;

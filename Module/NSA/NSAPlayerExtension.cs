@@ -1,11 +1,8 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Crime;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams;
+using System;
 
 namespace GVRP.Module.NSA
 {
@@ -25,7 +22,7 @@ namespace GVRP.Module.NSA
         {
             NSAModule.TransactionHistory.Add(new TransactionHistoryObject() { Description = Description, Added = DateTime.Now, Position = position, TransactionType = TransactionType.MONEY });
         }
-        
+
         public static void AddEnergyHistory(string Description, Vector3 position)
         {
             NSAModule.TransactionHistory.Add(new TransactionHistoryObject() { Description = Description, Added = DateTime.Now, Position = position, TransactionType = TransactionType.ENERGY });

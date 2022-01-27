@@ -10,7 +10,7 @@ namespace GVRP.Module.Service
         public ServiceApp() : base("ServiceRequestApp") { }
 
         [RemoteEvent]
-        public void cancelServiceRequest(Player client) 
+        public void cancelServiceRequest(Player client)
         {
             var dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
@@ -60,7 +60,7 @@ namespace GVRP.Module.Service
                             break;
                         case 14:
                             dbPlayer.ResetData("service");
-                            TeamModule.Instance[(int) teams.TEAM_GOV].SendNotification($"Die Anfrage von { dbPlayer.GetName() } ({ dbPlayer.ForumId }) wurde abgebrochen!");
+                            TeamModule.Instance[(int)teams.TEAM_GOV].SendNotification($"Die Anfrage von { dbPlayer.GetName() } ({ dbPlayer.ForumId }) wurde abgebrochen!");
                             dbPlayer.SendNewNotification("Sie haben die Anfrage abgebrochen!");
                             break;
                     }

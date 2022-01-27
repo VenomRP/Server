@@ -1,5 +1,4 @@
-﻿using System;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 
@@ -14,7 +13,7 @@ namespace GVRP.Module.Menu
             {
                 //CloseUserMenu(iPlayer.Player, iPlayer.WatchMenu);
             }
-            
+
             ShowMenu(iPlayer.Player, MenuID);
             iPlayer.WatchMenu = MenuID;
         }
@@ -23,7 +22,7 @@ namespace GVRP.Module.Menu
         {
             DbPlayer iPlayer = player.GetPlayer();
             if (iPlayer == null) return;
-            if(!noHide) HideMenu(player, MenuID);
+            if (!noHide) HideMenu(player, MenuID);
             /*if (iPlayer.Freezed == false)
             {
                 player.FreezePosition = false;

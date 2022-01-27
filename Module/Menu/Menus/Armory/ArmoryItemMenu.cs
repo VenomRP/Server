@@ -1,5 +1,4 @@
 ﻿using GVRP.Module.Armory;
-using GVRP.Module.GTAN;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
@@ -51,10 +50,10 @@ namespace GVRP
                 switch (index)
                 {
                     case 0:
-                        MenuManager.DismissMenu(iPlayer.Player, (int) PlayerMenu.ArmoryItems);
+                        MenuManager.DismissMenu(iPlayer.Player, (int)PlayerMenu.ArmoryItems);
                         return false;
                     case 1:
-                        MenuManager.DismissMenu(iPlayer.Player, (int) PlayerMenu.Armory);
+                        MenuManager.DismissMenu(iPlayer.Player, (int)PlayerMenu.Armory);
                         return false;
                     default:
                         var actualIndex = 0;

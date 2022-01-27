@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using GVRP.Module.Items;
-using GVRP.Module.Laboratories;
+﻿using GVRP.Module.Laboratories;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams;
 
 namespace GVRP
 {
@@ -38,7 +33,7 @@ namespace GVRP
             Menu menu = new Menu(Menu, "Labor Inhalte");
             menu.Add("Schließen", "");
             menu.Add("Durchsuchen", "");
-            if(dbPlayer.IsACop())
+            if (dbPlayer.IsACop())
                 menu.Add("Beschlagnahmen", "");
             else
                 menu.Add("Ausrauben", "");

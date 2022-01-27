@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 
 namespace GVRP.Module.Warehouse
 {
@@ -62,10 +52,10 @@ namespace GVRP.Module.Warehouse
                         if (idx == index)
                         {
                             // Check is enough there...
-                            
+
                             if (warehouseItem.ResultItemBestand > 0)
                             {
-                                if(!iPlayer.Container.CanInventoryItemAdded(warehouseItem.ResultItemId))
+                                if (!iPlayer.Container.CanInventoryItemAdded(warehouseItem.ResultItemId))
                                 {
                                     iPlayer.SendNewNotification("Sie haben nicht genug platz im Inventar!");
                                     return false;

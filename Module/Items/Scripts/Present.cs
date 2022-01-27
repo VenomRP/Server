@@ -1,9 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -17,7 +13,7 @@ namespace GVRP.Module.Items.Scripts
                 return false;
             }
 
-            if(ItemData.Id == 550) // großes Geschenk
+            if (ItemData.Id == 550) // großes Geschenk
             {
                 iPlayer.Container.AddItem(504); // 25% KFZ
                 iPlayer.Container.AddItem(552); // Teddy

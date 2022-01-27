@@ -1,13 +1,11 @@
-﻿using System;
-using System.Linq;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Business;
 using GVRP.Module.Farming;
-using GVRP.Module.GTAN;
-using GVRP.Module.Injury;
 using GVRP.Module.Players.Db;
 using GVRP.Module.VehicleRent;
 using GVRP.Module.Vehicles;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Players
 {
@@ -95,7 +93,7 @@ namespace GVRP.Module.Players
                     return true;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }
@@ -110,7 +108,7 @@ namespace GVRP.Module.Players
 
         public static void SetCannotInteract(this DbPlayer iPlayer, bool status)
         {
-            if(status) iPlayer.SetData("userCannotInterrupt", true);
+            if (status) iPlayer.SetData("userCannotInterrupt", true);
             else iPlayer.ResetData("userCannotInterrupt");
         }
         public static bool CanInteract(this DbPlayer iPlayer, bool ignoreFarming = false)

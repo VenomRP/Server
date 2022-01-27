@@ -1,9 +1,7 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Players.Db;
 using System;
 using System.Collections.Generic;
-using GVRP.Module.Injury;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Service
 {
@@ -17,7 +15,7 @@ namespace GVRP.Module.Service
         public string Telnr { get; }
 
         public DateTime Created { get; set; }
-        
+
         public Service(Vector3 position, string message, uint teamId, DbPlayer iPlayer, string description = "", string telefon = "0")
         {
             Position = position;

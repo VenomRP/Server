@@ -1,8 +1,8 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Items;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
 
 namespace GVRP.Module.Players.Phone.Apps
 {
@@ -32,7 +32,7 @@ namespace GVRP.Module.Players.Phone.Apps
             return Id;
         }
     }
-    
+
     public class HomeApp : SimpleApp
     {
         public HomeApp() : base("HomeApp")
@@ -40,7 +40,7 @@ namespace GVRP.Module.Players.Phone.Apps
         }
 
         [RemoteEvent]
-        public void requestApps(Player player) 
+        public void requestApps(Player player)
         {
 
             var dbPlayer = player.GetPlayer();
@@ -82,14 +82,14 @@ namespace GVRP.Module.Players.Phone.Apps
             //TriggerEvent(player, "responseApps", "[" + teamstring + " " + business + " {\"id\":\"FunkApp\",\"name\":\"Funkgerät\",\"icon\": \"FunkApp.png\"}, {\"id\":\"GpsApp\",\"name\":\"GPS\",\"icon\": \"GpsApp.png\"}, {\"id\":\"ContactsApp\",\"name\":\"Kontakte\",\"icon\": \"ContactsApp.png\"}, {\"id\":\"LifeInvaderApp\",\"name\":\"LifeInvader\",\"icon\": \"LifeinvaderApp.png\"}, {\"id\":\"TaxiApp\",\"name\":\"Taxi\",\"icon\": \"TaxiApp.png\"}, {\"id\":\"NewsApp\",\"name\":\"WeazelNews\",\"icon\": \"NewsApp.png\"}, {\"id\":\"TelefonApp\",\"name\":\"Telefon\",\"icon\": \"TelefonApp.png\"}, {\"id\":\"ProfileApp\",\"name\":\"Profil\",\"icon\": \"ProfilApp.png\"}, {\"id\":\"MessengerApp\",\"name\":\"SMS\",\"icon\": \"MessengerApp.png\"}, {\"id\":\"SettingsApp\",\"name\":\"Settings\",\"icon\": \"SettingsApp.png\"}, {\"id\":\"CalculatorApp\",\"name\":\"Rechner\",\"icon\": \"CalculatorApp.png\"}, {\"id\":\"ServiceRequestApp\",\"name\":\"Services\",\"icon\": \"ServiceApp.png\"}]");
         }
         [RemoteEvent]
-        public void requestPhoneWallpaper(Player player) 
+        public void requestPhoneWallpaper(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            
-                //TriggerEvent(player, "responsePhoneWallpaper", dbPlayer.wallpaper.File);
-            
-            
+
+            //TriggerEvent(player, "responsePhoneWallpaper", dbPlayer.wallpaper.File);
+
+
         }
 
     }

@@ -1,8 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Module.Chat;
 using GVRP.Module.Clothes;
 using GVRP.Module.Customization;
@@ -10,6 +6,10 @@ using GVRP.Module.Logging;
 using GVRP.Module.Outfits;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 //Possible problem. Removed on use, but not possible to add without weapon. Readd item?
 namespace GVRP.Module.Items.Scripts
 {
@@ -30,7 +30,7 @@ namespace GVRP.Module.Items.Scripts
                     Chats.sendProgressBar(iPlayer, 4000);
                     iPlayer.Player.TriggerEvent("freezePlayer", true);
 
-                    if(item.Data == null || !item.Data.ContainsKey("owner") || item.Data["owner"] != iPlayer.Id)
+                    if (item.Data == null || !item.Data.ContainsKey("owner") || item.Data["owner"] != iPlayer.Id)
                     {
                         iPlayer.SendNewNotification("Du kannst keine Kleidung von anderen Personen anziehen!");
                         return false;

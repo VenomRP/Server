@@ -1,13 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.Business;
-using GVRP.Module.Business.FuelStations;
-using GVRP.Module.GTAN;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 
@@ -25,7 +17,7 @@ namespace GVRP.Module.Anticheat
 
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null) return;
-            if(!dbPlayer.Player.Exists) { return; }
+            if (!dbPlayer.Player.Exists) { return; }
 
             string l_Cheat = "Cheat Engine";
 
@@ -59,7 +51,7 @@ namespace GVRP.Module.Anticheat
             Discord.SendMessage($"{dbPlayer.Player.Name} hat ein Anticheat-Log ausgelöst! ({cheatCode})", "", DiscordHandler.Channels.ANTICHEAT);
             Logger.AddActionLogg(dbPlayer.Id, cheatCode);
             Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({l_Cheat}) gegeben.");
-            
+
 
         }
 
@@ -68,7 +60,7 @@ namespace GVRP.Module.Anticheat
         {
             return;
             var dbPlayer = player.GetPlayer();
-            if(!dbPlayer.Player.Exists) { return; }
+            if (!dbPlayer.Player.Exists) { return; }
 
             Players.Players.Instance.SendMessageToAuthorizedUsers("teamchat", $"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({allowedhealth - health}).");
             Discord.SendMessage($"Dringender Anticheat-Verdacht: {dbPlayer.Player.Name} ({health - allowedhealth})", "", DiscordHandler.Channels.ANTICHEAT);

@@ -1,9 +1,8 @@
-﻿using System;
+﻿using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using GVRP.Module.Logging;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Support
 {

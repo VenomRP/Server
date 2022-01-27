@@ -1,14 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Business.Apps
 {
@@ -80,8 +80,8 @@ namespace GVRP.Module.Business.Apps
             {
                 if (member.Value == null) continue;
                 var findplayer = Players.Players.Instance.FindPlayerById(member.Value.PlayerId);
-                if (findplayer == null || !findplayer.IsValid() || findplayer.IsInAdminDuty() || findplayer.IsInGuideDuty())continue;                
-                
+                if (findplayer == null || !findplayer.IsValid() || findplayer.IsInAdminDuty() || findplayer.IsInGuideDuty()) continue;
+
                 var businessMember = member.Value;
                 var currentDbPlayer = Players.Players.Instance.GetByDbId(member.Key);
                 if (currentDbPlayer == null || !currentDbPlayer.IsValid()) continue;
@@ -95,7 +95,7 @@ namespace GVRP.Module.Business.Apps
 
             var membersManageObject = new MembersManageObject { BusinessMemberList = members, ManagePermission = manage };
             var membersJson = JsonConvert.SerializeObject(membersManageObject);
-                
+
             if (!string.IsNullOrEmpty(membersJson))
             {
                 TriggerEvent(dbPlayer.Player, "responseBusinessMembers", membersJson);
@@ -125,7 +125,7 @@ namespace GVRP.Module.Business.Apps
             DbPlayer l_DbPlayer = p_Player.GetPlayer();
             if (l_DbPlayer == null || !l_DbPlayer.IsValid() || !l_DbPlayer.IsMemberOfBusiness())
                 return;
-                
+
             l_DbPlayer.RemoveBusinessMembership(l_DbPlayer.ActiveBusiness);
             l_DbPlayer.UpdateApps();
         }
@@ -137,10 +137,10 @@ namespace GVRP.Module.Business.Apps
             if (l_DbPlayer == null || !l_DbPlayer.IsValid() || !l_DbPlayer.IsMemberOfBusiness())
                 return;
             var l_edit_Member = l_DbPlayer.ActiveBusiness.GetMember((uint)l_DbPlayer.Id);
-            
+
             if (l_edit_Member == null || (!l_edit_Member.Owner && !l_edit_Member.Manage))
             {
-                l_DbPlayer.SendNewNotification("Dazu bist du nicht berechtigt.", title:"Business", notificationType:PlayerNotification.NotificationType.BUSINESS);
+                l_DbPlayer.SendNewNotification("Dazu bist du nicht berechtigt.", title: "Business", notificationType: PlayerNotification.NotificationType.BUSINESS);
                 return;
             }
 
@@ -150,7 +150,8 @@ namespace GVRP.Module.Business.Apps
         [RemoteEvent]
         public void editBusinessMember(Player p_Player, int p_MemberID, bool p_Bank, bool p_Manage, int p_Salary, bool raffinery, bool fuelstation, bool nightclub, bool tattoo)
         {
-            try { 
+            try
+            {
                 DbPlayer l_DbPlayer = p_Player.GetPlayer();
                 if (l_DbPlayer == null || !l_DbPlayer.IsValid() || !l_DbPlayer.IsMemberOfBusiness())
                     return;
@@ -166,7 +167,8 @@ namespace GVRP.Module.Business.Apps
                     return;
 
                 //If owner gets edited by someone else then himself OR edit player has no permission
-                if ((l_Member.Owner && !l_edit_Member.Owner) || !l_edit_Member.Manage) {
+                if ((l_Member.Owner && !l_edit_Member.Owner) || !l_edit_Member.Manage)
+                {
                     l_DbPlayer.SendNewNotification("Dazu bist du nicht berechtigt.", title: "Business", notificationType: PlayerNotification.NotificationType.BUSINESS);
                     return;
                 }

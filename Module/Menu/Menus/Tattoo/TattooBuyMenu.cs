@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Business;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
@@ -25,7 +18,7 @@ namespace GVRP
             var tattooShop = TattooShopModule.Instance.Get(tattooShopId);
             if (tattooShop == null || tattooShop.BusinessId != 0) return null;
 
-            if(!iPlayer.GetActiveBusinessMember().Owner)
+            if (!iPlayer.GetActiveBusinessMember().Owner)
             {
                 iPlayer.SendNewNotification("Sie muessen ein Business besitzen!");
             }
@@ -48,12 +41,12 @@ namespace GVRP
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(iPlayer);
                     return false;
                 }
-                if(index == 1)
+                if (index == 1)
                 {
                     // Buy
                     if (!iPlayer.TryData("tattooShopId", out uint tattooShopId)) return false;

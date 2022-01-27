@@ -4,9 +4,9 @@
     {
         protected override string GetQuery()
         {
-           return "SELECT * FROM `computer_apps`;"; 
+            return "SELECT * FROM `computer_apps`;";
 
-            
+
         }
     }
 }

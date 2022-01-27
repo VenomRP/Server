@@ -1,13 +1,13 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players.Seat
 {
     public class PlayerSeat : Loadable<int>
     {
         public int Hash { get; }
-        
+
         public List<Place> Places { get; }
 
         public PlayerSeat(MySqlDataReader reader) : base(reader)
@@ -26,7 +26,7 @@ namespace GVRP.Module.Players.Seat
             public int Hash { get; }
             public Vector3 Offset { get; }
             public float Heading { get; }
-            
+
             public Place(MySqlDataReader reader)
             {
                 Hash = reader.GetInt32("hash");

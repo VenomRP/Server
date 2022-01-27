@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Menu;
@@ -8,6 +6,8 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
 using GVRP.Module.Teams.Shelter;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Dealer.Menu
 {
@@ -83,9 +83,9 @@ namespace GVRP.Module.Dealer.Menu
                             break;
                         }
 
-                        int l_MethPrice         = Convert.ToInt32(l_MethAmount * l_PricePerMeth);
-                        int l_MethFBank         = Convert.ToInt32(l_MethPrice * 0.05f);
-                        int l_PlayerMethPrice   = Convert.ToInt32(l_MethPrice * 0.95f);
+                        int l_MethPrice = Convert.ToInt32(l_MethAmount * l_PricePerMeth);
+                        int l_MethFBank = Convert.ToInt32(l_MethPrice * 0.05f);
+                        int l_PlayerMethPrice = Convert.ToInt32(l_MethPrice * 0.95f);
 
                         dbPlayer.Container.RemoveItem(DealerModule.Instance.MethItemId, (int)l_MethAmount);
 
@@ -131,20 +131,20 @@ namespace GVRP.Module.Dealer.Menu
                                 string amount_str = Convert.ToString(keyValuePair.Value);
                                 amount = Convert.ToUInt32(amount_str);
                             }
-                           /* else if (keyValuePair.Key == "quality")
-                            {
-                                string quality_str = Convert.ToString(keyValuePair.Value);
-                                quality = Convert.ToDouble(quality_str);*/
+                            /* else if (keyValuePair.Key == "quality")
+                             {
+                                 string quality_str = Convert.ToString(keyValuePair.Value);
+                                 quality = Convert.ToDouble(quality_str);*/
                             //}
 
                         }
 
-                       if (amount == 0)// || quality == 0)
+                        if (amount == 0)// || quality == 0)
                         {
                             dbPlayer.SendNewNotification("Mit dieser Kiste scheint etwas nicht korrekt zu sein.");
                             break;
                         }
-                      
+
                         if (l_Dealer.MethResource.GetAvailableAmountToSell() < amount)
                         {
                             dbPlayer.SendNewNotification($"Alter... Das is zu viel. Ich kann nur noch {l_Dealer.MethResource.GetAvailableAmountToSell().ToString()} annehmen...");
@@ -153,7 +153,7 @@ namespace GVRP.Module.Dealer.Menu
 
                         double offset = (1 - 0.90) * 100;
                         l_PricePerPureMeth += (uint)offset;
-                        
+
                         int l_PureMethPrice = Convert.ToInt32(amount * l_PricePerPureMeth);
                         int l_PureMethFBank = Convert.ToInt32(l_PureMethPrice * 0.05f);
                         int l_PlayerPureMethPrice = Convert.ToInt32(l_PureMethPrice * 0.95f);
@@ -232,13 +232,13 @@ namespace GVRP.Module.Dealer.Menu
                             if (keyValuePair.Key == "amount")
                             {
                                 string amount_str = Convert.ToString(keyValuePair.Value);
-                                amount = Convert.ToUInt32   (amount_str);
+                                amount = Convert.ToUInt32(amount_str);
                             }
-                           /* else if (keyValuePair.Key == "quality")
-                            {
-                                string quality_str = Convert.ToString(keyValuePair.Value);
-                                quality = Convert.ToDouble(quality_str);
-                            }*/
+                            /* else if (keyValuePair.Key == "quality")
+                             {
+                                 string quality_str = Convert.ToString(keyValuePair.Value);
+                                 quality = Convert.ToDouble(quality_str);
+                             }*/
 
                         }
 

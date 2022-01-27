@@ -1,10 +1,10 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Teams.MetaData;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Teams
 {
@@ -15,7 +15,7 @@ namespace GVRP.Module.Teams
         public string ShortName { get; }
         public int ColorId { get; }
         public bool HasDuty { get; }
-        public HashSet<double>Frequenzen { get; }
+        public HashSet<double> Frequenzen { get; }
         public Dictionary<int, int> Salary { get; }
         public int BlipColor { get; }
         public Color RgbColor { get; }
@@ -36,10 +36,10 @@ namespace GVRP.Module.Teams
         public Container MineContainerSchmelzCoal { get; set; }
         public Container MineContainerStorage { get; set; }
 
-        public bool IsGangster { get;set; }
+        public bool IsGangster { get; set; }
 
         public TeamMetaData TeamMetaData { get; set; }
-        
+
         public List<Banks.BankHistory.BankHistory> BankHistory { get; set; }
         protected DbTeam(MySqlDataReader reader) : base(reader)
         {
@@ -54,7 +54,7 @@ namespace GVRP.Module.Teams
             var temp = reader.GetString("rgb").Split(",");
             MaxMembers = reader.GetInt32("max_slots");
             RgbColor = new Color(Int32.Parse(temp[0]), Int32.Parse(temp[1]), Int32.Parse(temp[2]));
-            
+
             IsGangster = reader.GetInt32("isGangster") == 1;
 
             IsBusinessTeam = reader.GetInt32("isBusinessTeam") == 1;
@@ -126,7 +126,7 @@ namespace GVRP.Module.Teams
         {
             return TeamModule.Instance.IsWeaponTeamId(Id);
         }
-        
+
         public bool IsMethTeam()
         {
             return TeamModule.Instance.IsMethTeamId(Id);
@@ -135,7 +135,7 @@ namespace GVRP.Module.Teams
         public bool IsWeedTeam()
         {
             return TeamModule.Instance.IsWeedTeamId(Id);
-        } 
+        }
 
         public void LoadBankHistory()
         {
@@ -171,8 +171,8 @@ namespace GVRP.Module.Teams
 
         public bool IsCops()
         {
-            return Id == (int) teams.TEAM_POLICE || Id == (int)teams.TEAM_COUNTYPD || Id == (int) teams.TEAM_FIB ||
-                   Id == (int)teams.TEAM_GOV || Id == (int) teams.TEAM_ARMY || Id == (int) teams.TEAM_SWAT;
+            return Id == (int)teams.TEAM_POLICE || Id == (int)teams.TEAM_COUNTYPD || Id == (int)teams.TEAM_FIB ||
+                   Id == (int)teams.TEAM_GOV || Id == (int)teams.TEAM_ARMY || Id == (int)teams.TEAM_SWAT;
         }
 
         public bool GetsExtraNightPayday()
@@ -184,8 +184,8 @@ namespace GVRP.Module.Teams
         public bool IsStaatsfraktion()
         {
             return Id == (int)teams.TEAM_POLICE || Id == (int)teams.TEAM_COUNTYPD || Id == (int)teams.TEAM_FIB ||
-                   Id == (int)teams.TEAM_ARMY || Id == (int)teams.TEAM_SWAT || 
-                   Id == (int)teams.TEAM_MEDIC || Id == (int)teams.TEAM_GOV || 
+                   Id == (int)teams.TEAM_ARMY || Id == (int)teams.TEAM_SWAT ||
+                   Id == (int)teams.TEAM_MEDIC || Id == (int)teams.TEAM_GOV ||
                    Id == (int)teams.TEAM_DPOS || Id == (int)teams.TEAM_NEWS;
         }
 
@@ -196,12 +196,12 @@ namespace GVRP.Module.Teams
 
         public bool CanRegisterVehicles()
         {
-            return Id == (int) teams.TEAM_DPOS || Id == (int) teams.TEAM_DRIVINGSCHOOL;
+            return Id == (int)teams.TEAM_DPOS || Id == (int)teams.TEAM_DRIVINGSCHOOL;
         }
-        
+
         public bool IsMedics()
         {
-            return Id == (int) teams.TEAM_MEDIC;
+            return Id == (int)teams.TEAM_MEDIC;
         }
 
         public override string ToString()

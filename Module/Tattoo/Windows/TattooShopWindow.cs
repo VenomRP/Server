@@ -1,17 +1,15 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GVRP.Module.Assets.Tattoo;
 using GVRP.Module.Business;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Customization;
-using GVRP.Module.GTAN;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Tattoo;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Tattoo.Windows
 {
@@ -87,7 +85,7 @@ namespace GVRP.Module.Tattoo.Windows
                             if (assetsTattoo != null)
                             {
                                 TattooAddedItem tattooAddedItem = tattooShop.tattooLicenses.Find(l => l.AssetsTattooId == assetsTattoo.Id);
-                                TattooLicense tattooLicense = TattooLicenseModule.Instance.Get((uint) tattooAddedItem.TattooLicenseId);
+                                TattooLicense tattooLicense = TattooLicenseModule.Instance.Get((uint)tattooAddedItem.TattooLicenseId);
                                 if (tattooLicense == null) return;
 
                                 if (!dbPlayer.TakeMoney(assetsTattoo.Price))
@@ -104,8 +102,8 @@ namespace GVRP.Module.Tattoo.Windows
 
                                 dbPlayer.SendNewNotification($"Tattoo {assetsTattoo.Name} fuer ${assetsTattoo.Price} gekauft!");
 
-                                tattooShop.AddBank((int) (assetsTattoo.Price * 0.5));
-                                Logger.AddTattoShopLog(tattooShop.Id, dbPlayer.Id, (int) (assetsTattoo.Price * 0.5), true);
+                                tattooShop.AddBank((int)(assetsTattoo.Price * 0.5));
+                                Logger.AddTattoShopLog(tattooShop.Id, dbPlayer.Id, (int)(assetsTattoo.Price * 0.5), true);
 
 
                                 dbPlayer.ApplyDecorations();

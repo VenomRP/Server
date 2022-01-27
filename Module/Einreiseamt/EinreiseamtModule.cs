@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Commands;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using static GVRP.Module.Chat.Chats;
+using System.Linq;
 
 namespace GVRP.Module.Einreiseamt
 {
@@ -52,14 +47,14 @@ namespace GVRP.Module.Einreiseamt
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandeinreiseamt(Player player) 
+        public void Commandeinreiseamt(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.IsValid()) return;
             if (!iPlayer.IsEinreiseAmt()) return;
 
             string names = "";
-            foreach(DbPlayer xPlayer in Players.Players.Instance.GetValidPlayers().Where(p => p.NeuEingereist()))
+            foreach (DbPlayer xPlayer in Players.Players.Instance.GetValidPlayers().Where(p => p.NeuEingereist()))
             {
                 names += xPlayer.GetName() + " ,";
             }
@@ -70,7 +65,7 @@ namespace GVRP.Module.Einreiseamt
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandemember(Player player) 
+        public void Commandemember(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.IsValid()) return;
@@ -110,7 +105,7 @@ namespace GVRP.Module.Einreiseamt
             DbPlayer foundPlayer = Players.Players.Instance.FindPlayer(destplayer);
             if (foundPlayer == null || !foundPlayer.IsValid()) return;
 
-            if(foundPlayer.Einwanderung == 1)
+            if (foundPlayer.Einwanderung == 1)
             {
                 foundPlayer.Einwanderung = 0;
                 foundPlayer.SendNewNotification($"{dbPlayer.GetName()} hat ihnen die Einreiselizenz entzogen!");

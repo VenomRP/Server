@@ -6,12 +6,12 @@ namespace GVRP.Module.Players
     {
         public static bool CanUseMegaphone(this DbPlayer iPlayer)
         {
-            return iPlayer.IsACop() || 
-                   iPlayer.TeamId == (int) teams.TEAM_MEDIC ||
-                   iPlayer.TeamId == (int) teams.TEAM_DPOS || 
-                   iPlayer.TeamId == (int) teams.TEAM_NEWS ||
-                   iPlayer.TeamId == (int) teams.TEAM_GOV ||
-                   iPlayer.TeamId == (int) teams.TEAM_DRIVINGSCHOOL;
+            return iPlayer.IsACop() ||
+                   iPlayer.TeamId == (int)teams.TEAM_MEDIC ||
+                   iPlayer.TeamId == (int)teams.TEAM_DPOS ||
+                   iPlayer.TeamId == (int)teams.TEAM_NEWS ||
+                   iPlayer.TeamId == (int)teams.TEAM_GOV ||
+                   iPlayer.TeamId == (int)teams.TEAM_DRIVINGSCHOOL;
         }
 
         //Todo: needs externalized player module

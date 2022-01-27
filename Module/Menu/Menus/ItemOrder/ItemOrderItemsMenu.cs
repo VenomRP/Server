@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Module.Chat;
+﻿using GVRP.Module.Chat;
 using GVRP.Module.Gangwar;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
@@ -10,6 +6,9 @@ using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Schwarzgeld;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP
 {
@@ -56,12 +55,12 @@ namespace GVRP
                     {
                         if (itemOrderNpc.RequiredTeams.Count > 0 && !itemOrderNpc.RequiredTeams.Contains((int)iPlayer.TeamId)) return false;
                         //if (!iPlayer.CanInteractAntiFlood()) return false;
-                        if(npcItem.RangRestricted > iPlayer.TeamRank)
+                        if (npcItem.RangRestricted > iPlayer.TeamRank)
                         {
                             iPlayer.SendNewNotification($"Sie benötigen mindestens Rang {iPlayer.TeamRank}!");
                             return false;
                         }
-                        if(npcItem.Limited != 0 && ItemOrderModule.Instance.GetItemOrderCountByItem(iPlayer, npcItem) >= npcItem.Limited)
+                        if (npcItem.Limited != 0 && ItemOrderModule.Instance.GetItemOrderCountByItem(iPlayer, npcItem) >= npcItem.Limited)
                         {
                             iPlayer.SendNewNotification($"Maximal {npcItem.Limited} {npcItem.RewardItem.Name} herstellbar!");
                             return true;
@@ -96,7 +95,7 @@ namespace GVRP
                         }
 
                         // Check if user got schwarzgeld in inventory
-                        if(iPlayer.Container.GetItemAmount(SchwarzgeldModule.SchwarzgeldId) <= totalPrice)
+                        if (iPlayer.Container.GetItemAmount(SchwarzgeldModule.SchwarzgeldId) <= totalPrice)
                         {
                             if (!iPlayer.TakeMoney(totalPrice))
                             {
@@ -114,7 +113,7 @@ namespace GVRP
                         {
                             iPlayer.Container.RemoveItem(kvp.Key, kvp.Value);
                         }
-                        
+
                         ItemOrderModule.Instance.AddDbOrder(npcItem.RewardItemId, npcItem.RewardItemAmount, (int)iPlayer.Id, totalhours, (int)itemOrderNpc.Id);
 
                         Task.Run(async () =>

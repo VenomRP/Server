@@ -1,8 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Clothes.Props;
+﻿using GVRP.Module.Clothes.Props;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Outfits
 {

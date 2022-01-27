@@ -1,10 +1,10 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
 using GVRP.Module.Items;
 using GVRP.Module.NpcSpawner;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Shops
 {
@@ -40,7 +40,7 @@ namespace GVRP.Module.Shops
             ShopItems = new List<ShopItem>();
             SchwarzgeldUse = reader.GetInt32("schwarzgelduse") == 1;
             Marker = reader.GetInt32("marker") == 1;
-            if(Position.X != 0 && Position.Y != 0) new Npc(Ped, Position, Heading, 0);
+            if (Position.X != 0 && Position.Y != 0) new Npc(Ped, Position, Heading, 0);
 
             var teamString = reader.GetString("team");
             Teams = new HashSet<Team>();
@@ -94,7 +94,7 @@ namespace GVRP.Module.Shops
             RequiredChestItemId = reader.GetInt32("required_chest_item_id");
             IsStoredItem = StoredMax > 0 && EKPrice > 0;
         }
-        
+
         public override uint GetIdentifier()
         {
             return Id;

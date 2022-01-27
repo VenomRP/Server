@@ -220,10 +220,10 @@
             return "/invite [Name] /manage [Name]";
         }
 
-/*        public static string HelpBusiness()
-        {
-            return "/b (usinesschat)";
-        }*/
+        /*        public static string HelpBusiness()
+                {
+                    return "/b (usinesschat)";
+                }*/
 
         public static string MDC_LicCheck(bool has)
         {

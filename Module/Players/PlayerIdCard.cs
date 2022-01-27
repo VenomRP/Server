@@ -1,9 +1,8 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
 using GVRP.Module.Configurations;
 using GVRP.Module.Kasino;
-using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Players
 {
@@ -49,14 +48,14 @@ namespace GVRP.Module.Players
                 destinationPlayer.TriggerEvent("showPerso", dbPlayer.fakeName, dbPlayer.fakeSurname, dbPlayer.birthday[0], "Haus " + dbPlayer.ownHouse[0], dbPlayer.Level, dbPlayer.Id, isCasinoGuest, "");
             }
             //Wenn Spieler COP || FIB und OnDuty -> Dienstausweis
-            else if ((dbPlayer.TeamId == (int)teams.TEAM_MEDIC || dbPlayer.TeamId == (int) teams.TEAM_FIB || dbPlayer.TeamId == (int)teams.TEAM_COUNTYPD || dbPlayer.TeamId == (int) teams.TEAM_POLICE || dbPlayer.TeamId == (int) teams.TEAM_GOV || dbPlayer.TeamId == (int) teams.TEAM_NEWS || dbPlayer.TeamId == (int) teams.TEAM_ARMY || dbPlayer.TeamId == (int) teams.TEAM_DRIVINGSCHOOL || dbPlayer.TeamId == (int) teams.TEAM_DPOS || dbPlayer.TeamId == (int) teams.TEAM_SWAT) && dbPlayer.IsInDuty())
+            else if ((dbPlayer.TeamId == (int)teams.TEAM_MEDIC || dbPlayer.TeamId == (int)teams.TEAM_FIB || dbPlayer.TeamId == (int)teams.TEAM_COUNTYPD || dbPlayer.TeamId == (int)teams.TEAM_POLICE || dbPlayer.TeamId == (int)teams.TEAM_GOV || dbPlayer.TeamId == (int)teams.TEAM_NEWS || dbPlayer.TeamId == (int)teams.TEAM_ARMY || dbPlayer.TeamId == (int)teams.TEAM_DRIVINGSCHOOL || dbPlayer.TeamId == (int)teams.TEAM_DPOS || dbPlayer.TeamId == (int)teams.TEAM_SWAT) && dbPlayer.IsInDuty())
             {
                 var crumbs = dbPlayer.GetName().Split('_');
 
                 // Dienstnummer , Govlevel opt
                 string GovLevelDescription = dbPlayer.GetPlayerDutyStuff();
 
-                if(dbPlayer.GovLevel.Length > 0)
+                if (dbPlayer.GovLevel.Length > 0)
                 {
                     GovLevelDescription += " Sicherheitsfreigabe " + dbPlayer.GovLevel;
                 }

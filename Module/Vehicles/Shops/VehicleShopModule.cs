@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Configurations;
 using GVRP.Module.GTAN;
@@ -12,6 +8,10 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Vehicles.Data;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Vehicles.Shops
 {
@@ -155,7 +155,7 @@ namespace GVRP.Module.Vehicles.Shops
                                     Price = data.Price - reader.GetInt32("discount"),
                                     IsSpecialCar = false,
                                     LimitedBuyed = 0,
-                                    LimitedAmount = 0,                                    
+                                    LimitedAmount = 0,
                                 };
                                 shopVehicle.Entity = VehicleHandler.Instance
                                         .CreateServerVehicle(shopVehicle.Data.Id, false, shopVehicle.Position,
@@ -211,17 +211,17 @@ namespace GVRP.Module.Vehicles.Shops
                                 Description = reader.GetString("description"),
                                 Vehicles = new Dictionary<int, ShopVehicle>()
                             };
-                            if(vehicleShop.Id == 1001)
+                            if (vehicleShop.Id == 1001)
                             {
                                 vehicleShop.PlayerIds = new List<int>();
                                 string playerIdsString = reader.GetString("player_ids");
                                 if (!string.IsNullOrEmpty(playerIdsString))
                                 {
                                     string[] splittedPlayerIds = playerIdsString.Split(",");
-                                    
-                                    foreach(string playerIdString in splittedPlayerIds)
+
+                                    foreach (string playerIdString in splittedPlayerIds)
                                     {
-                                        if(!int.TryParse(playerIdString, out int playerId)) return;
+                                        if (!int.TryParse(playerIdString, out int playerId)) return;
                                         vehicleShop.PlayerIds.Add(playerId);
                                     }
                                 }
@@ -257,7 +257,7 @@ namespace GVRP.Module.Vehicles.Shops
 
                             if (vehicleShop.Marker)
                             {
-                                vehicleShop.Blip = Blips.Create(vehicleShop.Position, "Fahrzeughandel", 225, 1.0f, color:(int)4);
+                                vehicleShop.Blip = Blips.Create(vehicleShop.Position, "Fahrzeughandel", 225, 1.0f, color: (int)4);
                                 Main.ServerBlips.Add(vehicleShop.Blip);
                             }
 
@@ -320,7 +320,7 @@ namespace GVRP.Module.Vehicles.Shops
                 {
                     var shopVehicle = GetShopVehicle(shopVehicleId);
                     if (shopVehicle == null) return false;
-                    dbPlayer.SendNewNotification($"Preis: ${shopVehicle.Price} Steuer: ${shopVehicle.Data.Tax} Inventar: {shopVehicle.Data.InventoryWeight/1000} kg Slots: {shopVehicle.Data.InventorySize}", title: $"{shopVehicle.Name}");
+                    dbPlayer.SendNewNotification($"Preis: ${shopVehicle.Price} Steuer: ${shopVehicle.Data.Tax} Inventar: {shopVehicle.Data.InventoryWeight / 1000} kg Slots: {shopVehicle.Data.InventorySize}", title: $"{shopVehicle.Name}");
                     return true;
                 }
 

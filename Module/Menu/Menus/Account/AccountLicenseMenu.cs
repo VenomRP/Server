@@ -167,7 +167,7 @@ namespace GVRP
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                MenuManager.DismissMenu(iPlayer.Player, (uint) PlayerMenu.AccountLicense);
+                MenuManager.DismissMenu(iPlayer.Player, (uint)PlayerMenu.AccountLicense);
                 return false;
             }
         }

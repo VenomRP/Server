@@ -1,17 +1,13 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Module.Armory;
 using GVRP.Module.Banks;
-using GVRP.Module.Houses;
+using GVRP.Module.Injury;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams;
 using GVRP.Module.Vehicles.Garages;
-using GVRP.Module.Injury;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.AsyncEventTasks
 {
@@ -106,7 +102,8 @@ namespace GVRP.Module.AsyncEventTasks
                         iPlayer.SetData("garageId", garageId);
                         return;
                     }
-                    catch (Exception e) {
+                    catch (Exception e)
+                    {
                         Logger.Crash(e);
                     }
                 }

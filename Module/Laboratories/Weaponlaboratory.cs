@@ -1,10 +1,4 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
@@ -14,6 +8,11 @@ using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Laboratories
 {
@@ -22,7 +21,7 @@ namespace GVRP.Module.Laboratories
         public uint Id { get; }
 
         public uint TeamId { get; }
-        
+
         public uint DestinationId { get; }
         public JumpPoint JumpPointEingang { get; set; }
         public JumpPoint JumpPointAusgang { get; set; }
@@ -49,9 +48,9 @@ namespace GVRP.Module.Laboratories
             Hacked = false;
             FriskInProgess = false;
             ImpoundInProgress = false;
-            
+
             List<JumpPoint> JumpPoints = JumpPointModule.Instance.jumpPoints.Values.Where(jumppoint => jumppoint.DestinationId == DestinationId && jumppoint.Id != DestinationId).ToList();
-            
+
             Random rnd = new Random();
             int selectedJumpPoint = rnd.Next(JumpPoints.Count);
             int i = 0;
@@ -108,7 +107,7 @@ namespace GVRP.Module.Laboratories
         public void Processing(DbPlayer dbPlayer)
         {
             if (!ActingPlayers.ToList().Contains(dbPlayer)) return;
-            
+
             foreach (uint itemId in WeaponlaboratoryModule.RessourceItemIds)
             {
                 if (dbPlayer.WeaponlaboratoryInputContainer.GetItemAmount(itemId) < 1 ||

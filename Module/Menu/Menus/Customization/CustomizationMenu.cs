@@ -1,14 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Customization;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Customization;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Tattoo;
 
 namespace GVRP
 {

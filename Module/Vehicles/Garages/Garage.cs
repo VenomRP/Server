@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Configurations;
-using GVRP.Module.Gangwar;
-using GVRP.Module.GTAN;
-using GVRP.Module.Helper;
 using GVRP.Module.Houses;
 using GVRP.Module.Logging;
 using GVRP.Module.NpcSpawner;
@@ -15,6 +8,10 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Vehicles.Data;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Vehicles.Garages
 {
@@ -26,7 +23,7 @@ namespace GVRP.Module.Vehicles.Garages
         public string Name { get; }
 
         public HashSet<uint> Teams { get; }
-        
+
         public GarageType Type { get; }
         public List<GarageSpawn> Spawns { get; }
         public int Rang { get; }
@@ -49,13 +46,13 @@ namespace GVRP.Module.Vehicles.Garages
         public Garage(MySqlDataReader reader) : base(reader)
         {
             if (!Enum.TryParse(reader.GetInt32(6).ToString(), out GarageType type))
-            Logger.Crash(new Exception($"Unknown garage type {reader.GetInt32(6)}"));
+                Logger.Crash(new Exception($"Unknown garage type {reader.GetInt32(6)}"));
 
             Id = reader.GetUInt32("id");
             Position = new Vector3(reader.GetFloat("npc_pos_x"), reader.GetFloat("npc_pos_y"), reader.GetFloat("npc_pos_z"));
             Heading = reader.GetFloat("npc_heading");
             Name = reader.GetString("name");
-            
+
             var teamString = reader.GetString("team_id");
             Teams = new HashSet<uint>();
             if (!string.IsNullOrEmpty(teamString))
@@ -113,7 +110,7 @@ namespace GVRP.Module.Vehicles.Garages
                 var colShape = ColShapes.Create(Position, 7f);
                 colShape.SetData("garageId", Id);
                 // Register NPC if public Garage
-                if(!DisableInfos && Position.X != 0 && Position.Y != 0) new Npc(Npc, Position, Heading, 0);
+                if (!DisableInfos && Position.X != 0 && Position.Y != 0) new Npc(Npc, Position, Heading, 0);
                 //NAPI.TextLabel.CreateTextLabel(Name, Position.Add(new Vector3(0, 0, 1.1d)), 18, 1.5f, 0, new Color(230, 123, 0), true, (uint)dimension);
             }
         }
@@ -135,10 +132,10 @@ namespace GVRP.Module.Vehicles.Garages
 
         public bool CanVehiclePutIntoHouseGarage()
         {
-            if(HouseId > 0)
+            if (HouseId > 0)
             {
                 House house = HouseModule.Instance.Get(HouseId);
-                if(house != null)
+                if (house != null)
                 {
                     var count = 0;
                     var query = $"SELECT COUNT(*) FROM `vehicles` WHERE garage_id = '{Id}'";
@@ -225,7 +222,7 @@ namespace GVRP.Module.Vehicles.Garages
                         if (vehicle.Data.modded_car == 1)
                             vehicles.Add(new Main.GarageVehicle(vehicle.databaseId, vehicle.fuel, vehicle.Data.mod_car_name, ""));
                         else
-                            vehicles.Add(new Main.GarageVehicle(vehicle.databaseId, vehicle.fuel, vehicle.Data.Model,""));
+                            vehicles.Add(new Main.GarageVehicle(vehicle.databaseId, vehicle.fuel, vehicle.Data.Model, ""));
                     }
                 }
             }

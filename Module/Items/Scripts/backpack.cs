@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -22,8 +16,8 @@ namespace GVRP.Module.Items.Scripts
 
             // Aktuelle Slots
             var currentPlayerMaxSlots = iPlayer.Container.MaxSlots;
-            var currentPlayerMaxWeight= iPlayer.Container.MaxWeight;
-                        
+            var currentPlayerMaxWeight = iPlayer.Container.MaxWeight;
+
             // overall Change backpack
             var currentUsedSlots = ContainerManager.GetUsedSlots(iPlayer.Container);
             var currentUsedWeight = currentPlayerMaxWeight - ContainerManager.GetInventoryFreeSpace(iPlayer.Container);
@@ -31,9 +25,9 @@ namespace GVRP.Module.Items.Scripts
             // New Slots/Weights...
             int newSlots = 0;
             int newWeight = 0;
-            
+
             // Bei drop
-            if(drop)
+            if (drop)
             {
                 // Set Slots on defaultones...
                 newSlots = ContainerManager.defaultSlots;
@@ -61,7 +55,7 @@ namespace GVRP.Module.Items.Scripts
                 newSlots = selectedModelConfiguration.MaxSlots;
                 newWeight = selectedModelConfiguration.MaxWeight;
             }
-            
+
             // Wenn neue Slots nicht alten entsprechen
             if (newSlots != iPlayer.Container.MaxSlots || newWeight != iPlayer.Container.MaxWeight)
             {
@@ -93,7 +87,7 @@ namespace GVRP.Module.Items.Scripts
         static BackpackList()
         {
             backpackList = new List<BackpackConfiguration>();
-            backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_alicepack"), 6000,  40000, 12));
+            backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_alicepack"), 6000, 40000, 12));
             backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_louisbeton"), 8000, 40000, 12));
             backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_bellybag"), 8000, 40000, 12));
             backpackList.Add(new BackpackConfiguration(ItemModelModule.Instance.GetItemByNameOrTag("bp_armypack"), 10000, 50000, 14));

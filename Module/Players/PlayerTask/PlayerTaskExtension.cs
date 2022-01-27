@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using GVRP.Module.Players.Db;
 using System.Linq;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Players.PlayerTask
 {
@@ -14,7 +8,7 @@ namespace GVRP.Module.Players.PlayerTask
         public static void LoadTasks(this DbPlayer iPlayer)
         {
 
-     
+
         }
 
         public static void AddTask(this DbPlayer iPlayer, PlayerTaskTypeId type, string data = "")
@@ -31,7 +25,7 @@ namespace GVRP.Module.Players.PlayerTask
         public static void CheckTasks(this DbPlayer iPlayer)
         {
 
-            
+
         }
 
         public static bool CheckTaskExists(this DbPlayer iPlayer, PlayerTaskTypeId type)

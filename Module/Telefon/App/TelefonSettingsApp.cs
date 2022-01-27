@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
-using Newtonsoft.Json;
-using System;
-using GVRP.Module.Injury;
-using GVRP.Module.Players.Phone;
-using GVRP.Module.Teams;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
 
 namespace GVRP.Module.Telefon.App
 {

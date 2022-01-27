@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using GVRP.Module.Configurations;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Players.Phone.Contacts
 {
@@ -39,7 +36,7 @@ namespace GVRP.Module.Players.Phone.Contacts
                 }
             }
         }
-        
+
         public string TryGetPhoneContactNameByNumber(uint number)
         {
             Contacts.TryGetValue(number, out PhoneContact value);
@@ -70,7 +67,7 @@ namespace GVRP.Module.Players.Phone.Contacts
                 Contacts.Add(number, new PhoneContact(name, number));
                 MySQLAdd(name, number);
             }
-            else if(oldNumber != number)
+            else if (oldNumber != number)
             {
                 Contacts.Remove(oldNumber);
                 MySQLDelete(oldNumber);

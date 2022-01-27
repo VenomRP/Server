@@ -1,14 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Customization;
 using GVRP.Module.Outfits;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Racing
 {
@@ -20,7 +18,7 @@ namespace GVRP.Module.Racing
 
             SxVehicle closesPointVehicle = VehicleHandler.Instance.GetClosestVehicle(RacingModule.Box1Veh, 4.0f, racingLobby.RacingDimension);
             // Search for Slot
-            if(closesPointVehicle == null)
+            if (closesPointVehicle == null)
             {
                 spawnPosition = RacingModule.Box1Veh;
             }
@@ -88,7 +86,7 @@ namespace GVRP.Module.Racing
                 racingLobby.RacingVehicles.Add(sxVehicle);
             });
 
-            if(!racingLobby.RacingPlayers.Contains(dbPlayer)) racingLobby.RacingPlayers.Add(dbPlayer);
+            if (!racingLobby.RacingPlayers.Contains(dbPlayer)) racingLobby.RacingPlayers.Add(dbPlayer);
         }
 
         public static void RemoveFromRacing(this DbPlayer dbPlayer)

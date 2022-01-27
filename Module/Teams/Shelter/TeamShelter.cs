@@ -1,10 +1,10 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Teams.Shelter
 {
@@ -27,14 +27,14 @@ namespace GVRP.Module.Teams.Shelter
             Team = TeamModule.Instance.Get(reader.GetUInt32("teamid"));
             Money = reader.GetInt32("money");
             Container = ContainerManager.LoadContainer(Id, ContainerTypes.SHELTER, 0);
-            
+
             Dimension = reader.GetUInt32("interior_dimension");
             InventarPosition = new Vector3(reader.GetFloat("inventar_pos_x"), reader.GetFloat("inventar_pos_y"), reader.GetFloat("inventar_pos_z"));
 
             MenuPosition = new Vector3(reader.GetFloat("menu_pos_x"), reader.GetFloat("menu_pos_y"), reader.GetFloat("menu_pos_z"));
             MenuColShape = ColShapes.Create(MenuPosition, 3f, Dimension);
             MenuColShape.SetData("teamShelterMenuId", reader.GetUInt32("teamid"));
-            Console.WriteLine(reader.GetFloat("menu_pos_x") + " " +  reader.GetFloat("menu_pos_y") + " " + reader.GetFloat("menu_pos_z") + " " + reader.GetFloat("teamid"));
+            Console.WriteLine(reader.GetFloat("menu_pos_x") + " " + reader.GetFloat("menu_pos_y") + " " + reader.GetFloat("menu_pos_z") + " " + reader.GetFloat("teamid"));
         }
 
         public override uint GetIdentifier()

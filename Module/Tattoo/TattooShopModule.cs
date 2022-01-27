@@ -16,7 +16,7 @@
         }
         protected override void OnItemLoaded(TattooShop tattooShop)
         {
-            Main.ServerBlips.Add(Spawners.Blips.Create(tattooShop.Position, tattooShop.Name, blip, 1.0f, color:color));
+            Main.ServerBlips.Add(Spawners.Blips.Create(tattooShop.Position, tattooShop.Name, blip, 1.0f, color: color));
             return;
         }
     }

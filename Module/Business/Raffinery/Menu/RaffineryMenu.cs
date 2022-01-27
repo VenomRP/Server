@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.Business.Raffinery;
+﻿using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 
 namespace GVRP.Module.Business.Raffinery
 {
@@ -28,7 +18,7 @@ namespace GVRP.Module.Business.Raffinery
             if (!iPlayer.TryData("raffineryId", out uint raffineryId)) return null;
             var raffinery = RaffineryModule.Instance.Get(raffineryId);
             if (raffinery == null) return null;
-            
+
             var menu = new Menu.Menu(Menu, "Oelfoerderpumpe");
 
             menu.Add($"Schließen");
@@ -38,7 +28,7 @@ namespace GVRP.Module.Business.Raffinery
                 if (raffinery.GetOwnedBusiness() == iPlayer.ActiveBusiness && iPlayer.IsMemberOfBusiness() && iPlayer.GetActiveBusinessMember().Raffinery) // Member of business and has rights
                 {
                     SxVehicle sxVehicle = VehicleHandler.Instance.GetClosestVehicle(iPlayer.Player.Position, 12.0f);
-                    if(sxVehicle != null)
+                    if (sxVehicle != null)
                     {
                         menu.Add($"{sxVehicle.GetName()} ({sxVehicle.databaseId}) beladen");
                     }
@@ -79,14 +69,14 @@ namespace GVRP.Module.Business.Raffinery
                             if (sxVehicle != null)
                             {
                                 // Fahrzeug beladen
-                                if(sxVehicle.SyncExtension.Locked)
+                                if (sxVehicle.SyncExtension.Locked)
                                 {
                                     iPlayer.SendNewNotification("Fahrzeug muss aufgeschlossen sein!");
                                     return true;
                                 }
                                 else
                                 {
-                                    ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = sxVehicle.GetName() + " beladen" , Callback = "LoadIntoVehicle", Message = "Geben Sie die Lademenge an" });
+                                    ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = sxVehicle.GetName() + " beladen", Callback = "LoadIntoVehicle", Message = "Geben Sie die Lademenge an" });
 
                                 }
                             }
@@ -101,7 +91,8 @@ namespace GVRP.Module.Business.Raffinery
                             iPlayer.SendNewNotification($"Oelfoerderpumpe erfolgreich fuer ${raffinery.BuyPrice} erworben!");
                             raffinery.OwnerBusiness = iPlayer.ActiveBusiness;
                         }
-                        else {
+                        else
+                        {
                             iPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(raffinery.BuyPrice));
                         }
                     }

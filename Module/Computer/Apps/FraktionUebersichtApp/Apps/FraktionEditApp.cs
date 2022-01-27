@@ -1,19 +1,13 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Computer.Apps.FahrzeugUebersichtApp;
 using GVRP.Module.Configurations;
 using GVRP.Module.Forum;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 using GVRP.Module.Swat;
 using GVRP.Module.Teams;
 using GVRP.Module.Teams.Permission;
+using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Computer.Apps.FraktionUebersichtApp.Apps
 {
@@ -27,12 +21,12 @@ namespace GVRP.Module.Computer.Apps.FraktionUebersichtApp.Apps
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsSwatDuty()) return;
-            if (dbPlayer.TeamId == (uint) TeamList.Zivilist) return;
+            if (dbPlayer.TeamId == (uint)TeamList.Zivilist) return;
             var teamRankPermission = dbPlayer.TeamRankPermission;
             var editDbPlayer = Players.Players.Instance.GetByDbId(playerId);
             if (teamRankPermission.Manage < 1) return;
 
-            if(title.Length < 0 || title.Length > 50)
+            if (title.Length < 0 || title.Length > 50)
             {
                 dbPlayer.SendNewNotification("Diese Beschreibung ist zu nicht zulässig!");
                 return;
@@ -158,7 +152,7 @@ namespace GVRP.Module.Computer.Apps.FraktionUebersichtApp.Apps
                 }
 
                 editDbPlayer.SynchronizeForum();
-                
+
                 dbPlayer.Team.SendNotification($"{dbPlayer.GetName()} hat {editDbPlayer.GetName()} aus der Fraktion entlassen.");
 
                 if (editDbPlayer.Team.IsGangsters())
@@ -216,7 +210,7 @@ namespace GVRP.Module.Computer.Apps.FraktionUebersichtApp.Apps
                                 dbPlayer.SendNewNotification("Du kannst niemandem mit deinem oder einem höheren Rang veraendern!");
                                 return;
                             }
-                            
+
                             MySQLHandler.ExecuteAsync($"UPDATE player SET rang = '0', team = '0' WHERE id = '{playerId}'");
                             MySQLHandler.ExecuteAsync($"UPDATE player_rights SET title = '', r_bank = 0, r_inventory = 0, r_manage = 0 WHERE accountid = '{playerId}'");
                             dbPlayer.Team.SendNotification($"{dbPlayer.GetName()} hat {overview.Name} aus der Fraktion entlassen.");

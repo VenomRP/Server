@@ -1,8 +1,5 @@
 ﻿using GTANetworkAPI;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GVRP.Module.VirtualGarages
 {
@@ -17,7 +14,7 @@ namespace GVRP.Module.VirtualGarages
         public Vector3 Destination { get; set; }
         public float EnterHeading { get; set; }
         public float DestinationHeading { get; set; }
-        
+
         public uint EnterDimension { get; set; }
         public uint DestinationDimension { get; set; }
 

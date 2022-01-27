@@ -1,8 +1,4 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GVRP.Handler;
 using GVRP.Module.Asservatenkammer;
 using GVRP.Module.Business.FuelStations;
@@ -20,6 +16,10 @@ using GVRP.Module.Players.Windows;
 using GVRP.Module.Schwarzgeld;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Voice;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Items
 {
@@ -105,7 +105,8 @@ namespace GVRP.Module.Items
                         }
                     }
                 }
-            } catch(Exception e)
+            }
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }
@@ -137,12 +138,12 @@ namespace GVRP.Module.Items
             // Nix aus Aser nehmen kappa
             if (container.Type == ContainerTypes.STATIC && container.Id == (int)StaticContainerTypes.ASERLSPD)
             {
-                if(StaticContainerModule.Instance.Get((int)StaticContainerTypes.ASERLSPD).Locked) // Nur bei Locked kanns nicht entnommen werden (unlock bei Heist...)
+                if (StaticContainerModule.Instance.Get((int)StaticContainerTypes.ASERLSPD).Locked) // Nur bei Locked kanns nicht entnommen werden (unlock bei Heist...)
                     return true;
             }
             return false;
         }
-        
+
         public static bool IsItemRestrictedForContainer(this Container container, uint itemModelId, DbPlayer dbPlayer = null)
         {
             ItemModel itemModel = ItemModelModule.Instance.Get(itemModelId);
@@ -155,14 +156,14 @@ namespace GVRP.Module.Items
         {
             // großes Geschenk oder Verbandskasten (Fraktion) oder Schutzweste (Fraktion)
             if (item.Id == 550 || item.Id == 654 || item.Id == 655) return true;
-            
+
             // Nichts reinlegen GARNICHTS legen...
-            if (container.Type == ContainerTypes.RAFFINERY || container.Type == ContainerTypes.TeamOrder || 
-                container.Type == ContainerTypes.METHLABORATORYOUTPUT || 
+            if (container.Type == ContainerTypes.RAFFINERY || container.Type == ContainerTypes.TeamOrder ||
+                container.Type == ContainerTypes.METHLABORATORYOUTPUT ||
                 (container.Type == ContainerTypes.PRISONLOCKER && (dbPlayer.Player.Position.DistanceTo(Coordinates.PrisonLockerTakeOut) < 3.0f ||
                 dbPlayer.Player.Position.DistanceTo(Coordinates.LSPDLockerPutOut) < 3.0f))
                 ) return true;
-            
+
             // Mining zeugs
             if (container.Type == ContainerTypes.MINECONTAINERALU || container.Type == ContainerTypes.MINECONTAINERBRONCE
                 || container.Type == ContainerTypes.MINECONTAINERIRON || container.Type == ContainerTypes.MINECONTAINERZINK) return true;
@@ -188,7 +189,7 @@ namespace GVRP.Module.Items
             {
                 if (!item.Script.Contains("nightclubchest")) return true;
             }
-            
+
             // Special Shelters Bratwa // Brigada
             if (container.Type == ContainerTypes.STATIC)
             {
@@ -289,7 +290,7 @@ namespace GVRP.Module.Items
                     if (!delVeh.Data.AllowedItems.Contains(item.Id)) return true;
                 }
             }
-            
+
             return false;
         }
 
@@ -474,7 +475,7 @@ namespace GVRP.Module.Items
         public static int GetInventoryFreeSlots(this Container container)
         {
             int slots = 0;
-            foreach(KeyValuePair<int, Item> kvp in container.Slots.ToList())
+            foreach (KeyValuePair<int, Item> kvp in container.Slots.ToList())
             {
                 if (kvp.Value != null && kvp.Value.Id == 0) slots++;
             }
@@ -633,7 +634,7 @@ namespace GVRP.Module.Items
 
             try
             {
-                while(leftamount > 0)
+                while (leftamount > 0)
                 {
                     if (slot == -1)
                     {
@@ -671,7 +672,7 @@ namespace GVRP.Module.Items
                             slot = container.GetNextFreeSlot();
                             if (slot == -1) return false;
 
-                            if(leftamount > model.MaximumStacksize)
+                            if (leftamount > model.MaximumStacksize)
                             {
                                 container.Slots[slot] = data == null ? new Item(model.Id, model.MaximumStacksize, model.MaximumStacksize, new Dictionary<string, dynamic>()) : new Item(model.Id, model.MaximumStacksize, model.MaximumStacksize, data);
                                 leftamount -= model.MaximumStacksize;
@@ -734,7 +735,7 @@ namespace GVRP.Module.Items
             {
                 Logger.Crash(e);
             }
-            
+
             string l_ContainerSaveQuery = "";
             foreach (int l_Slot in touchedSlots)
             {

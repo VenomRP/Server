@@ -1,8 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Clothes;
+﻿using GVRP.Module.Clothes;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Outfits
 {
@@ -21,7 +18,7 @@ namespace GVRP.Module.Outfits
             Slot = reader.GetInt32("slot");
             Component = reader.GetInt32("component");
             Texture = reader.GetInt32("texture");
-            
+
             ClothModule.Instance.Add(OutfitsModule.Instance.GetPropValue(Id), new Cloth(OutfitsModule.Instance.GetPropValue(Id), "Generated", Slot, Component, Texture, 0, 0, 0, 0, 2, 0, false));
         }
 

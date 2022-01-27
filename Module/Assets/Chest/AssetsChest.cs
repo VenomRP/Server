@@ -1,5 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using GVRP.Module.Barber;
 
 namespace GVRP.Module.Assets.Chest
 {
@@ -9,7 +8,7 @@ namespace GVRP.Module.Assets.Chest
         public string Name { get; }
         public int CustomisationId { get; }
         public int Price { get; }
-        
+
         public int BarberShopId { get; }
 
         public AssetsChest(MySqlDataReader reader) : base(reader)

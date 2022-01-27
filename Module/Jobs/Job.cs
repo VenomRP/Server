@@ -16,7 +16,7 @@ namespace GVRP.Module.Jobs
         public bool disablegang { get; set; }
         public bool disablezivi { get; set; }
         public bool disabled { get; set; }
-        
+
         public Marker Marker { get; set; }
         public int NotificationId { get; set; }
     }

@@ -1,12 +1,12 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Shops.Windows;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Business.NightClubs
 {
@@ -46,7 +46,7 @@ namespace GVRP.Module.Business.NightClubs
             if (colShape.HasData("nightclubId"))
             {
                 NightClub nightClub = NightClubModule.Instance.Get(colShape.GetData<uint>("nightclubId"));
-                
+
                 if (nightClub == null) return false;
 
                 if (colShapeState == ColShapeState.Enter)

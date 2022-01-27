@@ -1,13 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Module.Chat;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Laboratories.Menu
 {
@@ -64,7 +63,7 @@ namespace GVRP.Module.Laboratories.Menu
                     int idx = 1;
                     foreach (KeyValuePair<uint, int> kvp in WeaponlaboratoryModule.Instance.WeaponHerstellungList)
                     {
-                        if(index == idx)
+                        if (index == idx)
                         {
                             if (dbPlayer.Container.GetItemAmount(976) <= 0)
                             {
@@ -91,7 +90,7 @@ namespace GVRP.Module.Laboratories.Menu
                             {
                                 int time = 15000; // 15 sek
                                 Chats.sendProgressBar(dbPlayer, time);
-                                
+
                                 dbPlayer.Player.TriggerEvent("freezePlayer", true);
                                 dbPlayer.SetData("userCannotInterrupt", true);
 
@@ -100,7 +99,7 @@ namespace GVRP.Module.Laboratories.Menu
 
                                 dbPlayer.SetData("userCannotInterrupt", false);
                                 dbPlayer.Player.TriggerEvent("freezePlayer", false);
-                                
+
                                 dbPlayer.Container.AddItem(kvp.Key, 1);
                                 dbPlayer.SendNewNotification($"Sie haben {ItemModelModule.Instance.Get(kvp.Key).Name} für {kvp.Value} hergestellt!");
 
@@ -113,7 +112,7 @@ namespace GVRP.Module.Laboratories.Menu
                     MenuManager.DismissCurrent(dbPlayer);
                     return true;
                 }
-                
+
             }
         }
     }

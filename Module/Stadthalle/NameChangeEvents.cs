@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using GTANetworkAPI;
-using GTANetworkMethods;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace GVRP.Module.Stadthalle
 {
@@ -169,7 +165,7 @@ namespace GVRP.Module.Stadthalle
                     }
 
                     dbPlayer.SendNewNotification($"Du hast dich erfolgreich von {marryName} scheiden lassen.");
-                    
+
                     var findPlayer = Players.Players.Instance.FindPlayer(dbPlayer.married[0]);
                     if (findPlayer == null || !findPlayer.IsValid())
                     {
@@ -180,7 +176,7 @@ namespace GVRP.Module.Stadthalle
                         findPlayer.married[0] = 0;
                         findPlayer.SendNewNotification($"{dbPlayer.Player.Name} hat sich von dir scheiden lassen.");
                     }
-                    
+
                     Logger.AddDivorceLog(dbPlayer.Id, dbPlayer.Level, dbPlayer.married[0]);
                     dbPlayer.married[0] = 0;
 

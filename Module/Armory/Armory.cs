@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
@@ -10,6 +7,9 @@ using GVRP.Module.Spawners;
 using GVRP.Module.Swat;
 using GVRP.Module.Teams;
 using GVRP.Module.Weapons.Component;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 //Todo: module
 namespace GVRP.Module.Armory
@@ -101,14 +101,14 @@ namespace GVRP.Module.Armory
 
                         var cComponents = new List<Weapons.Component.WeaponComponent>();
                         var componentsString = reader.GetString("components");
- 
+
                         if (!string.IsNullOrEmpty(componentsString))
                         {
                             var splittedComponents = componentsString.Split(',');
                             foreach (var componentId in splittedComponents)
                             {
                                 if (!int.TryParse(componentId, out var component)) continue;
-                                if(WeaponComponentModule.Instance.Contains(component)) cComponents.Add(WeaponComponentModule.Instance.Get(component));
+                                if (WeaponComponentModule.Instance.Contains(component)) cComponents.Add(WeaponComponentModule.Instance.Get(component));
                             }
                         }
 
@@ -204,7 +204,7 @@ namespace GVRP.Module.Armory
 
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(TeamModule), typeof(ItemModelModule) };
+            return new[] { typeof(TeamModule), typeof(ItemModelModule) };
         }
 
         protected override bool OnLoad()
@@ -297,7 +297,7 @@ namespace GVRP.Module.Armory
             Armory Armory = Get(ArmoryId);
             if (Armory == null) return false;
             // Wenn kein Cop return
-            if(Armory.SwatDuty)
+            if (Armory.SwatDuty)
             {
                 if (iPlayer.HasSwatRights() && !iPlayer.IsSwatDuty())
                 {

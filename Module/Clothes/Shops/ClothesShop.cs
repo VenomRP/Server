@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.Clothes.Props;
-using GVRP.Module.GTAN;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Clothes.Shops
 {
@@ -117,15 +115,15 @@ namespace GVRP.Module.Clothes.Shops
                 currClothes.AddRange(slotClothesAllGender);
             }
 
-            if (player.TeamId == (int) teams.TEAM_CIVILIAN) return currClothes;
+            if (player.TeamId == (int)teams.TEAM_CIVILIAN) return currClothes;
             var slotTeamClothes =
-                GetClothesBySlotAndTeam(slot, (int) teams.TEAM_CIVILIAN, player.Customization.Gender);
+                GetClothesBySlotAndTeam(slot, (int)teams.TEAM_CIVILIAN, player.Customization.Gender);
             if (slotTeamClothes != null)
             {
                 currClothes.AddRange(slotTeamClothes);
             }
 
-            var slotTeamClothesAllGender = GetClothesBySlotAndTeam(slot, (int) teams.TEAM_CIVILIAN, 3);
+            var slotTeamClothesAllGender = GetClothesBySlotAndTeam(slot, (int)teams.TEAM_CIVILIAN, 3);
             if (slotTeamClothesAllGender != null)
             {
                 currClothes.AddRange(slotTeamClothesAllGender);
@@ -149,15 +147,15 @@ namespace GVRP.Module.Clothes.Shops
                 currClothes.AddRange(slotClothesAllGender);
             }
 
-            if (player.TeamId == (int) teams.TEAM_CIVILIAN) return currClothes;
+            if (player.TeamId == (int)teams.TEAM_CIVILIAN) return currClothes;
             var slotTeamClothes =
-                GetPropsBySlotAndTeam(slot, (int) teams.TEAM_CIVILIAN, player.Customization.Gender);
+                GetPropsBySlotAndTeam(slot, (int)teams.TEAM_CIVILIAN, player.Customization.Gender);
             if (slotTeamClothes != null)
             {
                 currClothes.AddRange(slotTeamClothes);
             }
 
-            var slotTeamClothesAllGender = GetPropsBySlotAndTeam(slot, (int) teams.TEAM_CIVILIAN, 3);
+            var slotTeamClothesAllGender = GetPropsBySlotAndTeam(slot, (int)teams.TEAM_CIVILIAN, 3);
             if (slotTeamClothesAllGender != null)
             {
                 currClothes.AddRange(slotTeamClothesAllGender);

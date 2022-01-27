@@ -1,12 +1,10 @@
-﻿using System.Collections.Generic;
-using System.IO;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Module.AnimationMenu;
-using GVRP.Module.Logging;
+﻿using GVRP.Module.AnimationMenu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Phone;
+using System.Collections.Generic;
+using System.IO;
+using System.Text;
 
 namespace GVRP.Module.Configurations
 {
@@ -43,7 +41,7 @@ namespace GVRP.Module.Configurations
 
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
-            if(dbPlayer == null || !dbPlayer.IsValid())
+            if (dbPlayer == null || !dbPlayer.IsValid())
             {
                 return true;
             }

@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Security.Principal;
-using GVRP.Module.Players.Db;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
+using GVRP.Module.Asservatenkammer;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Items;
+using GVRP.Module.Players.Db;
 using GVRP.Module.Weapons.Data;
-using GVRP.Module.Asservatenkammer;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Vehicles;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -94,13 +91,13 @@ namespace GVRP.Module.Players.Windows
                         ItemsModuleEvents.resetDisabledInventoryFlag(dbPlayer);
                         return;
                     }
-                    
+
                     if (dbPlayer.GetData("friskInvUserName") == friskedPersonName || dbPlayer.GetData("friskInvUserID") == editDbPlayer.Id)
                     {
                         var lWeapons = editDbPlayer.Weapons;
                         if (lWeapons.Count > 0)
                         {
-                            
+
 
                             var lWeaponListContainer = new List<WeaponListContainer>();
                             foreach (var lWeapon in lWeapons.ToList())
@@ -113,9 +110,9 @@ namespace GVRP.Module.Players.Windows
 
                                 ItemModel Converted = ItemModelModule.Instance.GetById(AsservatenkammerModule.Instance.GetConvertionItemId(weapon.Id, true));
                                 if (Converted == null) continue;
-                                
-                                
-                                    dbPlayer.SendNewNotification($"Sie haben {Converted.Name} beschlagnahmt und weggeworfen!");      
+
+
+                                dbPlayer.SendNewNotification($"Sie haben {Converted.Name} beschlagnahmt und weggeworfen!");
                                 editDbPlayer.RemoveWeapon((WeaponHash)lData.Hash);
                             }
                         }

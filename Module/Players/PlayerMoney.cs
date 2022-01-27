@@ -1,6 +1,4 @@
-﻿using GVRP.Module.GTAN;
-using GVRP.Module.Items;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Players
 {
@@ -173,13 +171,13 @@ namespace GVRP.Module.Players
 
             // transfer money to destination
             dPlayer.GiveMoney(amount);
-            
+
             iPlayer.SendNewNotification(MSG.Money.PlayerGiveMoney(amount));
             dPlayer.SendNewNotification(MSG.Money.PlayerGotMoney(amount));
 
             SaveToPayLog(iPlayer.Player.Name, dPlayer.Player.Name, amount);
         }
-        
+
         public static void GiveEarning(this DbPlayer dbPlayer, int amount)
         {
             if (dbPlayer.paycheck[0] + amount < dbPlayer.paycheck[0]) return;
@@ -212,7 +210,7 @@ namespace GVRP.Module.Players
                     businessMoney = business.Money;
                 }
             }*/
-            
+
             return/*businessMoney +*/ dbPlayer.money[0] + dbPlayer.bank_money[0];
         }
     }

@@ -1,10 +1,5 @@
-﻿using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Blitzer;
-using GVRP.Module.Chat;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -14,12 +9,12 @@ namespace GVRP.Module.Items.Scripts
         {
             string itemScript = ItemData.Script;
 
-            if(!uint.TryParse(itemScript.Split('_')[1], out uint itemModelId))
+            if (!uint.TryParse(itemScript.Split('_')[1], out uint itemModelId))
             {
                 return false;
             }
 
-            if(!int.TryParse(itemScript.Split('_')[2], out int itemAmount))
+            if (!int.TryParse(itemScript.Split('_')[2], out int itemAmount))
             {
                 return false;
             }
@@ -48,7 +43,7 @@ namespace GVRP.Module.Items.Scripts
             ItemModel itemModel = ItemModelModule.Instance.Get(itemModelId);
             int addedWeight = itemModel.Weight * itemAmount;
 
-            if((iPlayer.Container.GetInventoryFreeSpace() + ItemData.Weight) < addedWeight)
+            if ((iPlayer.Container.GetInventoryFreeSpace() + ItemData.Weight) < addedWeight)
             {
                 iPlayer.SendNewNotification("So viel kannst du nicht tragen!");
                 return false;

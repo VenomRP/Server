@@ -1,22 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Assets.Hair;
-using GVRP.Module.Assets.HairColor;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Barber.Windows;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Customization;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
-
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Tattoo.Windows;
 using GVRP.Module.Vehicles;
+using System;
 
 namespace GVRP.Module.SpawnProtection
 {
@@ -36,14 +21,14 @@ namespace GVRP.Module.SpawnProtection
 
         public override void OnTenSecUpdate()
         {
-            foreach(DbPlayer dbPlayer in Players.Players.Instance.GetValidPlayers())
+            foreach (DbPlayer dbPlayer in Players.Players.Instance.GetValidPlayers())
             {
                 if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
                 if (dbPlayer.HasData("spawnProtectionSet"))
                 {
                     DateTime spawnProtectionTime = dbPlayer.GetData("spawnProtectionSet");
-                    if(spawnProtectionTime.AddSeconds(20) <= DateTime.Now)
+                    if (spawnProtectionTime.AddSeconds(20) <= DateTime.Now)
                     {
                         dbPlayer.ResetData("spawnProtectionSet");
                         dbPlayer.Player.TriggerEvent("setSpawnProtection", false);

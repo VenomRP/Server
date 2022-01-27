@@ -1,6 +1,4 @@
-﻿using GTANetworkMethods;
-using GVRP.Module.Chat;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
 

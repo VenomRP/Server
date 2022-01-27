@@ -6,7 +6,7 @@ namespace GVRP
     public static class Triaden
     {
         public static void Load(uint dimension)
-        { 
+        {
             // Triads
             ObjectSpawn.Create(-1116116298, new Vector3(-1881.559f, 2013.602f, 140.3337f), new Vector3(0.6000041f, 2.025105f, 70.79934f), dimension);
             ObjectSpawn.Create(-1116116298, new Vector3(-1878.544f, 2020.23f, 139.7337f), new Vector3(0.5999765f, 3.900101f, 59.59858f), dimension);

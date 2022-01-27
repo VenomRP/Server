@@ -1,40 +1,36 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Linq;
+using GVRP.Module.AnimationMenu;
 using GVRP.Module.Customization;
+using GVRP.Module.Einreiseamt;
+using GVRP.Module.Gangwar;
 using GVRP.Module.Houses;
 using GVRP.Module.Injury;
-using GVRP.Module.Logging;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Crime;
-using GVRP.Module.Gangwar;
+using System;
+using System.Linq;
 using System.Threading.Tasks;
-using GVRP.Module.Einreiseamt;
-using GVRP.Module.AnimationMenu;
-using GVRP.Module.Swat;
-using GVRP.Module.Events.Halloween;
-using System.Threading;
 
 namespace GVRP.Module.Players.Events
 {
     public class PlayerSpawn : Script
     {
-        public static void InitPlayerSpawnData(Player player) 
+        public static void InitPlayerSpawnData(Player player)
         {
-            try { 
-            var iPlayer = player.GetPlayer();
-            if (iPlayer == null || !iPlayer.IsValid())
+            try
             {
-                iPlayer.Kick();
-                return;
-            }
+                var iPlayer = player.GetPlayer();
+                if (iPlayer == null || !iPlayer.IsValid())
+                {
+                    iPlayer.Kick();
+                    return;
+                }
 
-            if (player == null)
-            {
-                player.Kick();
-                return;
-            }
+                if (player == null)
+                {
+                    player.Kick();
+                    return;
+                }
 
                 Task.Run(async () =>
                 {
@@ -55,13 +51,13 @@ namespace GVRP.Module.Players.Events
 
                 player.Transparency = 255;
 
-            player.TriggerEvent("setPlayerHealthRechargeMultiplier");
+                player.TriggerEvent("setPlayerHealthRechargeMultiplier");
 
-            // Workaround for freeze fails
-            if (iPlayer.Freezed == false)
-            {
-                player.TriggerEvent("freezePlayer", false);
-            }
+                // Workaround for freeze fails
+                if (iPlayer.Freezed == false)
+                {
+                    player.TriggerEvent("freezePlayer", false);
+                }
             }
             catch (Exception e)
             {
@@ -156,9 +152,10 @@ namespace GVRP.Module.Players.Events
 
 
         [ServerEvent(Event.PlayerSpawn)]
-        public static void OnPlayerSpawn(Player player) 
+        public static void OnPlayerSpawn(Player player)
         {
-            try {
+            try
+            {
                 if (player == null) return;
                 if (player.Name == "WeirdNewbie")
                 {
@@ -172,16 +169,16 @@ namespace GVRP.Module.Players.Events
                 var iPlayer = player.GetPlayer();
 
 
-            if (player == null)
-            {
-                player.Kick();
-                return;
-            }
-
-
-            if (iPlayer == null || !iPlayer.IsValid())
+                if (player == null)
                 {
-                   
+                    player.Kick();
+                    return;
+                }
+
+
+                if (iPlayer == null || !iPlayer.IsValid())
+                {
+
                     // anti blocking player (online etc..)
 
                     // da isn anderer Spieler?
@@ -207,21 +204,21 @@ namespace GVRP.Module.Players.Events
                 }
                 else
                 {
+                    if (iPlayer == null || !iPlayer.IsValid())
+                    {
+                        iPlayer.Kick();
+                        return;
+                    }
+                    if (iPlayer.Firstspawn)
+                        Modules.Instance.OnPlayerLoggedIn(iPlayer);
+                }
                 if (iPlayer == null || !iPlayer.IsValid())
                 {
                     iPlayer.Kick();
                     return;
                 }
-                if (iPlayer.Firstspawn) 
-                        Modules.Instance.OnPlayerLoggedIn(iPlayer);
-                }
-            if (iPlayer == null || !iPlayer.IsValid())
-            {
-                iPlayer.Kick();
-                return;
-            }
-            // Interrupt wrong Spawn saving
-            iPlayer.ResetData("lastPosition");
+                // Interrupt wrong Spawn saving
+                iPlayer.ResetData("lastPosition");
                 Modules.Instance.OnPlayerSpawn(iPlayer);
 
                 // init Spawn details
@@ -372,7 +369,7 @@ namespace GVRP.Module.Players.Events
                     Main.OnPlayerFirstSpawn(player);
 
                     // Fallback ...
-                    if(iPlayer.DimensionType[0] == DimensionType.Gangwar)
+                    if (iPlayer.DimensionType[0] == DimensionType.Gangwar)
                     {
                         iPlayer.Dimension[0] = 0;
                         iPlayer.DimensionType[0] = DimensionType.World;
@@ -385,7 +382,7 @@ namespace GVRP.Module.Players.Events
                     DialogMigrator.CloseUserDialog(player, Dialogs.menu_info);
 
                     // Connect to TS
-              //      Console.Write(iPlayer.GetName());
+                    //      Console.Write(iPlayer.GetName());
                     Teamspeak.Connect(player, iPlayer.GetName());
 
                     var crumbs = player.Name.Split('_');
@@ -402,9 +399,9 @@ namespace GVRP.Module.Players.Events
                         iPlayer.Player.TriggerEvent("onPlayerLoaded", firstName, lastName, iPlayer.Id, iPlayer.rp[0],
                             iPlayer.ActiveBusiness?.Id ?? 0, iPlayer.grade[0], iPlayer.money[0], 0,
                             iPlayer.ownHouse[0], iPlayer.TeamId, iPlayer.TeamRank, iPlayer.Level, iPlayer.isInjured(), iPlayer.IsInDuty(),
-                            iPlayer.IsTied, iPlayer.IsCuffed, iPlayer.VoiceHash, iPlayer.funkStatus, iPlayer.handy[0], iPlayer.job[0], 
-                            0, iPlayer.GetJsonAnimationsShortcuts(), iPlayer.RankId >= (uint)adminlevel.Supporter ? true : false, 
-                            Configurations.Configuration.Instance.WeaponDamageMultipier, Configurations.Configuration.Instance.MeeleDamageMultiplier, 
+                            iPlayer.IsTied, iPlayer.IsCuffed, iPlayer.VoiceHash, iPlayer.funkStatus, iPlayer.handy[0], iPlayer.job[0],
+                            0, iPlayer.GetJsonAnimationsShortcuts(), iPlayer.RankId >= (uint)adminlevel.Supporter ? true : false,
+                            Configurations.Configuration.Instance.WeaponDamageMultipier, Configurations.Configuration.Instance.MeeleDamageMultiplier,
                             Configurations.Configuration.Instance.PlayerSync, Configurations.Configuration.Instance.VehicleSync, iPlayer.blackmoney[0]);
                     }
                     else
@@ -440,11 +437,11 @@ namespace GVRP.Module.Players.Events
                 InitPlayerSpawnData(player);
 
                 iPlayer.LoadPlayerWeapons();
-            if (iPlayer == null || !iPlayer.IsValid())
-            {
-                iPlayer.Kick();
-                return;
-            }
+                if (iPlayer == null || !iPlayer.IsValid())
+                {
+                    iPlayer.Kick();
+                    return;
+                }
                 if (iPlayer.NeuEingereist())
                 {
                     if (iPlayer.isInjured()) iPlayer.revive();
@@ -541,8 +538,8 @@ namespace GVRP.Module.Players.Events
                         }));
                     }
                 }
-              
-                
+
+
             }
             catch (Exception e)
             {

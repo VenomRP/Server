@@ -1,22 +1,16 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Handler;
 using GVRP.Module.Asservatenkammer;
 using GVRP.Module.Chat;
 using GVRP.Module.Doors;
-using GVRP.Module.GTAN;
 using GVRP.Module.Houses;
 using GVRP.Module.Injury;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Robbery;
-using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -41,7 +35,7 @@ namespace GVRP.Module.Items.Scripts
                     if (door.LastBreak.AddMinutes(5) > DateTime.Now) return false; // Bei einem Break, kann 5 min nicht interagiert werden
 
                     // Check Duty Cops
-                    if(TeamModule.Instance.DutyCops < 10)
+                    if (TeamModule.Instance.DutyCops < 10)
                     {
                         iPlayer.SendNewNotification("Die Sicherheitssysteme lassen das nicht zu!", notificationType: PlayerNotification.NotificationType.SUCCESS);
                         return false;
@@ -129,7 +123,7 @@ namespace GVRP.Module.Items.Scripts
 
             if (iPlayer.Player.Position.DistanceTo(AsservatenkammerModule.AserHackPosition) < 2.0f)
             {
-                
+
                 // Nur als Gangler, nur bei mind 20 cops, nur alle 2h, nicht parallel
                 if ((!Configurations.Configuration.Instance.DevMode) && (!iPlayer.IsAGangster() || TeamModule.Instance.DutyCops < 20 || AsservatenkammerModule.Instance.AserHackActive || AsservatenkammerModule.Instance.LastAserHack.AddHours(2) > DateTime.Now))
                 {
@@ -161,9 +155,9 @@ namespace GVRP.Module.Items.Scripts
                 StaticContainer AserKammer = StaticContainerModule.Instance.Get((uint)StaticContainerTypes.ASERLSPD);
 
                 // Half Items at rob...
-                foreach(Item item in AserKammer.Container.Slots.Values)
+                foreach (Item item in AserKammer.Container.Slots.Values)
                 {
-                    if(item != null && item.Id > 0)
+                    if (item != null && item.Id > 0)
                     {
                         if (item.Amount > 10) item.Amount = item.Amount / 2;
                     }

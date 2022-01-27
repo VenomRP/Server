@@ -1,15 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Einreiseamt;
-using GVRP.Module.Items;
-using GVRP.Module.Kasino;
+﻿using GTANetworkAPI;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
 using GVRP.Module.Spawners;
 
 namespace GVRP.Module.Stadthalle

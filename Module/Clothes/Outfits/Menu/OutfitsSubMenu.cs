@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Clothes.Props;
+﻿using GVRP.Module.Clothes.Props;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Clothes.Outfits
 {
@@ -40,10 +37,11 @@ namespace GVRP.Module.Clothes.Outfits
                 if (index == 1)
                 {
                     Outfit outfit = null;
-                    try {
+                    try
+                    {
                         outfit = iPlayer.GetData("outfit");
                     }
-                    catch(Exception e)
+                    catch (Exception e)
                     {
                         return false;
                     }
@@ -56,7 +54,7 @@ namespace GVRP.Module.Clothes.Outfits
                     // Clothes
                     foreach (KeyValuePair<int, uint> kvp in outfit.Clothes.ToList())
                     {
-                        
+
                         Cloth cloth = ClothModule.Instance.Get(kvp.Value);
                         if (cloth == null) continue;
 

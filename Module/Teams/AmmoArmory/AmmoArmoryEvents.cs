@@ -1,13 +1,10 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams.AmmoArmory;
 using GVRP.Module.Teams.Shelter;
+using System;
 
 namespace GVRP.Module.Teams.AmmoPackageOrder
 {
@@ -87,28 +84,28 @@ namespace GVRP.Module.Teams.AmmoPackageOrder
         [RemoteEvent]
         public async void ConfigAmmoArmoriePrice(Player player, string returnstring)
         {
-            
-                var dbPlayer = player.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid() || !dbPlayer.HasData("configAmmoPrice")) return;
 
-                AmmoArmorieItem item = AmmoArmoryItemModule.Instance.Get(dbPlayer.GetData("configAmmoPrice"));
-                if (item == null) return;
-                if (!dbPlayer.Team.IsGangsters() || dbPlayer.TeamRank <= 10) return;
+            var dbPlayer = player.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid() || !dbPlayer.HasData("configAmmoPrice")) return;
+
+            AmmoArmorieItem item = AmmoArmoryItemModule.Instance.Get(dbPlayer.GetData("configAmmoPrice"));
+            if (item == null) return;
+            if (!dbPlayer.Team.IsGangsters() || dbPlayer.TeamRank <= 10) return;
 
 
-                if (int.TryParse(returnstring, out int price))
+            if (int.TryParse(returnstring, out int price))
+            {
+                if (price >= 0 && price < 10000)
                 {
-                    if(price >= 0 && price < 10000)
-                    {
-                        item.ChangeTeamPrice(price);
-                        dbPlayer.SendNewNotification($"Sie haben den Preis für {ItemModelModule.Instance.Get(item.ItemId).Name} auf ${price} gesetzt!");
-                        return;
-                    }
+                    item.ChangeTeamPrice(price);
+                    dbPlayer.SendNewNotification($"Sie haben den Preis für {ItemModelModule.Instance.Get(item.ItemId).Name} auf ${price} gesetzt!");
                     return;
                 }
-                else
-                    dbPlayer.SendNewNotification("Falsche Anzahl!");
-            
+                return;
+            }
+            else
+                dbPlayer.SendNewNotification("Falsche Anzahl!");
+
         }
     }
 }

@@ -1,11 +1,8 @@
-﻿using System.Collections.Generic;
-using GVRP.Module.AnimationMenu;
-using GVRP.Module.Farming;
-using GVRP.Module.Helper;
-using GVRP.Module.Houses;
+﻿using GVRP.Module.AnimationMenu;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP
 {
@@ -57,7 +54,7 @@ namespace GVRP
                     foreach (KeyValuePair<uint, AnimationCategory> kvp in AnimationCategoryModule.Instance.GetAll())
                     {
                         if (kvp.Value == null) continue;
-                        if(index-2 == idx)
+                        if (index - 2 == idx)
                         {
                             // Animation Category Clicked
                             iPlayer.SetData("animCat", (int)kvp.Value.Id);
@@ -65,7 +62,7 @@ namespace GVRP
                         }
                         idx++;
                     }
-                    
+
                     MenuManager.Instance.Build(PlayerMenu.AnimationMenuIn, iPlayer).Show(iPlayer);
                     return false;
                 }
@@ -82,7 +79,7 @@ namespace GVRP
             {
                 return true;
             }
-            
+
             iPlayer.PlayAnimation(AnimationMenuModule.Instance.animFlagDic[(uint)animationItem.AnimFlag], animationItem.AnimDic, animationItem.AnimName);
             return false;
         }

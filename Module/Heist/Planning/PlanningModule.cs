@@ -1,8 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Items;
@@ -13,6 +9,10 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
 using GVRP.Module.Teams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Heist.Planning
 {
@@ -263,7 +263,7 @@ namespace GVRP.Module.Heist.Planning
                 {
                     actionDid = PlanningRoomAusbauen(dbPlayer, room);
                 }
-                
+
 
                 return actionDid;
             }
@@ -1245,7 +1245,7 @@ namespace GVRP.Module.Heist.Planning
                     planningRoom.CreateMarker();
                 }
 
-                if(!planningRoom.PlayersInsideRoom.Contains(dbPlayer))
+                if (!planningRoom.PlayersInsideRoom.Contains(dbPlayer))
                 {
                     planningRoom.PlayersInsideRoom.Add(dbPlayer);
                 }
@@ -1455,7 +1455,7 @@ namespace GVRP.Module.Heist.Planning
             if (dbPlayer.Player.IsInVehicle) return;
 
             PlanningRoom room = Instance.GetPlanningRoomByTeamId(dbPlayer.Team.Id);
-            
+
             if (room.CasinoPropDoor == 0)
             {
                 if (room.CasinoPlanLevel == 1)

@@ -130,17 +130,17 @@ namespace GVRP.Module.Computer.Apps.StreifenApp
                             if (dbPlayer == teamLeitstellenObject.Acceptor) // Prevent double send to leitstelle
                                 continue; */
 
-                            //set client side marker
-                           // dbPlayer.Player.TriggerEvent("setcustommarks", CustomMarkersKeys.Leitstelle, true, NAPI.Util.ToJson(clientSendData));
-                       // }
+//set client side marker
+// dbPlayer.Player.TriggerEvent("setcustommarks", CustomMarkersKeys.Leitstelle, true, NAPI.Util.ToJson(clientSendData));
+// }
 
-                        //set client side marker
-                      //  teamLeitstellenObject.Acceptor.Player.TriggerEvent("setcustommarks", CustomMarkersKeys.Leitstelle, true, NAPI.Util.ToJson(clientSendData));
-                   // }
-               // }
-            //}
-       // }
+//set client side marker
+//  teamLeitstellenObject.Acceptor.Player.TriggerEvent("setcustommarks", CustomMarkersKeys.Leitstelle, true, NAPI.Util.ToJson(clientSendData));
+// }
+// }
+//}
+// }
 
-       
-   // }
+
+// }
 //}

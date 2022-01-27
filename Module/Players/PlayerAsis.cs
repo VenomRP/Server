@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
+using System.Collections.Generic;
 
 
 namespace GVRP.Module.Players
@@ -16,7 +16,7 @@ namespace GVRP.Module.Players
             allowedAsis.Add("SkipIntro.asi", "CF0F68109888CE43AEE861066A853E7A"); // Whitelist Default SkipIntro.asi
         }
 
-        public void CheckAsi(Player player) 
+        public void CheckAsi(Player player)
         {
             /*var asistring = "";
 

@@ -1,17 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
+using System.Linq;
 
 namespace GVRP.Module.Crime
 {
@@ -24,7 +13,7 @@ namespace GVRP.Module.Crime
         public override Menu.Menu Build(DbPlayer iPlayer)
         {
             if (!iPlayer.IsACop() || !iPlayer.Duty) return null;
-            
+
             var menu = new Menu.Menu(Menu, "Gefaengnisuebersicht");
 
             menu.Add($"Schließen");

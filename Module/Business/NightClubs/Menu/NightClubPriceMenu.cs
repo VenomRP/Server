@@ -1,8 +1,5 @@
-﻿using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 
@@ -26,7 +23,7 @@ namespace GVRP.Module.Business.NightClubs
             var menu = new Menu.Menu(Menu, nightClub.Name);
 
             menu.Add($"Schließen");
-            foreach(NightClubItem nightClubItem in nightClub.NightClubShopItems)
+            foreach (NightClubItem nightClubItem in nightClub.NightClubShopItems)
             {
                 menu.Add($"{nightClubItem.Name} | ${nightClubItem.Price}");
             }
@@ -56,7 +53,7 @@ namespace GVRP.Module.Business.NightClubs
                 var idx = 1;
                 foreach (NightClubItem nightClubItem in nightClub.NightClubShopItems)
                 {
-                    if(idx == index)
+                    if (idx == index)
                     {
                         iPlayer.SetData("nightClubItemEdit", nightClubItem.ItemId);
                         ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = $"Preis {nightClubItem.Name}", Callback = "SetNightClubItemPrice", Message = "Gib einen neuen Preis an." });

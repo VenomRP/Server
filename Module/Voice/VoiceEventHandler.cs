@@ -1,9 +1,6 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Globalization;
-using System.Threading.Tasks;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
+using System.Globalization;
 
 namespace GVRP.Module.Voice
 {
@@ -12,11 +9,11 @@ namespace GVRP.Module.Voice
         [RemoteEvent]
         public static void ChangeVoicRange(Player client, uint garageId, string state)
         {
-           client.SetSharedData("VOICE_RANGE", state);
+            client.SetSharedData("VOICE_RANGE", state);
         }
 
         [RemoteEvent]
-        public static void requestVoiceSettings(Player client) 
+        public static void requestVoiceSettings(Player client)
         {
             var dbPlayer = client.GetPlayer();
             if (!dbPlayer.IsValid()) return;
@@ -67,7 +64,7 @@ namespace GVRP.Module.Voice
 
             client.TriggerEvent("updateVoiceState", state);
         }
-                
+
         public static void Connect(Player player, string characterName)
         {
             player.TriggerEvent("ConnectTeamspeak");

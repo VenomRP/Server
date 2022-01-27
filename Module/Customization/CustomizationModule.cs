@@ -1,10 +1,10 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using System;
 using GVRP.Module.Logging;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Customization
 {
@@ -57,7 +57,7 @@ namespace GVRP.Module.Customization
                 {
                     var temp = new AppearanceItem[11];
                     Array.Copy(dbPlayer.Customization.Appearance, temp, 10);
-                    temp[10] = new AppearanceItem((byte) 255, 0.0f);
+                    temp[10] = new AppearanceItem((byte)255, 0.0f);
                     dbPlayer.Customization.Appearance = temp;
                 }
             }

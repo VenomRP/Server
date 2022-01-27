@@ -1,23 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.AnimationMenu;
-using GVRP.Module.Chat;
+﻿using GTANetworkAPI;
 using GVRP.Module.Injury;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Phone;
-using GVRP.Module.Shops;
 using GVRP.Module.Teams;
-using GVRP.Module.Voice;
-using GVRP.Module.Weapons;
-using GVRP.Module.Weapons.Data;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Robbery
 {
@@ -47,7 +36,7 @@ namespace GVRP.Module.Robbery
             StaticContainer.Container.ClearInventory();
             StaticContainer.Container.AddItem(303, 96);
             StaticContainer.Locked = false;
-            
+
             TeamModule.Instance.SendMessageToTeam("Die Waffenfabrik ist nun offen!", (teams)RobberTeam.Id);
 
             IsActive = false;
@@ -89,7 +78,7 @@ namespace GVRP.Module.Robbery
         {
             if (!dbPlayer.IsAGangster())
             {
-                dbPlayer.SendNewNotification( "Große Heists sind nur fuer Gangs/Mafien!");
+                dbPlayer.SendNewNotification("Große Heists sind nur fuer Gangs/Mafien!");
                 return;
             }
 
@@ -116,8 +105,8 @@ namespace GVRP.Module.Robbery
                 dbPlayer.SendNewNotification("Es muessen mindestens 30 Soldaten im Dienst sein!");
                 return;
             }
-            
-            dbPlayer.SendNewNotification( "Sie versuchen nun den Tresor zu knacken!");
+
+            dbPlayer.SendNewNotification("Sie versuchen nun den Tresor zu knacken!");
 
             // Set start datas
             TimeLeft = RobberyTime;
@@ -144,10 +133,10 @@ namespace GVRP.Module.Robbery
             RobberTeam = null;
             TimeLeft = RobberyTime;
         }
-        
+
         public override void OnMinuteUpdate()
         {
-            if(IsActive)
+            if (IsActive)
             {
                 // Check if Teamplayer is in Reange
                 if (RobberTeam == null || RobberTeam.Members.Where(p => p.Value != null && p.Value.IsValid() && !p.Value.isInjured() && p.Value.Player.Position.DistanceTo(RobPosition) < 20.0f).Count() <= 0)

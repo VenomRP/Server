@@ -1,22 +1,18 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
 using GVRP.Module.Doors;
-using GVRP.Module.Gangwar;
-using GVRP.Module.GTAN;
 using GVRP.Module.Injury;
 using GVRP.Module.Laboratories;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Robbery;
 using GVRP.Module.Shops;
 using GVRP.Module.Teams;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -46,7 +42,7 @@ namespace GVRP.Module.Items.Scripts
 
                     Chats.sendProgressBar(iPlayer, time);
 
-                    if(!door.LessSecurity || door.LessSecurityChanged.AddMinutes(5) < DateTime.Now) TeamModule.Instance.SendChatMessageToDepartments($"Es wird gerade versucht eine Sicherheitstuer aufzubrechen! Gray-Cooperation Secure System - Object {door.Name}!");
+                    if (!door.LessSecurity || door.LessSecurityChanged.AddMinutes(5) < DateTime.Now) TeamModule.Instance.SendChatMessageToDepartments($"Es wird gerade versucht eine Sicherheitstuer aufzubrechen! Gray-Cooperation Secure System - Object {door.Name}!");
 
                     iPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "amb@world_human_welding@male@idle_a", "idle_a");
                     iPlayer.Player.TriggerEvent("freezePlayer", true);
@@ -62,7 +58,7 @@ namespace GVRP.Module.Items.Scripts
 
                     if (door.LessSecurity && door.LessSecurityChanged.AddMinutes(5) > DateTime.Now) TeamModule.Instance.SendChatMessageToDepartments($"Es wird gerade versucht eine Sicherheitstuer aufzubrechen! Gray-Cooperation Secure System - Object {door.Name}!");
 
-                    iPlayer.SendNewNotification("Tuer aufgebrochen!", notificationType:PlayerNotification.NotificationType.SUCCESS);
+                    iPlayer.SendNewNotification("Tuer aufgebrochen!", notificationType: PlayerNotification.NotificationType.SUCCESS);
                     NAPI.Player.StopPlayerAnimation(iPlayer.Player);
                     return true;
                 }
@@ -79,7 +75,7 @@ namespace GVRP.Module.Items.Scripts
 
                     if (!jumpPoint.Locked)
                     {
-                        iPlayer.SendNewNotification("Eingang ist bereits aufgeschlossen!", notificationType:PlayerNotification.NotificationType.SUCCESS);
+                        iPlayer.SendNewNotification("Eingang ist bereits aufgeschlossen!", notificationType: PlayerNotification.NotificationType.SUCCESS);
                         return false;
                     }
 
@@ -100,7 +96,7 @@ namespace GVRP.Module.Items.Scripts
                             return false;
                         }
                         methlaboratory.LaborMemberCheckedOnHack = true;
-                        TeamModule.Instance.Get(methlaboratory.TeamId).SendNotification("Das Sicherheitssystem des Methlabors meldet einen Alarm...", time:30000);
+                        TeamModule.Instance.Get(methlaboratory.TeamId).SendNotification("Das Sicherheitssystem des Methlabors meldet einen Alarm...", time: 30000);
                     }
                     else if (weaponlaboratory != null)
                     {
@@ -222,7 +218,7 @@ namespace GVRP.Module.Items.Scripts
                 NAPI.Player.StopPlayerAnimation(iPlayer.Player);
 
                 iPlayer.SendNewNotification("Tresor aufgebrochen! Du wirst regelmäßig Geld erhalten.", notificationType: PlayerNotification.NotificationType.SUCCESS);
-                
+
                 return true;
             }
 
@@ -232,7 +228,7 @@ namespace GVRP.Module.Items.Scripts
             // Staatsbankrob
             if (tunnel != null && StaatsbankRobberyModule.Instance.IsActive && StaatsbankRobberyModule.Instance.RobberTeam == iPlayer.Team)
             {
-                if(!tunnel.IsOutsideOpen && iPlayer.Player.Position.DistanceTo(tunnel.Position) < 3.0f)
+                if (!tunnel.IsOutsideOpen && iPlayer.Player.Position.DistanceTo(tunnel.Position) < 3.0f)
                 {
                     iPlayer.SendNewNotification("Sie beginnen nun damit die Gitterstäbe aufzuschweißen!");
 
@@ -268,7 +264,7 @@ namespace GVRP.Module.Items.Scripts
                             || staticContainer.Id == (uint)StaticContainerTypes.STAATSBANK4 || staticContainer.Id == (uint)StaticContainerTypes.STAATSBANK5 || staticContainer.Id == (uint)StaticContainerTypes.STAATSBANK6
                             || staticContainer.Id == (uint)StaticContainerTypes.STAATSBANK7 || staticContainer.Id == (uint)StaticContainerTypes.STAATSBANK8)
                         {
-                            if(StaatsbankRobberyModule.Instance.CountInBreakTresor >= 2)
+                            if (StaatsbankRobberyModule.Instance.CountInBreakTresor >= 2)
                             {
                                 iPlayer.SendNewNotification("Es können nur maximal 2 Schließfächer zur selben Zeit geöffnet werden!");
                                 return false;

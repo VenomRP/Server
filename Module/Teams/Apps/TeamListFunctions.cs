@@ -1,9 +1,7 @@
-﻿using System;
+﻿using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 using static GVRP.Module.Teams.Apps.TeamListApp;
 
 namespace GVRP.Module.Teams.Apps
@@ -141,7 +139,7 @@ namespace GVRP.Module.Teams.Apps
 
                 if (dbPlayer.IsNSA)
                 {
-                    
+
                     foreach (var l_Member in TeamModule.Instance.GetById((int)teams.TEAM_ARMY).Members.ToList())
                     {
                         var l_FIBPlayer = l_Member.Value;
@@ -225,7 +223,7 @@ namespace GVRP.Module.Teams.Apps
                     members = members.Concat(tmp).ToList();
                 }
             }
-            
+
             return members;
         }
     }

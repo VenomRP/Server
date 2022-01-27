@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Weapons.Data;
 
 namespace GVRP.Module.Weapons
 {

@@ -1,5 +1,4 @@
-﻿using GVRP.Module.Configurations;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Forum
 {

@@ -1,10 +1,6 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Items;
-using GVRP.Module.Node;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Players.Drunk
 {
@@ -16,7 +12,7 @@ namespace GVRP.Module.Players.Drunk
             {
                 if (player.Position.DistanceTo(dbPlayer.Player.Position) < 280)
                 {
-               //     player.TriggerEvent("setPlayerDrunk", dbPlayer.Player, state);
+                    //     player.TriggerEvent("setPlayerDrunk", dbPlayer.Player, state);
                 }
             });
 
@@ -52,7 +48,7 @@ namespace GVRP.Module.Players.Drunk
                     dbPlayer.ResetData("alkTime");
                     SetPlayerDrunk(dbPlayer, false);
                 }
-                if(dbPlayer.HasData("alkLevel") && dbPlayer.GetData("alkLevel") >= 40)
+                if (dbPlayer.HasData("alkLevel") && dbPlayer.GetData("alkLevel") >= 40)
                 {
                     dbPlayer.Player.TriggerEvent("startScreenEffect", "DefaultFlash", 5000, true);
                 }

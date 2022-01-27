@@ -1,23 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Handler;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.Business.Raffinery;
+﻿using GVRP.Handler;
 using GVRP.Module.Chat;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Farming;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 using GVRP.Module.Vehicles;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Business.FuelStations
 {
@@ -59,7 +49,7 @@ namespace GVRP.Module.Business.FuelStations
                     MenuManager.DismissCurrent(iPlayer);
                     return false;
                 }
-                
+
                 if (!iPlayer.Player.IsInVehicle || !iPlayer.HasData("fillLiter")) return false;
 
                 List<SxVehicle> sxVehicles = VehicleHandler.Instance.GetClosestVehiclesPlayerCanControl(iPlayer, 11.0f);
@@ -79,7 +69,7 @@ namespace GVRP.Module.Business.FuelStations
 
                             // check for gas stations
                             var fuel = FuelStationModule.Instance.GetStaionByGas(iPlayer.Player.Position);
-                            if(fuel == null)
+                            if (fuel == null)
                             {
                                 fuel = FuelStationModule.Instance.GetThis(iPlayer.Player.Position);
                             }
@@ -90,7 +80,7 @@ namespace GVRP.Module.Business.FuelStations
                                     // Get Amount FUEL can added
                                     int amountFuelCanTake = fuel.Container.GetMaxItemAddedAmount(FuelStationModule.BenzinModelId);
 
-                                    if(sxVehicle.Container.GetItemAmount(FuelStationModule.BenzinModelId) < amountFuelCanTake)
+                                    if (sxVehicle.Container.GetItemAmount(FuelStationModule.BenzinModelId) < amountFuelCanTake)
                                     {
                                         amountFuelCanTake = sxVehicle.Container.GetItemAmount(FuelStationModule.BenzinModelId);
                                     }

@@ -1,16 +1,6 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
 
 namespace GVRP.Module.Racing.Menu
 {
@@ -42,7 +32,7 @@ namespace GVRP.Module.Racing.Menu
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(iPlayer);
                     return true;
@@ -50,18 +40,18 @@ namespace GVRP.Module.Racing.Menu
                 else
                 {
                     int idx = 1;
-                    
+
                     foreach (RacingLobby racingLobby in RacingModule.Lobbies)
                     {
-                        if(idx == index)
+                        if (idx == index)
                         {
-                            if(racingLobby.RacingPlayers.Count >= RacingModule.MaxLobbyPlayers)
+                            if (racingLobby.RacingPlayers.Count >= RacingModule.MaxLobbyPlayers)
                             {
                                 iPlayer.SendNewNotification("Diese Lobby ist bereits voll!");
                                 return false;
                             }
-                            
-                            if(!iPlayer.TakeMoney(RacingModule.LobbyEnterPrice))
+
+                            if (!iPlayer.TakeMoney(RacingModule.LobbyEnterPrice))
                             {
                                 iPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(RacingModule.LobbyEnterPrice));
                                 return false;

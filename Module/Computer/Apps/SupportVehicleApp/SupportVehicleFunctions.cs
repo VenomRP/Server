@@ -1,7 +1,7 @@
-﻿using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Vehicles.Garages;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps.SupportVehicleApp
 {
@@ -24,7 +24,7 @@ namespace GVRP.Module.Computer.Apps.SupportVehicleApp
 
                 string statement;
 
-                if(category == VehicleCategory.ID)
+                if (category == VehicleCategory.ID)
                 {
                     statement = $"SELECT id, owner, inGarage, garage_id, vehiclehash FROM vehicles WHERE id = '{ id }'";
                 }
@@ -44,7 +44,7 @@ namespace GVRP.Module.Computer.Apps.SupportVehicleApp
                             {
                                 Id = reader.GetInt32("id"),
                                 InGarage = reader.GetInt32("inGarage"),
-                                Garage = reader.GetInt32("garage_id") > 0 && GarageModule.Instance.Contains(reader.GetUInt32("garage_id")) ? GarageModule.Instance.Get(reader.GetUInt32("garage_id")).Name : "Unbekannte Garage!" ,
+                                Garage = reader.GetInt32("garage_id") > 0 && GarageModule.Instance.Contains(reader.GetUInt32("garage_id")) ? GarageModule.Instance.Get(reader.GetUInt32("garage_id")).Name : "Unbekannte Garage!",
                                 Vehiclehash = reader.GetString("vehiclehash")
                             };
 

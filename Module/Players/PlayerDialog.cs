@@ -1,7 +1,5 @@
 ﻿
 using GTANetworkAPI;
-using Newtonsoft.Json;
-using GVRP.Module.GTAN;
 using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Players
@@ -85,7 +83,7 @@ namespace GVRP.Module.Players
 
         public static uint menu_shop_clothes = 98;
         public static uint menu_shop_clothes_selection = 99;
-        
+
         public static uint menu_shop_license = 101;
         public static uint menu_shop_ammunation = 102;
         public static uint menu_shop_rebel_weapons = 103;
@@ -102,7 +100,7 @@ namespace GVRP.Module.Players
         public static uint menu_jailinhabits = 113;
         public static uint menu_dealerhint = 114;
     }
-    
+
     public static class PlayerDialog
     {
         public static void CloseUserDialog(this DbPlayer dbPlayer, uint dialogid)
@@ -113,7 +111,7 @@ namespace GVRP.Module.Players
             dbPlayer.Player.TriggerEvent("freezePlayer", false);
 
         }
-        
+
         public static void CreateUserDialog(this Player player, uint dialogid, string template = "",
             int optional = 0, string optinal = "")
         {
@@ -142,7 +140,7 @@ namespace GVRP.Module.Players
                 iPlayer.watchDialog = dialogid;
 
                 if (template == "login")
-                {   
+                {
                     player.TriggerEvent("openDialog", template, "{\"name\": \"" + player.Name + "\"}");
                 }
                 else

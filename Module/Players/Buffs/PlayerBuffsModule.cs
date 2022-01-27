@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkMethods;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using GVRP.Module.Configurations;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Players.Buffs
 {
@@ -76,7 +72,7 @@ namespace GVRP.Module.Players.Buffs
                 if (dbPlayer.Buffs.DrugBuff > 0)
                 {
                     CustomDrugModule.Instance.SetCustomDrugEffect(dbPlayer);
-                    if(dbPlayer.Buffs.DrugBuff == 1)
+                    if (dbPlayer.Buffs.DrugBuff == 1)
                     {
                         CustomDrugModule.Instance.RemoveEffect(dbPlayer);
                     }
@@ -113,12 +109,12 @@ namespace GVRP.Module.Players.Buffs
                 Logger.Crash(exception);
             }
         }
-        
+
         public static bool HasPlayerBuffToWarp(this DbPlayer dbPlayer)
         {
             return (dbPlayer.Buffs.JointBuff > 0 || dbPlayer.Buffs.DrugsInfected > 0 || dbPlayer.Buffs.Cocain > 0 || dbPlayer.Buffs.GCocain > 0 || dbPlayer.Buffs.DrugBuff > 0);
         }
-        
+
         public static void IncreasePlayerDrugInfection(this DbPlayer dbPlayer)
         {
             var rnd = new Random();
@@ -126,7 +122,7 @@ namespace GVRP.Module.Players.Buffs
             if (dbPlayer.Buffs.DrugsInfected > 60) dbPlayer.Buffs.DrugsInfected = 60;
             dbPlayer.SaveBuffs();
         }
-        
+
         public static bool Drugtest(this DbPlayer dbPlayer)
         {
             return dbPlayer.Buffs.DrugsInfected > 0 || dbPlayer.Buffs.DrugBuff > 0 || dbPlayer.Buffs.Cocain > 0 || dbPlayer.Buffs.GCocain > 0;
@@ -143,7 +139,7 @@ namespace GVRP.Module.Players.Buffs
 
             MySQLHandler.ExecuteAsync($"UPDATE `player_buffs` SET data = '{playerDataString}' WHERE `player_id` = '{dbPlayer.Id}';");
         }
-        
+
         public static void ResetBuffs(this DbPlayer dbPlayer)
         {
             dbPlayer.Buffs = new PlayerBuffs();

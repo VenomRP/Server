@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Settings
 {
     public class Setting : Loadable<uint>
     {
-        
+
         public uint Id { get; }
         public string Key { get; set; }
         public string Value { get; set; }

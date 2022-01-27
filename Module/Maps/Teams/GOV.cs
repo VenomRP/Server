@@ -1,7 +1,4 @@
-﻿using GTANetworkAPI;
-using GVRP.Module.Spawners;
-
-namespace GVRP
+﻿namespace GVRP
 {
     public static class GOV
     {

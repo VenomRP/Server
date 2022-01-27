@@ -1,16 +1,11 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Players;
-using Newtonsoft.Json;
-using System;
-using GVRP.Module.Injury;
-using GVRP.Module.Players.Phone;
-using GVRP.Module.Teams;
-using GVRP.Module.Players.Db;
-using System.Linq;
 using GVRP.Module.Items;
 using GVRP.Module.LeitstellenPhone;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Telefon.App
 {
@@ -35,7 +30,7 @@ namespace GVRP.Module.Telefon.App
             {
                 Logging.Logger.Crash(e);
                 return null;
-            } 
+            }
         }
 
         [RemoteEvent]
@@ -54,18 +49,18 @@ namespace GVRP.Module.Telefon.App
                 selfnumber = teamLeitstellenObject.Number;
             }
 
-           
+
 
             if (selfnumber == p_CallingNumber)
             {
-                l_Caller.SendNewNotification("Du kannst dich nicht selber anrufen.", notificationType:PlayerNotification.NotificationType.ERROR);
+                l_Caller.SendNewNotification("Du kannst dich nicht selber anrufen.", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
 
             if (l_Caller.phoneSetting.flugmodus)
             {
                 //Flugmodus aktiviert... kein Anruf möglich
-                l_Caller.SendNewNotification("Der Flugmodus ist aktiviert... Kein Empfang", title: "NO SIGNAL", notificationType:PlayerNotification.NotificationType.ERROR);
+                l_Caller.SendNewNotification("Der Flugmodus ist aktiviert... Kein Empfang", title: "NO SIGNAL", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
 
@@ -81,13 +76,14 @@ namespace GVRP.Module.Telefon.App
             {
                 teamLeitstellenObject = LeitstellenPhoneModule.Instance.GetLeitstelleByNumber(p_CallingNumber);
 
-                if (teamLeitstellenObject == null || teamLeitstellenObject.Acceptor == null || !teamLeitstellenObject.Acceptor.IsValid() || teamLeitstellenObject.Acceptor.TeamId != teamLeitstellenObject.TeamId) {
+                if (teamLeitstellenObject == null || teamLeitstellenObject.Acceptor == null || !teamLeitstellenObject.Acceptor.IsValid() || teamLeitstellenObject.Acceptor.TeamId != teamLeitstellenObject.TeamId)
+                {
                     l_Caller.SendNewNotification("Die angegebene Rufnummer ist derzeit nicht verfuegbar.", notificationType: PlayerNotification.NotificationType.ERROR);
                     return;
                 }
-                if(teamLeitstellenObject.StaatsFrakOnly && !l_Caller.IsACop() && l_Caller.TeamId != (int)teams.TEAM_NEWS &&
+                if (teamLeitstellenObject.StaatsFrakOnly && !l_Caller.IsACop() && l_Caller.TeamId != (int)teams.TEAM_NEWS &&
                     l_Caller.TeamId != (int)teams.TEAM_FIB && l_Caller.TeamId != (int)teams.TEAM_DPOS && l_Caller.TeamId != (int)teams.TEAM_MEDIC &&
-                    l_Caller.TeamId != (int) teams.TEAM_DRIVINGSCHOOL)
+                    l_Caller.TeamId != (int)teams.TEAM_DRIVINGSCHOOL)
                 {
                     l_Caller.SendNewNotification("Diese Nummer ist für Sie nicht verfügbar!.", notificationType: PlayerNotification.NotificationType.ERROR);
                     return;
@@ -141,7 +137,7 @@ namespace GVRP.Module.Telefon.App
 
             if (l_CalledPlayer == null || l_CalledPlayer.Container.GetItemAmount(174) == 0 || l_CalledPlayer.phoneSetting.flugmodus || l_CalledPlayer.IsInAdminDuty())
             {
-                l_Caller.SendNewNotification("Die angegebene Rufnummer ist derzeit nicht verfuegbar.", notificationType:PlayerNotification.NotificationType.ERROR);
+                l_Caller.SendNewNotification("Die angegebene Rufnummer ist derzeit nicht verfuegbar.", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
             if (l_CalledPlayer.phoneSetting.blockCalls)
@@ -150,12 +146,12 @@ namespace GVRP.Module.Telefon.App
                 return;
             }
 
-            
+
             l_Caller.ResetData("current_caller");
 
             if (l_CalledPlayer.HasData("current_caller"))
             {
-                l_Caller.SendNewNotification("Die angegebene Rufnummer ist derzeit im Gespraech.", notificationType:PlayerNotification.NotificationType.ERROR);
+                l_Caller.SendNewNotification("Die angegebene Rufnummer ist derzeit im Gespraech.", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
             l_Caller.SetData("current_caller", (int)l_CalledPlayer.handy[0]);

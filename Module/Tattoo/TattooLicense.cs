@@ -1,8 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Assets.Tattoo;
 
 namespace GVRP.Module.Tattoo
 {

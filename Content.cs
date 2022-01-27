@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace GVRP
 {
@@ -422,21 +421,21 @@ namespace GVRP
                 get
                 {
                     // evaluate the AnimationFlag, default cancellabel
-                    int flag = (int) AnimationFlags.AllowPlayerControl;
+                    int flag = (int)AnimationFlags.AllowPlayerControl;
 
                     if (Move)
                     {
-                        flag = (int) (AnimationFlags.AllowPlayerControl | AnimationFlags.OnlyAnimateUpperBody);
+                        flag = (int)(AnimationFlags.AllowPlayerControl | AnimationFlags.OnlyAnimateUpperBody);
                     }
 
                     // loop animation
                     if (Loop)
                     {
-                        flag = (int) AnimationFlags.Loop;
+                        flag = (int)AnimationFlags.Loop;
 
                         if (Move)
                         {
-                            flag = (int) (AnimationFlags.Loop | AnimationFlags.AllowPlayerControl |
+                            flag = (int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl |
                                           AnimationFlags.OnlyAnimateUpperBody);
                         }
                     }
@@ -450,7 +449,7 @@ namespace GVRP
         public enum AnimationFlags
         {
             Loop = 1 << 0,
-            
+
             OnLastFrame = 1 << 1,
             OnlyAnimateUpperBody = 1 << 4,
             AllowPlayerControl = 1 << 5,

@@ -1,17 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Threading.Tasks;
-using GVRP.Handler;
 using GVRP.Module.Chat;
-using GVRP.Module.Doors;
-using GVRP.Module.GTAN;
 using GVRP.Module.Houses;
 using GVRP.Module.Injury;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Teams;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -32,13 +27,13 @@ namespace GVRP.Module.Items.Scripts
                     Chats.sendProgressBar(iPlayer, breakTime);
 
                     DbPlayer owner = Players.Players.Instance.FindPlayer(house.OwnerId);
-                    if(owner != null && owner.IsValid() && house.Price >= 100000)
+                    if (owner != null && owner.IsValid() && house.Price >= 100000)
                     {
-                        owner.SendNewNotification($"Hookers House Guardian: Ein stiller Alarm an deinem Haus wurde ausgelöst.", title:"Hookers House Guardian", duration:30000);
+                        owner.SendNewNotification($"Hookers House Guardian: Ein stiller Alarm an deinem Haus wurde ausgelöst.", title: "Hookers House Guardian", duration: 30000);
                     }
-                    if(house.Price >= 2500000)
+                    if (house.Price >= 2500000)
                     {
-                        if(owner != null)
+                        if (owner != null)
                             TeamModule.Instance.SendChatMessageToDepartments($"Hookers House Guardian: Ein stiller Alarm am Haus {house.Id} von {owner.GetName()} wurde ausgelöst.");
                         else
                             TeamModule.Instance.SendChatMessageToDepartments($"Hookers House Guardian: Ein stiller Alarm am Haus {house.Id} wurde ausgelöst.");

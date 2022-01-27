@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.GTAN;
+﻿using GVRP.Handler;
 using GVRP.Module.Houses;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
@@ -63,10 +60,10 @@ namespace GVRP
                 {
                     if (iPlayer.ownHouse[0] > 0)
                     {
-                        iPlayer.SetData("sKeyId", (uint) iPlayer.ownHouse[0]);
+                        iPlayer.SetData("sKeyId", (uint)iPlayer.ownHouse[0]);
 
                         // Chose Menu
-                        MenuManager.DismissMenu(iPlayer.Player, (int) PlayerMenu.AccountHouseKeys);
+                        MenuManager.DismissMenu(iPlayer.Player, (int)PlayerMenu.AccountHouseKeys);
                         iPlayer.Player.CreateUserDialog(Dialogs.menu_housekeys_input, "inputtext");
                     }
 
@@ -88,7 +85,7 @@ namespace GVRP
 
                                     "Sie haben den Schluessel fuer das Haus " +
                                     key + " fallen gelassen!");
-                                MenuManager.DismissMenu(iPlayer.Player, (int) PlayerMenu.AccountHouseKeys);
+                                MenuManager.DismissMenu(iPlayer.Player, (int)PlayerMenu.AccountHouseKeys);
                                 return true;
                             }
 

@@ -8,10 +8,10 @@ namespace GVRP.Module.Computer.Apps.HouseApp.Apps
 {
     public class HouseEdit : SimpleApp
     {
-        public HouseEdit() : base("HouseEdit") {}
+        public HouseEdit() : base("HouseEdit") { }
 
         [RemoteEvent]
-        public void requestHouseData(Player client) 
+        public void requestHouseData(Player client)
         {
             DbPlayer dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;

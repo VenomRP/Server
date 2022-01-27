@@ -1,26 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.Assets.Beard;
-using GVRP.Module.Assets.Hair;
-using GVRP.Module.Assets.HairColor;
-using GVRP.Module.Barber.Windows;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Commands;
-using GVRP.Module.Configurations;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
-using GVRP.Module.Players;
-
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams;
-using GVRP.Module.Teams.Shelter;
-using GVRP.Module.Vehicles;
 using GVRP.Module.Vehicles.Data;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.VehicleTax
 {

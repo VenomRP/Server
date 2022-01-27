@@ -1,8 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Computer.Apps.FahrzeugUebersichtApp;
 using GVRP.Module.Players;
@@ -17,9 +13,9 @@ namespace GVRP.Module.Computer.Apps.FahrzeuguebersichtApp.Apps
 
         public enum OverviewCategory
         {
-            OWN=0,
-            KEY=1,
-            BUSINESS=2,
+            OWN = 0,
+            KEY = 1,
+            BUSINESS = 2,
             RENT = 3
         }
 

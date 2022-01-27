@@ -1,8 +1,4 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Commands;
 using GVRP.Module.Configurations;
@@ -11,6 +7,10 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.Teams.Blacklist.Menu;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Teams.Blacklist
 {
@@ -102,7 +102,7 @@ namespace GVRP.Module.Teams.Blacklist
             if (returnstring.Length < 2) return;
 
             DbPlayer target = Players.Players.Instance.FindPlayer(returnstring);
-            if(target != null && target.IsValid())
+            if (target != null && target.IsValid())
             {
                 if (target.IsOnBlacklist((int)iPlayer.TeamId))
                 {
@@ -133,7 +133,7 @@ namespace GVRP.Module.Teams.Blacklist
                 {
                     if (reader.HasRows)
                     {
-                        while(reader.Read())
+                        while (reader.Read())
                         {
                             team.blacklistEntries.Add(new BlacklistEntry(reader.GetInt32("team_id"), reader.GetInt32("player_id"), reader.GetInt32("setter_id"), reader.GetInt32("actual_deaths"), reader.GetDateTime("entry_date"), reader.GetInt32("type_id")));
                         }
@@ -167,12 +167,12 @@ namespace GVRP.Module.Teams.Blacklist
         public static void IncreaseBlacklist(this Team team, DbPlayer target)
         {
             if (target == null || !target.IsValid()) return;
-            
+
             BlacklistEntry blacklistEntry = team.blacklistEntries.FirstOrDefault(pb => pb.BlacklistPlayerId == target.Id);
             if (blacklistEntry == null || !BlacklistModule.Instance.blacklistTypes.ContainsKey(blacklistEntry.TypeId)) return;
 
             blacklistEntry.ActualBlacklistDeaths++;
-            
+
             if (blacklistEntry.ActualBlacklistDeaths >= BlacklistModule.Instance.blacklistTypes[blacklistEntry.TypeId].DeathLimit)
             {
                 blacklistEntry.Delete();
@@ -187,7 +187,7 @@ namespace GVRP.Module.Teams.Blacklist
 
         public static void Delete(this BlacklistEntry entry)
         {
-            MySQLHandler.Execute($"DELETE FROM team_blacklist WHERE player_id = '{entry.BlacklistPlayerId}' AND setter_id = '{entry.BlacklistSetterId}' AND team_id = '{entry.TeamId}'"); 
+            MySQLHandler.Execute($"DELETE FROM team_blacklist WHERE player_id = '{entry.BlacklistPlayerId}' AND setter_id = '{entry.BlacklistSetterId}' AND team_id = '{entry.TeamId}'");
 
             int team = entry.TeamId;
             TeamModule.Instance.GetById(team).blacklistEntries.Remove(entry);

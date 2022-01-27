@@ -3,7 +3,7 @@
 namespace GVRP.Module.ClientUI.Components
 {
     public abstract class Component : Script
-    {   
+    {
         public string Name { get; }
 
         public Component(string name)

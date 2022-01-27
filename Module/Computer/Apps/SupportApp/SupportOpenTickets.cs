@@ -1,11 +1,10 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Support;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps.SupportApp
 {
@@ -14,55 +13,55 @@ namespace GVRP.Module.Computer.Apps.SupportApp
         public SupportOpenTickets() : base("SupportOpenTickets") { }
 
         [RemoteEvent]
-        public async void requestOpenSupportTickets(Player client) 
+        public async void requestOpenSupportTickets(Player client)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                if (dbPlayer.RankId == 0)
-                {
-                    dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                List<ticketObject> ticketList = new List<ticketObject>();
-                var tickets = TicketModule.Instance.GetOpenTickets();
+            if (dbPlayer.RankId == 0)
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                foreach (var ticket in tickets)
-                {
-                    string accepted = string.Join(',', ticket.Accepted);
+            List<ticketObject> ticketList = new List<ticketObject>();
+            var tickets = TicketModule.Instance.GetOpenTickets();
 
-                    ticketList.Add(new ticketObject() { id = (int)ticket.Player.Id, creator = ticket.Player.GetName(), text = ticket.Description, created_at = ticket.Created_at, accepted_by = accepted });
-                }
+            foreach (var ticket in tickets)
+            {
+                string accepted = string.Join(',', ticket.Accepted);
 
-                var serviceJson = NAPI.Util.ToJson(ticketList);
-                
-                TriggerEvent(client, "responseOpenTicketList", serviceJson);
-            
+                ticketList.Add(new ticketObject() { id = (int)ticket.Player.Id, creator = ticket.Player.GetName(), text = ticket.Description, created_at = ticket.Created_at, accepted_by = accepted });
+            }
+
+            var serviceJson = NAPI.Util.ToJson(ticketList);
+
+            TriggerEvent(client, "responseOpenTicketList", serviceJson);
+
         }
 
         [RemoteEvent]
         public async void acceptOpenSupportTicket(Player client, string name)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                if (dbPlayer.RankId == 0)
-                {
-                    dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                var findplayer = Players.Players.Instance.FindPlayer(name);
-                if (findplayer == null) return;
+            if (dbPlayer.RankId == 0)
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                bool response = TicketModule.Instance.Accept(dbPlayer, findplayer);
+            var findplayer = Players.Players.Instance.FindPlayer(name);
+            if (findplayer == null) return;
 
-                dbPlayer.SendNewNotification(response ? $"Sie haben das Ticket von {findplayer.GetName()} angenommen!" : $"Das Ticket von {findplayer.GetName()} wurde bereits angenommen!");
-                findplayer.SendNewNotification("Ihr Ticket wurde angenommen!");
-            
+            bool response = TicketModule.Instance.Accept(dbPlayer, findplayer);
+
+            dbPlayer.SendNewNotification(response ? $"Sie haben das Ticket von {findplayer.GetName()} angenommen!" : $"Das Ticket von {findplayer.GetName()} wurde bereits angenommen!");
+            findplayer.SendNewNotification("Ihr Ticket wurde angenommen!");
+
         }
 
         public class ticketObject

@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Menu;
 
 namespace GVRP.Module.Laboratories
@@ -13,7 +10,7 @@ namespace GVRP.Module.Laboratories
         public static int TimeToAnalyze = 30000;
         public static int TimeToBreakDoor = 600000;
         public static int TimeToHack = 60000;
-        
+
         protected override bool OnLoad()
         {
             // Frisk Menu

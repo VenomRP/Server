@@ -1,10 +1,8 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Houses;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Schwarzgeld
 {
@@ -27,7 +25,7 @@ namespace GVRP.Module.Schwarzgeld
                     {
                         if (dbPlayer.Player.Position.DistanceTo(SchwarzgeldModule.BlackMoneyEndPoint) < 1.5f)
                         {
-                            if(xHouse.BLAmount < withdraw)
+                            if (xHouse.BLAmount < withdraw)
                             {
                                 dbPlayer.SendNewNotification("So viel befindet sich nicht in der Gelddruckmaschine!");
                                 return;

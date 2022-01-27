@@ -1,17 +1,17 @@
-﻿using System.Linq;
+﻿using GTANetworkAPI;
+using GVRP.Handler;
+using GVRP.Module.Business;
 using GVRP.Module.ClientUI.Apps;
-using GTANetworkAPI;
-using System.Collections.Generic;
-using Newtonsoft.Json;
 using GVRP.Module.Houses;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Business;
-using GVRP.Module.VehicleRent;
-using GVRP.Handler;
 using GVRP.Module.Storage;
 using GVRP.Module.Teams;
+using GVRP.Module.VehicleRent;
 using GVRP.Module.Vehicles;
+using Newtonsoft.Json;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.PointsOfInterest
 {
@@ -49,7 +49,7 @@ namespace GVRP.Module.PointsOfInterest
                     if (vehicle.teamid != 0)
                     {
                         Team team = TeamModule.Instance.GetById((int)vehicle.teamid);
-                        if( team != null)
+                        if (team != null)
                         {
                             l_Name = "(" + team.ShortName + ") " + l_Name;
                         }

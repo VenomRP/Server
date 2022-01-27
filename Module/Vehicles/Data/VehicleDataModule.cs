@@ -1,12 +1,11 @@
-﻿using System;
+﻿using GVRP.Module.Configurations;
+using GVRP.Module.Logging;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using GVRP.Module.Configurations;
-using GVRP.Module.Items;
-using GVRP.Module.Logging;
 
 namespace GVRP.Module.Vehicles.Data
 {
@@ -18,7 +17,7 @@ namespace GVRP.Module.Vehicles.Data
 
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(VehicleClassificationModule), typeof(VehicleCarsellCategoryModule)};
+            return new[] { typeof(VehicleClassificationModule), typeof(VehicleCarsellCategoryModule) };
         }
 
         protected override bool OnLoad()
@@ -83,7 +82,7 @@ namespace GVRP.Module.Vehicles.Data
         {
             return data.ContainsKey(id);
         }
-        
+
         public VehicleData GetDataByName(string model)
         {
             var searchedModel = model.ToLower();

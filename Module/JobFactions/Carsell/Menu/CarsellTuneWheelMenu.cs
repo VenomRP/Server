@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Tuning;
 using GVRP.Module.Vehicles;
+using System.Linq;
 
 namespace GVRP.Module.Carsell.Menu
 {
@@ -37,7 +36,7 @@ namespace GVRP.Module.Carsell.Menu
                 if (i > 20) break;
                 l_Menu.Add($"Felge {i.ToString()}", "");
             }
-            
+
 
             return l_Menu;
         }
@@ -51,12 +50,12 @@ namespace GVRP.Module.Carsell.Menu
         {
             public bool OnSelect(int index, DbPlayer dbPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(dbPlayer);
                     return true;
                 }
-                
+
                 if (!dbPlayer.Player.IsInVehicle) return true;
 
                 SxVehicle sxVeh = dbPlayer.Player.Vehicle.GetVehicle();
@@ -70,18 +69,18 @@ namespace GVRP.Module.Carsell.Menu
 
                 Helper.Tuning tuning = Helper.Helper.m_Mods.Values.ToList().Where(tun => tun.ID == FrontWheel).FirstOrDefault();
                 if (tuning == null) return true;
-                
+
                 int i = 1;
                 for (var l_Itr = tuning.StartIndex + 1; l_Itr <= tuning.MaxIndex; l_Itr++)
                 {
                     i++;
                     if (i > 20) break;
-                    if (index == i+1)
+                    if (index == i + 1)
                     {
                         sxVeh.SetMod(FrontWheel, i);
                         dbPlayer.SetData("carsellTuneWheelId", i);
                     }
-                }                
+                }
 
                 return false;
             }

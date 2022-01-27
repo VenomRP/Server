@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Commands;
@@ -18,7 +15,7 @@ namespace GVRP.Module.Vehicles.Impound
             if (dbPlayer == null || !dbPlayer.IsValid()) return false;
 
             if (!dbPlayer.CanAccessMethod()) return false;
-            if (dbPlayer.TeamId != (int) teams.TEAM_DPOS || !dbPlayer.IsInDuty()) return false;
+            if (dbPlayer.TeamId != (int)teams.TEAM_DPOS || !dbPlayer.IsInDuty()) return false;
 
             if (dbPlayer.Player.Position.DistanceTo(new Vector3(401.34, -1631.674, 29.29195)) < 10.0f ||
                 (dbPlayer.Player.Position.DistanceTo(new Vector3(-276.7973, 6053.857, 31.51515)) < 10.0f ||
@@ -27,7 +24,7 @@ namespace GVRP.Module.Vehicles.Impound
             {
                 foreach (var Vehicle in VehicleHandler.Instance.GetAllVehicles())
                 {
-                    if (Vehicle == null || Vehicle.teamid == (int) teams.TEAM_DPOS) continue;
+                    if (Vehicle == null || Vehicle.teamid == (int)teams.TEAM_DPOS) continue;
                     if (dbPlayer.Player.Position.DistanceTo(Vehicle.entity.Position) < 5.0f)
                     {
                         dbPlayer.Player.SetData("impound_vehicle", Vehicle);

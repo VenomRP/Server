@@ -1,17 +1,9 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using GVRP.Module.Armory;
-using GVRP.Module.GTAN;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
-using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Staatskasse;
-using GVRP.Module.Weapons.Component;
-using GVRP.Module.Weapons.Data;
 
 namespace GVRP.Module.Menu.Menus.Armory
 {
@@ -102,7 +94,7 @@ namespace GVRP.Module.Menu.Menus.Armory
                                     $"Diese Waffe kostet {ammoprice}$ (Bank)!");
                                 return false;
                             }
-                            
+
                             // Found
                             int ammo = 0;
                             if (ArmoryWeapon.Weapon == WeaponHash.Grenade ||

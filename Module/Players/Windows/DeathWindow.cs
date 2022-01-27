@@ -1,10 +1,7 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using GVRP.Module.Players.Db;
-using GTANetworkAPI;
-using GVRP.Module.Admin;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Windows;
+using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -26,7 +23,7 @@ namespace GVRP.Module.Players.Windows
             return player => OnShow(new ShowEvent(player));
         }
 
-        public void closeDeathWindowS(Player client) 
+        public void closeDeathWindowS(Player client)
         {
             TriggerEvent(client, "closeDeathScreen");
         }

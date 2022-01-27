@@ -1,15 +1,13 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Module.Chat;
+﻿using GVRP.Module.Chat;
 using GVRP.Module.Doors;
-using GVRP.Module.Houses;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Houses.Menu
 {
@@ -46,14 +44,14 @@ namespace GVRP.Module.Houses.Menu
                     MenuManager.DismissCurrent(dbPlayer);
                     return false;
                 }
-                else if(index == 1) // Paleto
+                else if (index == 1) // Paleto
                 {
                     // Get first door
                     Door door = DoorModule.Instance.GetAll().Values.ToList().Where(d => d.Group == (int)DoorGroups.PaletoPolice).First();
                     if (door == null) return false;
 
                     // Check Range
-                    if(dbPlayer.Player.Position.DistanceTo(door.Position) > 500)
+                    if (dbPlayer.Player.Position.DistanceTo(door.Position) > 500)
                     {
                         dbPlayer.SendNewNotification($"Von hier aus kommen Sie nicht an das Stromnetz dran!");
                         return false;
@@ -79,7 +77,7 @@ namespace GVRP.Module.Houses.Menu
                         if (dbPlayer.Container.GetItemAmount(653) <= 0) return;
                         dbPlayer.Container.RemoveItem(653);
 
-                        foreach(KeyValuePair<uint, Door> kvp in DoorModule.Instance.GetAll().Where(d => d.Value.Group == (int)DoorGroups.PaletoPolice))
+                        foreach (KeyValuePair<uint, Door> kvp in DoorModule.Instance.GetAll().Where(d => d.Value.Group == (int)DoorGroups.PaletoPolice))
                         {
                             kvp.Value.LessSecurity = true;
                             kvp.Value.LessSecurityChanged = DateTime.Now;

@@ -1,11 +1,10 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Houses;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps
 {
@@ -31,7 +30,7 @@ namespace GVRP.Module.Computer.Apps
         }
 
         [RemoteEvent]
-        public void requestComputerApps(Player player) 
+        public void requestComputerApps(Player player)
         {
             DbPlayer iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.IsValid()) return;

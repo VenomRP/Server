@@ -1,9 +1,9 @@
-﻿using System;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Laboratories.Windows
 {

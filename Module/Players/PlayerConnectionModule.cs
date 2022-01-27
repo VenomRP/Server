@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Time;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players
 {
@@ -31,7 +30,7 @@ namespace GVRP.Module.Players
         //TODO: disconnect is currently on main thread, but should be an task, none threaded stuff should happen in main event everything else in disconnect task
         public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
         {
-            if(dbPlayer == null || !dbPlayer.IsValid())
+            if (dbPlayer == null || !dbPlayer.IsValid())
             {
                 return;
             }
@@ -48,7 +47,7 @@ namespace GVRP.Module.Players
             {
                 if (Players.TryGetValue(dbPlayer, out DateTime date))
                 {
-                    int minutes = (int) DateTime.Now.Subtract(date).TotalMinutes;
+                    int minutes = (int)DateTime.Now.Subtract(date).TotalMinutes;
                     if (minutes == 0) return;
                     Logger.AddPlaytimeLog(dbPlayer.Id, minutes, date);
                     Players.Remove(dbPlayer);

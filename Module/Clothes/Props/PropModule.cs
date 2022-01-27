@@ -1,8 +1,7 @@
-﻿using System;
+﻿using GVRP.Module.Players.Db;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Clothes.Props
 {
@@ -42,7 +41,7 @@ namespace GVRP.Module.Clothes.Props
             {
                 var cloth = this[propId];
                 if (cloth?.Slot != slot ||
-                    cloth.TeamId != (int) teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
+                    cloth.TeamId != (int)teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
                     cloth.Gender != 3 && cloth.Gender != iPlayer.Customization.Gender) continue;
                 if (!wardrobeClothes.Contains(cloth))
                 {
@@ -74,7 +73,7 @@ namespace GVRP.Module.Clothes.Props
                 {
                     var cloth = this[propId];
                     if (cloth?.Slot != slot ||
-                        cloth.TeamId != (int) teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
+                        cloth.TeamId != (int)teams.TEAM_CIVILIAN && cloth.TeamId != iPlayer.TeamId ||
                         cloth.Gender != 3 && cloth.Gender != iPlayer.Customization.Gender) continue;
                     if (!wardrobeClothes.Contains(cloth))
                     {

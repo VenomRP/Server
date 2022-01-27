@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module.Business.Raffinery
+﻿namespace GVRP.Module.Business.Raffinery
 {
     public class RaffineryAusbaustufeModule : SqlModule<RaffineryAusbaustufeModule, RaffineryAusbaustufe, uint>
     {

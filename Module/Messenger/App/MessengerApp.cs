@@ -1,17 +1,5 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Players;
-using Newtonsoft.Json;
-using System;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Chat;
-using GVRP.Module.Configurations;
-using GVRP.Module.Items;
-
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Phone;
-using GVRP.Module.Players.PlayerAnimations;
 
 namespace GVRP.Module.Messenger.App
 {

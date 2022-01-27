@@ -1,17 +1,14 @@
-﻿using System;
-using GVRP.Module.Players.Db;
-using Newtonsoft.Json;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
-using GVRP.Module.Players;
-using GVRP.Module.Vehicles.Garages;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.ClientUI.Windows;
-using GVRP.Module.Tasks;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
-using GVRP.Module.JobFactions.Carsell;
 using GVRP.Module.Items;
+using GVRP.Module.JobFactions.Carsell;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Tasks;
+using GVRP.Module.Vehicles.Garages;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Vehicles.Windows
 {
@@ -106,7 +103,7 @@ namespace GVRP.Module.Vehicles.Windows
                             if (!iPlayer.TakeMoney(2500))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Um ein Fahrzeug freizukaufen benötigst du mindestens $2500 fuer eine Kaution!");
                                 return;
                             }
@@ -159,11 +156,11 @@ namespace GVRP.Module.Vehicles.Windows
                                 return;
                             }
                             Item kaufVertrag = iPlayer.Container.GetItemById(641);
-                            if(kaufVertrag == null || kaufVertrag.Data == null || !kaufVertrag.Data.ContainsKey("vehicleId") || kaufVertrag.Data["vehicleId"] != vehicleId)
+                            if (kaufVertrag == null || kaufVertrag.Data == null || !kaufVertrag.Data.ContainsKey("vehicleId") || kaufVertrag.Data["vehicleId"] != vehicleId)
                             {
                                 iPlayer.SendNewNotification($"Sie benötigen Ihren Kaufvertrag um das Fahrzeug zu entnehmen!");
                                 return;
-                            } 
+                            }
                         }
 
                         SynchronizedTaskManager.Instance.Add(

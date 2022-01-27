@@ -1,8 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Staatskasse
 {
@@ -41,7 +38,7 @@ namespace GVRP.Module.Staatskasse
             }
             else
             {
-                if (GetMoney(kasse) + Amount < 0) 
+                if (GetMoney(kasse) + Amount < 0)
                     return false;
 
                 RemoveMoney(kasse, Amount);

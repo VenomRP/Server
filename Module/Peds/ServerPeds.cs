@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using GVRP;
-using GVRP.Module.Logging;
+﻿using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP
 {

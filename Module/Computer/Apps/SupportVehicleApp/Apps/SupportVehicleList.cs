@@ -1,5 +1,4 @@
 ﻿using GTANetworkAPI;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
@@ -14,16 +13,16 @@ namespace GVRP.Module.Computer.Apps.SupportVehicleApp.Apps
         [RemoteEvent]
         public async void requestSupportVehicleList(Player client, int owner)
         {
-            
-                DbPlayer iPlayer = client.GetPlayer();
-                if (iPlayer == null || !iPlayer.IsValid()) return;
 
-                VehicleCategory category = VehicleCategory.ALL;
-                var vehicleData = SupportVehicleFunctions.GetVehicleData(category, owner);
+            DbPlayer iPlayer = client.GetPlayer();
+            if (iPlayer == null || !iPlayer.IsValid()) return;
 
-                var vehicleDataJson = NAPI.Util.ToJson(vehicleData);
-                TriggerEvent(client, "responseVehicleList", vehicleDataJson);
-            
+            VehicleCategory category = VehicleCategory.ALL;
+            var vehicleData = SupportVehicleFunctions.GetVehicleData(category, owner);
+
+            var vehicleDataJson = NAPI.Util.ToJson(vehicleData);
+            TriggerEvent(client, "responseVehicleList", vehicleDataJson);
+
         }
     }
 }

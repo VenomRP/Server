@@ -1,10 +1,6 @@
-﻿using GTANetworkAPI;
-using System;
+﻿using GVRP.Module.Logging;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Text;
-using GVRP.Module.Logging;
 
 namespace GVRP
 {

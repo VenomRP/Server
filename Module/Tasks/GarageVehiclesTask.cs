@@ -1,13 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Business;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Configurations;
 using GVRP.Module.Government;
 using GVRP.Module.Logging;
@@ -17,6 +10,11 @@ using GVRP.Module.VehicleRent;
 using GVRP.Module.Vehicles.Data;
 using GVRP.Module.Vehicles.Garages;
 using GVRP.Module.Vehicles.Windows;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Tasks
 {
@@ -87,9 +85,9 @@ namespace GVRP.Module.Tasks
 
             var keys = dbPlayer.VehicleKeys;
 
-            if(dbPlayer.IsMemberOfBusiness())
+            if (dbPlayer.IsMemberOfBusiness())
             {
-                foreach(var key in dbPlayer.ActiveBusiness.VehicleKeys)
+                foreach (var key in dbPlayer.ActiveBusiness.VehicleKeys)
                 {
                     if (!keys.ContainsKey(key.Key) && vehList.Find(g => g.Id == key.Key) == null) keys.Add(key.Key, key.Value);
                 }
@@ -98,7 +96,7 @@ namespace GVRP.Module.Tasks
             // VehicleRentModule
             foreach (PlayerVehicleRentKey playerVehicleRent in VehicleRentModule.PlayerVehicleRentKeys.ToList().Where(k => k.PlayerId == dbPlayer.Id))
             {
-                if(!keys.ContainsKey(playerVehicleRent.VehicleId) && vehList.Find(g => g.Id == playerVehicleRent.VehicleId) == null)
+                if (!keys.ContainsKey(playerVehicleRent.VehicleId) && vehList.Find(g => g.Id == playerVehicleRent.VehicleId) == null)
                 {
                     keys.Add(playerVehicleRent.VehicleId, "Mietfahrzeug");
                 }
@@ -108,9 +106,9 @@ namespace GVRP.Module.Tasks
             {
                 var vehicle = GetGarageVehicleByKey(key.Key);
                 if (vehicle != null)
-                { 
-                    if(!CheckById(vehList,vehicle))
-                    vehList.Add(vehicle);
+                {
+                    if (!CheckById(vehList, vehicle))
+                        vehList.Add(vehicle);
                 }
             }
 
@@ -121,7 +119,7 @@ namespace GVRP.Module.Tasks
 
         private bool CheckById(List<Main.GarageVehicle> vehList, Main.GarageVehicle vehicle)
         {
-            foreach(var veh in vehList)
+            foreach (var veh in vehList)
             {
                 if (veh.Id == vehicle.Id) return true;
             }

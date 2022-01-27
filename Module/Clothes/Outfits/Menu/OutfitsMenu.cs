@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Clothes.Props;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using System.Linq;
 
 namespace GVRP.Module.Clothes.Outfits
 {
@@ -55,7 +50,7 @@ namespace GVRP.Module.Clothes.Outfits
                 int idx = 2;
                 foreach (Outfit outfit in iPlayer.Outfits.ToList())
                 {
-                    if(idx == index)
+                    if (idx == index)
                     {
                         iPlayer.SetData("outfit", outfit);
                         MenuManager.Instance.Build(PlayerMenu.OutfitsSubMenu, iPlayer).Show(iPlayer);

@@ -1,7 +1,6 @@
-﻿using GVRP.Module.ClientUI.Apps;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
+using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
-using GVRP.Module.Players.Phone.Apps;
 
 namespace GVRP.Module.Teams.Apps
 {
@@ -12,12 +11,12 @@ namespace GVRP.Module.Teams.Apps
         }
 
         [RemoteEvent]
-        public void leaveTeam(Player player) 
+        public void leaveTeam(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-            dbPlayer.SetTeam((uint) TeamList.Zivilist);
+            dbPlayer.SetTeam((uint)TeamList.Zivilist);
         }
     }
 }

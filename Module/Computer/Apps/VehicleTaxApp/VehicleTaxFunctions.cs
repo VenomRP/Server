@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkMethods;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Computer.Apps.VehicleTaxApp
 {
@@ -37,7 +35,7 @@ namespace GVRP.Module.Computer.Apps.VehicleTaxApp
                                 Model = String.IsNullOrWhiteSpace(mod_car_name) ? reader.GetString("model") : mod_car_name,
                                 Tax = reader.GetInt32("tax"),
                                 Slots = reader.GetInt32("inv_size"),
-                                Weight = reader.GetInt32("inv_weight")/1000,
+                                Weight = reader.GetInt32("inv_weight") / 1000,
                                 Fuel = reader.GetInt32("fuel")
                             };
 

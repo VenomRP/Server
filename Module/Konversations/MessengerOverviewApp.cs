@@ -1,13 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Items;
 using GVRP.Module.LeitstellenPhone;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Konversations
 {
@@ -52,7 +51,7 @@ namespace GVRP.Module.Konversations
 
             if (l_DbPlayer.HasData("nsa_smclone")) return;
             // Disable SMS Function for Leitstellen Module
-            if (LeitstellenPhoneModule.TeamNumberPhones.ContainsKey((int) p_Receiver)) return;
+            if (LeitstellenPhoneModule.TeamNumberPhones.ContainsKey((int)p_Receiver)) return;
 
             uint l_ConversationID = 0;
             Conversation l_Conversation = new Conversation();
@@ -207,22 +206,22 @@ namespace GVRP.Module.Konversations
                 l_ID = l_MessageList.Max(l_M => l_M.Id) + 1;
 
             l_Conv.LastUpdated = DateTime.Now;
-            ClientKonversationMessage l_NewMessage      = new ClientKonversationMessage();
-            l_NewMessage.Id                             = l_ID;
+            ClientKonversationMessage l_NewMessage = new ClientKonversationMessage();
+            l_NewMessage.Id = l_ID;
             l_NewMessage.KonversationMessageUpdatedTime = l_Date;
-            l_NewMessage.MessageSenderName              = l_DbPlayer.handy[0].ToString();
-            l_NewMessage.Message                        = p_Answer;
-            l_NewMessage.Receiver                       = false;
+            l_NewMessage.MessageSenderName = l_DbPlayer.handy[0].ToString();
+            l_NewMessage.Message = p_Answer;
+            l_NewMessage.Receiver = false;
 
             var l_Json = NAPI.Util.ToJson(l_NewMessage);
             TriggerEvent(p_Player, "updateChat", l_Json);
 
-            ConvMessage l_Message       = new ConvMessage();
-            l_Message.Id                = l_ID;
-            l_Message.KonversationId    = l_Conv.Id;
-            l_Message.Message           = p_Answer;
-            l_Message.SenderId          = l_DbPlayer.handy[0];
-            l_Message.TimeStamp         = DateTime.Now;
+            ConvMessage l_Message = new ConvMessage();
+            l_Message.Id = l_ID;
+            l_Message.KonversationId = l_Conv.Id;
+            l_Message.Message = p_Answer;
+            l_Message.SenderId = l_DbPlayer.handy[0];
+            l_Message.TimeStamp = DateTime.Now;
 
             l_MessageList.Add(l_Message);
             KonversationsModule.Instance.konversations[l_Conv] = l_MessageList;

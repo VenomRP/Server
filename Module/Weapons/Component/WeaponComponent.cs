@@ -8,7 +8,7 @@ namespace GVRP.Module.Weapons.Component
         public string Hash { get; }
         public string Name { get; }
 
-        public WeaponComponent(MySqlDataReader reader): base(reader)
+        public WeaponComponent(MySqlDataReader reader) : base(reader)
         {
             Id = reader.GetInt32("id");
             Hash = reader.GetString("hash");

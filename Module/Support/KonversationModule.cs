@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Support
 {

@@ -1,21 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.GTAN;
+﻿using GTANetworkAPI;
 using GVRP.Module.Items;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Spawners;
-using Task = GTANetworkMethods.Task;
+using System.Collections.Generic;
 
 namespace GVRP.Module.DropItem
 {
     public sealed class DropItemModule : Module<DropItemModule>
     {
-        public  Dictionary<int, ItemHeap> ItemHeapDictionary = new Dictionary<int, ItemHeap>();
+        public Dictionary<int, ItemHeap> ItemHeapDictionary = new Dictionary<int, ItemHeap>();
         public int Counter = 0;
 
 

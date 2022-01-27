@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.Configurations;
-using GVRP.Module.GTAN;
-using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
 using GVRP.Module.Vehicles.Garages;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Houses
 {
@@ -41,7 +36,7 @@ namespace GVRP.Module.Houses
             var house = this[(uint)dbPlayer.Dimension[0]];
             house?.PlayersInHouse.Remove(dbPlayer);
         }
-        
+
         protected override void OnItemLoaded(House house)
         {
             if (house.Disabled) return;
@@ -144,7 +139,7 @@ namespace GVRP.Module.Houses
 
             return;
         }
-        
+
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
             if (dbPlayer == null || !dbPlayer.IsValid())
@@ -203,7 +198,7 @@ namespace GVRP.Module.Houses
                             dbPlayer.Player.Dimension = 0;
                             dbPlayer.DimensionType[0] = DimensionType.World;
                             xHouse.PlayersInHouse.Remove(dbPlayer);
-                            if(dbPlayer.HasData("inHouse")) dbPlayer.ResetData("inHouse");
+                            if (dbPlayer.HasData("inHouse")) dbPlayer.ResetData("inHouse");
                             return true;
                         }
 
@@ -224,7 +219,7 @@ namespace GVRP.Module.Houses
 
         public override bool OnColShapeEvent(DbPlayer dbPlayer, ColShape colShape, ColShapeState colShapeState)
         {
-            if(colShape.HasData("houseId"))
+            if (colShape.HasData("houseId"))
             {
                 if (colShapeState == ColShapeState.Exit)
                 {
@@ -256,7 +251,7 @@ namespace GVRP.Module.Houses
                     }
                     else
                     {
-                       dbPlayer.SendNewNotification($"Besitzer: {house.OwnerName} Freie Mietplätze: {house.GetFreeRents()} {(house.ShowPhoneNumber.Length > 0 ? "Tel: " + house.ShowPhoneNumber : "")}", title: $"({house.Id}) Immobilie", notificationType: (!house.Locked ? PlayerNotification.NotificationType.SUCCESS : PlayerNotification.NotificationType.ERROR));
+                        dbPlayer.SendNewNotification($"Besitzer: {house.OwnerName} Freie Mietplätze: {house.GetFreeRents()} {(house.ShowPhoneNumber.Length > 0 ? "Tel: " + house.ShowPhoneNumber : "")}", title: $"({house.Id}) Immobilie", notificationType: (!house.Locked ? PlayerNotification.NotificationType.SUCCESS : PlayerNotification.NotificationType.ERROR));
                     }
                     return true;
                 }

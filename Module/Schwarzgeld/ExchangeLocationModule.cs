@@ -1,7 +1,7 @@
-﻿using System.Linq;
-using GVRP.Module.Menu;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Schwarzgeld.Menu;
+using System.Linq;
 
 namespace GVRP.Module.Schwarzgeld
 {

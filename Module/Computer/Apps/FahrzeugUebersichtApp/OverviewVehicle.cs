@@ -1,8 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using GVRP.Module.Clothes.Props;
 
 namespace GVRP.Module.Computer.Apps.FahrzeuguebersichtApp
 {

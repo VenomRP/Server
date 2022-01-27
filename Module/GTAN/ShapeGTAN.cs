@@ -1,6 +1,4 @@
-﻿using GTANetworkAPI;
-
-namespace GVRP.Module.GTAN
+﻿namespace GVRP.Module.GTAN
 {
     public static class ShapeGTAN
     {

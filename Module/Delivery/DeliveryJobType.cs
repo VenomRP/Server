@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Delivery
 {
@@ -40,7 +37,7 @@ namespace GVRP.Module.Delivery
             RequiredLicence = reader.GetInt32("required_licence");
             MaxDistance = reader.GetInt32("max_distance");
             Enum.TryParse(typeof(DeliverToType), reader.GetInt32("deliver_to").ToString(), out object type);
-            DeliverTo = (DeliverToType) type;
+            DeliverTo = (DeliverToType)type;
         }
 
 

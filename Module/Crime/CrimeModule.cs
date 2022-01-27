@@ -1,21 +1,19 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Handler;
-using GVRP.Module.Injury;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Crime
 {
     public sealed class CrimeModule : Module<CrimeModule>
     {
         public List<Vector3> ComputerPositions = new List<Vector3>();
-     
+
         public override bool Load(bool reload = false)
         {
             ComputerPositions = new List<Vector3>();
@@ -40,9 +38,9 @@ namespace GVRP.Module.Crime
                     return false;
                 }
 
-                if(dbPlayer.HasData("lastblitzed"))
+                if (dbPlayer.HasData("lastblitzed"))
                 {
-                    if(dbPlayer.GetData("lastblitzed").AddSeconds(15) > DateTime.Now)
+                    if (dbPlayer.GetData("lastblitzed").AddSeconds(15) > DateTime.Now)
                     {
                         dbPlayer.SendNewNotification("Du kannst nur alle 15 Sekunden blitzen!");
                         return false;
@@ -68,13 +66,13 @@ namespace GVRP.Module.Crime
                     dbPlayer.SendNewNotification($"{targetVeh.GetSpeed()} KM/H - [{targetVeh.GetName()}]");
                     targetFound = true;
                 }
-                if(targetFound)
+                if (targetFound)
                 {
                     dbPlayer.SetData("lastblitzed", DateTime.Now);
                 }
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }
@@ -85,7 +83,7 @@ namespace GVRP.Module.Crime
         {
             return (ComputerPositions.FindAll(p => p.DistanceTo(pos) < 3.0f).Count() > 0);
         }
-        
+
         public override void OnPlayerMinuteUpdate(DbPlayer iPlayer)
         {
             if (iPlayer == null || !iPlayer.IsValid()) return;

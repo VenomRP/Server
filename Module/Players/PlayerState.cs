@@ -1,12 +1,7 @@
 ﻿
 using GTANetworkAPI;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 using GVRP.Module.Customization;
-using GVRP.Module.GTAN;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
 
 namespace GVRP.Module.Players
 {

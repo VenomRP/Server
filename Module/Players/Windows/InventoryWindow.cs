@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
-using GVRP.Module.ClientUI.Windows;
+﻿using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players.Windows
 {

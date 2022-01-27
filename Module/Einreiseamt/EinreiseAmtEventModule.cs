@@ -1,13 +1,11 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Text;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using System;
+using System.Globalization;
 
 namespace GVRP.Module.Einreiseamt
 {
@@ -27,7 +25,7 @@ namespace GVRP.Module.Einreiseamt
             }
 
             // Is In Range
-            if (findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC1) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC6) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC2) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC5) > 4.0f  && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC3) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC4) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC7) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC8) > 4.0f)
+            if (findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC1) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC6) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC2) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC5) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC3) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC4) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC7) > 4.0f && findPlayer.Player.Position.DistanceTo(EinreiseamtModule.PositionPC8) > 4.0f)
             {
                 dbPlayer.SendNewNotification("Bürger ist nicht in der Naehe!");
                 return;
@@ -52,7 +50,7 @@ namespace GVRP.Module.Einreiseamt
                 return;
             }
 
-            if (!DateTime.TryParseExact(returnstring, new string[] {"dd.mm.yyyy"}, 
+            if (!DateTime.TryParseExact(returnstring, new string[] { "dd.mm.yyyy" },
                 System.Globalization.CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out DateTime dt))
             {
@@ -71,6 +69,6 @@ namespace GVRP.Module.Einreiseamt
 
         }
 
-        
+
     }
 }

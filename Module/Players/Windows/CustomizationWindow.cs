@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Customization;
-using GVRP.Module.Items;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -61,7 +58,7 @@ namespace GVRP.Module.Players.Windows
         }
 
         [RemoteEvent]
-        public void StopCustomization(Player player) 
+        public void StopCustomization(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null) return;

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 using static GVRP.Module.Players.Events.EventStateModule;
 
 namespace GVRP.Module.Players.Events
@@ -52,7 +51,7 @@ namespace GVRP.Module.Players.Events
 
         public static void ChangeEventState(this DbPlayer dbPlayer, EventListIds eventListId, int StateValue)
         {
-            if(dbPlayer.EventDoneList.ContainsKey(eventListId))
+            if (dbPlayer.EventDoneList.ContainsKey(eventListId))
             {
                 dbPlayer.EventDoneList[eventListId] = StateValue;
                 MySQLHandler.ExecuteAsync($"UPDATE `player_eventstate` SET state = '{StateValue}' WHERE player_id = '{dbPlayer.Id}' AND event_id = '{eventListId}';");

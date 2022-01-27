@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Mime;
-using System.Text;
-using GTANetworkMethods;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Gamescom
 {

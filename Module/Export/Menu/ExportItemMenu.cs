@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Linq;
 
 namespace GVRP.Module.Export.Menu
 {
@@ -43,7 +40,7 @@ namespace GVRP.Module.Export.Menu
             public bool OnSelect(int index, DbPlayer dbPlayer)
             {
                 ItemExportNpc itemExportNpc = ItemExportNpcModule.Instance.GetAll().Values.FirstOrDefault(ie => ie.Position.DistanceTo(dbPlayer.Player.Position) < 3.0f);
-                
+
                 if (itemExportNpc == null) return true;
 
                 if (index == 0)
@@ -54,7 +51,7 @@ namespace GVRP.Module.Export.Menu
                 else
                 {
                     int idx = 1;
-                    
+
                     foreach (var kvp in itemExportNpc.ItemExportList)
                     {
                         if (index == idx)
@@ -71,7 +68,7 @@ namespace GVRP.Module.Export.Menu
 
                                 kvp.TempCountSaving += count;
 
-                                if(kvp.TempCountSaving >= 50)
+                                if (kvp.TempCountSaving >= 50)
                                 {
                                     kvp.TempCountSaving = 0;
                                     itemExportNpc.CalculateNewPrices(kvp);

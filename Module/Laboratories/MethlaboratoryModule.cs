@@ -1,20 +1,17 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.ClientUI.Components;
+using GVRP.Module.Gangwar;
+using GVRP.Module.Items;
+using GVRP.Module.Laboratories.Windows;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Players.JumpPoints;
+using GVRP.Module.Teams;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GVRP.Module.Chat;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Configurations;
-using GVRP.Module.Gangwar;
-using GVRP.Module.Items;
-using GVRP.Module.Laboratories.Windows;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Teams;
 
 namespace GVRP.Module.Laboratories
 {
@@ -25,7 +22,7 @@ namespace GVRP.Module.Laboratories
         public static List<uint> EndProductItemIds = new List<uint> { 726, 727, 728, 729 }; //Pures Meth
         public static uint FuelItemId = 537; //Benzin
         public static uint FuelAmountPerProcessing = 5; //Fuelverbrauch pro 15-Minuten-Kochvorgang (Spielerunabhängig)
-        
+
         public static int temp = 0;
         public static uint RankNeededForParameter = 9;
         public string PlayerIds = "";
@@ -64,7 +61,7 @@ namespace GVRP.Module.Laboratories
             ComponentManager.Get<MethlaboratoryStartWindow>().Show()(dbPlayer, methlaboratory);
             return true;
         }
-        
+
         public override void OnMinuteUpdate()
         {
             if (Configurations.Configuration.Instance.DevMode)
@@ -108,7 +105,8 @@ namespace GVRP.Module.Laboratories
                     }
                     if (!query.Equals("")) MySQLHandler.ExecuteAsync(query);
                 }));
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logging.Logger.Crash(ex);
             }
@@ -144,7 +142,8 @@ namespace GVRP.Module.Laboratories
                         return true;
                     }
                 }
-            } catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Logging.Logger.Crash(e);
             }
@@ -158,7 +157,7 @@ namespace GVRP.Module.Laboratories
             if (methlaboratory == null) return;
             methlaboratory.HackMethlaboratory(dbPlayer);
         }
-        
+
         public bool CanMethLaboratyRaided(Methlaboratory methlaboratory, DbPlayer dbPlayer)
         {
             if (!Configurations.Configuration.Instance.MethLabEnabled) return false;

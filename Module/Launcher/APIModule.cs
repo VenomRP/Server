@@ -1,13 +1,7 @@
-﻿using Newtonsoft.Json;
+﻿using GVRP.Module.Helper;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
-using GVRP.Module.Helper;
-using GVRP.Module.Injury;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Zone;
 
 namespace GVRP.Module.Launcher
 {

@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Commands;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
@@ -20,7 +17,7 @@ namespace GVRP.Module.InteriorProp
         {
             return base.Load(reload);
         }
-        
+
         public void LoadInteriorForPlayer(DbPlayer dbPlayer, InteriorPropListsType interiorPropListsType)
         {
             InteriorsProp interiorsProp = InteriorsPropModule.Instance.Get((uint)interiorPropListsType);
@@ -57,7 +54,7 @@ namespace GVRP.Module.InteriorProp
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandgetiid(Player player) 
+        public void Commandgetiid(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.CanAccessMethod()) return;
@@ -70,12 +67,12 @@ namespace GVRP.Module.InteriorProp
 
         public override bool OnColShapeEvent(DbPlayer dbPlayer, ColShape colShape, ColShapeState colShapeState)
         {
-            if(colShape.HasData("interiorPropId"))
+            if (colShape.HasData("interiorPropId"))
             {
                 InteriorsProp interiorsProp = InteriorsPropModule.Instance.Get(colShape.GetData<uint>("interiorPropId"));
-                if(interiorsProp != null)
+                if (interiorsProp != null)
                 {
-                    if(colShapeState == ColShapeState.Enter)
+                    if (colShapeState == ColShapeState.Enter)
                     {
                         LoadInteriorForPlayer(dbPlayer, interiorsProp);
                     }

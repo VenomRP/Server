@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Players;
 
 namespace GVRP.Module.Pet
@@ -24,7 +21,7 @@ namespace GVRP.Module.Pet
         }
 
         [Command(GreedyArg = true)]
-        public void followme(Player player) 
+        public void followme(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (!dbPlayer.IsValid()) return;

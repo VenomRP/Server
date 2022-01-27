@@ -1,13 +1,10 @@
-﻿using System;
-using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Logging;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Anticheat;
-using System.Collections.Generic;
-using GVRP.Module.Weapons.Data;
 using GVRP.Module.Weapons;
 using GVRP.Module.Weapons.Component;
+using GVRP.Module.Weapons.Data;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GVRP.Module.Players
@@ -21,10 +18,10 @@ namespace GVRP.Module.Players
         {
             iPlayer.Player.GiveWeapon(weaponHash, ammo);
             iPlayer.Player.SetWeaponAmmo(weaponHash, ammo);
-            
+
             var l_WeaponData = Weapons.Data.WeaponDataModule.Instance.GetAll().ToList().Where(wp => wp.Value.Hash == (int)weaponHash).FirstOrDefault();
-            if(l_WeaponData.Value != null)
-            { 
+            if (l_WeaponData.Value != null)
+            {
                 Predicate<WeaponDetail> l_Detail = (WeaponDetail d) => { return d.WeaponDataId == l_WeaponData.Key; };
                 if (iPlayer.Weapons.Exists(l_Detail))
                     return;
@@ -65,7 +62,7 @@ namespace GVRP.Module.Players
         public static int GetPlayerWeaponsWeight(this DbPlayer iPlayer)
         {
             int weight = 0;
-            foreach( WeaponDetail weaponDetail in iPlayer.Weapons)
+            foreach (WeaponDetail weaponDetail in iPlayer.Weapons)
             {
                 WeaponData l_Data = WeaponDataModule.Instance[weaponDetail.WeaponDataId];
                 if (l_Data == null) continue;
@@ -192,7 +189,7 @@ namespace GVRP.Module.Players
 
             iPlayer.Player.SetWeaponAmmo(Weapon, xammo + ammo);
             var weaponPlayer = iPlayer.Weapons.FirstOrDefault(w => w.WeaponDataId == l_WeaponID);
-            if(weaponPlayer != null)
+            if (weaponPlayer != null)
             {
                 weaponPlayer.Ammo = ammo;
             }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Stadthalle
 {
@@ -21,11 +19,11 @@ namespace GVRP.Module.Stadthalle
 
             int addSum = 0;
 
-            if(split[0].Contains("-"))
+            if (split[0].Contains("-"))
             {
                 addSum = split[0].Length * 150000;
             }
-            else if(split[1].Contains("-"))
+            else if (split[1].Contains("-"))
             {
                 addSum = split[1].Length * 150000;
             }

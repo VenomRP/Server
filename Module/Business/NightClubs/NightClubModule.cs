@@ -1,7 +1,7 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Items;
 using System;
 using System.Linq;
-using GVRP.Module.Items;
 
 namespace GVRP.Module.Business.NightClubs
 {

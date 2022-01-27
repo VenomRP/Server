@@ -1,6 +1,5 @@
-﻿using System;
-using GTANetworkAPI;
-using GVRP.Module.Logging;
+﻿using GVRP.Module.Logging;
+using System;
 
 namespace GVRP.Module.Vehicles.Garages
 {
@@ -13,7 +12,7 @@ namespace GVRP.Module.Vehicles.Garages
 
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(GarageModule)};
+            return new[] { typeof(GarageModule) };
         }
 
         protected override void OnItemLoaded(GarageSpawn garageSpawn)

@@ -1,21 +1,16 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Handler;
 using GVRP.Module.Chat;
-using GVRP.Module.Doors;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
 using GVRP.Module.Injury;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Robbery;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -25,19 +20,19 @@ namespace GVRP.Module.Items.Scripts
         {
             // da selbe kriterium wie bankrob
             if (!StaatsbankRobberyModule.Instance.CanStaatsbankRobbed() || !iPlayer.IsAGangster()) return false;
-            
+
             List<StaatsbankTunnel> list = StaatsbankRobberyModule.Instance.StaatsbankTunnels.Where(t => t.IsActiveForTeam == null).ToList();
             Random rand = new Random();
-            
+
             if (list.Count <= 0) return false;
-            
+
             StaatsbankTunnel staatsbankTunnel = list.ElementAt(rand.Next(0, list.Count));
             if (staatsbankTunnel == null) return false;
 
             // Setze den vorherigen frei, falls einer da war
             StaatsbankTunnel usedTunnelBevore = StaatsbankRobberyModule.Instance.StaatsbankTunnels.ToList().Where(t => t.IsActiveForTeam == iPlayer.Team).FirstOrDefault();
 
-            if(usedTunnelBevore != null)
+            if (usedTunnelBevore != null)
             {
                 usedTunnelBevore.IsActiveForTeam = null;
             }
@@ -56,7 +51,7 @@ namespace GVRP.Module.Items.Scripts
             StaatsbankTunnel staatsbankTunnel = StaatsbankRobberyModule.Instance.StaatsbankTunnels.Where(t => t.IsActiveForTeam == iPlayer.Team).FirstOrDefault();
             if (staatsbankTunnel == null) return false;
 
-            if(!staatsbankTunnel.IsOutsideOpen)
+            if (!staatsbankTunnel.IsOutsideOpen)
             {
                 iPlayer.SendNewNotification("Um einen Tunnel zu bohren, müssen erst Gitterstäbe in der Kanalisation durchgeschweißt werden!");
                 return false;
@@ -79,7 +74,7 @@ namespace GVRP.Module.Items.Scripts
 
             staatsbankTunnel.IsInsideOpen = true;
             iPlayer.SendNewNotification("Du hast einen Tunnel zur Kanalisation gebohrt! Achtung, der Tunnel wird mit der Zeit verschüttet (15 min)");
-            
+
             TeamModule.Instance.SendMessageToTeam("[INFO] Die Seismografen haben unterhalb der Staatsbank erschütterungen wahrgenommen!", teams.TEAM_FIB);
 
             // jump Points...
@@ -128,7 +123,7 @@ namespace GVRP.Module.Items.Scripts
                 staatsbankTunnel.jpOutside.ColShape = ColShapes.Create(staatsbankTunnel.jpOutside.Position, 2, 0);
                 staatsbankTunnel.jpInside.ColShape.SetData("jumpPointId", staatsbankTunnel.jpInside.Id);
                 staatsbankTunnel.jpOutside.ColShape.SetData("jumpPointId", staatsbankTunnel.jpOutside.Id);
-                
+
                 JumpPointModule.Instance.jumpPoints.Add(staatsbankTunnel.jpInside.Id, staatsbankTunnel.jpInside);
                 JumpPointModule.Instance.jumpPoints.Add(staatsbankTunnel.jpOutside.Id, staatsbankTunnel.jpOutside);
 

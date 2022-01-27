@@ -1,11 +1,9 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Configurations;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Stadthalle
 {
@@ -22,7 +20,7 @@ namespace GVRP.Module.Stadthalle
         {
             dbPlayer.LastPhoneNumberChange = reader.GetDateTime("lasthandychange");
         }
-        
+
 
         public bool IsPhoneNumberAvailable(int number)
         {
@@ -58,8 +56,8 @@ namespace GVRP.Module.Stadthalle
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            
-            if(returnString.Length < 0 || returnString.Length > 20 || returnString.ToLower() != "kaufen")
+
+            if (returnString.Length < 0 || returnString.Length > 20 || returnString.ToLower() != "kaufen")
             {
                 return;
             }
@@ -103,7 +101,7 @@ namespace GVRP.Module.Stadthalle
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-            if(!UInt32.TryParse(returnString, out uint phoneNumber) || phoneNumber < 1000 || phoneNumber > 9999999)
+            if (!UInt32.TryParse(returnString, out uint phoneNumber) || phoneNumber < 1000 || phoneNumber > 9999999)
             {
                 dbPlayer.SendNewNotification("Die angegebene Telefonnummer ist ungültig!");
                 return;
@@ -119,7 +117,7 @@ namespace GVRP.Module.Stadthalle
             if (phoneNumber > 1000 && phoneNumber < 9999) price = 200000 * dbPlayer.Level;
             else price = 25000 * dbPlayer.Level;
 
-            if(!dbPlayer.TakeBankMoney(price, "Telefonnummer Änderung"))
+            if (!dbPlayer.TakeBankMoney(price, "Telefonnummer Änderung"))
             {
                 dbPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(price));
                 return;

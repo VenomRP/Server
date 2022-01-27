@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module.PlayerName
+﻿namespace GVRP.Module.PlayerName
 {
     public class PlayerNameModule : SqlModule<PlayerNameModule, PlayerName, uint>
     {

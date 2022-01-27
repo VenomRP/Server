@@ -1,38 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Banks.BankHistory;
+﻿using GTANetworkAPI;
+using GVRP.Handler;
 using GVRP.Module.Clothes.Character;
+using GVRP.Module.Clothes.Outfits;
 using GVRP.Module.Crime;
+using GVRP.Module.Customization;
+using GVRP.Module.Delivery;
+using GVRP.Module.Freiberuf;
+using GVRP.Module.Gangwar;
+using GVRP.Module.Houses;
+using GVRP.Module.Injury;
+using GVRP.Module.Items;
+using GVRP.Module.Pet;
 using GVRP.Module.Players.Buffs;
+using GVRP.Module.Players.Phone.Apps;
 using GVRP.Module.Players.Phone.Contacts;
 using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Players.Ranks;
 using GVRP.Module.Teams;
 using GVRP.Module.Teams.Permission;
-using GVRP.Module.Pet;
-using GVRP.Module.Players.Phone.Apps;
-using GVRP.Module.Injury;
-using GVRP.Module.Customization;
-using GVRP.Module.Items;
-using GVRP.Module.Weapons.Data;
-using GVRP.Module.Weapons;
-using GVRP.Module.Voice;
-using System.Threading.Tasks;
 using GVRP.Module.Telefon.App.Settings;
-using GVRP.Module.Telefon.App.Settings.Wallpaper;
 using GVRP.Module.Telefon.App.Settings.Ringtone;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Clothes.Outfits;
-using GVRP.Module.Business;
-using GVRP.Module.Delivery;
-using GVRP.Module.Delivery.Menu;
-using GVRP.Module.Freiberuf;
+using GVRP.Module.Telefon.App.Settings.Wallpaper;
 using GVRP.Module.Vehicles;
-using GVRP.Module.Gangwar;
-using GVRP.Module.Houses;
+using GVRP.Module.Voice;
+using GVRP.Module.Weapons;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using static GVRP.Module.Players.Events.EventStateModule;
 
 namespace GVRP.Module.Players.Db
@@ -373,7 +368,7 @@ namespace GVRP.Module.Players.Db
         public Container WorkstationEndContainer { get; set; }
 
         public uint WorkstationId { get; set; }
-        
+
         public Dictionary<uint, int> DeliveryJobSkillPoints { get; set; }
 
         public bool ParamedicLicense { get; set; }
@@ -395,7 +390,7 @@ namespace GVRP.Module.Players.Db
             Crimes = new List<CrimePlayerReason>();
 
             RankDuty = RankDutyStatus.OffDuty;
-            
+
             RankId = reader.GetUInt32("rankId");
             TeamId = reader.GetUInt32("team");
             TeamRank = reader.GetUInt32("rang");
@@ -460,7 +455,7 @@ namespace GVRP.Module.Players.Db
                 updateString += deliveryJob.Key + ":" + deliveryJob.Value;
             }
 
-      //      MySQLHandler.ExecuteAsync($"UPDATE player SET delivery_job_skillpoints = '{updateString}' WHERE id = '{Id}'");
+            //      MySQLHandler.ExecuteAsync($"UPDATE player SET delivery_job_skillpoints = '{updateString}' WHERE id = '{Id}'");
         }
 
         public void IncreaseDeliveryJobSkillPoints(DeliveryJob deliveryJob, int amount)
@@ -519,18 +514,19 @@ namespace GVRP.Module.Players.Db
 
         public void SetData(string key, dynamic value)
         {
-            try { 
-            if (PlayerData.ContainsKey(key))
+            try
             {
-                PlayerData[key] = value;
-            }
-            else
-            {
-                lock (PlayerData)
+                if (PlayerData.ContainsKey(key))
                 {
-                    PlayerData.Add(key, value);
+                    PlayerData[key] = value;
                 }
-            }
+                else
+                {
+                    lock (PlayerData)
+                    {
+                        PlayerData.Add(key, value);
+                    }
+                }
             }
             catch (Exception e)
             {
@@ -540,8 +536,9 @@ namespace GVRP.Module.Players.Db
 
         public bool HasData(string key)
         {
-            try { 
-            return (PlayerData.ContainsKey(key));
+            try
+            {
+                return (PlayerData.ContainsKey(key));
             }
             catch (Exception e)
             {
@@ -552,8 +549,9 @@ namespace GVRP.Module.Players.Db
 
         public void ResetData(string key)
         {
-            try { 
-            if (PlayerData.ContainsKey(key)) PlayerData.Remove(key);
+            try
+            {
+                if (PlayerData.ContainsKey(key)) PlayerData.Remove(key);
             }
             catch (Exception e)
             {
@@ -563,9 +561,10 @@ namespace GVRP.Module.Players.Db
 
         public dynamic GetData(string key)
         {
-        try { 
-    var result = (PlayerData.ContainsKey(key)) ? PlayerData[key] : "";
-            return result;
+            try
+            {
+                var result = (PlayerData.ContainsKey(key)) ? PlayerData[key] : "";
+                return result;
             }
             catch (Exception e)
             {
@@ -721,7 +720,7 @@ namespace GVRP.Module.Players.Db
             Player.TriggerEvent("freezePlayer", false);
             NAPI.Player.StopPlayerAnimation(Player);
         }
-        
+
         public void SaveArmorType(uint type)
         {
             string query = $"UPDATE `player` SET visibleArmorType = '{type}' WHERE id = '{Id}';";

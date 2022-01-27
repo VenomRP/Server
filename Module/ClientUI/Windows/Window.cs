@@ -1,10 +1,10 @@
-﻿using System;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.ClientUI.Windows
 {

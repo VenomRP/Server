@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.IO;
+﻿using GTANetworkAPI;
+using GVRP.Handler;
+using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module
 {
@@ -43,7 +39,7 @@ namespace GVRP.Module
         {
             currentLog?.AppendLine(log);
         }
-        
+
         public virtual bool OnClientConnected(Player client)
         {
             return true;
@@ -107,7 +103,7 @@ namespace GVRP.Module
         {
             return false;
         }
-        
+
         public virtual bool OnChatCommand(DbPlayer dbPlayer, string command, string[] args)
         {
             return false;
@@ -148,7 +144,7 @@ namespace GVRP.Module
         public virtual void OnFiveMinuteUpdate()
         {
         }
-        
+
         public virtual void OnFifteenMinuteUpdate()
         {
 
@@ -186,14 +182,14 @@ namespace GVRP.Module
         {
             return 0;
         }
-        
+
         public virtual void OnDailyReset()
         {
         }
 
         protected bool UpdateSetting(string key, string value)
         {
-            Settings.Setting  setting = Settings.SettingsModule.Instance.GetAll().ToList().Where(s => s.Value.Key.ToLower() == key.ToLower()).FirstOrDefault().Value;
+            Settings.Setting setting = Settings.SettingsModule.Instance.GetAll().ToList().Where(s => s.Value.Key.ToLower() == key.ToLower()).FirstOrDefault().Value;
 
             if (setting == null) return false;
 

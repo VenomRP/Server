@@ -1,16 +1,7 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
+using System.Collections.Generic;
 
 namespace GVRP.Module.NSA.Menu
 {
@@ -30,7 +21,7 @@ namespace GVRP.Module.NSA.Menu
 
             var l_Menu = new Module.Menu.Menu(Menu, "NSA Schlüssel (" + l_Target.GetName() + ")");
             l_Menu.Add($"Schließen");
-            
+
             foreach (KeyValuePair<uint, string> kvp in l_Target.VehicleKeys)
             {
                 l_Menu.Add($"{kvp.Key} ({kvp.Value}) [Schlüssel]");

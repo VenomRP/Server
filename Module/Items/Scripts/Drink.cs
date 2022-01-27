@@ -1,9 +1,6 @@
-﻿using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {

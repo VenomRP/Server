@@ -1,9 +1,7 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.NpcSpawner;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.NpcSpawner;
 
 namespace GVRP.Module.Players.Events.EasterEvent
 {
@@ -14,7 +12,7 @@ namespace GVRP.Module.Players.Events.EasterEvent
         public float Heading { get; set; }
 
         public DateTime LastUsed { get; set; }
-        
+
         public EasterRabbit(MySqlDataReader reader) : base(reader)
         {
             Id = reader.GetUInt32("id");
@@ -24,7 +22,7 @@ namespace GVRP.Module.Players.Events.EasterEvent
 
             LastUsed = DateTime.Now.AddMinutes(-15);
 
-            if(EasterRabbitModule.Instance.isActive) new Npc(GTANetworkAPI.PedHash.Rabbit, Position, Heading, 0);
+            if (EasterRabbitModule.Instance.isActive) new Npc(GTANetworkAPI.PedHash.Rabbit, Position, Heading, 0);
         }
 
         public override uint GetIdentifier()

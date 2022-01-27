@@ -1,9 +1,8 @@
 ﻿using GTANetworkAPI;
-using System.Collections.Generic;
-using System.Linq;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using GVRP.Module.Service;
+using System.Collections.Generic;
 using static GVRP.Module.Computer.Apps.ServiceApp.ServiceListApp;
 
 namespace GVRP.Module.Computer.Apps.ServiceApp
@@ -13,11 +12,11 @@ namespace GVRP.Module.Computer.Apps.ServiceApp
         public ServiceOwnApp() : base("ServiceOwnApp") { }
 
         [RemoteEvent]
-        public void requestOwnServices(Player client) 
+        public void requestOwnServices(Player client)
         {
             var dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int) teams.TEAM_GOV) return;
+            if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int)teams.TEAM_GOV) return;
 
             List<serviceObject> serviceList = new List<serviceObject>();
             var acceptedServices = ServiceModule.Instance.GetAcceptedServices(dbPlayer);
@@ -38,7 +37,7 @@ namespace GVRP.Module.Computer.Apps.ServiceApp
         {
             var dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int) teams.TEAM_GOV) return;
+            if (!dbPlayer.IsACop() && dbPlayer.TeamId != (int)teams.TEAM_MEDIC && dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL && dbPlayer.TeamId != (int)teams.TEAM_DPOS && dbPlayer.TeamId != (int)teams.TEAM_NEWS && dbPlayer.TeamId != (int)teams.TEAM_LSC && dbPlayer.TeamId != (int)teams.TEAM_GOV) return;
 
             var findplayer = Players.Players.Instance.FindPlayer(creator);
             if (findplayer == null) return;

@@ -1,10 +1,8 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Warehouse
 {
@@ -23,7 +21,7 @@ namespace GVRP.Module.Warehouse
         {
             return Instance.GetAll().Values.FirstOrDefault(fs => fs.Position.DistanceTo(position) < 3.0f);
         }
-        
+
         protected override void OnLoaded()
         {
             MenuManager.Instance.AddBuilder(new WarehouseBuyMenuBuilder());

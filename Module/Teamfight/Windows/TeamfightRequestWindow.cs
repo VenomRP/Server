@@ -1,12 +1,11 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Teamfight.Windows
 {

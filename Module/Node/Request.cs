@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace GVRP.Module.Node
 {
@@ -21,17 +20,17 @@ namespace GVRP.Module.Node
             Post("call", new FormUrlEncodedContent(call));
         }
 
-        public static async void CallEntity(string entity,  string name, string args)
+        public static async void CallEntity(string entity, string name, string args)
         {
-            
-                var call = new Dictionary<string, string>
+
+            var call = new Dictionary<string, string>
                 {
                     { "entity", entity },
                     { "name", name },
                     { "args", args }
                 };
 
-                Post("call-entity", new FormUrlEncodedContent(call));
+            Post("call-entity", new FormUrlEncodedContent(call));
         }
 
         public static void SetEntity(string entity, string name, string args)

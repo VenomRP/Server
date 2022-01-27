@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Kasino;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Kasino
 {
@@ -79,7 +78,7 @@ namespace GVRP.Module.Kasino
             }
             else
             {
-                if(dbPlayer.money[0] < kasinoDevice.MinPrice*5)
+                if (dbPlayer.money[0] < kasinoDevice.MinPrice * 5)
                 {
                     dbPlayer.SendNewNotification($"Sie benötigen mindestens ${kasinoDevice.MinPrice * 5} um hier zu spielen!");
                 }

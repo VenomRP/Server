@@ -1,7 +1,4 @@
-﻿using System;
-using System.Linq;
-using GTANetworkAPI;
-using System.Threading.Tasks;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Blitzer;
 using GVRP.Module.Chat;
@@ -10,8 +7,10 @@ using GVRP.Module.Injury;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Vehicles;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -75,7 +74,7 @@ namespace GVRP.Module.Items.Scripts
                         }
 
                         Chats.sendProgressBar(iPlayer, 60000);
-                        iPlayer.PlayAnimation((int) (AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "amb@world_human_welding@male@idle_a", "idle_a");
+                        iPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "amb@world_human_welding@male@idle_a", "idle_a");
                         iPlayer.Player.TriggerEvent("freezePlayer", true);
                         iPlayer.SetCannotInteract(true);
                         await Task.Delay(60000);
@@ -120,18 +119,18 @@ namespace GVRP.Module.Items.Scripts
                             // Remove Blitzer if Item is one
                             if (pObject.Item.Id == 484)
                             {
-                                if (iPlayer.Team.Id != (uint) teams.TEAM_POLICE && iPlayer.Team.Id != (uint)teams.TEAM_COUNTYPD) return false;
+                                if (iPlayer.Team.Id != (uint)teams.TEAM_POLICE && iPlayer.Team.Id != (uint)teams.TEAM_COUNTYPD) return false;
                                 BlitzerModule.Instance.RemoveBlitzer(BlitzerModule.Instance.GetNearestBlitzer(iPlayer));
                             }
                             else if (pObject.Item.Id == 485)
                             {
-                                if (iPlayer.Team.Id != (uint) teams.TEAM_POLICE && iPlayer.Team.Id != (uint)teams.TEAM_COUNTYPD) return false;
+                                if (iPlayer.Team.Id != (uint)teams.TEAM_POLICE && iPlayer.Team.Id != (uint)teams.TEAM_COUNTYPD) return false;
                                 BlitzerModule.Instance.RemoveBlitzer(BlitzerModule.Instance.GetNearestBlitzer(iPlayer));
                             }
 
                             PoliceObjectModule.Instance.Delete(pObject);
                             iPlayer.PlayAnimation(
-                                (int) (AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["fixing"].Split()[0], Main.AnimationList["fixing"].Split()[1]);
+                                (int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["fixing"].Split()[0], Main.AnimationList["fixing"].Split()[1]);
                             iPlayer.Player.TriggerEvent("freezePlayer", true);
                             iPlayer.SetCannotInteract(true);
                             await Task.Delay(4000);

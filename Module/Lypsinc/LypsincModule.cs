@@ -1,14 +1,4 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-
-namespace GVRP.Module.Lypsinc
+﻿namespace GVRP.Module.Lypsinc
 {
     class LypsincModule : Module<LypsincModule>
     {
@@ -39,7 +29,7 @@ namespace GVRP.Module.Lypsinc
             TeamspeakLogin = Configurations.Configuration.Instance.TeamspeakLogin;
             TeamspeakPassword = Configurations.Configuration.Instance.TeamspeakPassword;
             TeamspeakChannel = Configurations.Configuration.Instance.VoiceChannel;
-            
+
 
             /*Task.Factory.StartNew(() =>
             {

@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Configurations;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players.Seat
 {
@@ -49,7 +49,7 @@ namespace GVRP.Module.Players.Seat
 
                 var benchpos = position;
 
-                var q = (double) benchrot.Z;
+                var q = (double)benchrot.Z;
 
                 q += 180; //Reset gta degree (-180 to 180)
 
@@ -97,11 +97,11 @@ namespace GVRP.Module.Players.Seat
                 if (destination == null || freeIndex == -1) return; //No free seat
 
                 if (destination.DistanceTo(player.Position) > 4f) return;
-                
+
                 occupiedInts[freeIndex] = true;
-                
+
                 //player.FreezePosition = true;
-                
+
                 player.Position = destination;
                 benchrot.Z -= 180 + heading;
                 player.Rotation = benchrot;
@@ -114,7 +114,7 @@ namespace GVRP.Module.Players.Seat
         }
 
         [RemoteEvent]
-        public void CancelInteract(Player player) 
+        public void CancelInteract(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;

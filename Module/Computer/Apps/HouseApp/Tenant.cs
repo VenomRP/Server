@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Computer.Apps.HouseApp
 {

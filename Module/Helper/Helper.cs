@@ -1,6 +1,6 @@
-﻿using System;
+﻿using GVRP.Module.Players.Db;
+using System;
 using System.Collections.Generic;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Helper
 {
@@ -62,11 +62,11 @@ namespace GVRP.Module.Helper
             {34, new Tuning(98, "Pearllack")},
             {35, new Tuning(99, "Felgenfarbe")},
         };
-        
-        
+
+
         public static int GetTimestamp(DateTime date)
         {
-            return (int) date.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
+            return (int)date.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
         public static string ComplainPlayerDataInt(int[] playerVar, string dbField)
@@ -93,7 +93,7 @@ namespace GVRP.Module.Helper
         public static bool CheckPlayerData(DbPlayer dbPlayer, dynamic playerData, DbPlayer.Value value,
             out string query)
         {
-            var valueUInt = (uint) value;
+            var valueUInt = (uint)value;
             if (dbPlayer.DbValues[valueUInt] != playerData)
             {
                 string stringData;
@@ -133,9 +133,9 @@ namespace GVRP.Module.Helper
 
         public static string ComplainPlayerData(DimensionType[] playerVar, string dbField)
         {
-            return (int) playerVar[0] != (int) playerVar[1] ? $"`{dbField}` = '{(int) playerVar[0]}'" : null;
+            return (int)playerVar[0] != (int)playerVar[1] ? $"`{dbField}` = '{(int)playerVar[0]}'" : null;
         }
-        
+
         public static string ComplainPlayerDataFloat(float[] playerVar, string dbField)
         {
             string str = "";

@@ -1,9 +1,7 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
-using GVRP.Module.Logging;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles;
+using System.Collections.Generic;
 
 
 namespace GVRP.Anticheat
@@ -34,7 +32,7 @@ namespace GVRP.Anticheat
         {
             var currW = dbPlayer.Player.CurrentWeapon;
 
-            if (!ForbiddenWeapons.Contains(currW) ||  dbPlayer.Rank.Id < 4 && dbPlayer.Rank.Id > 7 || dbPlayer.IsInAdminDuty()) return;
+            if (!ForbiddenWeapons.Contains(currW) || dbPlayer.Rank.Id < 4 && dbPlayer.Rank.Id > 7 || dbPlayer.IsInAdminDuty()) return;
             GVRP.Module.Chat.Chats.SendGlobalMessage($"Der Spieler {dbPlayer.Player.Name} wurde vom Anticheat gebannt.", Module.Chat.Chats.COLOR.RED, Module.Chat.Chats.ICON.GLOB);
 
             //DBLogging.LogAdminAction(player, dbPlayer.Player.Name, adminLogTypes.perm, "Community-Ausschluss", 0, Devmode);

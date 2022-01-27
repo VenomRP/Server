@@ -1,10 +1,8 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Handler;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Node
 {
@@ -32,7 +30,7 @@ namespace GVRP.Module.Node
 
         public static void Set(this Player player, string name, object value)
         {
-            Request.SetEntity(JsonConvert.SerializeObject(new NodeArg("player", player.Handle.Value)), name, JsonConvert.SerializeObject(new List<NodeArg>() { new NodeArg( "", value) }));
+            Request.SetEntity(JsonConvert.SerializeObject(new NodeArg("player", player.Handle.Value)), name, JsonConvert.SerializeObject(new List<NodeArg>() { new NodeArg("", value) }));
         }
 
         public static void Set(this Vehicle vehicle, string name, object value)

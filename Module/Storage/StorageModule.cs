@@ -1,10 +1,4 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Handler;
 using GVRP.Module.Business;
 using GVRP.Module.Commands;
@@ -14,6 +8,10 @@ using GVRP.Module.Menu;
 using GVRP.Module.PlayerName;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Storage
 {
@@ -33,7 +31,7 @@ namespace GVRP.Module.Storage
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandcreatestorage(Player player) 
+        public void Commandcreatestorage(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.CanAccessMethod()) return;
@@ -96,7 +94,7 @@ namespace GVRP.Module.Storage
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
             if (dbPlayer.Player.IsInVehicle) return false;
-            if(key == Key.E)
+            if (key == Key.E)
             {
                 StorageRoom storageRoom = StorageRoomModule.Instance.GetClosest(dbPlayer);
                 if (storageRoom != null)
@@ -108,7 +106,7 @@ namespace GVRP.Module.Storage
                 if (dbPlayer.HasData("storageRoomId"))
                 {
                     storageRoom = StorageRoomModule.Instance.Get((uint)dbPlayer.GetData("storageRoomId"));
-                    if(storageRoom != null && InteriorPosition.DistanceTo(dbPlayer.Player.Position) < 2.0f && !storageRoom.Locked)
+                    if (storageRoom != null && InteriorPosition.DistanceTo(dbPlayer.Player.Position) < 2.0f && !storageRoom.Locked)
                     {
                         // Player out of StorageRoom 
                         if (storageRoom.Locked)
@@ -176,7 +174,7 @@ namespace GVRP.Module.Storage
             return false;
         }
     }
-    
+
     public static class StorageModulePlayerExtensions
     {
         public static bool CanLockStorage(this DbPlayer dbPlayer, StorageRoom storageRoom)

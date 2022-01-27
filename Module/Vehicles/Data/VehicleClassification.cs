@@ -22,7 +22,7 @@ namespace GVRP.Module.Vehicles.Data
         public string Name { get; }
         public bool UseBreak { get; }
         public uint ScrapYard { get; }
-        
+
         public VehicleClassification(MySqlDataReader reader) : base(reader)
         {
             Id = reader.GetUInt32(0);

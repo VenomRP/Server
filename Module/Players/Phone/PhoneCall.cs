@@ -1,16 +1,13 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Chat;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.NSA;
 using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players.Db;
-using GVRP.Module.ReversePhone;
 using GVRP.Module.Telefon.App;
 using GVRP.Module.Voice;
+using System;
 
 namespace GVRP.Module.Players.Phone
 {
@@ -19,7 +16,7 @@ namespace GVRP.Module.Players.Phone
         public static string PHONECALL_TYPE = "phone_calling";
         public static string PHONENUMBER = "phone_number";
 
-        public static bool IsPlayerInCall(Player player) 
+        public static bool IsPlayerInCall(Player player)
         {
             DbPlayer iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.IsValid()) return false;
@@ -29,7 +26,7 @@ namespace GVRP.Module.Players.Phone
                    iPlayer.GetData(PHONECALL_TYPE) == "incoming" ||
                    iPlayer.GetData(PHONECALL_TYPE) == "active";
         }
-        
+
         public static async void CancelPhoneCall(this DbPlayer dbPlayer)
         {
             Player player = dbPlayer.Player;
@@ -71,7 +68,7 @@ namespace GVRP.Module.Players.Phone
             if (!CanPlayerHaveCall(dbPlayer))
             {
                 dbPlayer.SendNewNotification(
-                    
+
                     "Fuer diese Aktion benötigst du ein verfuegbares " +
                     ItemModelModule.Instance.Get(174).Name);
                 return false;
@@ -106,7 +103,7 @@ namespace GVRP.Module.Players.Phone
             // verify has item smartphone
             return dbPlayer.Container.GetItemAmount(174) >= 1;
         }
-        
+
         public static void SetPlayerCallStatus(Player player, string state = "waiting",
             uint phoneNumber = 0)
         {
@@ -125,14 +122,14 @@ namespace GVRP.Module.Players.Phone
             // set the connected phone number
             dbPlayer.SetData(PHONENUMBER, phoneNumber);
         }
-        
+
         public static void StartPhoneCall(DbPlayer dbPlayer, uint number)
         {
             if (dbPlayer.Container.GetItemAmount(
                     174) < 1)
             {
                 dbPlayer.SendNewNotification(
-                    
+
                     "Sie besitzen kein Telefon.");
                 return;
             }
@@ -162,12 +159,12 @@ namespace GVRP.Module.Players.Phone
                     {
                         var requestorNumber = dbPlayer.handy[0];
                         var requestedNumber = user.handy[0];
-                        
+
                         // is requested player already in phone call
                         if (IsPlayerInCall(user.Player))
                         {
                             dbPlayer.SendNewNotification(
-                                
+
                                 "Der Anschluss ist zurzeit besetzt!");
                             return;
                         }
@@ -175,14 +172,14 @@ namespace GVRP.Module.Players.Phone
 
                         // set requested player in state incoming
                         SetPlayerCallStatus(user.Player, "incoming", requestorNumber);
-           
+
 
                         // set requestor player in state waiting
                         dbPlayer.guthaben[0] = dbPlayer.guthaben[0] - 10;
                         SetPlayerCallStatus(dbPlayer.Player, "waiting", requestedNumber);
 
                         // Set Funk to push-to-talk if active (dauersenden)
-                        if(dbPlayer.funkStatus == FunkStatus.Active)
+                        if (dbPlayer.funkStatus == FunkStatus.Active)
                         {
                             dbPlayer.funkStatus = FunkStatus.Deactive;
                             VoiceModule.Instance.refreshFQVoiceForPlayerFrequenz(dbPlayer);

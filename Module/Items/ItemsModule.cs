@@ -1,33 +1,28 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
+using GVRP.Module.Armory;
 using GVRP.Module.Business;
 using GVRP.Module.Business.FuelStations;
-using GVRP.Module.Business.Raffinery;
-using GVRP.Module.Houses;
-using GVRP.Module.Injury;
-using GVRP.Module.Logging;
 using GVRP.Module.Business.NightClubs;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.RemoteEvents;
-using GVRP.Module.Storage;
-using GVRP.Module.Teams.Shelter;
-using GVRP.Module.Vehicles;
-using GVRP.Module.Teams.AmmoPackageOrder;
+using GVRP.Module.Business.Raffinery;
 using GVRP.Module.Configurations;
 using GVRP.Module.DropItem;
-using GVRP.Module.Laboratories;
-using GVRP.Module.Teams;
-using GVRP.Module.Armory;
-using GVRP.Module.Schwarzgeld;
-using GVRP.Module.Workstation;
 using GVRP.Module.Heist.Planning;
+using GVRP.Module.Houses;
 using GVRP.Module.JobFactions.Mine;
+using GVRP.Module.Laboratories;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Schwarzgeld;
+using GVRP.Module.Storage;
+using GVRP.Module.Teams.AmmoPackageOrder;
+using GVRP.Module.Teams.Shelter;
+using GVRP.Module.Vehicles;
+using GVRP.Module.Workstation;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Items
 {
@@ -39,10 +34,10 @@ namespace GVRP.Module.Items
             var id = reader.GetUInt32("id");
             dbPlayer.Container = ContainerManager.LoadContainer(id, ContainerTypes.PLAYER, 0);
 
-                        
+
         }
 
-        public Container findInventory(Player player) 
+        public Container findInventory(Player player)
         {
             // Haus
             DbPlayer dbPlayer = player.GetPlayer();
@@ -107,7 +102,7 @@ namespace GVRP.Module.Items
             TeamShelter teamShelter = TeamShelterModule.Instance.GetByInventoryPosition(dbPlayer.Player.Position, dbPlayer.Player.Dimension);
             if (teamShelter != null)
             {
-                if(teamShelter.Team.Id == dbPlayer.TeamId) return teamShelter.Container;
+                if (teamShelter.Team.Id == dbPlayer.TeamId) return teamShelter.Container;
             }
 
             // FSaves GW
@@ -280,7 +275,7 @@ namespace GVRP.Module.Items
             if (dbPlayer.HasData("container_refund"))
             {
                 return ContainerManager.LoadContainer(dbPlayer.Id, ContainerTypes.REFUND, 0, 0);
-                
+
             }
 
             if (dbPlayer.HasData("dropItemHeap"))
@@ -291,7 +286,7 @@ namespace GVRP.Module.Items
                     return itemHeap.Container;
                 }
             }
-            
+
             if (dbPlayer.HasData("aser_lspd"))
             {
                 StaticContainer staticContainer = StaticContainerModule.Instance.Get((int)StaticContainerTypes.ASERLSPD);
@@ -299,11 +294,11 @@ namespace GVRP.Module.Items
                     return staticContainer.Container;
             }
 
-            if(dbPlayer.HasWorkstation() && dbPlayer.TeamId == (int)teams.TEAM_CIVILIAN)
+            if (dbPlayer.HasWorkstation() && dbPlayer.TeamId == (int)teams.TEAM_CIVILIAN)
             {
                 Workstation.Workstation workstation = dbPlayer.GetWorkstation();
 
-                if(workstation != null)
+                if (workstation != null)
                 {
                     if (dbPlayer.Player.Position.DistanceTo(workstation.EndPosition) < 2.0f && workstation.Dimension == dbPlayer.Player.Dimension) return dbPlayer.WorkstationEndContainer;
                     if (dbPlayer.Player.Position.DistanceTo(workstation.SourcePosition) < 2.0f && workstation.Dimension == dbPlayer.Player.Dimension) return dbPlayer.WorkstationSourceContainer;

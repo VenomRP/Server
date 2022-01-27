@@ -1,12 +1,10 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Module.Chat;
-using GVRP.Module.Houses;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Houses.Menu
 {
@@ -41,13 +39,13 @@ namespace GVRP.Module.Houses.Menu
                     MenuManager.DismissCurrent(dbPlayer);
                     return false;
                 }
-                else 
+                else
                 {
 
                     HousesVoltage housesVoltage = HousesVoltageModule.Instance.GetAll().Values.ToList().Where(hv => hv.Position.DistanceTo(dbPlayer.Player.Position) < 5.0f).FirstOrDefault();
                     if (housesVoltage == null) return false;
 
-                    if(index == 1)
+                    if (index == 1)
                     {
                         Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                         {
@@ -64,7 +62,7 @@ namespace GVRP.Module.Houses.Menu
                             dbPlayer.Player.TriggerEvent("freezePlayer", false);
                             dbPlayer.ResetData("userCannotInterrupt");
                             NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
-                            
+
                             if (housesVoltage.DetectedHouses.Count() > 0)
                             {
                                 dbPlayer.SendNewNotification($"Folgende Häuser haben einen hohen Verbrauch aufgewiesen {string.Join(',', housesVoltage.DetectedHouses.ToList())}!");

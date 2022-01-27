@@ -1,12 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
-using GVRP.Module.Menu;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -18,7 +12,7 @@ namespace GVRP.Module.Items.Scripts
             {
                 return false;
             }
-            
+
             MenuManager.Instance.Build(PlayerMenu.VehicleRentMenu, iPlayer).Show(iPlayer);
             return false;
         }

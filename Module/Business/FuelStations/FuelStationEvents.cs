@@ -1,14 +1,6 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using GVRP.Handler;
-using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
 using GVRP.Module.Items;
 using GVRP.Module.Logging;
 using GVRP.Module.Menu;
@@ -19,6 +11,10 @@ using GVRP.Module.RemoteEvents;
 using GVRP.Module.Staatskasse;
 using GVRP.Module.Teams;
 using GVRP.Module.Vehicles;
+using System;
+using System.Linq;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Business.FuelStations
 {
@@ -29,7 +25,7 @@ namespace GVRP.Module.Business.FuelStations
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null) return;
-            
+
             if (!dbPlayer.TryData("fuelstationId", out uint fuelStationId)) return;
             var fuelstation = FuelStationModule.Instance.Get(fuelStationId);
             if (fuelstation == null) return;
@@ -38,7 +34,7 @@ namespace GVRP.Module.Business.FuelStations
             {
                 if (fuelstation.GetOwnedBusiness() == dbPlayer.ActiveBusiness && dbPlayer.GetActiveBusinessMember() != null && dbPlayer.GetActiveBusinessMember().Fuelstation) // Member of business and has rights
                 {
-                    if(Regex.IsMatch(returnstring, @"^[a-zA-Z ]+$") && FuelStationModule.Instance.GetAll().Where(fs => fs.Value.Name.ToLower() == returnstring.ToLower()).Count() == 0)
+                    if (Regex.IsMatch(returnstring, @"^[a-zA-Z ]+$") && FuelStationModule.Instance.GetAll().Where(fs => fs.Value.Name.ToLower() == returnstring.ToLower()).Count() == 0)
                     {
                         fuelstation.SetFuelName(returnstring);
                         dbPlayer.SendNewNotification("Name wurde geaendert!");
@@ -64,7 +60,7 @@ namespace GVRP.Module.Business.FuelStations
                 dbPlayer.SendNewNotification("Dieser Preis kann nicht gesetzt werden!");
                 return;
             }
-            
+
             // check realistic value
             if (price < 1 || price > 100)
             {
@@ -250,7 +246,7 @@ namespace GVRP.Module.Business.FuelStations
 
             // check for gas stations
             var fuel = FuelStationModule.Instance.GetStaionByGas(dbPlayer.Player.Position);
-            
+
             // no gas station found
             if (fuel == null)
             {
@@ -258,16 +254,16 @@ namespace GVRP.Module.Business.FuelStations
                      "Sie muessen an einer Tankstelle sein!");
                 return;
             }
-            
+
             // enigne is running
             if (dbVehicle.SyncExtension.EngineOn || dbVehicle.SyncExtension.Locked)
             {
                 dbPlayer.SendNewNotification(
-                    
+
                     "Motor muss abgeschaltet und Fahrzeug aufgeschlossen sein!");
                 return;
             }
-            
+
             int fuelstationFuelAmount = fuel.Container.GetItemAmount(FuelStationModule.BenzinModelId);
             bool isOwned = fuel.GetOwnedBusiness() == null ? false : true;
             if (fuelstationFuelAmount <= 0 && isOwned)

@@ -39,7 +39,7 @@ namespace GVRP.Module.Node
             return this;
         }
 
-        public NodeCallBuilder AddPlayer(Player client) 
+        public NodeCallBuilder AddPlayer(Player client)
         {
             AddType("player", client.Handle.Value);
             return this;

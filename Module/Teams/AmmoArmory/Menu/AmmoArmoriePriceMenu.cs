@@ -1,19 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
-using GVRP.Module.Teams.AmmoPackageOrder;
-using GVRP.Module.Teams.Shelter;
 
 namespace GVRP.Module.Teams.AmmoArmory
 {
@@ -31,7 +20,7 @@ namespace GVRP.Module.Teams.AmmoArmory
             var menu = new Menu.Menu(Menu, "Munitionskammer");
 
             menu.Add($"Schließen");
-            
+
             foreach (AmmoArmorieItem ammoArmorieItem in ammoArmorie.ArmorieItems)
             {
                 menu.Add(ItemModelModule.Instance.Get(ammoArmorieItem.ItemId).Name + " $" + ammoArmorieItem.TeamPrice + " (P:" + ammoArmorieItem.GetRequiredPacketsForTeam(iPlayer.Team) + ")");
@@ -65,7 +54,7 @@ namespace GVRP.Module.Teams.AmmoArmory
                         if (idx == index)
                         {
                             iPlayer.SetData("configAmmoPrice", ammoArmorieItem.Id);
-                            ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = "Preis anpassen", Callback = "ConfigAmmoArmoriePrice", Message = "Geben Sie die Kosten für " + ItemModelModule.Instance.Get(ammoArmorieItem.ItemId).Name + " an:"});
+                            ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = "Preis anpassen", Callback = "ConfigAmmoArmoriePrice", Message = "Geben Sie die Kosten für " + ItemModelModule.Instance.Get(ammoArmorieItem.ItemId).Name + " an:" });
                             return true;
                         }
                         else idx++;

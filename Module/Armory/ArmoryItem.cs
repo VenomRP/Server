@@ -1,5 +1,4 @@
-﻿using GVRP.Handler;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 
 namespace GVRP.Module.Armory
 {

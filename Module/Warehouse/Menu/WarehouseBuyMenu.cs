@@ -1,17 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 
 namespace GVRP.Module.Warehouse
 {
@@ -30,7 +20,7 @@ namespace GVRP.Module.Warehouse
 
             menu.Add($"Schließen");
 
-            foreach(WarehouseItem warehouseItem in warehouse.WarehouseItems)
+            foreach (WarehouseItem warehouseItem in warehouse.WarehouseItems)
             {
                 menu.Add($"{ItemModelModule.Instance.Get(warehouseItem.RequiredItemId).Name} ${warehouseItem.RequiredItemPrice}");
             }
@@ -65,7 +55,7 @@ namespace GVRP.Module.Warehouse
                             int amount = iPlayer.Container.GetItemAmount(warehouseItem.RequiredItemId);
                             int buyamount = (amount / warehouseItem.RequiredToResultItemAmount); // zb nur 5er stacks... x.x
 
-                            if(buyamount > 0 && amount >= warehouseItem.RequiredToResultItemAmount)
+                            if (buyamount > 0 && amount >= warehouseItem.RequiredToResultItemAmount)
                             {
                                 int realamount = buyamount * warehouseItem.RequiredToResultItemAmount;
                                 int playerResultPrice = realamount * warehouseItem.RequiredItemPrice;

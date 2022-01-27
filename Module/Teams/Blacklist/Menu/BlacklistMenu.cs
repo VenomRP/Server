@@ -1,17 +1,7 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.PlayerName;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
 
 namespace GVRP.Module.Teams.Blacklist.Menu
 {
@@ -29,7 +19,7 @@ namespace GVRP.Module.Teams.Blacklist.Menu
             var l_Menu = new Module.Menu.Menu(Menu, "Blacklist Einträge");
             l_Menu.Add($"Schließen");
 
-            foreach(BlacklistEntry entry in p_DbPlayer.Team.blacklistEntries)
+            foreach (BlacklistEntry entry in p_DbPlayer.Team.blacklistEntries)
             {
                 if (!BlacklistModule.Instance.blacklistTypes.ContainsKey(entry.TypeId)) continue;
                 DbPlayer target = Players.Players.Instance.FindPlayerById((uint)entry.BlacklistPlayerId);

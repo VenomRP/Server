@@ -1,8 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Banks;
 using GVRP.Module.Logging;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module
 {
@@ -11,7 +11,7 @@ namespace GVRP.Module
         where TLoadable : Loadable<TId>
     {
         private Dictionary<TId, TLoadable> list;
-        
+
         protected override bool OnLoad()
         {
             list = new Dictionary<TId, TLoadable>();
@@ -34,7 +34,7 @@ namespace GVRP.Module
         {
             return list;
         }
-        
+
         public bool Contains(TId key)
         {
             return list.ContainsKey(key);

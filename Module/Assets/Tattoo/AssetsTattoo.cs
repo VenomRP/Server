@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GVRP.Module.Players.Db;
 using MySql.Data.MySqlClient;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Assets.Tattoo
 {
@@ -14,7 +12,7 @@ namespace GVRP.Module.Assets.Tattoo
         public string Collection { get; }
         public int ZoneId { get; }
         public int Price { get; }
-        
+
         public AssetsTattoo(MySqlDataReader reader) : base(reader)
         {
             Id = reader.GetUInt32("id");

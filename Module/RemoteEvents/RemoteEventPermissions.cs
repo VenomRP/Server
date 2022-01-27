@@ -1,8 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using GTANetworkAPI;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using GTANetworkAPI;
-using GVRP.Module.GTAN;
 
 namespace GVRP.Module.RemoteEvents
 {
@@ -15,7 +14,7 @@ namespace GVRP.Module.RemoteEvents
         private RemoteEventPermissions()
         {
             remoteEvents = new Dictionary<string, RemoteEventPermissionAttribute>();
-            
+
             foreach (var script in Assembly.GetCallingAssembly().GetTypes()
                 .Where(myType => myType.IsClass && !myType.IsAbstract))
             {

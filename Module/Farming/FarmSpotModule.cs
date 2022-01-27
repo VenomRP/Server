@@ -1,16 +1,10 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
-using GVRP.Module.Events.Halloween;
+﻿using GTANetworkAPI;
 using GVRP.Module.Gangwar;
-using GVRP.Module.Injury;
 using GVRP.Module.Items;
-using GVRP.Module.Jobs;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Buffs;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Farming
 {
@@ -99,7 +93,7 @@ namespace GVRP.Module.Farming
                 if (FarmingModule.FarmingList.Contains(dbPlayer)) FarmingModule.FarmingList.Remove(dbPlayer);
                 return false;
             }
-            
+
             switch (xFarm.SpecialType)
             {
                 case FarmType.Pickup:
@@ -117,7 +111,8 @@ namespace GVRP.Module.Farming
             if (xFarm.Id == 1)
             {
                 dbPlayer.SendNewNotification("Du hast " + amount + " " + xFarm.RessourceName + " gesammelt!");
-            } else
+            }
+            else
             {
                 dbPlayer.SendNewNotification("Du hast " + amount + " " + xFarm.RessourceName + " gesammelt!");
 

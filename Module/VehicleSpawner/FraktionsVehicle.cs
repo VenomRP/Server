@@ -1,8 +1,5 @@
 ﻿using GTANetworkAPI;
 using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GVRP.Module.VehicleSpawner
 {
@@ -23,7 +20,7 @@ namespace GVRP.Module.VehicleSpawner
         public bool Registered { get; set; }
         public string Plate { get; set; }
         public int WheelClamp { get; set; }
-        
+
         public bool AlarmSystem { get; set; }
         public uint lastGarage { get; set; }
 

@@ -1,19 +1,12 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.ClientUI.Components;
+﻿using GVRP.Module.Chat;
 using GVRP.Module.Logging;
 using GVRP.Module.Menu;
 using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
 using GVRP.Module.Telefon.App;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.NSA.Menu
 {
@@ -100,8 +93,8 @@ namespace GVRP.Module.NSA.Menu
                             return true;
                         }
                     case 2:
-                        
-                        if(iPlayer.HasData("nsaOrtung"))
+
+                        if (iPlayer.HasData("nsaOrtung"))
                         {
                             iPlayer.ResetData("nsaOrtung");
                             iPlayer.SendNewNotification("Ortung beendet!");
@@ -121,7 +114,7 @@ namespace GVRP.Module.NSA.Menu
                         Module.Menu.MenuManager.Instance.Build(GVRP.Module.Menu.PlayerMenu.NSABankMenu, iPlayer).Show(iPlayer);
                         return false;
                     case 5:
-                        if(targetOne.phoneSetting.flugmodus)
+                        if (targetOne.phoneSetting.flugmodus)
                         {
                             iPlayer.SendNewNotification("Smartphone konnte nicht gecloned werden!");
                             return false;

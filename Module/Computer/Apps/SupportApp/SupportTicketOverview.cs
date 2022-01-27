@@ -1,5 +1,4 @@
 ﻿using GTANetworkAPI;
-using System.Threading.Tasks;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Commands;
 using GVRP.Module.Logging;
@@ -53,13 +52,13 @@ namespace GVRP.Module.Computer.Apps.SupportApp
             {
                 destinationPlayer.SendNewNotification("Administrator " + dbPlayer.GetName() + " hat sich zu ihnen teleportiert!", title: "ADMIN", notificationType: PlayerNotification.NotificationType.ADMIN);
             }
-            
+
         }
 
         [RemoteEvent]
         public async void closeTicket(Player client, string name)
         {
-            
+
             var dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
             if (string.IsNullOrEmpty(name)) return;
@@ -84,7 +83,7 @@ namespace GVRP.Module.Computer.Apps.SupportApp
 
             dbPlayer.SendNewNotification(ticketResponse ? $"Sie haben das Ticket von {findplayer.GetName()} geschlossen!" : $"Das Ticket von {findplayer.GetName()} konnte nicht geschlossen werden!");
             findplayer.SendNewNotification("Ihr Ticket wurde geschlossen!");
-            
+
         }
     }
 }

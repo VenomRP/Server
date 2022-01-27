@@ -1,8 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Drunk;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {

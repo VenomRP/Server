@@ -1,11 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module;
 using GVRP.Module.Items;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP
 {
@@ -34,7 +34,7 @@ namespace GVRP
 
         public override void OnPlayerLoadData(DbPlayer dbPlayer, MySqlDataReader reader)
         {
-            if(objects.Count() > 0)
+            if (objects.Count() > 0)
             {
 
             }

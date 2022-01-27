@@ -7,7 +7,7 @@ namespace GVRP.Module.Heist.Planning
         public uint Id { get; }
         public string Name { get; }
         public List<string> UpgradeNames { get; }
-        
+
         public Upgrade(uint id, string name, List<string> upgradeNames)
         {
             Id = id;

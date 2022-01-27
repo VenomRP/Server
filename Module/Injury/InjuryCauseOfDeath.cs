@@ -1,6 +1,4 @@
-﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
+﻿using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 
 namespace GVRP.Module.Injury

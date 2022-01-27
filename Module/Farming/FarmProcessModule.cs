@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Business.Raffinery;
 using GVRP.Module.Chat;
@@ -11,7 +7,10 @@ using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Buffs;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Farming
 {
@@ -19,14 +18,14 @@ namespace GVRP.Module.Farming
     {
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(FarmSpotModule)};
+            return new[] { typeof(FarmSpotModule) };
         }
 
         protected override string GetQuery()
         {
             return "SELECT * FROM `farm_processes`;";
         }
-        
+
         protected override bool OnLoad()
         {
             if (GetAll() != null)
@@ -54,7 +53,7 @@ namespace GVRP.Module.Farming
             if (!dbPlayer.CanInteract()) return; // already verarbeiten...
 
             //Geh jedes Item was benötigt wird durch
-                foreach (var item in required)
+            foreach (var item in required)
             {
                 //Rechte die maximal mögliche anzahl der herstellung
                 decimal maxProcess = Math.Floor((decimal)UsingContainer.GetItemAmount(item.Key.Id) / (decimal)item.Value);
@@ -85,13 +84,13 @@ namespace GVRP.Module.Farming
             }
 
             int farmingtime = (farmProcess.RequiredTime * min.Value);
-            if (dbPlayer.HasCustomDrugBuff()) farmingtime = Convert.ToInt32(farmingtime  * 0.3);
+            if (dbPlayer.HasCustomDrugBuff()) farmingtime = Convert.ToInt32(farmingtime * 0.3);
 
             Chats.sendProgressBar(dbPlayer, farmingtime);
 
             Task.Run(async () =>
             {
-                if(sxVehicle != null)
+                if (sxVehicle != null)
                 {
                     sxVehicle.CanInteract = false;
                 }
@@ -129,7 +128,7 @@ namespace GVRP.Module.Farming
                 {
                     FarmingModule.Instance.ProcessAmount[farmProcess] = farmProcess.RewardItemAmount * min.Value;
                 }
-                
+
             });
         }
 
@@ -145,7 +144,7 @@ namespace GVRP.Module.Farming
             if (farmProcess == null) return false;
 
             if (dbPlayer.Player.IsInVehicle) return false;
-            
+
             Container UsingContainer = dbPlayer.Container;
 
             if (!dbPlayer.CanInteract())
@@ -154,7 +153,7 @@ namespace GVRP.Module.Farming
                 return false;
             }
 
-            if(farmProcess.UseFromVehicle)
+            if (farmProcess.UseFromVehicle)
             {
                 MenuManager.Instance.Build(PlayerMenu.FarmProcessMenu, dbPlayer).Show(dbPlayer);
             }

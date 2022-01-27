@@ -1,5 +1,4 @@
 ﻿using GTANetworkAPI;
-using GVRP.Module.Chat;
 using GVRP.Module.FIB;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Swat;

@@ -1,11 +1,9 @@
-﻿using GTANetworkAPI;
+﻿using GVRP.Module.Configurations;
+using GVRP.Module.Players.Db;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Items
 {
@@ -75,7 +73,7 @@ namespace GVRP.Module.Items
             }
             return false;
         }
-        
+
         public ItemOrder AddDbOrder(int itemId, int itemAmount, int ownerId, int hours, int npcId)
         {
             MySQLHandler.Execute($"INSERT INTO `itemorder_orders` (`item_id`, `item_amount`, `owner_id`, `hours`, `npc_id`) VALUES " +

@@ -1,9 +1,4 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Module.Gangwar;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
@@ -11,6 +6,11 @@ using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
 using GVRP.Module.Teams.Shelter;
 using GVRP.Module.Weapons.Data;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Teamfight
 {

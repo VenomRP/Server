@@ -1,16 +1,8 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Menu;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
+using System.Linq;
 
 namespace GVRP.Module.NSA.Menu
 {
@@ -33,7 +25,7 @@ namespace GVRP.Module.NSA.Menu
 
                 l_Menu.Add($"{targetOne.Id} {targetOne.GetName()}");
             }
-            
+
             return l_Menu;
         }
 

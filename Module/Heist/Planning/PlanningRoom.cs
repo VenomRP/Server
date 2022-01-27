@@ -1,9 +1,4 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Module.Chat;
 using GVRP.Module.Items;
 using GVRP.Module.NpcSpawner;
@@ -12,6 +7,11 @@ using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
 using GVRP.Module.Schwarzgeld;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Heist.Planning
 {

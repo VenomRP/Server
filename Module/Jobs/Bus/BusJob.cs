@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using GTANetworkAPI;
+using System.Collections.Generic;
 using System.Linq;
-using GTANetworkAPI;
-using GVRP.Module.Spawners;
 
 namespace GVRP.Module.Jobs.Bus
 {
@@ -223,10 +222,10 @@ namespace GVRP.Module.Jobs.Bus
 
         public BusStop GetNearestStop(Vector3 position)
         {
-            return (from line   in lines
-                from stop in line.Value.Stops
-                where stop.Value.Position.DistanceTo(position) <= 2.0f
-                select stop.Value).FirstOrDefault();
+            return (from line in lines
+                    from stop in line.Value.Stops
+                    where stop.Value.Position.DistanceTo(position) <= 2.0f
+                    select stop.Value).FirstOrDefault();
         }
 
         public BusLine GetLine(int id)

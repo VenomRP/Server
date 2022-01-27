@@ -7,7 +7,7 @@ namespace GVRP.Module.Items.Scripts
     {
         public static bool Houserent(DbPlayer iPlayer, ItemModel ItemData)
         {
-            if(iPlayer.ownHouse[0] > 0)
+            if (iPlayer.ownHouse[0] > 0)
             {
                 if (iPlayer.HasData("houseId") && iPlayer.GetData("houseId") == iPlayer.ownHouse[0])
                 {

@@ -1,13 +1,8 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Chat;
-using GVRP.Module.Events.Halloween;
 using GVRP.Module.Players;
-
 using GVRP.Module.Players.Db;
-using GVRP.Module.Weapons.Data;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -25,7 +20,7 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.Container.RemoveAllFromSlot(slot);
 
             iPlayer.Player.TriggerEvent("freezePlayer", true);
-            
+
             iPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), "amb@prop_human_parking_meter@male@base", "base");
 
             iPlayer.SetData("userCannotInterrupt", true);
@@ -34,7 +29,7 @@ namespace GVRP.Module.Items.Scripts
 
             iPlayer.SetData("userCannotInterrupt", false);
             NAPI.Player.StopPlayerAnimation(iPlayer.Player);
-           
+
             iPlayer.Player.TriggerEvent("freezePlayer", false);
 
             iPlayer.GiveBlackMoney(amount);

@@ -1,6 +1,6 @@
 ﻿using GTANetworkAPI;
-using System.Collections.Generic;
 using GVRP.Module.Government;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Armory
 {
@@ -23,17 +23,17 @@ namespace GVRP.Module.Armory
 
         public int GetDefconRequiredRang()
         {
-            if(GovernmentModule.Defcon.Level == 3 && Defcon3Rang > 0)
+            if (GovernmentModule.Defcon.Level == 3 && Defcon3Rang > 0)
             {
-                return Defcon3Rang-1;
+                return Defcon3Rang - 1;
             }
             else if (GovernmentModule.Defcon.Level == 2 && Defcon2Rang > 0)
             {
-                return Defcon2Rang-1;
+                return Defcon2Rang - 1;
             }
             else if (GovernmentModule.Defcon.Level == 1 && Defcon1Rang > 0)
             {
-                return Defcon1Rang-1;
+                return Defcon1Rang - 1;
             }
 
             return RestrictedRang;

@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Chat;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Shops;
-using GVRP.Module.Teams;
+﻿using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Robbery
 {

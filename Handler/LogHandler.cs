@@ -1,5 +1,5 @@
-﻿using System;
-using MySql.Data.MySqlClient;
+﻿using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP
 {
@@ -42,7 +42,7 @@ namespace GVRP
             string p_ID = p_PlayerID.ToString() ?? "undefined";
             p_PlayerName = p_PlayerName ?? "undefined";
             p_FakeName = p_FakeName ?? "undefined";
-            
+
             string l_Query =
                 $"INSERT INTO `log_fakename` (`player_id`, `player_name`, `fake_name`) VALUES ('{MySqlHelper.EscapeString(p_ID)}', '{MySqlHelper.EscapeString(p_PlayerName)}', '{MySqlHelper.EscapeString(p_FakeName)}');";
 

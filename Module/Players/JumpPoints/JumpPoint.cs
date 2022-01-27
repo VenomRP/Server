@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Data;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
+using GVRP.Module.Doors;
+using GVRP.Module.Houses;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
-using GVRP.Module.Configurations;
-using GVRP.Module.Houses;
-using GVRP.Module.Doors;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Players.JumpPoints
 {
@@ -115,7 +113,7 @@ namespace GVRP.Module.Players.JumpPoints
                 player.Player.Dimension = Destination.Dimension;
                 player.DimensionType[0] = Destination.DimensionType;
 
-                if(Destination.Dimension != 0)
+                if (Destination.Dimension != 0)
                 {
                     if ((int)Destination.DimensionType == 10)
                     {
@@ -188,7 +186,7 @@ namespace GVRP.Module.Players.JumpPoints
                 }
                 else
                 {
-                    Main.m_AsyncThread.AddToAsyncThread(new Task(async() =>
+                    Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                     {
                         player.Player.TriggerEvent("freezePlayer", true);
                         vehicle.Rotation = new Vector3(0, 0, Destination.Heading);

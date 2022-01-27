@@ -1,18 +1,13 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
-using GVRP.Module.FIB;
-using GVRP.Module.Items;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Events;
 using GVRP.Module.Staatskasse;
 using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Crime
 {
@@ -26,7 +21,7 @@ namespace GVRP.Module.Crime
 
             string reporter = Cop.GetName();
 
-            if(crime.Jailtime <= 0) dbPlayer.SendNewNotification("Sie haben einen Strafzettel für " + crime.Name + " erhalten!");
+            if (crime.Jailtime <= 0) dbPlayer.SendNewNotification("Sie haben einen Strafzettel für " + crime.Name + " erhalten!");
 
             dbPlayer.AddCrimeLogical(reporter, new CrimePlayerReason(crime, notice));
         }
@@ -46,7 +41,7 @@ namespace GVRP.Module.Crime
                 notice = $"Beamter {reporter} am {DateTime.Now.ToString("dd/MM/yyyy")} um {DateTime.Now.ToString("HH:mm")} Uhr";
             }
             crime.Notice = notice;
-            
+
             dbPlayer.Crimes.Add(crime);
             dbPlayer.AddDbCrime(crime);
         }
@@ -67,9 +62,9 @@ namespace GVRP.Module.Crime
             dbPlayer.ResetDbCrimes();
             dbPlayer.UHaftTime = 0;
 
-            if(dbPlayer.TeamId != (int)teams.TEAM_FIB && !dbPlayer.IsNSA) Teams.TeamModule.Instance.SendChatMessageToDepartments($"{dbPlayer.GetName()} wurde die Akte {(officer != "" ? "von " + officer : "")} erlassen!");
+            if (dbPlayer.TeamId != (int)teams.TEAM_FIB && !dbPlayer.IsNSA) Teams.TeamModule.Instance.SendChatMessageToDepartments($"{dbPlayer.GetName()} wurde die Akte {(officer != "" ? "von " + officer : "")} erlassen!");
         }
-        
+
         private static void AddDbCrime(this DbPlayer iPlayer, CrimePlayerReason crime)
         {
             // Insert into DB
@@ -88,40 +83,40 @@ namespace GVRP.Module.Crime
 
         public static async Task LoadCrimes(this DbPlayer iPlayer)
         {
-            
-                iPlayer.Crimes.Clear();
 
-                // Loading Wanted for Player
-                using (var conn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
-                using (var cmd = conn.CreateCommand())
+            iPlayer.Crimes.Clear();
+
+            // Loading Wanted for Player
+            using (var conn = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
+            using (var cmd = conn.CreateCommand())
+            {
+                await conn.OpenAsync();
+                cmd.CommandText =
+                    $"SELECT crime_reason_id, notice FROM `player_crime` WHERE player_id = '{iPlayer.Id}';";
+                using (var reader = cmd.ExecuteReader())
                 {
-                    await conn.OpenAsync();
-                    cmd.CommandText =
-                        $"SELECT crime_reason_id, notice FROM `player_crime` WHERE player_id = '{iPlayer.Id}';";
-                    using (var reader = cmd.ExecuteReader())
+                    if (reader.HasRows)
                     {
-                        if (reader.HasRows)
+                        while (reader.Read())
                         {
-                            while (reader.Read())
-                            {
-                                var reason = CrimeReasonModule.Instance.Get(reader.GetUInt32("crime_reason_id"));
-                                if (reason == null) continue;
+                            var reason = CrimeReasonModule.Instance.Get(reader.GetUInt32("crime_reason_id"));
+                            if (reason == null) continue;
 
-                                string notice = reader.GetString("notice");
-                                iPlayer.Crimes.Add(new CrimePlayerReason(reason, notice));
-                            }
+                            string notice = reader.GetString("notice");
+                            iPlayer.Crimes.Add(new CrimePlayerReason(reason, notice));
                         }
                     }
-                    await conn.CloseAsync();
                 }
-            
+                await conn.CloseAsync();
+            }
+
         }
-        
+
         private static void ResetDbCrimes(this DbPlayer iPlayer)
         {
             MySQLHandler.ExecuteAsync($"DELETE FROM `player_crime` WHERE `player_id` = '{iPlayer.Id}'");
         }
-        
+
         public static void ArrestPlayer(this DbPlayer iPlayer, DbPlayer iPlayerCop, bool gestellt, bool SpawnPlayer = true)
         {
             var wanteds = iPlayer.wanteds[0];
@@ -138,7 +133,7 @@ namespace GVRP.Module.Crime
             }
 
             // Uhaft
-            if(iPlayer.UHaftTime > 0)
+            if (iPlayer.UHaftTime > 0)
             {
                 //Limit auf 60min
                 int uHaftJailTimeReverse = iPlayer.UHaftTime > 60 ? 60 : iPlayer.UHaftTime;
@@ -147,7 +142,7 @@ namespace GVRP.Module.Crime
                 iPlayer.jailtime[0] = iPlayer.jailtime[0] - uHaftJailTimeReverse <= 10 ? 10 : iPlayer.jailtime[0] - iPlayer.UHaftTime;
             }
 
-            if(gestellt)
+            if (gestellt)
             {
                 // Ziehe 20% ab
                 iPlayer.jailtime[0] -= iPlayer.jailtime[0] / 5;
@@ -156,11 +151,11 @@ namespace GVRP.Module.Crime
 
             string ListCrimes = "Sie wurden wegen folgenden Verbrechen Inhaftiert: ";
 
-            foreach(CrimePlayerReason crime in iPlayer.Crimes)
+            foreach (CrimePlayerReason crime in iPlayer.Crimes)
             {
                 ListCrimes += crime.Name + ",";
             }
-            
+
             iPlayer.RemoveAllCrimes();
             iPlayer.TempWanteds = 0;
 
@@ -181,7 +176,7 @@ namespace GVRP.Module.Crime
 
             TeamModule.Instance.SendChatMessageToDepartments("An Alle Einheiten, " + iPlayer.GetName() +
                 " sitzt nun hinter Gittern!");
-            
+
             iPlayer.SendNewNotification(ListCrimes);
 
             // Set Voice To Normal

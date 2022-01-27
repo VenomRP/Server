@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Business.Tasks;
+﻿using GVRP.Module.Business.Tasks;
 using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Tasks;
+using MySql.Data.MySqlClient;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Business
 {
@@ -25,7 +24,7 @@ namespace GVRP.Module.Business
         public BusinessBranch BusinessBranch { get; set; }
 
         public List<Banks.BankHistory.BankHistory> BankHistory { get; set; }
-        
+
         public string MessageOfTheDay { get; set; }
 
         public Business(MySqlDataReader reader) : base(reader)
@@ -41,12 +40,12 @@ namespace GVRP.Module.Business
             StorageKeys = new List<uint>();
             BankHistory = new List<Banks.BankHistory.BankHistory>();
         }
-        
+
         public override uint GetIdentifier()
         {
             return Id;
         }
-        
+
         public class Member
         {
             public uint BusinessId { get; set; }
@@ -60,7 +59,7 @@ namespace GVRP.Module.Business
             public bool Fuelstation { get; set; }
             public bool NightClub { get; set; }
             public bool Tattoo { get; set; }
-                       
+
             public Member()
             {
 
@@ -210,7 +209,7 @@ namespace GVRP.Module.Business
             MySQLHandler.ExecuteAsync(
                 $"UPDATE `business` SET name = '{MySqlHelper.EscapeString(Name)}' WHERE id = '{Id}'");
         }
-        
+
         public void ChangeMotd(string motd)
         {
             MessageOfTheDay = motd;

@@ -1,5 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Teams.Permission
 {

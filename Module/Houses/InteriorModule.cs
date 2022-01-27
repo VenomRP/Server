@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace GVRP.Module.Houses
+﻿namespace GVRP.Module.Houses
 {
     public sealed class InteriorModule : SqlModule<InteriorModule, Interior, uint>
     {

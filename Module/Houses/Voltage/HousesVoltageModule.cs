@@ -1,10 +1,7 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Module.Houses.Menu;
 using GVRP.Module.Menu;
+using System.Linq;
 
 namespace GVRP.Module.Houses
 {

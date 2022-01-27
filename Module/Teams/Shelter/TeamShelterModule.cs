@@ -1,12 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Gangwar;
+﻿using GTANetworkAPI;
 using GVRP.Module.GTAN;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Teams.Shelter
 {
@@ -28,7 +25,7 @@ namespace GVRP.Module.Teams.Shelter
         {
             return GetAll().Values.Where(t => t.Team.Id == teamId).FirstOrDefault();
         }
-        
+
         public override bool OnColShapeEvent(DbPlayer dbPlayer, ColShape colShape, ColShapeState colShapeState)
         {
             if (colShape.TryData("teamShelterMenuId", out uint teamShelterMenuId))
@@ -94,6 +91,6 @@ namespace GVRP.Module.Teams.Shelter
             }
             return null;
         }
-        
+
     }
 }

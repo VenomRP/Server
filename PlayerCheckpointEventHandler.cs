@@ -1,21 +1,15 @@
-﻿using System;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.GTAN;
+﻿using GTANetworkAPI;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
-
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Vehicles;
+using System;
 
 namespace GVRP
 {
     public class PlayerCheckpointEventHandler : Script
     {
         public static Random rnd = new Random();
-        
+
         [RemoteEvent]
         public void onPlayerEnterCheckpoint(Player client, object[] args)
         {
@@ -28,7 +22,7 @@ namespace GVRP
             OnPlayerEnterCheckpoint(player);
         }
 
-        public static void OnPlayerEnterCheckpoint(Player player) 
+        public static void OnPlayerEnterCheckpoint(Player player)
         {
             var iPlayer = player.GetPlayer();
 
@@ -50,7 +44,7 @@ namespace GVRP
             {
                 if (!iPlayer.Container.CanInventoryItemAdded(172))
                 {
-                    iPlayer.SendNewNotification( "Inventar ist voll!");
+                    iPlayer.SendNewNotification("Inventar ist voll!");
                     return;
                 }
 

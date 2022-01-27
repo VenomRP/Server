@@ -1,7 +1,5 @@
-﻿using System;
-using System.Linq;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Items
 {

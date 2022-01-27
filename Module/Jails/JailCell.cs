@@ -1,10 +1,6 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Module.Spawners;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Jails
 {
@@ -17,7 +13,7 @@ namespace GVRP.Module.Jails
         public int Group { get; set; }
 
         public JailSpawn JailSpawn { get; set; }
-        
+
         public JailCell(MySqlDataReader reader) : base(reader)
         {
             Id = reader.GetUInt32("id");

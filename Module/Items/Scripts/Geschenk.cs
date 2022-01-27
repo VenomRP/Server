@@ -1,6 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using GVRP.Module.Geschenk;
+﻿using GVRP.Module.Geschenk;
 using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Items.Scripts

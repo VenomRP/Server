@@ -43,7 +43,7 @@ namespace GVRP.Module.Menu.Menus.Heists.Planningroom
                     PlanningModule.Instance.StartVehiclePreQuest(iPlayer, heistId);
                     return true;
                 }
-                else if(index == 2)
+                else if (index == 2)
                 {
                     PlanningModule.Instance.StartOutfitPreQuest(iPlayer, heistId);
                     return true;

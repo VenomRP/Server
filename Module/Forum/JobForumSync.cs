@@ -1,7 +1,4 @@
-﻿using GVRP.Module.Configurations;
-using GVRP.Module.Players.Db;
-
-namespace GVRP.Module.Forum
+﻿namespace GVRP.Module.Forum
 {
     public sealed class JobForumSync : SqlModule<JobForumSync, JobForumSyncItem, uint>
     {

@@ -6,7 +6,7 @@ namespace GVRP.Module.Weapons.Component
     {
         public override System.Type[] RequiredModules()
         {
-            return new[] {typeof(WeaponDataModule), typeof(WeaponComponentModule)};
+            return new[] { typeof(WeaponDataModule), typeof(WeaponComponentModule) };
         }
 
         protected override string GetQuery()

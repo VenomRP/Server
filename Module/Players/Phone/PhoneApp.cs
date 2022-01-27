@@ -1,7 +1,6 @@
 ﻿using GTANetworkAPI;
-using System.Text.RegularExpressions;
 using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Players.Db;
+using System.Text.RegularExpressions;
 
 namespace GVRP.Module.Players.Phone
 {
@@ -12,7 +11,7 @@ namespace GVRP.Module.Players.Phone
         }
 
         [RemoteEvent]
-        public void requestPhoneContacts(Player player) 
+        public void requestPhoneContacts(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
@@ -28,7 +27,7 @@ namespace GVRP.Module.Players.Phone
             if (newNumber < 0 || newNumber > 99999999) return;
             if (!Regex.IsMatch(name, @"^[a-zA-Z0-9_#\s-]+$"))
             {
-                dbPlayer.SendNewNotification("Kontakt konnte nicht aktualisiert werden!", notificationType:PlayerNotification.NotificationType.ERROR);
+                dbPlayer.SendNewNotification("Kontakt konnte nicht aktualisiert werden!", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
             dbPlayer.PhoneContacts.Update((uint)oldNumber, (uint)newNumber, name);
@@ -42,7 +41,7 @@ namespace GVRP.Module.Players.Phone
             if (number < 0 || number > 99999999) return;
             if (!Regex.IsMatch(name, @"^[a-zA-Z0-9_#\s-]+$"))
             {
-                dbPlayer.SendNewNotification("Kontakt konnte nicht eingespeichert werden.", notificationType:PlayerNotification.NotificationType.ERROR);
+                dbPlayer.SendNewNotification("Kontakt konnte nicht eingespeichert werden.", notificationType: PlayerNotification.NotificationType.ERROR);
                 return;
             }
 

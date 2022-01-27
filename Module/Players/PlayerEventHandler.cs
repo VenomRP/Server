@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.AnimationMenu;
 using GVRP.Module.Attachments;
 using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Clothes;
 using GVRP.Module.Clothes.Props;
-using GVRP.Module.Clothes.Team;
 using GVRP.Module.Configurations;
-using GVRP.Module.Crime;
 using GVRP.Module.Injury;
 using GVRP.Module.Items;
 using GVRP.Module.Kasino;
@@ -27,12 +18,13 @@ using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.RemoteEvents;
 using GVRP.Module.Schwarzgeld;
-using GVRP.Module.Staatskasse;
 using GVRP.Module.Swat;
-using GVRP.Module.Teams;
-using GVRP.Module.Vehicles;
 using GVRP.Module.Weapons.Data;
-using static GVRP.AnimationContent;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Players
 {
@@ -137,21 +129,21 @@ namespace GVRP.Module.Players
 
             if (!dbPlayer.CanAccessRemoteEvent())
             {
-                dbPlayer.SendNewNotification( MSG.Error.NoPermissions());
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
                 return;
             }
 
             var destinationDbPlayer = destinationPlayer.GetPlayer();
             if (!destinationDbPlayer.IsValid()) return;
             if (destinationDbPlayer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 2.5f) return;
-            
+
             dbPlayer.SetData("giveitem", destinationDbPlayer.Id);
             ItemsModuleEvents.RequestInventory(client);
         }
 
         [RemoteEventPermission]
         [RemoteEvent]
-        public void requestPlayerKeys(Player client) 
+        public void requestPlayerKeys(Player client)
         {
             var dbPlayer = client.GetPlayer();
             if (!dbPlayer.CanAccessRemoteEvent()) return;
@@ -171,7 +163,7 @@ namespace GVRP.Module.Players
 
         [RemoteEventPermission]
         [RemoteEvent]
-        public void packblackmoney(Player client) 
+        public void packblackmoney(Player client)
         {
             var dbPlayer = client.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsTied || dbPlayer.IsCuffed || !dbPlayer.CanInteract()) return;
@@ -181,7 +173,7 @@ namespace GVRP.Module.Players
                 int blAmount = dbPlayer.blackmoney[0];
                 int freeSlots = dbPlayer.Container.GetInventoryFreeSlots();
                 int maxAddableAmount = freeSlots * ItemModelModule.Instance.GetById(SchwarzgeldModule.SchwarzgeldId).MaximumStacksize;
-                if(maxAddableAmount < blAmount)
+                if (maxAddableAmount < blAmount)
                 {
                     blAmount = maxAddableAmount;
                 }
@@ -204,15 +196,15 @@ namespace GVRP.Module.Players
                     dbPlayer.TakeBlackMoney(blAmount);
 
                     await Task.Delay(5000);
-                    
+
                     dbPlayer.Player.TriggerEvent("freezePlayer", false);
                     dbPlayer.ResetData("userCannotInterrupt");
                     NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
-                    
+
                     dbPlayer.Container.AddItem(SchwarzgeldModule.SchwarzgeldId, blAmount);
                     dbPlayer.SendNewNotification($"Du hast dein Schwarzgeld gepackt (${blAmount})!");
                 }));
-                
+
                 return;
             }
         }
@@ -229,7 +221,7 @@ namespace GVRP.Module.Players
             if (!destinationDbPlayer.IsValid()) return;
             if (destinationDbPlayer.Id == dbPlayer.Id) return;
             if (destinationDbPlayer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 2.5f) return;
-            
+
             if (destinationDbPlayer.isInjured() || destinationDbPlayer.IsCuffed)
             {
                 return;
@@ -242,27 +234,27 @@ namespace GVRP.Module.Players
                 // destinationDbPlayer.SetTied(false);
 
 
-                
+
                 Main.m_AsyncThread.AddToAsyncThread(new Task(async () =>
                 {
-                        dbPlayer.PlayAnimation(33, "mp_arresting", "a_uncuff");
-                        destinationDbPlayer.PlayAnimation(33, "mp_arresting", "b_uncuff");
-                        dbPlayer.Player.TriggerEvent("freezePlayer", true);
-                        destinationDbPlayer.Player.TriggerEvent("freezePlayer", true);
-                        await Task.Delay(4300);
+                    dbPlayer.PlayAnimation(33, "mp_arresting", "a_uncuff");
+                    destinationDbPlayer.PlayAnimation(33, "mp_arresting", "b_uncuff");
+                    dbPlayer.Player.TriggerEvent("freezePlayer", true);
+                    destinationDbPlayer.Player.TriggerEvent("freezePlayer", true);
+                    await Task.Delay(4300);
 
-                        dbPlayer.StopAnimation();
-                        destinationDbPlayer.StopAnimation();
-                        destinationDbPlayer.SetCuffed(false);
-                        destinationDbPlayer.SetTied(false);
-                        dbPlayer.Player.TriggerEvent("freezePlayer", false);
-                        destinationDbPlayer.Player.TriggerEvent("freezePlayer", false);
-                        destinationDbPlayer.Player.TriggerEvent("toggleShooting", false);
-                        dbPlayer.SendNewNotification("Sie haben jemanden entfesselt!");
-                        destinationDbPlayer.SendNewNotification("Jemand hat Sie entfesselt!");
-                     return;
+                    dbPlayer.StopAnimation();
+                    destinationDbPlayer.StopAnimation();
+                    destinationDbPlayer.SetCuffed(false);
+                    destinationDbPlayer.SetTied(false);
+                    dbPlayer.Player.TriggerEvent("freezePlayer", false);
+                    destinationDbPlayer.Player.TriggerEvent("freezePlayer", false);
+                    destinationDbPlayer.Player.TriggerEvent("toggleShooting", false);
+                    dbPlayer.SendNewNotification("Sie haben jemanden entfesselt!");
+                    destinationDbPlayer.SendNewNotification("Jemand hat Sie entfesselt!");
+                    return;
                 }));
-                
+
             }
             else
             {
@@ -313,7 +305,7 @@ namespace GVRP.Module.Players
                 // Cancel phone call when tied
                 //if (PhoneCall.IsPlayerInCall(destinationDbPlayer.Player))
                 //{
-                    //destinationDbPlayer.CancelPhoneCall();
+                //destinationDbPlayer.CancelPhoneCall();
                 //}
 
                 // send messages and /me animations
@@ -429,32 +421,32 @@ namespace GVRP.Module.Players
                         dbPlayer.SendNewNotification("Sie haben jemanden die Handschellen angelegt!");
                         destinationDbPlayer.SendNewNotification("Ein Beamter hat Ihnen die Handschellen angelegt!");
                     }));
-                        /*dbPlayer.PlayAnimation(33, "mp_arrest_paired", "cop_p2_back_right");
-                    destinationDbPlayer.PlayAnimation(33, "mp_arrest_paired", "crook_p2_back_right");
+                    /*dbPlayer.PlayAnimation(33, "mp_arrest_paired", "cop_p2_back_right");
+                destinationDbPlayer.PlayAnimation(33, "mp_arrest_paired", "crook_p2_back_right");
 
-                    Chats.sendProgressBar(dbPlayer, 4300);
-                    dbPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["revive"].Split()[0], Main.AnimationList["revive"].Split()[1]);
-                    dbPlayer.Player.TriggerEvent("freezePlayer", true);
-                    await Task.Delay(4300);
-                    //Console.WriteLine("kein aid license");
-                    if (dbPlayer.IsCuffed || dbPlayer.IsTied || dbPlayer.isInjured())
-                    {
-                        //Console.WriteLine("kein niga");
-                        dbPlayer.SendNewNotification("Stabilisierung fehlgeschlagen!");
-                        return;
-                    }
-                    dbPlayer.Player.TriggerEvent("freezePlayer", false);
-                    NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
+                Chats.sendProgressBar(dbPlayer, 4300);
+                dbPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["revive"].Split()[0], Main.AnimationList["revive"].Split()[1]);
+                dbPlayer.Player.TriggerEvent("freezePlayer", true);
+                await Task.Delay(4300);
+                //Console.WriteLine("kein aid license");
+                if (dbPlayer.IsCuffed || dbPlayer.IsTied || dbPlayer.isInjured())
+                {
+                    //Console.WriteLine("kein niga");
+                    dbPlayer.SendNewNotification("Stabilisierung fehlgeschlagen!");
+                    return;
+                }
+                dbPlayer.Player.TriggerEvent("freezePlayer", false);
+                NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
 
-                    // Cancel phone call when arrested
-                    if (PhoneCall.IsPlayerInCall(destinationDbPlayer.Player))
-                    {
-                        destinationDbPlayer.CancelPhoneCall();
-                    }
+                // Cancel phone call when arrested
+                if (PhoneCall.IsPlayerInCall(destinationDbPlayer.Player))
+                {
+                    destinationDbPlayer.CancelPhoneCall();
+                }
 
-                    destinationDbPlayer.SetCuffed(true);
-                    dbPlayer.SendNewNotification("Sie haben jemanden die Handschellen angelegt!");
-                    destinationDbPlayer.SendNewNotification("Ein Beamter hat Ihnen die Handschellen angelegt!");*/
+                destinationDbPlayer.SetCuffed(true);
+                dbPlayer.SendNewNotification("Sie haben jemanden die Handschellen angelegt!");
+                destinationDbPlayer.SendNewNotification("Ein Beamter hat Ihnen die Handschellen angelegt!");*/
                 }
             }
         }
@@ -473,7 +465,7 @@ namespace GVRP.Module.Players
 
             ItemsModuleEvents.resetFriskInventoryFlags(dbPlayer);
             ItemsModuleEvents.resetDisabledInventoryFlag(dbPlayer);
-            
+
             if (!destinationDbPlayer.IsCuffed && !destinationDbPlayer.IsTied && !destinationDbPlayer.isInjured())
             {
                 dbPlayer.SendNewNotification("Person ist nicht gefesselt", notificationType: PlayerNotification.NotificationType.ERROR);
@@ -525,7 +517,7 @@ namespace GVRP.Module.Players
 
             ItemsModuleEvents.resetFriskInventoryFlags(dbPlayer);
             ItemsModuleEvents.resetDisabledInventoryFlag(dbPlayer);
-            
+
             dbPlayer.SetData("friskInvUserID", destinationDbPlayer.Id);
             destinationDbPlayer.Container.ShowFriskInventory(dbPlayer, destinationDbPlayer, "Spieler", (destinationDbPlayer.money[0] + destinationDbPlayer.blackmoney[0]));
 
@@ -542,16 +534,16 @@ namespace GVRP.Module.Players
         {
             var dbPlayer = client.GetPlayer();
             if (!dbPlayer.CanAccessRemoteEvent()) return;
-            
+
             var destinationDbPlayer = destinationPlayer.GetPlayer();
             if (!destinationDbPlayer.IsValid()) return;
             if (destinationDbPlayer.Id == dbPlayer.Id) return;
             if (destinationDbPlayer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 2.5f) return;
-            
+
             if (client.IsInVehicle || destinationDbPlayer.Player.IsInVehicle)
             {
                 dbPlayer.SendNewNotification(
-                    
+
                     "Sie oder die Person duerfen nicht in einem Fahrzeug sein!");
                 return;
             }
@@ -572,8 +564,8 @@ namespace GVRP.Module.Players
                 destinationDbPlayer.SetCuffed(false);
                 destinationDbPlayer.SetData("follow", client.Name);
                 destinationDbPlayer.Player.TriggerEvent("toggleShooting", true);
-                destinationDbPlayer.PlayAnimation(AnimationScenarioType.Animation,"anim@move_m@prisoner_cuffed_rc","aim_low_loop", -1, true, AnimationLevels.UserCop,
-                    (int) (AnimationFlags.OnlyAnimateUpperBody | AnimationFlags.Loop |
+                destinationDbPlayer.PlayAnimation(AnimationScenarioType.Animation, "anim@move_m@prisoner_cuffed_rc", "aim_low_loop", -1, true, AnimationLevels.UserCop,
+                    (int)(AnimationFlags.OnlyAnimateUpperBody | AnimationFlags.Loop |
                            AnimationFlags.AllowPlayerControl), true);
             }
             else
@@ -650,21 +642,21 @@ namespace GVRP.Module.Players
                         return;
                     }
 
-                        dbPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl),
-                            Main.AnimationList["revive"].Split()[0], Main.AnimationList["revive"].Split()[1]);
-                        dbPlayer.Player.TriggerEvent("freezePlayer", true);
-                        if (dbPlayer.IsAGangster())
-                        {
-                            Chats.sendProgressBar(dbPlayer, 15000);
-                            await Task.Delay(15000);
-                        }
-                        else
-                        {
-                            Chats.sendProgressBar(dbPlayer, 9000);
-                            await Task.Delay(9000);
-                        }
-                        dbPlayer.Player.TriggerEvent("freezePlayer", false);
-                        NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
+                    dbPlayer.PlayAnimation((int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl),
+                        Main.AnimationList["revive"].Split()[0], Main.AnimationList["revive"].Split()[1]);
+                    dbPlayer.Player.TriggerEvent("freezePlayer", true);
+                    if (dbPlayer.IsAGangster())
+                    {
+                        Chats.sendProgressBar(dbPlayer, 15000);
+                        await Task.Delay(15000);
+                    }
+                    else
+                    {
+                        Chats.sendProgressBar(dbPlayer, 9000);
+                        await Task.Delay(9000);
+                    }
+                    dbPlayer.Player.TriggerEvent("freezePlayer", false);
+                    NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
 
                     //ToDo: Make player walk injured for some time
                     destinationDbPlayer.revive();
@@ -820,40 +812,40 @@ namespace GVRP.Module.Players
         [RemoteEvent]
         public async void computerCheck(Player player, int type)
         {
-            
-                var dbPlayer = player.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                if (!dbPlayer.CanInteract()) return;
-                if (dbPlayer.IsInAnimation()) return;
+
+            var dbPlayer = player.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+            if (!dbPlayer.CanInteract()) return;
+            if (dbPlayer.IsInAnimation()) return;
 
             // Kein Cop kein Reg Rang 9 und kein Laptop
 
-                if (type == 1)
-                {
+            if (type == 1)
+            {
                 if (dbPlayer.Container.GetItemAmount(173) < 1)
                 {
-                    
+
                     return;
                 }
                 if (!player.IsInVehicle)
-                    {
-                        NAPI.Player.PlayPlayerAnimation(player, (int)(AnimationFlags.Loop | AnimationFlags.OnlyAnimateUpperBody | AnimationFlags.AllowPlayerControl), "amb@code_human_in_bus_passenger_idles@female@tablet@idle_a", "idle_a");
-                    }
-
-                    player.TriggerEvent("openComputer");
-                }
-                else
                 {
-                    if (dbPlayer.RankId == 1 || dbPlayer.RankId == 2 || dbPlayer.RankId == 3 || dbPlayer.RankId == 4 || dbPlayer.RankId == 5 || dbPlayer.RankId == 6 || dbPlayer.RankId == 8 || dbPlayer.RankId == 11)
-                    {
-                        player.TriggerEvent("openIpad");
-                    }
+                    NAPI.Player.PlayPlayerAnimation(player, (int)(AnimationFlags.Loop | AnimationFlags.OnlyAnimateUpperBody | AnimationFlags.AllowPlayerControl), "amb@code_human_in_bus_passenger_idles@female@tablet@idle_a", "idle_a");
                 }
-            
+
+                player.TriggerEvent("openComputer");
+            }
+            else
+            {
+                if (dbPlayer.RankId == 1 || dbPlayer.RankId == 2 || dbPlayer.RankId == 3 || dbPlayer.RankId == 4 || dbPlayer.RankId == 5 || dbPlayer.RankId == 6 || dbPlayer.RankId == 8 || dbPlayer.RankId == 11)
+                {
+                    player.TriggerEvent("openIpad");
+                }
+            }
+
         }
 
         [RemoteEvent]
-        public  void closeComputer(Player player, uint type)
+        public void closeComputer(Player player, uint type)
         {
             Main.m_AsyncThread.AddToAsyncThread(new Task(() =>
             {
@@ -879,41 +871,41 @@ namespace GVRP.Module.Players
         [RemoteEvent]
         public async void REQUEST_PEDS_PLAYER_SHOW_LIC(Player client, Player destinationPlayer)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.CanAccessRemoteEvent()) return;
-                var destinationDbPlayer = destinationPlayer.GetPlayer();
-                if (!destinationDbPlayer.IsValid()) return;
-                if (destinationDbPlayer.Id == dbPlayer.Id) return;
-                if (destinationDbPlayer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 12f) return;
 
-                dbPlayer.ShowLicenses(destinationPlayer);
-                dbPlayer.SendNewNotification(
-                    "Sie haben Ihre Lizenzen gezeigt!");
-            
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.CanAccessRemoteEvent()) return;
+            var destinationDbPlayer = destinationPlayer.GetPlayer();
+            if (!destinationDbPlayer.IsValid()) return;
+            if (destinationDbPlayer.Id == dbPlayer.Id) return;
+            if (destinationDbPlayer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 12f) return;
+
+            dbPlayer.ShowLicenses(destinationPlayer);
+            dbPlayer.SendNewNotification(
+                "Sie haben Ihre Lizenzen gezeigt!");
+
         }
 
         [RemoteEventPermission]
         [RemoteEvent]
         public async void REQUEST_PEDS_PLAYER_TAKE_LIC(Player client, Player destinationPlayer)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (!dbPlayer.CanAccessRemoteEvent()) return;
 
-                if (!dbPlayer.IsACop() || !dbPlayer.Duty) return;
+            var dbPlayer = client.GetPlayer();
+            if (!dbPlayer.CanAccessRemoteEvent()) return;
 
-                var destinationDbPlayer = destinationPlayer.GetPlayer();
-                if (!destinationDbPlayer.IsValid()) return;
-                if (destinationDbPlayer.Id == dbPlayer.Id) return;
-                if (destinationDbPlayer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 12f) return;
+            if (!dbPlayer.IsACop() || !dbPlayer.Duty) return;
 
-                if (!destinationDbPlayer.IsCuffed && !destinationDbPlayer.IsTied) return;
+            var destinationDbPlayer = destinationPlayer.GetPlayer();
+            if (!destinationDbPlayer.IsValid()) return;
+            if (destinationDbPlayer.Id == dbPlayer.Id) return;
+            if (destinationDbPlayer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 12f) return;
 
-                destinationDbPlayer.ShowLicenses(client);
-                dbPlayer.SendNewNotification("Sie haben sich die Lizenzen genommen!");
-                destinationDbPlayer.SendNewNotification("Ein Beamter hat sich Ihre Lizenzen genommen!");
-            
+            if (!destinationDbPlayer.IsCuffed && !destinationDbPlayer.IsTied) return;
+
+            destinationDbPlayer.ShowLicenses(client);
+            dbPlayer.SendNewNotification("Sie haben sich die Lizenzen genommen!");
+            destinationDbPlayer.SendNewNotification("Ein Beamter hat sich Ihre Lizenzen genommen!");
+
         }
 
 
@@ -922,24 +914,24 @@ namespace GVRP.Module.Players
         [RemoteEvent]
         public async void Indicator(Player player, int indicator)
         {
-            
-                var dbPlayer = player.GetPlayer();
-                if (!dbPlayer.CanAccessRemoteEvent()) return;
-                if (!player.IsInVehicle) return;
-                if (!player.Vehicle.HasSharedData("INDICATOR_" + indicator))
-                {
-                    player.Vehicle.SetSharedData("INDICATOR_" + indicator, true);
-                }
-                else
-                {
-                    player.Vehicle.ResetSharedData("INDICATOR_" + indicator);
-                }
-            
+
+            var dbPlayer = player.GetPlayer();
+            if (!dbPlayer.CanAccessRemoteEvent()) return;
+            if (!player.IsInVehicle) return;
+            if (!player.Vehicle.HasSharedData("INDICATOR_" + indicator))
+            {
+                player.Vehicle.SetSharedData("INDICATOR_" + indicator, true);
+            }
+            else
+            {
+                player.Vehicle.ResetSharedData("INDICATOR_" + indicator);
+            }
+
         }
 
         [RemoteEventPermission]
         [RemoteEvent]
-        public void Siren(Player player) 
+        public void Siren(Player player)
         {
             Main.m_AsyncThread.AddToAsyncThread(new Task(() =>
             {
@@ -958,7 +950,7 @@ namespace GVRP.Module.Players
         }
 
         [RemoteEvent]
-        public async Task Pressed_E(Player player) 
+        public async Task Pressed_E(Player player)
         {
             Console.WriteLine(player.Name + "Pressed_E");
 
@@ -973,9 +965,9 @@ namespace GVRP.Module.Players
 
             await Main.TriggerPlayerPoint(dbPlayer);
         }
-        
+
         [RemoteEvent]
-        public void Pressed_H(Player player) 
+        public void Pressed_H(Player player)
         {
 
             var dbPlayer = player.GetPlayer();
@@ -999,17 +991,17 @@ namespace GVRP.Module.Players
         }
 
         [RemoteEvent]
-        public void Pressed_M(Player player) 
+        public void Pressed_M(Player player)
         {
             try
             {
                 if (player == null) return;
                 var dbPlayer = player.GetPlayer();
                 if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.Character == null || dbPlayer.Character.Clothes == null) return;
-                
+
                 if (dbPlayer.IsInAdminDuty() || dbPlayer.jailtime[0] > 0) return;
 
-               MenuManager.Instance.Build(PlayerMenu.MobileClothMenu, dbPlayer)?.Show(dbPlayer);
+                MenuManager.Instance.Build(PlayerMenu.MobileClothMenu, dbPlayer)?.Show(dbPlayer);
             }
             catch (Exception e)
             {
@@ -1018,16 +1010,16 @@ namespace GVRP.Module.Players
         }
 
         [RemoteEvent]
-        public void Pressed_T(Player player) 
+        public void Pressed_T(Player player)
         {
             if (player == null) return;
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
             ComponentManager.Get<ChatWindow>().Show()(dbPlayer);
         }
-        
+
         [RemoteEvent]
-        public void Pressed_L(Player player) 
+        public void Pressed_L(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
@@ -1035,7 +1027,7 @@ namespace GVRP.Module.Players
         }
 
         [RemoteEvent]
-        public void Pressed_K(Player player) 
+        public void Pressed_K(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
@@ -1043,7 +1035,7 @@ namespace GVRP.Module.Players
 
 
         [RemoteEvent]
-        public void Pressed_J(Player player) 
+        public void Pressed_J(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
@@ -1051,7 +1043,7 @@ namespace GVRP.Module.Players
         }
 
         [RemoteEvent]
-        public async Task Pressed_KOMMA(Player player) 
+        public async Task Pressed_KOMMA(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsCuffed || dbPlayer.IsTied) return;
@@ -1060,7 +1052,7 @@ namespace GVRP.Module.Players
         }
 
         [RemoteEvent]
-        public async Task Pressed_PUNKT(Player player) 
+        public async Task Pressed_PUNKT(Player player)
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsCuffed || dbPlayer.IsTied) return;
@@ -1111,12 +1103,12 @@ namespace GVRP.Module.Players
                 AttachmentModule.Instance.SerializeAttachments(dbPlayer),
                 JsonConvert.SerializeObject(clothesToSync));
         }
-        
+
         [RemoteEventPermission(AllowedDeath = false, AllowedOnCuff = false, AllowedOnTied = false)]
         [RemoteEvent]
         public async void Keks(Player player, bool state)
         {
-            
+
             DbPlayer iPlayer = player.GetPlayer();
             if (iPlayer == null) return;
             if (!iPlayer.CanAccessRemoteEvent()) return;
@@ -1124,14 +1116,15 @@ namespace GVRP.Module.Players
             if (player.IsReloading) return;
             if (iPlayer.IsInAnimation()) return;
 
-            if (iPlayer.Container.GetItemAmount(174) < 1) {              
-                    return;
+            if (iPlayer.Container.GetItemAmount(174) < 1)
+            {
+                return;
             }
 
 
 
             if (state && !player.IsInVehicle)
-            {						
+            {
                 NAPI.Player.PlayPlayerAnimation(iPlayer.Player, (int)(AnimationFlags.Loop | AnimationFlags.OnlyAnimateUpperBody | AnimationFlags.AllowPlayerControl), "amb@world_human_stand_mobile@male@text@idle_a", "idle_a");
             }
             if (!state && !player.IsInVehicle)
@@ -1139,64 +1132,64 @@ namespace GVRP.Module.Players
                 NAPI.Player.StopPlayerAnimation(iPlayer.Player);
             }
 
-                //Call remote trigger phone
+            //Call remote trigger phone
             player.TriggerEvent("hatNudeln", state);
-            
+
         }
 
         [RemoteEventPermission]
         [RemoteEvent]
-        public async void changeVoiceRange(Player player) 
+        public async void changeVoiceRange(Player player)
         {
-            
-                var iPlayer = player.GetPlayer();
-                if (iPlayer == null) return;
 
-                // 1 = normal, 2 = whisper, 3 = schreien 4 (optional) = mega
-                // 
+            var iPlayer = player.GetPlayer();
+            if (iPlayer == null) return;
 
-                int voicetype = 1;
-                if (iPlayer.HasData("voiceType"))
-                {
-                    voicetype = iPlayer.GetData("voiceType");
-                }
+            // 1 = normal, 2 = whisper, 3 = schreien 4 (optional) = mega
+            // 
 
-                if (iPlayer.jailtime[0] > 0) return; // in jail ignore it...
+            int voicetype = 1;
+            if (iPlayer.HasData("voiceType"))
+            {
+                voicetype = iPlayer.GetData("voiceType");
+            }
 
-                if (voicetype == 1)
+            if (iPlayer.jailtime[0] > 0) return; // in jail ignore it...
+
+            if (voicetype == 1)
+            {
+                player.SetSharedData("voiceRange", (int)VoiceRange.shout);
+                iPlayer.SetData("voiceType", 2);
+                player.TriggerEvent("setVoiceType", 2);
+            }
+            else if (voicetype == 2)
+            {
+                player.SetSharedData("voiceRange", (int)VoiceRange.whisper);
+                iPlayer.SetData("voiceType", 3);
+                player.TriggerEvent("setVoiceType", 3);
+            }
+            else if (voicetype == 3)
+            {
+                if (iPlayer.CanUseMegaphone())
                 {
-                    player.SetSharedData("voiceRange", (int)VoiceRange.shout);
-                    iPlayer.SetData("voiceType", 2);
-                    player.TriggerEvent("setVoiceType", 2);
+                    player.SetSharedData("voiceRange", (int)VoiceRange.megaphone);
+                    iPlayer.SetData("voiceType", 4);
+                    player.TriggerEvent("setVoiceType", 4);
                 }
-                else if (voicetype == 2)
-                {
-                    player.SetSharedData("voiceRange", (int)VoiceRange.whisper);
-                    iPlayer.SetData("voiceType", 3);
-                    player.TriggerEvent("setVoiceType", 3);
-                }
-                else if (voicetype == 3)
-                {
-                    if (iPlayer.CanUseMegaphone())
-                    {
-                        player.SetSharedData("voiceRange", (int)VoiceRange.megaphone);
-                        iPlayer.SetData("voiceType", 4);
-                        player.TriggerEvent("setVoiceType", 4);
-                    }
-                    else
-                    {
-                        player.SetSharedData("voiceRange", (int)VoiceRange.normal);
-                        iPlayer.SetData("voiceType", 1);
-                        player.TriggerEvent("setVoiceType", 1);
-                    }
-                }
-                else if (voicetype == 4)
+                else
                 {
                     player.SetSharedData("voiceRange", (int)VoiceRange.normal);
                     iPlayer.SetData("voiceType", 1);
                     player.TriggerEvent("setVoiceType", 1);
                 }
-            
+            }
+            else if (voicetype == 4)
+            {
+                player.SetSharedData("voiceRange", (int)VoiceRange.normal);
+                iPlayer.SetData("voiceType", 1);
+                player.TriggerEvent("setVoiceType", 1);
+            }
+
         }
     }
 }

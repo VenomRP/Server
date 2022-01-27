@@ -1,5 +1,4 @@
 ﻿using System;
-using GVRP.Module.Assets.Tattoo;
 
 namespace GVRP.Module.AnimationMenu
 {

@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Items.Scripts.Presents;
+﻿using GVRP.Module.Items.Scripts.Presents;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -19,7 +18,7 @@ namespace GVRP.Module.Items.Scripts
 
             List<Present> presents = PresentModule.Instance.GetByItemId(ItemData.Id);
 
-            if(presents.Count > 0)
+            if (presents.Count > 0)
             {
                 Present ResultPresent = presents[new Random().Next(presents.Count)];
                 ItemModel Result = ResultPresent.ResultItem;
@@ -29,7 +28,7 @@ namespace GVRP.Module.Items.Scripts
                 iPlayer.SendNewNotification("Du hast ein " + ItemData.Name + " geoeffnet und " + Result.Name + " erhalten!");
                 return true;
             }
-            
+
             // RefreshInventory
             return false;
         }

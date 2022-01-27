@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using GVRP.Module.GTAN;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
 using GVRP.Module.Spawners;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Jobs
 {

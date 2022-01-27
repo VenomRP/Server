@@ -1,15 +1,7 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Linq;
-using GVRP.Module.Armory;
-using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
+﻿using GVRP.Module.Armory;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Staatskasse;
-using GVRP.Module.Weapons.Component;
-using GVRP.Module.Weapons.Data;
 
 namespace GVRP
 {

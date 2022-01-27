@@ -1,10 +1,7 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.NpcSpawner;
 using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Text;
-using GVRP.Module.NpcSpawner;
 
 namespace GVRP.Module.Workstation
 {
@@ -67,7 +64,7 @@ namespace GVRP.Module.Workstation
             // Optional
             if (FuelItemId != 0) NAPI.Marker.CreateMarker(25, (FuelPosition - new Vector3(0f, 0f, 0.95f)), new Vector3(), new Vector3(), 1f, new Color(0, 255, 0, 155), true, Dimension);
         }
-        
+
         public override uint GetIdentifier()
         {
             return Id;

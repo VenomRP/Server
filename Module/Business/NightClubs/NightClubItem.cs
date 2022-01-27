@@ -1,5 +1,5 @@
-﻿using MySql.Data.MySqlClient;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Business.NightClubs
 {

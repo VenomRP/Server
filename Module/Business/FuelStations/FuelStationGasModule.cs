@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace GVRP.Module.Business.FuelStations
+﻿namespace GVRP.Module.Business.FuelStations
 {
     public class FuelStationGasModule : SqlModule<FuelStationGasModule, FuelStationGas, uint>
     {

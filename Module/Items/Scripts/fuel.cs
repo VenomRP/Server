@@ -1,5 +1,4 @@
 ﻿using GVRP.Handler;
-using GVRP.Module.Chat;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.PlayerAnimations;
@@ -18,7 +17,7 @@ namespace GVRP.Module.Items.Scripts
 
             if (closestVehicle.SyncExtension.Locked)
             {
-                iPlayer.SendNewNotification( "Das Fahrzeug muss zum Tanken aufgeschlossen sein!", title: "Fahrzeug", notificationType: PlayerNotification.NotificationType.ERROR);
+                iPlayer.SendNewNotification("Das Fahrzeug muss zum Tanken aufgeschlossen sein!", title: "Fahrzeug", notificationType: PlayerNotification.NotificationType.ERROR);
                 return false;
             }
             if (closestVehicle.fuel < closestVehicle.Data.Fuel)

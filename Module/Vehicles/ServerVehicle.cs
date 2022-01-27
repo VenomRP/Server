@@ -16,14 +16,14 @@ namespace GVRP.Module.Vehicles
 
         public bool IsJobVehicle(int jobId = 0)
         {
-            return this is JobVehicle && jobId == 0 || jobId == ((JobVehicle) this).JobId;
+            return this is JobVehicle && jobId == 0 || jobId == ((JobVehicle)this).JobId;
         }
 
         public bool IsTeamVehicle()
         {
             return this is TeamVehicle;
         }
-        
+
         public virtual void Death()
         {
             Vehicle.SafeDelete();

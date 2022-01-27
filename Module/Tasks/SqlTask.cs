@@ -1,7 +1,7 @@
-﻿using System;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
+using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Tasks
 {

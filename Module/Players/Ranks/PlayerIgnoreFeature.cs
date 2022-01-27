@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Players.Ranks
 {

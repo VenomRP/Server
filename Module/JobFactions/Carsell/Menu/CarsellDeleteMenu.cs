@@ -1,19 +1,9 @@
-﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
 using GVRP.Module.Vehicles.Data;
+using MySql.Data.MySqlClient;
 
 namespace GVRP.Module.Carsell.Menu
 {
@@ -42,7 +32,7 @@ namespace GVRP.Module.Carsell.Menu
                         {
                             VehicleData vehData = VehicleDataModule.Instance.GetDataById(reader.GetUInt32("model"));
                             if (vehData == null) continue;
-                            
+
                             l_Menu.Add($"{(vehData.mod_car_name.Length <= 0 ? vehData.Model : vehData.mod_car_name)}");
                         }
                     }
@@ -62,7 +52,7 @@ namespace GVRP.Module.Carsell.Menu
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     MenuManager.DismissCurrent(iPlayer);
                     return true;
@@ -83,7 +73,7 @@ namespace GVRP.Module.Carsell.Menu
                             {
                                 VehicleData vehData = VehicleDataModule.Instance.GetDataById(reader.GetUInt32("model"));
                                 if (vehData == null) continue;
-                                
+
                                 if (index == idx)
                                 {
                                     if (reader.GetInt32("inGarage") == 0)

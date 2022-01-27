@@ -1,17 +1,16 @@
 ﻿
-using MySql.Data.MySqlClient;
-using System.Collections.Generic;
 using GTANetworkAPI;
 using GVRP.Module;
 using GVRP.Module.Configurations;
 using GVRP.Module.Houses;
+using GVRP.Module.Items;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.PlayerTask;
-using GVRP.Module.Vehicles.Garages;
-using GVRP.Module.Items;
-using System;
 using GVRP.Module.Schwarzgeld;
-using GVRP.Module.Logging;
+using GVRP.Module.Vehicles.Garages;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace GVRP
@@ -46,7 +45,7 @@ namespace GVRP
         public float TrashAmount { get; set; }
 
         public int BLAmount { get; set; }
-        
+
         public bool IsDimensionNullHouse { get; set; }
         public Container BlackMoneyInvContainer { get; set; }
         public Container BlackMoneyCodeContainer { get; set; }
@@ -111,10 +110,10 @@ namespace GVRP
             if (HouseRentModule.Instance.houseRents.ToList().Where(hm => hm.HouseId == Id).Count() < Maxrents)
             {
                 List<HouseRent> thisHouseRents = HouseRentModule.Instance.houseRents.Where(hm => hm.HouseId == Id).ToList();
-                for(int i = 1; i < Maxrents+1; i++)
+                for (int i = 1; i < Maxrents + 1; i++)
                 {
                     HouseRent xRent = thisHouseRents.Where(h => h.SlotId == i).FirstOrDefault();
-                    if(xRent == null) // Not found? Anlegen...
+                    if (xRent == null) // Not found? Anlegen...
                     {
                         this.AddCleanTenant(i, 0);
                     }
@@ -132,7 +131,7 @@ namespace GVRP
     //Todo: move to House class instead of extension functions
     public static class HouseFunctions
     {
-      
+
         public static void SaveTrash(this House house)
         {
             var query = string.Format($"UPDATE `houses` SET trash_amount = '{house.TrashAmount}' WHERE `id` = '{house.Id}';");
@@ -174,7 +173,7 @@ namespace GVRP
             var query = $"UPDATE `houses` SET interiorid = '{house.Interior.Id}' WHERE `id` = '{house.Id}';";
             MySQLHandler.ExecuteAsync(query);
         }
-        
+
         public static void SaveGarage(this House house)
         {
             var query = string.Format(
@@ -243,7 +242,7 @@ namespace GVRP
         {
             // Build Keller
             if (iHouse.GarageId != 0) return false;
-            
+
             return iHouse.Container.GetItemAmount(312) >= 50 && iHouse.Container.GetItemAmount(310) >= 100;
         }
 
@@ -256,12 +255,12 @@ namespace GVRP
             iHouse.Garage = GarageModule.Instance.GetHouseGarage(iHouse.GarageId);
             iHouse.SaveGarage();
         }
-        
+
         public static bool CanKellerUpgraded(this House iHouse)
         {
             // Build Keller
             if (iHouse.Keller != 1) return false;
-            
+
             return iHouse.Container.GetItemAmount(312) >= 40 && iHouse.Container.GetItemAmount(310) >= 100;
         }
 
@@ -273,7 +272,7 @@ namespace GVRP
 
             iPlayer.AddTask(PlayerTaskTypeId.LaborAusbau);
         }
-        
+
         public static int GetFreeRents(this House house)
         {
             return house.Maxrents - HouseRentModule.Instance.houseRents.Where(hr => hr.HouseId == house.Id && hr.PlayerId != 0).Count();

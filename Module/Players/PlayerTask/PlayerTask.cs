@@ -1,9 +1,8 @@
-﻿using System;
-using GVRP.Module.Configurations;
-using GVRP.Module.Houses;
+﻿using GVRP.Module.Houses;
 using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles.Data;
+using System;
 
 namespace GVRP.Module.Players.PlayerTask
 {
@@ -36,7 +35,7 @@ namespace GVRP.Module.Players.PlayerTask
                     return;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Logger.Crash(e);
                 return;

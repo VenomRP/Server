@@ -1,22 +1,18 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
+using GVRP.Handler;
+using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Chat;
-using System.Threading.Tasks;
-using GVRP.Module.Teams;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Gangwar;
 using GVRP.Module.Spawners;
-using GVRP.Module.Injury;
-using GVRP.Module.Teams.Shelter;
+using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Laboratories
 {
@@ -68,14 +64,14 @@ namespace GVRP.Module.Laboratories
                 ActValue = actValue;
             }
         }
-        
+
         public class Production
         {
             public List<uint> NeededItems { get; set; }
             public List<uint> EndProducts { get; set; }
             public uint MinEndProduct { get; set; }
             public uint MaxEndProduct { get; set; }
-          
+
             public Production(List<uint> neededItems, List<uint> endProducts, uint minEndProduct, uint maxEndProduct, float smellrangePerPlayer = 2.0f, float smellRangeOffset = 0.0f)
             {
                 NeededItems = neededItems;
@@ -112,7 +108,7 @@ namespace GVRP.Module.Laboratories
                 new Parameter("Ruehrgeschwindigkeit", "U/min", 1.0f, 300.0f, reader.GetFloat("ruehrgeschwindigkeit")),
                 new Parameter("Menge", "Stück", 5.0f, 15.0f, reader.GetFloat("menge")),
             };
-                        
+
             int DestinationId = reader.GetInt32("destination_id");
             Random rnd = new Random();
             List<JumpPoint> jumpPoints = JumpPointModule.Instance.jumpPoints.Values.Where(jumppoint => jumppoint.DestinationId == DestinationId && jumppoint.Id != DestinationId).ToList();
@@ -133,7 +129,7 @@ namespace GVRP.Module.Laboratories
                 {
                     NAPI.Task.Run(() =>
                     {
-                        if(jumpPoint != null)
+                        if (jumpPoint != null)
                         {
                             if (jumpPoint.ColShape != null)
                             {
@@ -156,7 +152,7 @@ namespace GVRP.Module.Laboratories
             ColShape.SetData("methInteriorColshape", this.TeamId);
 
             bool ready = true;
-            
+
             ReadyToStart = ready;
             Hacked = false;
             HackInProgess = false;
@@ -181,7 +177,7 @@ namespace GVRP.Module.Laboratories
             }*/
             int menge = 10;
 
-            foreach (uint itemId in  LabProduction.NeededItems)
+            foreach (uint itemId in LabProduction.NeededItems)
             {
                 if (dbPlayer.MethlaboratoryInputContainer.GetItemAmount(itemId) < menge)
                 {
@@ -190,7 +186,7 @@ namespace GVRP.Module.Laboratories
                     return;
                 }
                 uint fuelAmount = (uint)FuelContainer.GetItemAmount(MethlaboratoryModule.FuelItemId);
-                if(fuelAmount < MethlaboratoryModule.FuelAmountPerProcessing)
+                if (fuelAmount < MethlaboratoryModule.FuelAmountPerProcessing)
                 {
                     dbPlayer.SendNewNotification("Es fehlt Kraftstoff...");
                     StopProcess(dbPlayer);
@@ -227,7 +223,7 @@ namespace GVRP.Module.Laboratories
             int QualityRange1 = Convert.ToInt32((SumMax - SumMin) * 0.04); // 8 % 
             int QualityRange2 = Convert.ToInt32((SumMax - SumMin) * 0.10); // 20 % 
             int QualityRange3 = Convert.ToInt32((SumMax - SumMin) * 0.20); // 40 % 
-            
+
             if (Math.Abs(SumActual - CalculatedValue) <= QualityRange1) Quality = 0.99; // Best
             else if (Math.Abs(SumActual - CalculatedValue) > QualityRange1 && Math.Abs(SumActual - CalculatedValue) <= QualityRange2) Quality = 0.8; // Good
             else if (Math.Abs(SumActual - CalculatedValue) > QualityRange2 && Math.Abs(SumActual - CalculatedValue) <= QualityRange3) Quality = 0.7; // Normal
@@ -274,7 +270,7 @@ namespace GVRP.Module.Laboratories
                 quality = 0.01;
                 itemId = 726;
             }
-            else if(quality > 1)
+            else if (quality > 1)
             {
                 quality = 1;
             }
@@ -303,10 +299,10 @@ namespace GVRP.Module.Laboratories
             }
             foreach (uint itemId in LabProduction.NeededItems)
                 dbPlayer.MethlaboratoryInputContainer.RemoveItem(itemId, (int)menge);
-            
+
             GivePlayerItem(dbPlayer, Quality);
         }
-       
+
         private void ReloadInterior(DbPlayer dbPlayer)
         {
             int boilerState = 2;
@@ -384,7 +380,7 @@ namespace GVRP.Module.Laboratories
                     return false;
                 }
             }
-            if(!MethlaboratoryModule.Instance.CanMethLaboratyRaided(this, dbPlayer))
+            if (!MethlaboratoryModule.Instance.CanMethLaboratyRaided(this, dbPlayer))
             {
                 dbPlayer.SendNewNotification("Hier scheint nichts los zu sein...");
                 return false;
@@ -408,7 +404,7 @@ namespace GVRP.Module.Laboratories
             }
             dbPlayer.Player.TriggerEvent("freezePlayer", false);
             NAPI.Player.StopPlayerAnimation(dbPlayer.Player);
-            
+
             dbPlayer.SendNewNotification("Labor erfolgreich gehackt...");
 
             if (ProzessingPlayers.Count() > 0) ProzessingPlayers.Clear();
@@ -424,7 +420,7 @@ namespace GVRP.Module.Laboratories
             return true;
 
         }
-        
+
         public async Task<bool> FriskMethlaboratory(DbPlayer dbPlayer)
         {
             if (dbPlayer.TeamId == 0)
@@ -510,7 +506,7 @@ namespace GVRP.Module.Laboratories
             FriskInProgess = false;
             return false;
         }
-        
+
         public async Task<bool> ImpoundMethlaboratory(DbPlayer dbPlayer)
         {
             if (dbPlayer.TeamId == 0)
@@ -534,7 +530,7 @@ namespace GVRP.Module.Laboratories
             {
                 itemsImpounded.Add(itemId, 0);
             }
-            foreach(int itemId in LabProduction.EndProducts)
+            foreach (int itemId in LabProduction.EndProducts)
             {
                 itemsImpounded.Add(itemId, 0);
             }
@@ -554,8 +550,8 @@ namespace GVRP.Module.Laboratories
                     closestVeh.entity.Model == (uint)VehicleHash.Burrito5 ||
                     closestVeh.entity.Model == (uint)VehicleHash.Gburrito ||
                     closestVeh.entity.Model == (uint)VehicleHash.Gburrito2)
-                    && closestVeh.teamid == dbPlayer.TeamId && 
-                    (!closestVeh.entity.HasData("Door_KRaum") || 
+                    && closestVeh.teamid == dbPlayer.TeamId &&
+                    (!closestVeh.entity.HasData("Door_KRaum") ||
                     closestVeh.entity.GetData<int>("Door_KRaum") != 1) && closestVeh.Container != null)
             {
                 dbPlayer.SendNewNotification("Du benötigst ein Lagerfahrzeug (Burrito, Brickade, ...) mit offenem Kofferraum.");
@@ -603,7 +599,7 @@ namespace GVRP.Module.Laboratories
                         {
                             if (closestVeh.Container.CanInventoryItemAdded(kvpSlots.Value.Id, kvpSlots.Value.Amount) || (dbPlayer.IsACop() && dbPlayer.IsInDuty()))
                             {
-                                if(!dbPlayer.IsACop() || !dbPlayer.IsInDuty())
+                                if (!dbPlayer.IsACop() || !dbPlayer.IsInDuty())
                                     closestVeh.Container.AddItem(kvpSlots.Value.Model.Id, kvpSlots.Value.Amount);
                                 itemsImpounded[(int)kvpSlots.Value.Model.Id] = itemsImpounded[(int)kvpSlots.Value.Model.Id] + kvpSlots.Value.Amount;
                                 kvp.Value.MethlaboratoryInputContainer.RemoveFromSlot(kvpSlots.Key, kvpSlots.Value.Amount);

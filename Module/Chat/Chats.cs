@@ -1,5 +1,5 @@
-﻿using System.Threading.Tasks;
-using GVRP.Module.Players.Db;
+﻿using GVRP.Module.Players.Db;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Chat
 {
@@ -35,10 +35,10 @@ namespace GVRP.Module.Chat
         {
             await Task.Run(() =>
             {
-                  foreach (DbPlayer iPlayer in Players.Players.Instance.GetValidPlayers())
-                  {
-                      iPlayer.Player.TriggerEvent("sendGlobalNotification", message, duration, color.ToString().ToLower(), icon.ToString().ToLower());
-                  }
+                foreach (DbPlayer iPlayer in Players.Players.Instance.GetValidPlayers())
+                {
+                    iPlayer.Player.TriggerEvent("sendGlobalNotification", message, duration, color.ToString().ToLower(), icon.ToString().ToLower());
+                }
             });
         }
 

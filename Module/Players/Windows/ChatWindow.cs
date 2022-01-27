@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
-using System.Reflection;
-using GVRP.Module.Players.Db;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Admin;
 using GVRP.Module.ClientUI.Windows;
-using System.Threading.Tasks;
+using GVRP.Module.Players.Db;
+using System;
+using System.Reflection;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -30,83 +28,83 @@ namespace GVRP.Module.Players.Windows
         [RemoteEvent]
         public async void PlayerChat(Player player, string commandAndText)
         {
-            
-                // Validate Player
-                var dbPlayer = player.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                // Validate empty arguments
-                if (commandAndText.Length < 1 || commandAndText == " ") return;
+            // Validate Player
+            var dbPlayer = player.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-
-                dynamic dynamicCommand = new PlayerCommands();
-
-                string[] commandParts = commandAndText.Split(" ");
-
-                string command = "";
-                string commandArgs = "";
+            // Validate empty arguments
+            if (commandAndText.Length < 1 || commandAndText == " ") return;
 
 
-                if (commandParts.Length <= 0)
-                    return;
+            dynamic dynamicCommand = new PlayerCommands();
 
-                // set command always
-                if (commandParts.Length >= 1)
-                {
-                    command = commandParts[0];
-                }
+            string[] commandParts = commandAndText.Split(" ");
 
-                // Argumente vorhanden
-                if (commandParts.Length > 1)
-                {
-                    commandArgs = commandAndText.Split(" ", 2)[1];
+            string command = "";
+            string commandArgs = "";
+
+
+            if (commandParts.Length <= 0)
+                return;
+
+            // set command always
+            if (commandParts.Length >= 1)
+            {
+                command = commandParts[0];
+            }
+
+            // Argumente vorhanden
+            if (commandParts.Length > 1)
+            {
+                commandArgs = commandAndText.Split(" ", 2)[1];
 
             }
 
             string plainCommand = command.ToLower();
 
-                MethodInfo addMethod = dynamicCommand.GetType().GetMethod(plainCommand);
+            MethodInfo addMethod = dynamicCommand.GetType().GetMethod(plainCommand);
 
 
-                // Search For Command in Modulehandler
-                if (addMethod == null)
+            // Search For Command in Modulehandler
+            if (addMethod == null)
+            {
+                if (Modules.Instance.GetCommand(plainCommand) != null)
                 {
-                    if (Modules.Instance.GetCommand(plainCommand) != null)
-                    {
-                        addMethod = Modules.Instance.GetCommand(plainCommand);
-                        dynamicCommand = Modules.Instance.GetModuleByCommand(plainCommand);
-                    }
+                    addMethod = Modules.Instance.GetCommand(plainCommand);
+                    dynamicCommand = Modules.Instance.GetModuleByCommand(plainCommand);
+                }
+            }
+
+            // Search in Admin Commands
+            if (addMethod == null && dbPlayer.RankId >= 1)
+            {
+                dynamicCommand = new AdminModuleCommands();
+                addMethod = dynamicCommand.GetType().GetMethod(plainCommand);
+            }
+
+            // Parse Command + Args to Method if found
+            if (addMethod != null)
+            {
+                var parameters = new object[] { player };
+
+                if (addMethod.GetParameters().Length > 1)
+                {
+                    parameters = new object[] { player, commandArgs };
                 }
 
-                // Search in Admin Commands
-                if (addMethod == null && dbPlayer.RankId >= 1)
+                try
                 {
-                    dynamicCommand = new AdminModuleCommands();
-                    addMethod = dynamicCommand.GetType().GetMethod(plainCommand);
+                    var result = addMethod.Invoke(dynamicCommand, parameters);
                 }
-
-                // Parse Command + Args to Method if found
-                if (addMethod != null)
+                catch (Exception ex)
                 {
-                    var parameters = new object[] { player };
-
-                    if (addMethod.GetParameters().Length > 1)
-                    {
-                        parameters = new object[] { player, commandArgs };
-                    }
-
-                    try
-                    {
-                        var result = addMethod.Invoke(dynamicCommand, parameters);
-                    }
-                    catch (Exception ex)
-                    {
-                        Logging.Logger.Crash(ex);
-                        if (commandArgs != "") Logging.Logger.SaveToDbLog($"Command {command} arguments {commandArgs}");
-                        else Logging.Logger.SaveToDbLog($"Command {command}");
-                    }
+                    Logging.Logger.Crash(ex);
+                    if (commandArgs != "") Logging.Logger.SaveToDbLog($"Command {command} arguments {commandArgs}");
+                    else Logging.Logger.SaveToDbLog($"Command {command}");
                 }
-            
+            }
+
         }
     }
 }

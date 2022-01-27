@@ -1,9 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Configurations;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players;
+using MySql.Data.MySqlClient;
 
 namespace GVRP
 {

@@ -1,9 +1,9 @@
-﻿using System.Threading.Tasks;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {

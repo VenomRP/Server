@@ -1,17 +1,15 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Handler;
 using GVRP.Module.Business;
-using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Houses;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Storage;
 using GVRP.Module.Vehicles.Data;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Keys.Windows
 {
@@ -21,11 +19,11 @@ namespace GVRP.Module.Keys.Windows
         {
             [JsonProperty(PropertyName = "Spielername")]
             private string PlayerName { get; }
-            
+
             [JsonProperty(PropertyName = "Keys")]
             private Dictionary<string, List<VHKey>> Keys { get; }
 
-            public ShowEvent(DbPlayer dbPlayer,string playerName, Dictionary<string, List<VHKey>> keys) :
+            public ShowEvent(DbPlayer dbPlayer, string playerName, Dictionary<string, List<VHKey>> keys) :
                 base(dbPlayer)
             {
                 PlayerName = playerName;
@@ -77,7 +75,7 @@ namespace GVRP.Module.Keys.Windows
                     return;
                 }
 
-               
+
             }
             //Spieler zu Business
             else
@@ -103,21 +101,21 @@ namespace GVRP.Module.Keys.Windows
 
                     if (business != 0)
                     {
-                        dbPlayer.SendNewNotification( "Hausschlüssel können aktuell nicht im Business hinterlegt werden.");
+                        dbPlayer.SendNewNotification("Hausschlüssel können aktuell nicht im Business hinterlegt werden.");
                         return;
                     }
 
                     if (dbPlayer.ownHouse[0] != id)
                     {
-                        dbPlayer.SendNewNotification( "Dieses Haus gehoert dir nicht!");
+                        dbPlayer.SendNewNotification("Dieses Haus gehoert dir nicht!");
                         return;
                     }
-                    
+
                     if (targetPlayer == null || !targetPlayer.IsValid()) return;
 
                     if (targetPlayer.HouseKeys.Contains(id))
                     {
-                        dbPlayer.SendNewNotification( "Der Buerger besitzt diesen Schluessel bereits!");
+                        dbPlayer.SendNewNotification("Der Buerger besitzt diesen Schluessel bereits!");
                         return;
                     }
                     HouseKeyHandler.Instance.AddHouseKey(targetPlayer, HouseModule.Instance[id]);
@@ -132,7 +130,7 @@ namespace GVRP.Module.Keys.Windows
 
                     if (StorageRoomModule.Instance.Get(id).OwnerId != dbPlayer.Id)
                     {
-                        dbPlayer.SendNewNotification( "Dieser Lagerraum gehoert dir nicht!");
+                        dbPlayer.SendNewNotification("Dieser Lagerraum gehoert dir nicht!");
                         return;
                     }
 
@@ -143,7 +141,7 @@ namespace GVRP.Module.Keys.Windows
                         //schlüssel geht ans business
                         if (biz.StorageKeys.Contains(id))
                         {
-                            dbPlayer.SendNewNotification( "Das Business besitzt diesen Schluessel bereits!");
+                            dbPlayer.SendNewNotification("Das Business besitzt diesen Schluessel bereits!");
                             return;
                         }
                         Business.BusinessStorageExtension.AddStorageKey(biz, id);
@@ -155,7 +153,7 @@ namespace GVRP.Module.Keys.Windows
 
                     if (targetPlayer.StorageKeys.Contains(id))
                     {
-                        dbPlayer.SendNewNotification( "Der Buerger besitzt diesen Schluessel bereits!");
+                        dbPlayer.SendNewNotification("Der Buerger besitzt diesen Schluessel bereits!");
                         return;
                     }
 
@@ -171,7 +169,7 @@ namespace GVRP.Module.Keys.Windows
 
                     if (vehicle == null || !dbPlayer.IsOwner(vehicle))
                     {
-                        dbPlayer.SendNewNotification( "Dieses Fahrzeug gehört ihnen nicht darf nicht in der garage sein.");
+                        dbPlayer.SendNewNotification("Dieses Fahrzeug gehört ihnen nicht darf nicht in der garage sein.");
                         return;
                     }
 
@@ -213,7 +211,7 @@ namespace GVRP.Module.Keys.Windows
                         //schlüssel geht an player
                         if (targetPlayer.VehicleKeys.ContainsKey(id))
                         {
-                            dbPlayer.SendNewNotification( "Der Buerger besitzt diesen Schluessel bereits!");
+                            dbPlayer.SendNewNotification("Der Buerger besitzt diesen Schluessel bereits!");
                             return;
                         }
 
@@ -249,7 +247,7 @@ namespace GVRP.Module.Keys.Windows
                     if (id != 0 && dbPlayer.GetStoragesOwned().ContainsKey(id))
                     {
                         //Spieler ist Besitzer von dem Haus, kann also nicht wegwerfen
-                        dbPlayer.SendNewNotification( "Du kannst den Hauptschlüssel nicht wegwerfen.");
+                        dbPlayer.SendNewNotification("Du kannst den Hauptschlüssel nicht wegwerfen.");
                     }
                     //Schlüssel wegwerfen
                     StorageKeyHandler.Instance.DeleteStorageKey(dbPlayer, StorageRoomModule.Instance.Get(id));
@@ -267,7 +265,7 @@ namespace GVRP.Module.Keys.Windows
                     }
                     else
                     {
-                        if ( dbPlayer.IsOwner(vehicle))
+                        if (dbPlayer.IsOwner(vehicle))
                         {
                             dbPlayer.SendNewNotification("Du kannst den Hauptschlüssel nicht wegwerfen.");
                             return;
@@ -275,7 +273,7 @@ namespace GVRP.Module.Keys.Windows
                     }
 
 
-                    dbPlayer.SendNewNotification("Sie haben den Schluessel fuer das Fahrzeug " + dbPlayer.VehicleKeys.GetValueOrDefault(id) +" (" + id +") fallen gelassen!");
+                    dbPlayer.SendNewNotification("Sie haben den Schluessel fuer das Fahrzeug " + dbPlayer.VehicleKeys.GetValueOrDefault(id) + " (" + id + ") fallen gelassen!");
                     VehicleKeyHandler.Instance.DeletePlayerKey(dbPlayer, id);
                     break;
             }

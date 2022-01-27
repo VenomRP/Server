@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Module.Players;
 
 namespace GVRP.Module.UHaft
@@ -15,7 +12,7 @@ namespace GVRP.Module.UHaft
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
             var findPlayer = Players.Players.Instance.FindPlayer(returnstring);
-            if(findPlayer == null || !findPlayer.IsValid())
+            if (findPlayer == null || !findPlayer.IsValid())
             {
                 dbPlayer.SendNewNotification("Spieler nicht gefunden!");
                 return;
@@ -23,14 +20,14 @@ namespace GVRP.Module.UHaft
 
             // Check Jail and 
 
-            if(findPlayer.UHaftTime > 0 || findPlayer.jailtime[0] > 0)
+            if (findPlayer.UHaftTime > 0 || findPlayer.jailtime[0] > 0)
             {
                 dbPlayer.SendNewNotification("Spieler bereits in Untersuchungshaft oder im Gefaengnis!");
                 return;
             }
 
             // Is In Range
-            if(findPlayer.Player.Position.DistanceTo(UHaftmodule.UhaftComputerPosition) > 4.0f)
+            if (findPlayer.Player.Position.DistanceTo(UHaftmodule.UhaftComputerPosition) > 4.0f)
             {
                 dbPlayer.SendNewNotification("Spieler ist nicht in der Naehe!");
                 return;

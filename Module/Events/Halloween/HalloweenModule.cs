@@ -1,20 +1,4 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.Commands;
-using GVRP.Module.Customization;
-using GVRP.Module.Doors;
-using GVRP.Module.Farming;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players.JumpPoints;
-using static GVRP.Module.Chat.Chats;
-
-namespace GVRP.Module.Events.Halloween
+﻿namespace GVRP.Module.Events.Halloween
 {
     //public class HalloweenModule : Module<HalloweenModule>
     //{
@@ -84,7 +68,7 @@ namespace GVRP.Module.Events.Halloween
     //        foreach(DbPlayer iPlayer in activeZombies.ToList())
     //        {
     //            if (iPlayer == null || !iPlayer.IsValid()) continue;
-                
+
     //            DbPlayer rangedPlayer = Players.Players.Instance.GetClosestPlayerForPlayerForHalloweenEvent(iPlayer);
 
     //            rangedPlayer.InfestPlayer();
@@ -99,7 +83,7 @@ namespace GVRP.Module.Events.Halloween
     //    {
     //        var iPlayer = player.GetPlayer();
     //        if (iPlayer == null || !iPlayer.IsValid() || (iPlayer.Rank.Id != 6 && iPlayer.Rank.Id != 5)) return;
-                        
+
     //        // Set Active
     //        if(!HalloweenModule.isActive)
     //        {
@@ -159,7 +143,7 @@ namespace GVRP.Module.Events.Halloween
     //        }
     //        return;
     //    }
-        
+
     //    [CommandPermission(PlayerRankPermission = true)]
     //    [Command]
     //    public void Commandsetzombie(Player player, string returnstring)

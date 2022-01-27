@@ -1,8 +1,7 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System.Collections.Generic;
 using GVRP.Handler;
 using GVRP.Module.Vehicles.Data;
+using Newtonsoft.Json;
 
 namespace GVRP.Module.Vehicles.Shops
 {
@@ -43,7 +42,7 @@ namespace GVRP.Module.Vehicles.Shops
 
         [JsonIgnore]
         public bool IsSpecialCar { get; set; }
-        
+
         [JsonIgnore]
         public int LimitedBuyed { get; set; }
 
@@ -54,11 +53,11 @@ namespace GVRP.Module.Vehicles.Shops
         public void IncreaseLimitedAmount()
         {
             LimitedBuyed++;
-            if(LimitedBuyed >= LimitedAmount)
+            if (LimitedBuyed >= LimitedAmount)
             {
-                if(Entity != null)
+                if (Entity != null)
                     Entity.entity.DeleteVehicle();
-                if(ColShape != null)
+                if (ColShape != null)
                     ColShape.Delete();
             }
             MySQLHandler.ExecuteAsync($"UPDATE carshop_special_vehicles SET limited_buyed = '{LimitedBuyed}' WHERE carshopId = '{VehicleShopId}' AND id = '{Id}'");

@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
-using GVRP.Module.Logging;
+﻿using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Business
 {
@@ -29,15 +26,15 @@ namespace GVRP.Module.Business
         public static Business GetVisitedBusiness(this DbPlayer iPlayer)
         {
             return (from business in BusinessModule.Instance.GetAll()
-                where business.Value.Visitors.Contains(iPlayer)
-                select business.Value).FirstOrDefault();
+                    where business.Value.Visitors.Contains(iPlayer)
+                    select business.Value).FirstOrDefault();
         }
-        
+
         public static Business.Member GetActiveBusinessMember(this DbPlayer player)
         {
             return player.BusinessMembership;
         }
-        
+
         public static void SaveBusinessMemberships(this DbPlayer player)
         {
             player.SaveBusinessMembership(player.BusinessMembership);
@@ -50,9 +47,9 @@ namespace GVRP.Module.Business
                 var query =
                 string.Format(
                     $"UPDATE `business_members` SET `business_id` = {member.BusinessId}, `manage` = {(member.Manage ? 1 : 0)}, " +
-                    $"`money` = {(member.Money ? 1:0)}, `inventory` = {(member.Inventory ? 1:0)}, `gehalt` = {member.Salary}, `owner` = {(member.Owner ? 1:0)}, " +
-                    $"`fuelstation` = {(member.Fuelstation ? 1:0)}, `raffinery` = {(member.Raffinery ? 1:0)}, `nightclub` = {(member.NightClub ? 1 : 0)}, " +
-                    $"`tattoo` = {(member.Tattoo ? 1:0)} " +
+                    $"`money` = {(member.Money ? 1 : 0)}, `inventory` = {(member.Inventory ? 1 : 0)}, `gehalt` = {member.Salary}, `owner` = {(member.Owner ? 1 : 0)}, " +
+                    $"`fuelstation` = {(member.Fuelstation ? 1 : 0)}, `raffinery` = {(member.Raffinery ? 1 : 0)}, `nightclub` = {(member.NightClub ? 1 : 0)}, " +
+                    $"`tattoo` = {(member.Tattoo ? 1 : 0)} " +
                     $"WHERE `player_id` = {member.PlayerId} AND `business_id` = {member.BusinessId}");
 
                 MySQLHandler.ExecuteAsync(query);
@@ -69,7 +66,7 @@ namespace GVRP.Module.Business
             var query = string.Format(
                 $"DELETE FROM `business_members` WHERE `player_id` = {player.Id} AND business_id = {business.Id};");
             MySQLHandler.ExecuteAsync(query);
-            
+
             if (!BusinessModule.Instance.Contains(business.Id)) return;
             Business biz = BusinessModule.Instance.GetById(business.Id);
             if (biz == null) return;
@@ -102,7 +99,8 @@ namespace GVRP.Module.Business
         {
             if (business == null) return;
 
-            Business.Member member = new Business.Member() {
+            Business.Member member = new Business.Member()
+            {
                 PlayerId = player.Id,
                 BusinessId = business.Id,
                 Manage = true,
@@ -131,7 +129,7 @@ namespace GVRP.Module.Business
             var query =
                 string.Format(
                     $"INSERT INTO `business_members` (`player_id`, `business_id`, `manage`, `money`, `inventory`, `gehalt`, `owner`, `raffinery`, `fuelstation`, `nightclub`, `tattoo`) " +
-                    $"VALUES ('{player.Id}', '{member.BusinessId}', '{(member.Manage?1:0)}', '{(member.Money?1:0)}', '{(member.Inventory ?1:0)}', '{member.Salary}', '{(member.Owner? 1:0)}', '{(member.Raffinery?1:0)}', '{(member.Fuelstation?1:0)}', '{(member.NightClub ? 1 : 0)}', ' {(member.Tattoo?1:0)}');");
+                    $"VALUES ('{player.Id}', '{member.BusinessId}', '{(member.Manage ? 1 : 0)}', '{(member.Money ? 1 : 0)}', '{(member.Inventory ? 1 : 0)}', '{member.Salary}', '{(member.Owner ? 1 : 0)}', '{(member.Raffinery ? 1 : 0)}', '{(member.Fuelstation ? 1 : 0)}', '{(member.NightClub ? 1 : 0)}', ' {(member.Tattoo ? 1 : 0)}');");
             MySQLHandler.ExecuteAsync(query);
         }
     }

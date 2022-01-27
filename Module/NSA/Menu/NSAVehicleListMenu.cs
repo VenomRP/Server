@@ -1,13 +1,6 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
+﻿using GVRP.Handler;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
 
 namespace GVRP.Module.NSA.Menu
 {
@@ -22,8 +15,8 @@ namespace GVRP.Module.NSA.Menu
         {
             var l_Menu = new Module.Menu.Menu(Menu, "NSA Fahrzeugverwaltung");
             l_Menu.Add($"Schließen");
-            
-            foreach(SxVehicle sxVehicle in VehicleHandler.Instance.GetClosestVehiclesFromTeam(p_DbPlayer.Player.Position, (int)teams.TEAM_FIB, 10.0f))
+
+            foreach (SxVehicle sxVehicle in VehicleHandler.Instance.GetClosestVehiclesFromTeam(p_DbPlayer.Player.Position, (int)teams.TEAM_FIB, 10.0f))
             {
                 l_Menu.Add($"{sxVehicle.GetName()} ({sxVehicle.databaseId})");
             }
@@ -40,12 +33,12 @@ namespace GVRP.Module.NSA.Menu
         {
             public bool OnSelect(int index, DbPlayer iPlayer)
             {
-                if(index >= 1)
+                if (index >= 1)
                 {
                     int idx = 1;
                     foreach (SxVehicle sxVehicle in VehicleHandler.Instance.GetClosestVehiclesFromTeam(iPlayer.Player.Position, (int)teams.TEAM_FIB, 10.0f))
                     {
-                        if(index == idx)
+                        if (index == idx)
                         {
                             MenuManager.DismissCurrent(iPlayer);
 

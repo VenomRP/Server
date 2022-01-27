@@ -1,16 +1,8 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.ClientUI.Components;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
-using GVRP.Module.PlayerName;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Vehicles.InteriorVehicles;
 
 namespace GVRP.Module.NSA.Menu
 {

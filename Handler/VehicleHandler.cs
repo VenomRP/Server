@@ -146,9 +146,9 @@ namespace GVRP.Handler
                     }
                 }
             }
-            catch(Exception e) 
+            catch (Exception e)
             {
-                Console.WriteLine("OnPlayerDeath Occupants" + e); 
+                Console.WriteLine("OnPlayerDeath Occupants" + e);
             }
         }
 

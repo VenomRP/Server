@@ -4,7 +4,7 @@ namespace GVRP.Module.Vehicles.Data
 {
     public enum CarsellCategories
     {
-        
+
     }
 
     public class VehicleCarsellCategory : Loadable<uint>

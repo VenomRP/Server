@@ -1,15 +1,12 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 using GVRP.Module.Tuning;
 using GVRP.Module.Vehicles;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.LSCustoms
 {
@@ -38,7 +35,7 @@ namespace GVRP.Module.LSCustoms
                     SxVehicle l_SxVehicle = VehicleHandler.Instance.GetAllVehicles().Where(x => x.databaseId == dbPlayer.GetData("tuneVeh")).FirstOrDefault();
                     if (l_SxVehicle == null || !l_SxVehicle.IsValid())
                         return;
-                    
+
                     if (dbPlayer.HasData("inTuning"))
                     {
                         dbPlayer.SendNewNotification("Sie bringen gerade ein Tuningteil an!");
@@ -65,14 +62,14 @@ namespace GVRP.Module.LSCustoms
                         l_Query = $"UPDATE `fvehicles` SET `color1`={color1.ToString()}, `color2`={color2.ToString()} WHERE `id`={l_SxVehicle.databaseId.ToString()};";
                     }
 
-                    
+
                     MySQLHandler.ExecuteAsync(l_Query);
 
                     dbPlayer.ResetData("inTuning");
                     dbPlayer.SendNewNotification($"Fahrzeugfarbe auf {color1} {color2} geändert!");
                     return;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     Logging.Logger.Crash(e);
                 }
@@ -117,7 +114,7 @@ namespace GVRP.Module.LSCustoms
                 {
                     Logging.Logger.Crash(e);
                 }
-            })); 
+            }));
         }
         [RemoteEvent]
         public void SetCarRimColorLSC(Player player, string returnstring)

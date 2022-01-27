@@ -1,7 +1,7 @@
-﻿using System;
+﻿using GVRP.Module.Logging;
+using System;
 using System.Collections.Generic;
 using System.Threading;
-using GVRP.Module.Logging;
 
 namespace GVRP.Module.Tasks
 {
@@ -16,7 +16,7 @@ namespace GVRP.Module.Tasks
 
         private SynchronizedTaskManager()
         {
-            mainThread = new Thread(MainLoop) {IsBackground = true};
+            mainThread = new Thread(MainLoop) { IsBackground = true };
             mainThread.Start();
         }
 
@@ -50,7 +50,7 @@ namespace GVRP.Module.Tasks
                     {
                         localTasks = new List<SynchronizedTask>(tasks);//Todo: not needed
                     }
-                    
+
                     for (var i = localTasks.Count - 1; i >= 0; i--)
                     {
                         if (localTasks[i] != null)

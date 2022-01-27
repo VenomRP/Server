@@ -1,5 +1,5 @@
-﻿using System;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
+using System;
 
 
 namespace GVRP.Module.Players
@@ -8,7 +8,7 @@ namespace GVRP.Module.Players
     {
         public static int GetSpeed(this Player player)
         {
-            
+
             if (!player.IsInVehicle) return 0;
             var velocity = player.Velocity;
             var speed = Math.Sqrt(

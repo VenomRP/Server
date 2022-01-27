@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Spawners;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Ammunations
 {
@@ -52,7 +52,7 @@ namespace GVRP.Module.Ammunations
 
         public static void OnAmmunationSpawn(Ammunation ammunation)
         {
-            Main.ServerBlips.Add(Blips.Create(ammunation.Position, "Ammunation", blip, 1.0f, color:color));
+            Main.ServerBlips.Add(Blips.Create(ammunation.Position, "Ammunation", blip, 1.0f, color: color));
 
             // Pickup System
             // CreateMarkerForUser(new Vector3(kvp.Value.pos.X, kvp.Value.pos.Y, kvp.Value.pos.Z + 1.5f), 29, 0.8f, 255, 255, 0, 0); // AD punkt

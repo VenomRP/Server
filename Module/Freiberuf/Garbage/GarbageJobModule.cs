@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Attachments;
 using GVRP.Module.Chat;
@@ -14,6 +11,9 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Vehicles.Data;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Freiberuf.Garbage
 {
@@ -58,7 +58,7 @@ namespace GVRP.Module.Freiberuf.Garbage
         // Start garbage job
         public void RentGarbageVeh(DbPlayer dbPlayer)
         {
-            if(!dbPlayer.HasData("jobStarted"))
+            if (!dbPlayer.HasData("jobStarted"))
             {
                 dbPlayer.SendNewNotification("Sie müssen den Job zuerst starten!");
                 return;
@@ -89,7 +89,7 @@ namespace GVRP.Module.Freiberuf.Garbage
             // Get job vehicle
             SxVehicle JobVehicle = FreiberufFunctions.GetNearestJobVehicle(dbPlayer, GarbageJobVehMarkId, 6.0f);
 
-            if(JobVehicle != null && JobVehicle.IsValid())
+            if (JobVehicle != null && JobVehicle.IsValid())
             {
                 // Check if vehicle got loadage data
                 if (!JobVehicle.entity.HasData("loadage")) return;
@@ -214,7 +214,7 @@ namespace GVRP.Module.Freiberuf.Garbage
                 FreiberufFunctions.GetJobVehicle(dbPlayer, GarbageJobVehMarkId).entity.SetData("loadage", 0.0f);
 
                 // Get reward
-                int money = (int) Math.Round(currentVehicleLoadage, 0) * Reward;
+                int money = (int)Math.Round(currentVehicleLoadage, 0) * Reward;
 
                 // Add money
                 dbPlayer.GiveMoney(money);
@@ -234,7 +234,7 @@ namespace GVRP.Module.Freiberuf.Garbage
 
             SxVehicle jobVehicle = FreiberufFunctions.GetJobVehicle(dbPlayer, GarbageJobVehMarkId);
 
-            if(jobVehicle != null && jobVehicle.IsValid())
+            if (jobVehicle != null && jobVehicle.IsValid())
             {
                 // Check if vehicle still got trash inside
                 float currentVehicleLoadage = FreiberufFunctions.GetJobVehicle(dbPlayer, GarbageJobVehMarkId).entity.GetData<int>("loadage");
@@ -262,10 +262,10 @@ namespace GVRP.Module.Freiberuf.Garbage
             if (key != Key.E) return false;
 
 
-          
+
             return false;
         }
-        
+
         public House GetTrashHouseObjectFromPosition(Vector3 position)
         {
             return HouseModule.Instance.GetAll().FirstOrDefault(house => house.Value.Position.DistanceTo(position) <= 2.0f).Value;

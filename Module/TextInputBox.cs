@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players.Db;
-using GTANetworkAPI;
 
 namespace GVRP.Module
 {

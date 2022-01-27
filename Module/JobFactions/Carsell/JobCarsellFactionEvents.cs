@@ -1,7 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Players;
@@ -10,6 +7,7 @@ using GVRP.Module.Players.Windows;
 using GVRP.Module.Teams.Shelter;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Vehicles.Data;
+using System;
 
 namespace GVRP.Module.JobFactions.Carsell
 {
@@ -20,7 +18,7 @@ namespace GVRP.Module.JobFactions.Carsell
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            
+
             if (returnstring.Length < 2 || !returnstring.Contains(" ")) return;
 
             string[] splittedReturn = returnstring.Split(" ");
@@ -61,19 +59,19 @@ namespace GVRP.Module.JobFactions.Carsell
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
             if (returnstring.Length < 2) return;
-            
+
             if (!dbPlayer.Player.IsInVehicle) return;
 
             DbPlayer customer = Players.Players.Instance.FindPlayer(returnstring);
             if (customer == null || !customer.IsValid()) return;
 
-            if(customer.TeamId == dbPlayer.TeamId)
+            if (customer.TeamId == dbPlayer.TeamId)
             {
                 dbPlayer.SendNewNotification($"Mitarbeiter können hier nichts kaufen...!");
                 return;
             }
 
-            if(customer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 10.0f)
+            if (customer.Player.Position.DistanceTo(dbPlayer.Player.Position) > 10.0f)
             {
                 dbPlayer.SendNewNotification($"Kunde muss in der Nähe sein!");
                 return;
@@ -94,8 +92,8 @@ namespace GVRP.Module.JobFactions.Carsell
             if (returnstring.Length < 2) return;
 
             if (!dbPlayer.Player.IsInVehicle) return;
-            
-            if(!Int32.TryParse(returnstring, out int price))
+
+            if (!Int32.TryParse(returnstring, out int price))
             {
                 return;
             }
@@ -117,7 +115,7 @@ namespace GVRP.Module.JobFactions.Carsell
             int vehiclePriceMin = Convert.ToInt32(sxVehicle.Data.Price * 0.8);
             int vehiclePriceMax = Convert.ToInt32(sxVehicle.Data.Price * 1.1);
 
-            if(price < vehiclePriceMin || price > vehiclePriceMax)
+            if (price < vehiclePriceMin || price > vehiclePriceMax)
             {
                 dbPlayer.SendNewNotification($"Der Preis muss zwischen ${vehiclePriceMin} und ${vehiclePriceMax} liegen!");
                 return;
@@ -128,7 +126,8 @@ namespace GVRP.Module.JobFactions.Carsell
                 dbPlayer.SendNewNotification($"Kunde hat nicht genug Geld auf dem Konto!");
                 return;
             }
-            else {
+            else
+            {
 
                 ComponentManager.Get<TextInputBoxWindow>().Show()(customer, new TextInputBoxWindowObject() { Title = "Kauf Bestätigen", Callback = "JobCarsellCustomerBuy", Message = $"{(sxVehicle.Data.mod_car_name.Length <= 0 ? sxVehicle.Data.Model : sxVehicle.Data.mod_car_name)} für ${price} - Geben sie [KAUFEN] zum annehmen oder [ABLEHNEN] zum ablehnen ein:" });
 
@@ -139,7 +138,7 @@ namespace GVRP.Module.JobFactions.Carsell
                 customer.SetData("carshop_color2", dbPlayer.GetData("carsellTuneColor2"));
                 customer.SetData("carshop_price", price);
 
-                
+
                 dbPlayer.SendNewNotification($"Kaufauftrag für {(sxVehicle.Data.mod_car_name.Length <= 0 ? sxVehicle.Data.Model : sxVehicle.Data.mod_car_name)} wurde dem Kunden zur Bestätigung übergeben!");
                 return;
             }
@@ -159,11 +158,11 @@ namespace GVRP.Module.JobFactions.Carsell
             {
                 return;
             }
-            
+
             SxVehicle sxVehicle = dbPlayer.Player.Vehicle.GetVehicle();
             if (sxVehicle == null || !sxVehicle.IsValid() || sxVehicle.teamid != dbPlayer.TeamId) return;
 
-            if(price < sxVehicle.Data.Price*0.8 || price > sxVehicle.Data.Price*1.1)
+            if (price < sxVehicle.Data.Price * 0.8 || price > sxVehicle.Data.Price * 1.1)
             {
                 dbPlayer.SendNewNotification($"Der Preis muss sich in der verfügbaren Preisspanne befinden!");
                 return;
@@ -181,8 +180,8 @@ namespace GVRP.Module.JobFactions.Carsell
         {
             DbPlayer dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            
-            if(returnstring.Trim().ToLower() != "kaufen")
+
+            if (returnstring.Trim().ToLower() != "kaufen")
             {
                 dbPlayer.ResetData("carshop_sellerId");
                 dbPlayer.ResetData("carshop_vehicleDataId");
@@ -205,7 +204,7 @@ namespace GVRP.Module.JobFactions.Carsell
 
             VehicleData Data = VehicleDataModule.Instance.GetDataById(dbPlayer.GetData("carshop_vehicleDataId"));
             int price = dbPlayer.GetData("carshop_price");
-            
+
             if (!dbPlayer.TakeBankMoney(price, $"Fahrzeugkauf {(Data.mod_car_name.Length <= 0 ? Data.Model : Data.mod_car_name)}"))
             {
                 dbPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(price));
@@ -215,7 +214,7 @@ namespace GVRP.Module.JobFactions.Carsell
             {
                 dbPlayer.SendNewNotification($"Sie haben einen {(Data.mod_car_name.Length <= 0 ? Data.Model : Data.mod_car_name)} für ${price} bestellt!");
 
-                int diff = price - Convert.ToInt32(Data.Price*0.8);
+                int diff = price - Convert.ToInt32(Data.Price * 0.8);
 
                 // steuern
                 int tax = Convert.ToInt32(diff * 0.20);
@@ -227,7 +226,7 @@ namespace GVRP.Module.JobFactions.Carsell
                 // diff = gewinn
                 if (diff > 0)
                 {
-                    teamShelter.GiveMoney(diff-tax);
+                    teamShelter.GiveMoney(diff - tax);
                     seller.SendNewNotification($"Sie haben einen {(Data.mod_car_name.Length <= 0 ? Data.Model : Data.mod_car_name)} für ${price} verkauft! (Gewinn ${diff} (- ${tax} Steuern) wurde auf die Fbank überwiesen)");
                 }
 

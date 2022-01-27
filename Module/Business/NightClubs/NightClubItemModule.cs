@@ -1,5 +1,5 @@
-﻿using System;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
+using System;
 
 namespace GVRP.Module.Business.NightClubs
 {

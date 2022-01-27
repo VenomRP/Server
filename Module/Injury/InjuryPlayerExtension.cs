@@ -1,10 +1,5 @@
-﻿using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
-using GVRP.Module.AnimationMenu;
 using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Items;
@@ -19,7 +14,8 @@ using GVRP.Module.Service;
 using GVRP.Module.Telefon.App;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Voice;
-using static GVRP.Module.Players.Db.DbPlayer;
+using System;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Injury
 {
@@ -201,10 +197,10 @@ namespace GVRP.Module.Injury
 
                 if ((medic.IsAMedic() && medic.Duty) || (medic.ParamedicLicense && (!medic.IsAGangster() || dbPlayer.TeamId == medic.TeamId)))
                 {
-                    
+
                     if (dbPlayer.Injury.ItemToStabilizeId != 0 || dbPlayer.Player.Dimension == 0)
                     {
-                        
+
                         //kayano
 
 
@@ -214,7 +210,7 @@ namespace GVRP.Module.Injury
                         // Wenn Spieler ins KH gebracht werden muss dann in einen Krankenwagen setzen
                         if (dbPlayer.Injury.NeedHospital)
                         {
-                                Console.WriteLine("Wichtig11");   
+                            Console.WriteLine("Wichtig11");
                             if ((medic.Container.GetItemAmount(412) > 0 && medic.Container.GetItemAmount(dbPlayer.Injury.ItemToStabilizeId) > 0))
                             {
                                 Console.WriteLine("Wichtig13");

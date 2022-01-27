@@ -1,19 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
 using GVRP.Module.Farming;
 using GVRP.Module.Items;
 using GVRP.Module.Kasino;
-using GVRP.Module.Laboratories;
 using GVRP.Module.Meth;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Schwarzgeld;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Logging
 {
@@ -29,12 +26,12 @@ namespace GVRP.Module.Logging
     public class LoggingModule : Module<LoggingModule>
     {
         private static string LoggingQuerys = "";
-        
+
         public void AddToQueryLog(string query)
         {
             LoggingQuerys += query;
         }
-        
+
         public override void OnFiveMinuteUpdate()
         {
             string query = "";
@@ -64,7 +61,7 @@ namespace GVRP.Module.Logging
 
             if (MethModule.Instance.ephi != 0) query += $"INSERT INTO `log_methcook` (`ephi_amount`, `meth_amount`, `cooker_amount`) VALUES ('{MethModule.Instance.ephi}', '{MethModule.Instance.meth}', '{MethModule.Instance.cooker}');";
             MethModule.Instance.ResetLogVariables();
-            if (!query.Equals(""))MySQLHandler.ExecuteAsync(query);
+            if (!query.Equals("")) MySQLHandler.ExecuteAsync(query);
 
             MySQLHandler.ExecuteAsync(LoggingQuerys);
             LoggingQuerys = "";
@@ -74,7 +71,7 @@ namespace GVRP.Module.Logging
     public static class Logger
     {
 
-       
+
 
         public static void Debug(string message)
         {
@@ -86,9 +83,9 @@ namespace GVRP.Module.Logging
 
         public static void GlobalDebug(string message)
         {
-            Chats.SendGlobalMessage(message, Chats.COLOR.RED, Chats.ICON.DEV, duration:20000);
+            Chats.SendGlobalMessage(message, Chats.COLOR.RED, Chats.ICON.DEV, duration: 20000);
         }
-        
+
         public static void SaveToFbankLog(uint p_TeamID, int p_Amount, uint p_PlayerID, string p_PlayerName, bool p_Deposit)
         {
             int l_Deposit = p_Deposit ? 1 : 0;
@@ -138,7 +135,7 @@ namespace GVRP.Module.Logging
             var query = $"INSERT INTO `log_serverdump` (`argument`) VALUES ('{argument}');";
             LoggingModule.Instance.AddToQueryLog(query);
         }
-        
+
         public static void SaveClothesShopBuyAction(uint shopid, int amount)
         {
             var query = $"INSERT INTO log_clothes_shops (shop_id, amount, buy_actions) VALUES ({shopid}, {amount}, 1) ON DUPLICATE KEY UPDATE amount=amount+{amount}, buy_actions = buy_actions +1;";
@@ -237,7 +234,7 @@ namespace GVRP.Module.Logging
             LoggingModule.Instance.AddToQueryLog(l_Query);
         }
 
-        public static void AddTattoShopLog(uint tattoShopId, uint playerId, int amount, bool deposit )
+        public static void AddTattoShopLog(uint tattoShopId, uint playerId, int amount, bool deposit)
         {
             var l_Query = $"INSERT INTO `log_tattoshop` (`tattoshop_id`, `player_id`, `amount`, `deposit`) VALUES ('{tattoShopId}', '{playerId}', '{amount}', '{(deposit == true ? "1" : "0")}');";
             LoggingModule.Instance.AddToQueryLog(l_Query);
@@ -329,7 +326,7 @@ namespace GVRP.Module.Logging
         {
             Console.WriteLine(ex.ToString());
             Discord.SendMessage(ex.ToString(), "EXCEPTION-LOG", Handler.DiscordHandler.Channels.EXCEPTION);
-            
+
             SaveToDbLog(MySqlHelper.EscapeString(ex.ToString()));
         }
     }

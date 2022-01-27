@@ -1,9 +1,6 @@
 ﻿using GTANetworkAPI;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.InteriorProp
 {
@@ -18,7 +15,7 @@ namespace GVRP.Module.InteriorProp
         {
             return "SELECT * FROM `interiors_props`;";
         }
-        
+
         protected override void OnItemLoaded(InteriorsProp loadable)
         {
             foreach (InteriorPropsProp interiorPropsProp in InteriorPropsPropModule.Instance.GetAll().Values.Where(ipp => ipp.InteriorsPropId == loadable.Id))
@@ -27,7 +24,7 @@ namespace GVRP.Module.InteriorProp
             }
 
             // Create Colshape
-            if(loadable.AutoLoad)
+            if (loadable.AutoLoad)
             {
                 ColShape col = Spawners.ColShapes.Create(loadable.Position, loadable.Range);
                 col.SetData("interiorPropId", loadable.Id);

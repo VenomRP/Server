@@ -1,14 +1,13 @@
-﻿using GVRP.Module.ClientUI.Apps;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
+using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Phone.Apps;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Teams.Permission;
-using GVRP.Module.Swat;
-using GVRP.Module.Forum;
-using System;
 using GVRP.Module.FIB;
+using GVRP.Module.Forum;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Windows;
+using GVRP.Module.Swat;
+using GVRP.Module.Teams.Permission;
+using System;
 
 namespace GVRP.Module.Teams.Apps
 {
@@ -24,12 +23,12 @@ namespace GVRP.Module.Teams.Apps
 
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsSwatDuty()) return;
-            if (dbPlayer.TeamId == (uint) TeamList.Zivilist) return;
+            if (dbPlayer.TeamId == (uint)TeamList.Zivilist) return;
             var teamRankPermission = dbPlayer.TeamRankPermission;
             var editDbPlayer = Players.Players.Instance.GetByDbId(editPlayerId);
             if (editDbPlayer == null) return;
             if (editDbPlayer.TeamId != dbPlayer.TeamId) return;
-            
+
             // Spezial SWAT
             if (dbPlayer.IsSwatDuty())
             {
@@ -39,9 +38,9 @@ namespace GVRP.Module.Teams.Apps
                     dbPlayer.SendNewNotification($"{editDbPlayer.GetName()} ist kein Mitglied des SWATS.");
                     return;
                 }
-                
+
                 editDbPlayer.SetSwatRights(manage);
-                if(manage) dbPlayer.SendNewNotification($"Managerechte von {editDbPlayer.GetName()} hinzugefügt.");
+                if (manage) dbPlayer.SendNewNotification($"Managerechte von {editDbPlayer.GetName()} hinzugefügt.");
                 else dbPlayer.SendNewNotification($"Managerechte von {editDbPlayer.GetName()} entfernt.");
                 return;
             }
@@ -67,7 +66,7 @@ namespace GVRP.Module.Teams.Apps
                 dbPlayer.SendNewNotification("Du kannst keine Rechte vergeben, welche du nicht hast. (Bank)!");
                 return;
             }
-             if(manage && teamRankPermission.Manage != 2)
+            if (manage && teamRankPermission.Manage != 2)
             {
                 dbPlayer.SendNewNotification("Nur Rang 11 und 12 können Manage-Rechte vergeben!");
                 return;
@@ -86,11 +85,11 @@ namespace GVRP.Module.Teams.Apps
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            if (dbPlayer.TeamId == (uint) TeamList.Zivilist) return;
+            if (dbPlayer.TeamId == (uint)TeamList.Zivilist) return;
             var teamRankPermission = dbPlayer.TeamRankPermission;
             if (teamRankPermission == null || teamRankPermission.Manage < 1) return;
             var editDbPlayer = Players.Players.Instance.GetByDbId(editPlayerId);
-            if(editDbPlayer == null || !editDbPlayer.IsValid()) return;
+            if (editDbPlayer == null || !editDbPlayer.IsValid()) return;
             if (!editDbPlayer.IsValid() || editDbPlayer.TeamId != dbPlayer.TeamId ||
                 editDbPlayer.TeamRankPermission.Manage >= teamRankPermission.Manage) return;
 
@@ -104,8 +103,8 @@ namespace GVRP.Module.Teams.Apps
                     dbPlayer.SendNewNotification($"{editDbPlayer.GetName()} ist kein Mitglied des SWATS.");
                     return;
                 }
-                
-                if(editDbPlayer.IsSwatDuty())
+
+                if (editDbPlayer.IsSwatDuty())
                 {
                     editDbPlayer.SetSwatDuty(false);
                 }
@@ -116,7 +115,7 @@ namespace GVRP.Module.Teams.Apps
                 return;
             }
 
-            if(editDbPlayer.Team.IsGangsters())
+            if (editDbPlayer.Team.IsGangsters())
             {
                 if (editDbPlayer.Team.IsInTeamfight())
                 {
@@ -131,7 +130,7 @@ namespace GVRP.Module.Teams.Apps
 
 
             editDbPlayer.Team.RemoveMember(editDbPlayer);
-            editDbPlayer.SetTeam((uint) TeamList.Zivilist);
+            editDbPlayer.SetTeam((uint)TeamList.Zivilist);
             editDbPlayer.TeamRank = 0;
             editDbPlayer.fgehalt[0] = 0;
             editDbPlayer.Player.TriggerEvent("updateDuty", false);
@@ -142,12 +141,12 @@ namespace GVRP.Module.Teams.Apps
             editDbPlayer.SynchronizeForum();
 
             dbPlayer.Team.SendNotification($"{editDbPlayer.GetName()} wurde aus der Fraktion geworfen");
-            dbPlayer.SendNewNotification($"Du hast {editDbPlayer.GetName()} aus der Fraktion geworfen", title:$"{dbPlayer.Team.Name}");
-            editDbPlayer.SendNewNotification( $"Du wurdest von {dbPlayer.GetName()} aus der Fraktion geworfen", title:$"{dbPlayer.Team.Name}");
-            
+            dbPlayer.SendNewNotification($"Du hast {editDbPlayer.GetName()} aus der Fraktion geworfen", title: $"{dbPlayer.Team.Name}");
+            editDbPlayer.SendNewNotification($"Du wurdest von {dbPlayer.GetName()} aus der Fraktion geworfen", title: $"{dbPlayer.Team.Name}");
+
 
         }
-        
+
         [RemoteEvent]
         public void addPlayer(Player player, string playerName)
         {
@@ -162,11 +161,11 @@ namespace GVRP.Module.Teams.Apps
                 if (editDbPlayer == null || !editDbPlayer.IsValid()) return;
 
                 // 7 Days
-           //     if(editDbPlayer.LastUninvite.AddDays(7) > DateTime.Now)
-           //     {
-           //         dbPlayer.SendNewNotification($"Spieler kann erst nach einer Woche erneut einer Fraktion beitreten.");
-           //         return;
-//                }
+                //     if(editDbPlayer.LastUninvite.AddDays(7) > DateTime.Now)
+                //     {
+                //         dbPlayer.SendNewNotification($"Spieler kann erst nach einer Woche erneut einer Fraktion beitreten.");
+                //         return;
+                //                }
 
                 if (dbPlayer.Team.GetMemberCount() >= dbPlayer.Team.MaxMembers)
                 {

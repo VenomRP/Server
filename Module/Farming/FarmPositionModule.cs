@@ -1,5 +1,5 @@
-﻿using System;
-using GVRP.Module.Logging;
+﻿using GVRP.Module.Logging;
+using System;
 
 namespace GVRP.Module.Farming
 {
@@ -7,7 +7,7 @@ namespace GVRP.Module.Farming
     {
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(FarmSpotModule)};
+            return new[] { typeof(FarmSpotModule) };
         }
 
         protected override string GetQuery()

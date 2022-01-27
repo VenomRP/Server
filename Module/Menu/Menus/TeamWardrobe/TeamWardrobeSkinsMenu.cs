@@ -1,5 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
 using GVRP.Module.Clothes;
 using GVRP.Module.Clothes.Team;
 using GVRP.Module.Menu;
@@ -37,7 +36,7 @@ namespace GVRP
             {
                 if (index == 0)
                 {
-                    MenuManager.DismissMenu(iPlayer.Player, (uint) PlayerMenu.TeamWardrobeSkins);
+                    MenuManager.DismissMenu(iPlayer.Player, (uint)PlayerMenu.TeamWardrobeSkins);
                     ClothModule.SaveCharacter(iPlayer);
                     return false;
                 }

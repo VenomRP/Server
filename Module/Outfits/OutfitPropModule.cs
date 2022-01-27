@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Clothes.Props;
+﻿using GVRP.Module.Clothes.Props;
+using System;
 
 namespace GVRP.Module.Outfits
 {

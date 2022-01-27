@@ -1,15 +1,14 @@
-﻿using System;
-using GTANetworkAPI;
-using GVRP.Module.GTAN;
+﻿using GTANetworkAPI;
 using GVRP.Module.Jobs;
 using GVRP.Module.Players.Db;
+using System;
 
 namespace GVRP.Module.Players
 {
     public static class PlayerJob
     {
         public static Random rnd = new Random();
-        
+
         public static Job GetJob(this DbPlayer iPlayer)
         {
             return JobsModule.Instance.GetJob(iPlayer.job[0]);
@@ -41,8 +40,8 @@ namespace GVRP.Module.Players
 
             iPlayer.SetData("jobstate", status);
         }
-        
-        public static void 
+
+        public static void
             Increase(this DbPlayer iPlayer, int multiplier = 1, int pureinc = 0)
         {
             if (iPlayer.job[0] <= 0) return;

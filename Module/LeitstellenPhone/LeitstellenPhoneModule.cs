@@ -1,8 +1,6 @@
-﻿using System;
+﻿using GVRP.Module.Players.Db;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.LeitstellenPhone
 {
@@ -38,9 +36,10 @@ namespace GVRP.Module.LeitstellenPhone
 
         public void RegisterNumber(uint teamId, int number, bool staatsfrakonly)
         {
-            if(!TeamNumberPhones.ContainsKey(number))
+            if (!TeamNumberPhones.ContainsKey(number))
             {
-                TeamNumberPhones.Add(number, new TeamLeitstellenObject() {
+                TeamNumberPhones.Add(number, new TeamLeitstellenObject()
+                {
                     TeamId = teamId,
                     Number = number,
                     Acceptor = null,

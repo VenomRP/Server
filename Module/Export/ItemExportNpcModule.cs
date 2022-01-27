@@ -1,6 +1,4 @@
 ﻿using System;
-using GVRP.Handler;
-using GVRP.Module.Items;
 
 namespace GVRP.Module.Export
 {

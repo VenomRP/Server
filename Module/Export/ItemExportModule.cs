@@ -1,11 +1,10 @@
-﻿using System;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Export.Menu;
+﻿using GVRP.Module.Export.Menu;
 using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Export
 {
@@ -13,7 +12,7 @@ namespace GVRP.Module.Export
     {
         public override Type[] RequiredModules()
         {
-            return new[] {typeof(ItemModelModule)};
+            return new[] { typeof(ItemModelModule) };
         }
 
         protected override string GetQuery()

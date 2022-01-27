@@ -1,13 +1,8 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Farming;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Vehicles;
+using System.Linq;
 
 namespace GVRP.Module.Houses
 {
@@ -44,8 +39,8 @@ namespace GVRP.Module.Houses
                     MenuManager.DismissCurrent(iPlayer);
                     return false;
                 }
-                
-                
+
+
                 int count = 1;
                 foreach (HouseRent houseRent in HouseRentModule.Instance.houseRents.ToList().Where(hr => hr.HouseId == iPlayer.ownHouse[0] && hr.PlayerId == 0))
                 {

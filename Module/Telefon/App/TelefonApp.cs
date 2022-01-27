@@ -1,9 +1,5 @@
-﻿using GTANetworkAPI;
-using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Injury;
-using GVRP.Module.Players;
+﻿using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Phone;
 
 namespace GVRP.Module.Telefon.App
 {

@@ -1,6 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using GVRP.Module.Configurations;
+using MySql.Data.MySqlClient;
 using System;
-using GVRP.Module.Configurations;
 
 namespace GVRP.Module.Business
 {

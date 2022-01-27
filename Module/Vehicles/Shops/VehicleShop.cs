@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Vehicles.Shops
 {
@@ -34,10 +34,10 @@ namespace GVRP.Module.Vehicles.Shops
 
         [JsonIgnore]
         public ColShape ColShape { get; set; }
-        
+
         [JsonIgnore]
         public Blip Blip { get; set; }
-        
+
         [JsonIgnore]
         public HashSet<int> RestrictedTeams { get; set; }
 

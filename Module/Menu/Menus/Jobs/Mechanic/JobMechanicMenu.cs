@@ -1,8 +1,4 @@
 ﻿
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Linq;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Helper;
@@ -11,6 +7,10 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Tuning;
 using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP
 {
@@ -37,10 +37,10 @@ namespace GVRP
             menu.Add("Standard", "");
             if (!iPlayer.TryData("tuneSlot", out int tuneSlot)) return menu;
             Console.WriteLine("TuneSlot: " + tuneSlot);
-            
+
             Tuning tuning = Helper.m_Mods.Values.ToList().Where(tun => tun.ID == tuneSlot).FirstOrDefault();
             if (tuning == null) return menu;
-            
+
             int i = 0;
             for (var l_Itr = tuning.StartIndex + 1; l_Itr <= tuning.MaxIndex; l_Itr++)
             {
@@ -48,7 +48,7 @@ namespace GVRP
                 menu.Add($"Teil {i.ToString()}", "");
                 l_Dic.Add(l_Itr + 3, l_Itr);
             }
-            
+
             iPlayer.SetData("tuningList", l_Dic);
             iPlayer.SetData("tuneIndex", 0);
 
@@ -134,14 +134,14 @@ namespace GVRP
                     {
                         MenuManager.DismissMenu(iPlayer.Player, (int)PlayerMenu.MechanicTune);
 
-                        if(iPlayer.TeamRank < 10 && !sxVeh.InTuningProcess)
+                        if (iPlayer.TeamRank < 10 && !sxVeh.InTuningProcess)
                         {
                             iPlayer.SendNewNotification("Fahrzeug ist nicht im Tuning Besitz!");
                             return;
                         }
 
                         int time = 20;
-                        if(iPlayer.HasData("inTuning"))
+                        if (iPlayer.HasData("inTuning"))
                         {
                             iPlayer.SendNewNotification("Sie bringen gerade ein Tuningteil an!");
                             return;
@@ -149,7 +149,7 @@ namespace GVRP
                         iPlayer.SetData("inTuning", true);
 
                         Chats.sendProgressBar(iPlayer, (time * 1000));
-                        
+
                         await Task.Delay(time * 1000);
 
                         sxVeh.AddSavedMod(l_TuneSlot, l_TuneIndex);

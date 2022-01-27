@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Assets.Tattoo;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Tattoo;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP
 {
@@ -46,8 +42,8 @@ namespace GVRP
             }
 
             tattoos = tattoos.OrderBy(t => t.Name).ToList();
-            
-            foreach(TattooLicenseList tatlic in tattoos)
+
+            foreach (TattooLicenseList tatlic in tattoos)
             {
                 menu.Add($"{tatlic.Name} {tatlic.Price}$");
             }
@@ -93,7 +89,7 @@ namespace GVRP
 
                 tattoos = tattoos.OrderBy(t => t.Name).ToList();
 
-                foreach(TattooLicenseList tatlic in tattoos)
+                foreach (TattooLicenseList tatlic in tattoos)
                 {
                     if (index == idx)
                     {

@@ -1,19 +1,14 @@
-﻿using System;
+﻿using GTANetworkAPI;
+using GVRP.Handler;
+using GVRP.Module.Logging;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using GVRP.Handler;
-using GVRP.Module.GTAN;
-using GVRP.Module.Injury;
-using GVRP.Module.Logging;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerTask;
-using GVRP.Module.Players.Sync;
-using GVRP.Module.Weather;
 
 namespace GVRP.Module
 {
@@ -31,7 +26,7 @@ namespace GVRP.Module
                 .GetTypes()
                 .Where(myType => myType.IsClass && !myType.IsAbstract && myType.IsSubclassOf(typeof(BaseModule)) &&
                                  myType.GetCustomAttribute<DisabledModuleAttribute>() == null)
-                .Select(type => (BaseModule) Activator.CreateInstance(type))
+                .Select(type => (BaseModule)Activator.CreateInstance(type))
                 .ToList();
             objects.Sort(new ModuleComparer());
             objects.Reverse();
@@ -45,7 +40,7 @@ namespace GVRP.Module
         public MethodInfo GetCommand(string methodName)
         {
             // For Using Syntax if /mychatcommand then void Commandmychatcommand
-            
+
             foreach (var module in modules)
             {
                 if (module.Value.GetType().GetMethod("Command" + methodName) != null)
@@ -69,7 +64,7 @@ namespace GVRP.Module
             }
             return null;
         }
-        
+
         public void OnPlayerWeaponSwitch(DbPlayer dbPlayer, WeaponHash oldGun, WeaponHash newGun)
         {
             foreach (var module in modules.Values)
@@ -85,7 +80,7 @@ namespace GVRP.Module
             }
         }
 
-        public bool OnClientConnected(Player client) 
+        public bool OnClientConnected(Player client)
         {
             foreach (var module in modules.Values)
             {
@@ -101,7 +96,7 @@ namespace GVRP.Module
 
             return true;
         }
-        
+
         public void OnPlayerFirstSpawn(DbPlayer dbPlayer)
         {
             foreach (var module in modules.Values)
@@ -312,7 +307,7 @@ namespace GVRP.Module
                 }
             }
         }
-        
+
 
         public void OnPlayerDeath(DbPlayer dbPlayer, NetHandle killer, uint weapon)
         {
@@ -345,12 +340,13 @@ namespace GVRP.Module
                         }
                     }
                 }
-            }catch (Exception e)
+            }
+            catch (Exception e)
             {
                 Console.WriteLine("OnPlayerDeath Modules" + e);
             }
         }
-        
+
         public void OnPlayerLoggedIn(DbPlayer dbPlayer)
         {
 
@@ -497,7 +493,7 @@ namespace GVRP.Module
                 Logger.Print($"Module not found: {moduleType}");
                 return;
             }
-            
+
             modules[moduleType].Load(reload);
         }
 
@@ -555,13 +551,13 @@ namespace GVRP.Module
         {
             foreach (var module in modules.Values)
             {
-                 module.OnFiveMinuteUpdate();
+                module.OnFiveMinuteUpdate();
             }
         }
 
         public void OnFifteenMinuteUpdate()
         {
-            foreach(var module in modules.Values)
+            foreach (var module in modules.Values)
             {
                 module.OnFifteenMinuteUpdate();
             }
@@ -571,7 +567,7 @@ namespace GVRP.Module
         {
             foreach (var module in modules.Values)
             {
-                foreach(DbPlayer iPlayer in Players.Players.Instance.GetValidPlayers())
+                foreach (DbPlayer iPlayer in Players.Players.Instance.GetValidPlayers())
                 {
                     if (iPlayer == null) continue;
                     module.OnPlayerMinuteUpdate(iPlayer);

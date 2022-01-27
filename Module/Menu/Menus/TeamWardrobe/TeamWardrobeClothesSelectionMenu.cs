@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Clothes;
+﻿using GVRP.Module.Clothes;
 using GVRP.Module.Clothes.Shops;
 using GVRP.Module.Clothes.Team;
-using GVRP.Module.GTAN;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP
 {
@@ -79,7 +78,7 @@ namespace GVRP
             {
                 if (index == 0)
                 {
-                    MenuManager.DismissMenu(iPlayer.Player, (uint) PlayerMenu.TeamWardrobeClothesSelection);
+                    MenuManager.DismissMenu(iPlayer.Player, (uint)PlayerMenu.TeamWardrobeClothesSelection);
                     ClothModule.SaveCharacter(iPlayer);
                     return false;
                 }

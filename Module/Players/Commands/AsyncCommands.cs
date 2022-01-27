@@ -1,19 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Commands;
+using GVRP.Module.Dealer;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles;
 using GVRP.Module.Robbery;
-using static GVRP.Module.Chat.Chats;
 using GVRP.Module.Schwarzgeld;
-using GVRP.Module.Dealer;
-using GVRP.Module.Clothes;
+using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using static GVRP.Module.Chat.Chats;
 
 namespace GVRP.Module.Players.Commands
 {
@@ -28,7 +27,7 @@ namespace GVRP.Module.Players.Commands
 
             if (string.IsNullOrWhiteSpace(playerName))
             {
-                dbPlayer.SendNewNotification( MSG.General.Usage("/grab", "[playerName]"));
+                dbPlayer.SendNewNotification(MSG.General.Usage("/grab", "[playerName]"));
                 return;
             }
 
@@ -76,121 +75,121 @@ namespace GVRP.Module.Players.Commands
             {
                 dbPlayer.SendNewNotification("Du musst die Person erst fesseln.");
                 return;
-            }            
+            }
         }
-        
+
         public async Task HandleTakeLic(Player p_Player, string p_Name)
         {
-            
-                var dbPlayer = p_Player.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.CanAccessMethod()) return;
 
-                if (!dbPlayer.IsACop() || !dbPlayer.IsInDuty())
-                {
-                    dbPlayer.SendNewNotification( MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = p_Player.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.CanAccessMethod()) return;
 
-                var findPlayer = Players.Instance.FindPlayer(p_Name);
-                if (findPlayer == null || findPlayer.Player.Position.DistanceTo(p_Player.Position) > 5.0f)
-                {
-                    dbPlayer.SendNewNotification(
-                                                    "Spieler nicht gefunden oder außerhalb der Reichweite!");
-                    return;
-                }
+            if (!dbPlayer.IsACop() || !dbPlayer.IsInDuty())
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                dbPlayer.SetData("takeLic", findPlayer);
+            var findPlayer = Players.Instance.FindPlayer(p_Name);
+            if (findPlayer == null || findPlayer.Player.Position.DistanceTo(p_Player.Position) > 5.0f)
+            {
+                dbPlayer.SendNewNotification(
+                                                "Spieler nicht gefunden oder außerhalb der Reichweite!");
+                return;
+            }
 
-                DialogMigrator.CreateMenu(p_Player, Dialogs.menu_takelic, "Lizenzen",
-                    "Welche Lizenz wollen Sie " + findPlayer.GetName() + " entziehen...");
-                if (findPlayer.Lic_Car[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Car, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Car, "");
-                if (findPlayer.Lic_LKW[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Lkw, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Lkw, "");
-                if (findPlayer.Lic_Bike[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Bike, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Bike, "");
-                if (findPlayer.Lic_Boot[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Boot, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Boot, "");
-                if (findPlayer.Lic_PlaneA[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneA, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneA, "");
-                if (findPlayer.Lic_PlaneB[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneB, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneB, "");
-                if (findPlayer.Lic_Biz[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Biz, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Biz, "");
-                if (findPlayer.Lic_Gun[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Gun, "");
-                else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Gun, "");
-                if (findPlayer.Lic_Transfer[0] > 0)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Transfer, "");
-                else
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Transfer, "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, "Menu schließen", "");
-                DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_takelic);
-            
+            dbPlayer.SetData("takeLic", findPlayer);
+
+            DialogMigrator.CreateMenu(p_Player, Dialogs.menu_takelic, "Lizenzen",
+                "Welche Lizenz wollen Sie " + findPlayer.GetName() + " entziehen...");
+            if (findPlayer.Lic_Car[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Car, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Car, "");
+            if (findPlayer.Lic_LKW[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Lkw, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Lkw, "");
+            if (findPlayer.Lic_Bike[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Bike, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Bike, "");
+            if (findPlayer.Lic_Boot[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Boot, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Boot, "");
+            if (findPlayer.Lic_PlaneA[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneA, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneA, "");
+            if (findPlayer.Lic_PlaneB[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneB, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.PlaneB, "");
+            if (findPlayer.Lic_Biz[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Biz, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Biz, "");
+            if (findPlayer.Lic_Gun[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Gun, "");
+            else DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Gun, "");
+            if (findPlayer.Lic_Transfer[0] > 0)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Transfer, "");
+            else
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, Content.License.Transfer, "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_takelic, "Menu schließen", "");
+            DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_takelic);
+
         }
 
         public async Task HandleGiveLic(Player p_Player, string p_Name)
         {
-            
-                var dbPlayer = p_Player.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.CanAccessMethod()) return;
 
-                if (dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL || !dbPlayer.IsInDuty())
-                {
-                    dbPlayer.SendNewNotification( MSG.Error.NoPermissions());
-                    return;
-                }
+            var dbPlayer = p_Player.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.CanAccessMethod()) return;
 
-                var findPlayer = Players.Instance.FindPlayer(p_Name);
+            if (dbPlayer.TeamId != (int)teams.TEAM_DRIVINGSCHOOL || !dbPlayer.IsInDuty())
+            {
+                dbPlayer.SendNewNotification(MSG.Error.NoPermissions());
+                return;
+            }
 
-                if (findPlayer == null || findPlayer.Player.Position.DistanceTo(p_Player.Position) > 5.0f)
-                {
-                    dbPlayer.SendNewNotification(
-                        
-                        "Spieler nicht gefunden oder außerhalb der Reichweite!");
-                    return;
-                }
+            var findPlayer = Players.Instance.FindPlayer(p_Name);
 
-                if (findPlayer.IsHomeless())
-                {
-                    dbPlayer.SendNewNotification("Ohne Wohnsitz kann diese Person keine Lizenz erhalten!");
-                    return;
-                }
+            if (findPlayer == null || findPlayer.Player.Position.DistanceTo(p_Player.Position) > 5.0f)
+            {
+                dbPlayer.SendNewNotification(
 
-                if (dbPlayer.Player.Position.DistanceTo(new Vector3(-810.6085, -1347.864, 5.166561)) >= 20.0f)
-                {
-                    dbPlayer.SendNewNotification("Du musst an dem Fahrschulgebaeude sein um Scheine auszustellen!");
-                    return;
-                }
+                    "Spieler nicht gefunden oder außerhalb der Reichweite!");
+                return;
+            }
 
-                dbPlayer.SetData("giveLic", findPlayer.Player);
+            if (findPlayer.IsHomeless())
+            {
+                dbPlayer.SendNewNotification("Ohne Wohnsitz kann diese Person keine Lizenz erhalten!");
+                return;
+            }
 
-                DialogMigrator.CreateMenu(dbPlayer.Player, Dialogs.menu_givelicenses, "Lizenzen",
-                    "Vergebe Lizenzen an " + findPlayer.GetName());
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
-                    Content.License.Car + " " + Price.License.Car + "$", "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
-                    Content.License.Lkw + " " + Price.License.Lkw + "$", "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
-                    Content.License.Bike + " " + Price.License.Bike + "$", "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
-                    Content.License.Boot + " " + Price.License.Boot + "$", "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
-                    Content.License.PlaneA + " " + Price.License.PlaneA + "$", "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
-                    Content.License.PlaneB + " " + Price.License.PlaneB + "$", "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
-                    Content.License.Transfer + " " + Price.License.Transfer + "$", "");
-                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses, "Menu schließen", "");
-                DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_givelicenses);
-            
+            if (dbPlayer.Player.Position.DistanceTo(new Vector3(-810.6085, -1347.864, 5.166561)) >= 20.0f)
+            {
+                dbPlayer.SendNewNotification("Du musst an dem Fahrschulgebaeude sein um Scheine auszustellen!");
+                return;
+            }
+
+            dbPlayer.SetData("giveLic", findPlayer.Player);
+
+            DialogMigrator.CreateMenu(dbPlayer.Player, Dialogs.menu_givelicenses, "Lizenzen",
+                "Vergebe Lizenzen an " + findPlayer.GetName());
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
+                Content.License.Car + " " + Price.License.Car + "$", "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
+                Content.License.Lkw + " " + Price.License.Lkw + "$", "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
+                Content.License.Bike + " " + Price.License.Bike + "$", "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
+                Content.License.Boot + " " + Price.License.Boot + "$", "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
+                Content.License.PlaneA + " " + Price.License.PlaneA + "$", "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
+                Content.License.PlaneB + " " + Price.License.PlaneB + "$", "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses,
+                Content.License.Transfer + " " + Price.License.Transfer + "$", "");
+            DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_givelicenses, "Menu schließen", "");
+            DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_givelicenses);
+
         }
 
         public async Task HandleGiveMarryLic(Player p_Player, string p_Name)
@@ -223,13 +222,13 @@ namespace GVRP.Module.Players.Commands
                 dbPlayer.SendNewNotification(findPlayer.GetName() + " hat bereits die " + Content.License.marryLic);
             }
             else
-            {                           
+            {
                 MySQLHandler.ExecuteAsync($"UPDATE player SET marrylic = '1' WHERE id = '{findPlayer.Id}'");
 
                 findPlayer.marryLic = 1;
 
-                findPlayer.SendNewNotification("Sie haben die "+Content.License.marryLic+" erhalten!");
-                dbPlayer.SendNewNotification("Sie haben "+findPlayer.GetName()+" die "+Content.License.marryLic+" gegeben.");
+                findPlayer.SendNewNotification("Sie haben die " + Content.License.marryLic + " erhalten!");
+                dbPlayer.SendNewNotification("Sie haben " + findPlayer.GetName() + " die " + Content.License.marryLic + " gegeben.");
 
             }
 
@@ -237,7 +236,7 @@ namespace GVRP.Module.Players.Commands
 
         public void HandleSupport(string p_Name, int p_ForumID, string p_Message)
         {
-                Players.Instance.SendMessageToAuthorizedUsers("support", $"[{p_Name}({p_ForumID})]: {p_Message}", time:20000);
+            Players.Instance.SendMessageToAuthorizedUsers("support", $"[{p_Name}({p_ForumID})]: {p_Message}", time: 20000);
         }
 
         public async Task SendGovMessage(DbPlayer player, string mesage)
@@ -385,32 +384,32 @@ namespace GVRP.Module.Players.Commands
                     ////DBLogging.LogAdminAction(player, findPlayer.GetName(), adminLogTypes.log, $"{amount}$ GiveBlackMoneyHand");
                     return;
                 }
-                
+
             });
         }
-         //fuck it dont need yk blackmoney yk
+        //fuck it dont need yk blackmoney yk
         public async Task HandleFindüberfall(DbPlayer dbPlayer)
         {
-            
-                if (!dbPlayer.IsValid())
-                    return;
 
-                if (RobberyModule.Instance.GetActiveRobs().Count <= 0)
-                {
-                    dbPlayer.SendNewNotification( "Kein Raubueberfall gefunden.");
-                    return;
-                }
+            if (!dbPlayer.IsValid())
+                return;
 
-                DialogMigrator.CreateMenu(dbPlayer.Player, Dialogs.menu_findrob, "Aktuelle Raube", "");
-                foreach (Rob rob in RobberyModule.Instance.GetActiveRobs(true))
-                {
-                    if (rob.Id == RobberyModule.Juwelier)
-                        DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_findrob, "Juwelier", "");
-                    else
-                        DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_findrob, "Shopraub", "");
-                }
+            if (RobberyModule.Instance.GetActiveRobs().Count <= 0)
+            {
+                dbPlayer.SendNewNotification("Kein Raubueberfall gefunden.");
+                return;
+            }
 
-                DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_findrob);
+            DialogMigrator.CreateMenu(dbPlayer.Player, Dialogs.menu_findrob, "Aktuelle Raube", "");
+            foreach (Rob rob in RobberyModule.Instance.GetActiveRobs(true))
+            {
+                if (rob.Id == RobberyModule.Juwelier)
+                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_findrob, "Juwelier", "");
+                else
+                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_findrob, "Shopraub", "");
+            }
+
+            DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_findrob);
         }
 
         public async Task HandleFindBlackW(DbPlayer dbPlayer)
@@ -455,27 +454,27 @@ namespace GVRP.Module.Players.Commands
 
         public async Task HandleJail(DbPlayer dbPlayer)
         {
-            
-                if (!dbPlayer.IsValid())
-                    return;
 
-                Dictionary<string, int> l_JailInhabits = new Dictionary<string, int>();
+            if (!dbPlayer.IsValid())
+                return;
 
-                foreach (var l_Player in Players.Instance.GetValidPlayers())
-                {
-                    if (l_Player.jailtime[0] > 0)
-                        l_JailInhabits.TryAdd(l_Player.GetName(), l_Player.jailtime[0]);
-                }
+            Dictionary<string, int> l_JailInhabits = new Dictionary<string, int>();
 
-                DialogMigrator.CreateMenu(dbPlayer.Player, Dialogs.menu_jailinhabits, "Insassen (Name - Verbleib. Monate)", "");
-                foreach (var l_Pair in l_JailInhabits)
-                    DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_jailinhabits, $"{l_Pair.Key} - {l_Pair.Value}", "");
+            foreach (var l_Player in Players.Instance.GetValidPlayers())
+            {
+                if (l_Player.jailtime[0] > 0)
+                    l_JailInhabits.TryAdd(l_Player.GetName(), l_Player.jailtime[0]);
+            }
 
-                DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_jailinhabits);
-                dbPlayer.SendNewNotification($"Es befinden sich insgesamt {l_JailInhabits.Count} Insassen im SG!");
-            
+            DialogMigrator.CreateMenu(dbPlayer.Player, Dialogs.menu_jailinhabits, "Insassen (Name - Verbleib. Monate)", "");
+            foreach (var l_Pair in l_JailInhabits)
+                DialogMigrator.AddMenuItem(dbPlayer.Player, Dialogs.menu_jailinhabits, $"{l_Pair.Key} - {l_Pair.Value}", "");
+
+            DialogMigrator.OpenUserMenu(dbPlayer, Dialogs.menu_jailinhabits);
+            dbPlayer.SendNewNotification($"Es befinden sich insgesamt {l_JailInhabits.Count} Insassen im SG!");
+
         }
-        
+
         public async Task HandleNews(string p_NewsMessage)
         {
             await Task.Run(() =>

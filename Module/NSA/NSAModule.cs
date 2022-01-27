@@ -1,8 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Commands;
@@ -19,7 +15,9 @@ using GVRP.Module.Players.Windows;
 using GVRP.Module.Storage;
 using GVRP.Module.Teams;
 using GVRP.Module.Vehicles;
-using GVRP.Module.Vehicles.InteriorVehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.NSA
 {
@@ -47,7 +45,7 @@ namespace GVRP.Module.NSA
         protected override bool OnLoad()
         {
             TransactionHistory = new List<TransactionHistoryObject>();
-            
+
             MenuManager.Instance.AddBuilder(new NSAVehicleListMenuBuilder());
             MenuManager.Instance.AddBuilder(new NSAVehicleModifyMenuBuilder());
             MenuManager.Instance.AddBuilder(new NSAComputerMenuBuilder());
@@ -59,15 +57,15 @@ namespace GVRP.Module.NSA
             MenuManager.Instance.AddBuilder(new NSATransactionHistoryMenuBuilder());
             MenuManager.Instance.AddBuilder(new NSAEnergyHistoryMenuBuilder());
             MenuManager.Instance.AddBuilder(new NSADoorUsedsMenuBuilder());
-            
+
             return base.OnLoad();
         }
-        
+
         public override void OnTenSecUpdate()
         {
-            foreach(DbPlayer member in TeamModule.Instance.Get((uint)teams.TEAM_FIB).Members.Values.ToList())
+            foreach (DbPlayer member in TeamModule.Instance.Get((uint)teams.TEAM_FIB).Members.Values.ToList())
             {
-                if(member.HasData("nsaOrtung"))
+                if (member.HasData("nsaOrtung"))
                 {
                     DbPlayer targetOne = Players.Players.Instance.FindPlayerById(member.GetData("nsaOrtung"));
                     if (targetOne == null || !targetOne.IsValid() || !targetOne.IsOrtable(member, true))
@@ -104,12 +102,12 @@ namespace GVRP.Module.NSA
 
         public void StopNASCAll(int phoneNumber, int phoneNumber2 = 0)
         {
-            foreach(DbPlayer xPlayer in TeamModule.Instance.Get((uint)teams.TEAM_FIB).Members.Values.ToList())
+            foreach (DbPlayer xPlayer in TeamModule.Instance.Get((uint)teams.TEAM_FIB).Members.Values.ToList())
             {
                 if (xPlayer == null || !xPlayer.IsValid()) continue;
-                if(xPlayer.HasData("nsa_activePhone"))
+                if (xPlayer.HasData("nsa_activePhone"))
                 {
-                    if(xPlayer.GetData("nsa_activePhone") == phoneNumber || xPlayer.GetData("nsa_activePhone") == phoneNumber2)
+                    if (xPlayer.GetData("nsa_activePhone") == phoneNumber || xPlayer.GetData("nsa_activePhone") == phoneNumber2)
                     {
                         xPlayer.ResetData("nsa_activePhone");
                         xPlayer.Player.TriggerEvent("setCallingPlayer", "");
@@ -151,10 +149,10 @@ namespace GVRP.Module.NSA
                     dbPlayer.SendNewNotification("Gesuchte Person " + playerFromPool.GetName() + " befindet sich im BusinessTower!");
                     break;
                 case DimensionType.Storage:
-                    if(playerFromPool.HasData("storageRoomId"))
+                    if (playerFromPool.HasData("storageRoomId"))
                     {
                         StorageRoom storageRoom = StorageRoomModule.Instance.Get((uint)playerFromPool.GetData("storageRoomId"));
-                        if(storageRoom != null) player.TriggerEvent("setPlayerGpsMarker", storageRoom.Position.X, storageRoom.Position.Y);
+                        if (storageRoom != null) player.TriggerEvent("setPlayerGpsMarker", storageRoom.Position.X, storageRoom.Position.Y);
                     }
                     break;
                 case DimensionType.WeaponFactory:
@@ -184,10 +182,10 @@ namespace GVRP.Module.NSA
                     return true;
                 }
             }
-            
+
             return false;
         }
-        
+
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
         public void Commandtakebm(Player player, string commandParams)
@@ -223,7 +221,7 @@ namespace GVRP.Module.NSA
                     return;
                 }
 
-                if(findPlayer.blackmoney[0] <= 0)
+                if (findPlayer.blackmoney[0] <= 0)
                 {
                     dbPlayer.SendNewNotification("Person hat kein Schwarzgeld auf der Hand!");
                     return;
@@ -243,7 +241,7 @@ namespace GVRP.Module.NSA
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandcreatevoltage(Player player) 
+        public void Commandcreatevoltage(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null) return;
@@ -266,7 +264,7 @@ namespace GVRP.Module.NSA
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandpeilsender(Player player) 
+        public void Commandpeilsender(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null) return;
@@ -282,20 +280,20 @@ namespace GVRP.Module.NSA
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandsuspendieren(Player player) 
+        public void Commandsuspendieren(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null) return;
 
             if (!iPlayer.IsValid() || (iPlayer.TeamId != (int)teams.TEAM_FIB && iPlayer.TeamId != (int)teams.TEAM_GOV) || iPlayer.TeamRank < 11) return;
-            
+
             ComponentManager.Get<TextInputBoxWindow>().Show()(iPlayer, new TextInputBoxWindowObject() { Title = "Suspendierung", Callback = "NSASuspendate", Message = "Bitte einen Namen angeben:" });
             return;
         }
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandcloneplayer(Player player) 
+        public void Commandcloneplayer(Player player)
         {
             var iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.CanAccessMethod()) return;
@@ -303,7 +301,7 @@ namespace GVRP.Module.NSA
             if (!Configurations.Configuration.Instance.DevMode) return;
             if (!iPlayer.IsValid()) return;
 
-            if(iPlayer.HasData("clonePerson"))
+            if (iPlayer.HasData("clonePerson"))
             {
                 iPlayer.ResetData("clonePerson");
                 iPlayer.SendNewNotification("Cloning beendet!");
@@ -316,7 +314,7 @@ namespace GVRP.Module.NSA
             }
             return;
         }
-        
+
         [CommandPermission()]
         [Command(GreedyArg = true)]
         public void Commandsetgovlevel(Player player, string args)
@@ -355,7 +353,7 @@ namespace GVRP.Module.NSA
 
             var findPlayer = Players.Players.Instance.FindPlayer(name);
             if (findPlayer == null || !findPlayer.IsValid()) return;
-            
+
             findPlayer.RemoveGovLevel();
 
             dbPlayer.SendNewNotification($"Sie haben {findPlayer.GetName()} die Sicherheitsfreigabe entzogen!");

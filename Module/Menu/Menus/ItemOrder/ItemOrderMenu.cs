@@ -1,6 +1,4 @@
-﻿using GVRP.Module.Houses;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
 
 namespace GVRP

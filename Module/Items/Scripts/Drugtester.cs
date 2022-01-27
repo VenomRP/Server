@@ -1,17 +1,11 @@
-﻿using System;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.Events.Halloween;
-using GVRP.Module.Gangwar;
-using GVRP.Module.Laboratories;
+﻿using GVRP.Handler;
 using GVRP.Module.Meth;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Vehicles;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -20,11 +14,11 @@ namespace GVRP.Module.Items.Scripts
         public static async Task<bool> DrugtestAir(DbPlayer iPlayer, ItemModel ItemData)
         {
             if (iPlayer.Player.IsInVehicle || iPlayer.TeamId != (int)teams.TEAM_FIB) return false;
-        
+
             if (iPlayer.HasData("lastDrugAirUsed"))
             {
                 DateTime lastUsed = iPlayer.GetData("lastDrugAirUsed");
-                if(lastUsed.AddMinutes(1) > DateTime.Now)
+                if (lastUsed.AddMinutes(1) > DateTime.Now)
                 {
                     iPlayer.SendNewNotification("Es kann nur eine Messung innerhalb 1 Minuten durchgeführt werden!");
                     return true;
@@ -45,14 +39,14 @@ namespace GVRP.Module.Items.Scripts
                 if (Distance < MethModule.CamperDrugAirRange)
                 {
                     // get percent
-                    int percDist = 10-((int)((Distance/60) * 10));
-                    int Stickstoff = Convert.ToInt32(0.78f * (100-percDist));
-                    int Sauerstoff = Convert.ToInt32(0.20f * (100-percDist));
+                    int percDist = 10 - ((int)((Distance / 60) * 10));
+                    int Stickstoff = Convert.ToInt32(0.78f * (100 - percDist));
+                    int Sauerstoff = Convert.ToInt32(0.20f * (100 - percDist));
                     iPlayer.SendNewNotification($"Lufttest: Stickstoff {Stickstoff}%, Sauerstoff {Sauerstoff}%, Aldehyde {percDist}%");
                     return true;
                 }
             }
-            
+
             /*foreach(Methlaboratory methlaboratory in Laboratories.MethlaboratoryModule.Instance.GetAll().Values.Where(m => m.ProzessingPlayers.Count() > 0))
             {
                 float Distance = iPlayer.Player.Position.DistanceTo(methlaboratory.JumpPointEingang.Position);

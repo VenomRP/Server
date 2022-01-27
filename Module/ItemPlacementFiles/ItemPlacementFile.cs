@@ -8,7 +8,7 @@ namespace GVRP.Module.ItemPlacementFiles
         public string Hash { get; }
         public string Name { get; }
         public bool Active { get; }
-        
+
         public ItemPlacementFile(MySqlDataReader reader) : base(reader)
         {
             Id = reader.GetUInt32(0);

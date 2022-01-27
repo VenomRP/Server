@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Players.Db;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Forum
 {
@@ -33,7 +30,7 @@ namespace GVRP.Module.Forum
             }
 
 
-            if(iPlayer.married[0] > 0)
+            if (iPlayer.married[0] > 0)
             {
                 // Get Name
 

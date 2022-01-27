@@ -1,6 +1,5 @@
-﻿using System;
-using GVRP.Module.Logging;
-using GVRP.Module.Spawners;
+﻿using GVRP.Module.Spawners;
+using System;
 
 namespace GVRP.Module.Injury
 {

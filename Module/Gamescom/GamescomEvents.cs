@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
+using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace GVRP.Module.Gamescom
 {
@@ -39,7 +36,7 @@ namespace GVRP.Module.Gamescom
                 return;
             }
 
-            
+
             if (returnString.Length == 9 && Regex.IsMatch(returnString, @"^[a-zA-Z0-9]+$") && returnString.StartsWith("Venom") && GamescomModule.Instance.Codes.TryGetValue(returnString, out GamescomCode code))
             {
                 if (code.PlayerId == 0)

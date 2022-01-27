@@ -1,20 +1,12 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Commands;
 using GVRP.Module.FIB.Menu;
 using GVRP.Module.Menu;
-using GVRP.Module.NSA.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Teams;
-using GVRP.Module.Vehicles.InteriorVehicles;
-using GVRP.Handler;
+using MySql.Data.MySqlClient;
 
 
 namespace GVRP.Module.FIB
@@ -28,7 +20,7 @@ namespace GVRP.Module.FIB
         {
             dbPlayer.UndercoverName = reader.GetString("ucname");
 
-            if(dbPlayer.IsUndercover())
+            if (dbPlayer.IsUndercover())
             {
                 string[] nameParts = dbPlayer.UndercoverName.Split("_");
                 if (nameParts.Length < 2 || nameParts[0].Length < 3 || nameParts[1].Length < 3) return;
@@ -47,16 +39,16 @@ namespace GVRP.Module.FIB
         {
             if (dbPlayer.TeamId != (int)teams.TEAM_FIB || dbPlayer.Player.IsInVehicle) return false;
             if (dbPlayer.TeamRank < 5) return false;
-            if(dbPlayer.Player.Position.DistanceTo(UCPoint) < 2.0f)
+            if (dbPlayer.Player.Position.DistanceTo(UCPoint) < 2.0f)
             {
 
-                if(dbPlayer.IsUndercover())
+                if (dbPlayer.IsUndercover())
                 {
                     Discord.SendMessage(dbPlayer.GetName() + $" hat den Undercover Dienst beendet! ({dbPlayer.UndercoverName})");
                     dbPlayer.ResetUndercover();
                     dbPlayer.SendNewNotification("Sie haben den Undercoverdienst beendet!");
                     dbPlayer.Team.SendNotification($"{dbPlayer.GetName()} hat den Undercover Dienst beendet!", 5000, 10);
-                    
+
                 }
                 else
                 {

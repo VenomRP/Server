@@ -1,14 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace GVRP.Module.Items.Scripts.Presents
 {
     public class Present : Loadable<uint>
     {
         public uint Id { get; }
-        
+
         public ItemModel Item { get; set; }
         public ItemModel ResultItem { get; set; }
         public int Percent { get; set; }

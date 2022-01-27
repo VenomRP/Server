@@ -27,7 +27,7 @@ namespace GVRP.Module.Players
             dbPlayer.Player.TriggerEvent("freezePlayer", freeze);
             //dbPlayer.Player.FreezePosition = freeze;
         }
-        
+
         public static void Freeze(this Player player, bool freeze, bool shapefreeze = false,
             bool interrupt = false)
         {

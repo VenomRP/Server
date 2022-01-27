@@ -1,11 +1,8 @@
-﻿using System;
-using GVRP.Module.Chat;
-using GVRP.Module.Gangwar;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Gangwar;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams.Shelter;
+using System;
 
 namespace GVRP
 {
@@ -54,7 +51,7 @@ namespace GVRP
                         10000);
                 }
                 else if (index == 2)
-                { 
+                {
                     if (iPlayer.IsAGangster())
                     {
                         gangwar.Attack(iPlayer);

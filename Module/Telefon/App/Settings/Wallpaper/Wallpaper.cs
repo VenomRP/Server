@@ -10,7 +10,7 @@ namespace GVRP.Module.Telefon.App.Settings.Wallpaper
         [JsonProperty(PropertyName = "name")]
         public string Name { get; }
         [JsonProperty(PropertyName = "file")]
-        public string File { get;}
+        public string File { get; }
         [JsonIgnore]
         public bool isTeamOnly { get; }
 

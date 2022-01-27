@@ -1,14 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using System.Linq;
 
 namespace GVRP.Module.Kasino
 {
@@ -58,7 +53,8 @@ namespace GVRP.Module.Kasino
         {
             NAPI.Task.Run(() => ComponentManager.Get<TextInputBoxWindow>().Show()(
                 iPlayer,
-                new TextInputBoxWindowObject() {  //thats other thing its wurfel not casino | ok let me fix this anyways
+                new TextInputBoxWindowObject()
+                {  //thats other thing its wurfel not casino | ok let me fix this anyways
                     Title = $"Würfelrunde ({kasinoDice.MinPrice} $ - {kasinoDice.MaxPrice} $)",
                     Callback = "StartDiceGame",
                     Message = "Gib einen Einsatz ein, den jeder Teilnehmer setzen muss."

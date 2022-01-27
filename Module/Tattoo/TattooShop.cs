@@ -1,9 +1,8 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Spawners;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System.Collections.Generic;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Spawners;
 
 namespace GVRP.Module.Tattoo
 {

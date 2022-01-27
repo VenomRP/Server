@@ -1,7 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using GVRP.Module.Items;
+using MySql.Data.MySqlClient;
 using System;
-using GVRP.Handler;
-using GVRP.Module.Items;
 
 namespace GVRP.Module.Export
 {
@@ -24,7 +23,7 @@ namespace GVRP.Module.Export
             MaxPrice = reader.GetInt32("max_price");
             TempCountSaving = 0;
 
-            if(MinPrice > 0 && MaxPrice > 0)
+            if (MinPrice > 0 && MaxPrice > 0)
             {
                 Price = new Random().Next(MinPrice, MaxPrice);
             }

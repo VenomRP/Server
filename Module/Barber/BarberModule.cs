@@ -1,22 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Handler;
+﻿using GTANetworkAPI;
 using GVRP.Module.Assets.Beard;
 using GVRP.Module.Assets.Chest;
 using GVRP.Module.Assets.Hair;
 using GVRP.Module.Assets.HairColor;
 using GVRP.Module.Barber.Windows;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Customization;
 using GVRP.Module.GTAN;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
-
 using GVRP.Module.Players.Db;
 using GVRP.Module.Tattoo;
+using System;
 
 namespace GVRP.Module.Barber
 {
@@ -26,7 +20,7 @@ namespace GVRP.Module.Barber
         {
             return new[] { typeof(BarberShopModule), typeof(AssetsBeardModule), typeof(AssetsHairModule), typeof(AssetsHairColorModule), typeof(AssetsChestModule) };
         }
-        
+
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
             if (key != Key.E || dbPlayer.Player.IsInVehicle) return false;
@@ -46,7 +40,7 @@ namespace GVRP.Module.Barber
                 dbPlayer.Player.ClearAccessory(6);
                 dbPlayer.Player.ClearAccessory(7);
                 TattooShopFunctions.SetTattooClothes(dbPlayer);
-                
+
                 if (dbPlayer.Customization.Gender == 0)
                 {
                     ComponentManager.Get<BarberShopWindow>().Show()(dbPlayer, BarberShopModule.Instance.MaleListJsonBarberObject[barberShopId]);

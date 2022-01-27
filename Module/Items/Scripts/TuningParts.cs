@@ -1,10 +1,5 @@
-﻿using System;
-using GVRP.Handler;
-using GVRP.Module.Chat;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Vehicles;
 
 namespace GVRP.Module.Items.Scripts
 {

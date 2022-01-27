@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Injury;
+﻿using GVRP.Module.Injury;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Zone;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Service
 {
@@ -49,11 +49,11 @@ namespace GVRP.Module.Service
             {
                 List<Service> returnServices = new List<Service>();
 
-                foreach(KeyValuePair<uint, List<Service>> kvp in serviceList)
+                foreach (KeyValuePair<uint, List<Service>> kvp in serviceList)
                 {
-                    if(kvp.Value != null && kvp.Value.Count > 0)
+                    if (kvp.Value != null && kvp.Value.Count > 0)
                     {
-                        foreach(Service service in kvp.Value.ToList().Where(s => s.Player.Id == iPlayer.Id))
+                        foreach (Service service in kvp.Value.ToList().Where(s => s.Player.Id == iPlayer.Id))
                         {
                             returnServices.Add(service);
                         }
@@ -62,7 +62,8 @@ namespace GVRP.Module.Service
 
                 return returnServices;
             }
-            catch(Exception e) {
+            catch (Exception e)
+            {
                 Logging.Logger.Crash(e);
                 return new List<Service>();
             }
@@ -81,7 +82,7 @@ namespace GVRP.Module.Service
         public override void OnMinuteUpdate()
         {
             if (!serviceList.ContainsKey((int)teams.TEAM_MEDIC)) return;
-            foreach(Service service in serviceList[(int)teams.TEAM_MEDIC].Where(s => s.Player != null && s.Player.IsValid() && s.Player.isInjured()))
+            foreach (Service service in serviceList[(int)teams.TEAM_MEDIC].Where(s => s.Player != null && s.Player.IsValid() && s.Player.isInjured()))
             {
                 service.Message = $"Verletzung: {service.Player.Injury.Name} | {service.Player.Injury.TimeToDeath - service.Player.deadtime[0]} Min";
             }
@@ -134,7 +135,7 @@ namespace GVRP.Module.Service
 
             if (playerTeam != createdService[0].TeamId) return false;
             if (createdService[0].Accepted.Contains(iPlayer.GetName())) return false;
-            
+
             bool status = createdService[0].Accepted.Add(iPlayer.GetName());
             return status;
         }
@@ -166,7 +167,7 @@ namespace GVRP.Module.Service
 
         public override void OnPlayerDisconnected(DbPlayer dbPlayer, string reason)
         {
-            if(dbPlayer.isInjured())
+            if (dbPlayer.isInjured())
             {
                 CancelOwnService(dbPlayer, (int)teams.TEAM_MEDIC);
             }

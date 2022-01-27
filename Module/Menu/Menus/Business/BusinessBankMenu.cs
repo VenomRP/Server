@@ -38,10 +38,10 @@ namespace GVRP
                 switch (index)
                 {
                     case 1: // Kaufen
-                        
+
                         if (!iPlayer.IsMemberOfBusiness() && !iPlayer.IsHomeless())
                         {
-                                                                                     
+
                             if (!iPlayer.TakeBankMoney(250000))
                             {
                                 iPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(250000));
@@ -50,7 +50,7 @@ namespace GVRP
 
                             BusinessModule.Instance.CreatePlayerBusiness(iPlayer);
                             iPlayer.SendNewNotification("Business erfolgreich fuer $250000 erworben!");
-                            
+
                         }
                         else
                         {

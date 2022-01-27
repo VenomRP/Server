@@ -14,7 +14,7 @@ namespace GVRP.Module.Maps.Test
                 ObjectSpawn.Create(model, position, rotation, dimension);
             }
         }
-        
+
         public static void Load(uint dimension)
         {
             Add(-1867871609, new Vector3(125.9254f, -420.6841f, 40.06044f),

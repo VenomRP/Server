@@ -1,17 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Houses;
-using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 
 namespace GVRP.Module.Einreiseamt
 {
@@ -53,7 +45,7 @@ namespace GVRP.Module.Einreiseamt
                 DbPlayer foundPlayer = Players.Players.Instance.FindPlayer(iPlayer.GetData("einreiseamtp"));
                 if (foundPlayer == null || !foundPlayer.IsValid() || !foundPlayer.NeuEingereist()) return false;
 
-                switch(index)
+                switch (index)
                 {
                     case 2: // Ablehnen
 
@@ -61,7 +53,7 @@ namespace GVRP.Module.Einreiseamt
                         foundPlayer.SendNewNotification("Bitte melden Sie sich bei Fragen im Support!");
                         iPlayer.SendNewNotification($"Sie haben {foundPlayer.GetName()} die Einreise verweigert!");
 
-             
+
                         //DBLogging.LogAdminAction(iPlayer.Player, foundPlayer.GetName(), adminLogTypes.perm, "Einreiseamt", 0, Configurations.Configuration.Instance.DevMode);
                         foundPlayer.warns[0] = 3;
 

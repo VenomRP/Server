@@ -1,54 +1,43 @@
-﻿using GVRP.Module.GTAN;
-using System;
-using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Business;
-using GVRP.Module.Chat;
 using GVRP.Module.Clothes;
 using GVRP.Module.Clothes.Character;
 using GVRP.Module.Clothes.Props;
 using GVRP.Module.Clothes.Shops;
 using GVRP.Module.Configurations;
-using GVRP.Module.Doors;
-using GVRP.Module.Export;
+using GVRP.Module.Crime;
+using GVRP.Module.Dealer;
+using GVRP.Module.Farming;
+using GVRP.Module.Gangwar;
+using GVRP.Module.Guenther;
 using GVRP.Module.Houses;
+using GVRP.Module.Injury;
+using GVRP.Module.Items;
 using GVRP.Module.Jobs;
-using GVRP.Module.Jobs.Bus;
+using GVRP.Module.Logging;
 using GVRP.Module.Menu;
+using GVRP.Module.NSA;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using GVRP.Module.Players.Events;
 using GVRP.Module.Players.PlayerTask;
 using GVRP.Module.Robbery;
+using GVRP.Module.Staatskasse;
 using GVRP.Module.Tasks;
 using GVRP.Module.Teams;
 using GVRP.Module.Teams.Permission;
+using GVRP.Module.Teams.Shelter;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Vehicles.Data;
 using GVRP.Module.Vehicles.Garages;
-using GVRP.Module.Vehicles.Shops;
-using GVRP.Module.Players.Events;
-using GVRP.Module.Items;
-using GVRP.Module.Shops;
-using GVRP.Module.Farming;
-using GVRP.Module.Crime;
-using GVRP.Module.Logging;
-using GVRP.Module.Helper;
-using GVRP.Module.Teams.Shelter;
-using System.Linq;
-using GVRP.Module.Gangwar;
-using GVRP.Module.Warrants;
-using GVRP.Module.Staatskasse;
 using GVRP.Module.Vehicles.RegistrationOffice;
-using GVRP.Module.Dealer;
-using GVRP.Module.Injury;
-using GVRP.Module.Guenther;
+using GVRP.Module.Vehicles.Shops;
 using GVRP.Module.Zone;
-using GVRP.Module.NSA;
-using Newtonsoft.Json;
-using System.Net;
-using System.Text;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 
 namespace GVRP
@@ -109,7 +98,7 @@ namespace GVRP
                                 if (targetPlayer.TeamRankPermission.Manage == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         "Sie können keinen Mainleader uninviten!", title: "", notificationType: PlayerNotification.NotificationType.ERROR);
                                     return;
                                 }
@@ -120,7 +109,7 @@ namespace GVRP
                                 targetPlayer.SendNewNotification(
                                     iPlayer.GetName() + " hat Sie aus der Fraktion entlassen!");
                                 iPlayer.SendNewNotification($"Sie haben {targetPlayer.GetName()} entlassen!");
-                                
+
                                 PlayerSpawn.OnPlayerSpawn(targetPlayer.Player);
                                 targetPlayer.SetTeamRankPermission(false, 0, false, "");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_fmanager);
@@ -158,7 +147,7 @@ namespace GVRP
                                 if (targetPlayer.TeamRankPermission.Manage == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         "Sie können keinen Mainleader degradieren!");
                                     return;
                                 }
@@ -213,7 +202,7 @@ namespace GVRP
                                 if (targetPlayer.TeamRankPermission.Inventory)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         "Spieler hat bereits Rechte zum Inventar!");
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_fmanager);
                                     return;
@@ -238,7 +227,7 @@ namespace GVRP
                                 if (targetPlayer.TeamRankPermission.Manage == 1)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         "Spieler hat bereits Rechte zur Fraktionsverwaltung!");
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_fmanager);
                                     return;
@@ -263,7 +252,7 @@ namespace GVRP
                                 if (targetPlayer.TeamRankPermission.Manage == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         "Sie können keinem Mainleader die Rechte entziehen!");
                                     return;
                                 }
@@ -370,7 +359,7 @@ namespace GVRP
                                 Logger.SaveClothesShopBuyAction(shopId, price);
                             }
                         }
-                        
+
                         ClothesShopModule.Instance.Buy(iPlayer);
 
                         DialogMigrator.CloseUserMenu(player, Dialogs.menu_shop_clothes);
@@ -824,23 +813,23 @@ namespace GVRP
                     switch (index)
                     {
                         case 0:
-                            iPlayer.adminObject.Position = 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Position.X + iPlayer.adminObjectSpeed,
                                     iPlayer.adminObject.Position.Y, iPlayer.adminObject.Position.Z);
                             break;
                         case 1:
-                            iPlayer.adminObject.Position = 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Position.X - iPlayer.adminObjectSpeed,
                                     iPlayer.adminObject.Position.Y, iPlayer.adminObject.Position.Z);
                             break;
                         case 2:
-                            iPlayer.adminObject.Position = 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Position.X,
                                     iPlayer.adminObject.Position.Y + iPlayer.adminObjectSpeed,
                                     iPlayer.adminObject.Position.Z);
                             break;
                         case 3:
-                            iPlayer.adminObject.Position = 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Position.X,
                                     iPlayer.adminObject.Position.Y - iPlayer.adminObjectSpeed,
                                     iPlayer.adminObject.Position.Z);
@@ -851,12 +840,12 @@ namespace GVRP
                                     iPlayer.adminObject.Position.Z + iPlayer.adminObjectSpeed);
                             break;
                         case 5:
-                            iPlayer.adminObject.Position= 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Position.X, iPlayer.adminObject.Position.Y,
                                     iPlayer.adminObject.Position.Z - iPlayer.adminObjectSpeed);
                             break;
                         case 6:
-                            iPlayer.adminObject.Position = 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Rotation.X, iPlayer.adminObject.Rotation.Y,
                                     iPlayer.adminObject.Rotation.Z + iPlayer.adminObjectSpeed * 8);
                             break;
@@ -872,13 +861,13 @@ namespace GVRP
                                     iPlayer.adminObject.Rotation.Z);
                             break;
                         case 9:
-                            iPlayer.adminObject.Position = 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Rotation.X - iPlayer.adminObjectSpeed * 8,
                                     iPlayer.adminObject.Rotation.Y,
                                     iPlayer.adminObject.Rotation.Z);
                             break;
                         case 10:
-                            iPlayer.adminObject.Position = 
+                            iPlayer.adminObject.Position =
                                 new Vector3(iPlayer.adminObject.Rotation.X,
                                     iPlayer.adminObject.Rotation.Y + iPlayer.adminObjectSpeed * 8,
                                     iPlayer.adminObject.Rotation.Z);
@@ -949,8 +938,8 @@ namespace GVRP
                                     "Sie müssen der Besitzer des Hauses sein!");
                                 return;
                             }
-                            
-                            if(iHouse.ShowPhoneNumber.Length > 0)
+
+                            if (iHouse.ShowPhoneNumber.Length > 0)
                             {
                                 iPlayer.SendNewNotification($"Die Telefonnummer wird nun nicht mehr angezeigt!");
                                 iHouse.ShowPhoneNumber = "";
@@ -977,7 +966,7 @@ namespace GVRP
                                 DialogMigrator.AddMenuItem(player, Dialogs.menu_garage_overlay, MSG.General.Close(), "");
                                 DialogMigrator.AddMenuItem(player, Dialogs.menu_garage_overlay, "Fahrzeug entnehmen", "");
                                 DialogMigrator.AddMenuItem(player, Dialogs.menu_garage_overlay, "Fahrzeug einlagern", "");
-                                
+
 
                                 DialogMigrator.OpenUserMenu(iPlayer, Dialogs.menu_garage_overlay);
                                 iPlayer.SetData("GarageId", garage.Id);
@@ -998,7 +987,7 @@ namespace GVRP
                                     if (iPlayer.ownHouse[0] != iHouse.Id)
                                     {
                                         iPlayer.SendNewNotification(
-                                            
+
                                             "Um den Keller auszubauen muessen Sie der Besitzer des Hauses sein!");
                                         return;
                                     }
@@ -1021,7 +1010,7 @@ namespace GVRP
                                     return;
                                 }
                             }
-                            
+
                         default:
                             DialogMigrator.CloseUserMenu(player, Dialogs.menu_house_main);
                             break;
@@ -1042,10 +1031,10 @@ namespace GVRP
                             if (iHouse.Keller > 0)
                             {
                                 //iPlayer.Player.FreezePosition = true;
-                                
+
                                 player.SetPosition(new Vector3(1138.25f, -3198.88f, -39.6657f));
                                 player.SetRotation(357.87f);
-                                
+
                                 if (iHouse.Keller == 2)
                                 {
                                     iPlayer.DimensionType[0] = DimensionType.Labor;
@@ -1064,7 +1053,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben keinen Keller!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_house_keller);
                                 return;
@@ -1123,7 +1112,7 @@ namespace GVRP
                                     if (iPlayer.ownHouse[0] != iHouse.Id)
                                     {
                                         iPlayer.SendNewNotification(
-                                            
+
                                             "Um den Keller auszubauen muessen Sie der Besitzer des Hauses sein!");
                                         return;
                                     }
@@ -1168,7 +1157,7 @@ namespace GVRP
                                     if (iPlayer.ownHouse[0] != iHouse.Id)
                                     {
                                         iPlayer.SendNewNotification(
-                                            
+
                                             "Um den Keller auszubauen muessen Sie der Besitzer des Hauses sein!");
                                         return;
                                     }
@@ -1194,7 +1183,7 @@ namespace GVRP
                         case 4:
                             if (iHouse.MoneyKeller != 1) // Ausbau auf Geldwäsche
                             {
-                                if(iHouse.Type != 3)
+                                if (iHouse.Type != 3)
                                 {
                                     iPlayer.SendNewNotification("Bei diesem Typ ist ein Ausbau nicht möglich!");
                                     return;
@@ -1369,7 +1358,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Leider koennen wir dein Auto nicht aufruesten. Komm bitte mit einem Modell wieder, das wir umbauen koennen.");
                                 return;
                             }
@@ -1431,9 +1420,9 @@ namespace GVRP
                                                         reader.GetInt32("color2"), 0, reader.GetUInt32("gps_tracker") == 1, true, true, 0,
                                                         "",
                                                         reader.GetUInt32("id"), 0, reader.GetUInt32("owner"),
-                                                        reader.GetInt32("fuel"), reader.GetInt32("zustand"), 
+                                                        reader.GetInt32("fuel"), reader.GetInt32("zustand"),
                                                         reader.GetString("tuning"), reader.GetString("neon"),
-                                                        reader.GetFloat("km"), null, "", false, reader.GetInt32("TuningState") == 1, WheelClamp:reader.GetInt32("WheelClamp"), AlarmSystem: reader.GetInt32("alarm_system") == 1);
+                                                        reader.GetFloat("km"), null, "", false, reader.GetInt32("TuningState") == 1, WheelClamp: reader.GetInt32("WheelClamp"), AlarmSystem: reader.GetInt32("alarm_system") == 1);
                                                     xVeh.entity.NumberPlate = reader.GetString("plate");
 
                                                     Main.WarpPlayerIntoVehicle(player, xVeh.entity, -1);
@@ -1704,7 +1693,7 @@ namespace GVRP
 
                             DialogMigrator.OpenUserMenu(iPlayer, Dialogs.menu_garage_setlist);
                             break;
-                        
+
                         default:
                             DialogMigrator.CloseUserMenu(player, Dialogs.menu_garage_overlay);
                             break;
@@ -1728,7 +1717,7 @@ namespace GVRP
                     else
                     {
                         DialogMigrator.CloseUserMenu(player, Dialogs.menu_garage_setlist);
-                        
+
                         if (garage != null)
                         {
                             // Fraktionsgarage
@@ -1758,7 +1747,7 @@ namespace GVRP
                             }*/
                             if (!garage.IsTeamGarage())
                             {
-                                if(garage.HouseId > 0 && !garage.CanVehiclePutIntoHouseGarage())
+                                if (garage.HouseId > 0 && !garage.CanVehiclePutIntoHouseGarage())
                                 {
                                     iPlayer.SendNewNotification("Hausgarage ist voll!");
                                     return;
@@ -1775,12 +1764,12 @@ namespace GVRP
                                         iPlayer.CanControl(Vehicle) &&
                                         player.Position.DistanceTo(Vehicle.entity.Position) <= 25.0f)
                                     {
-                                            if (idx == index - 2)
-                                            {
-                                                Vehicle.SetPrivateCarGarage(1, garage.Id);
-                                                iPlayer.SendNewNotification("Fahrzeug wurde in die Garage eingelagert!");
-                                                return;
-                                            }
+                                        if (idx == index - 2)
+                                        {
+                                            Vehicle.SetPrivateCarGarage(1, garage.Id);
+                                            iPlayer.SendNewNotification("Fahrzeug wurde in die Garage eingelagert!");
+                                            return;
+                                        }
                                         idx++;
                                     }
                                 }
@@ -1819,7 +1808,7 @@ namespace GVRP
                             if (!iPlayer.TakeMoney(2500))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Um ein Fahrzeug freizukaufen benötigst du mindestens $2500 fuer eine Kaution!");
                             }
 
@@ -1831,7 +1820,7 @@ namespace GVRP
                             if (!iPlayer.TakeMoney(500))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Dein Fahrzeug wurde zerstört um es zu reparieren benötigst du mindestens 500$!");
                                 return;
                             }
@@ -1912,7 +1901,7 @@ namespace GVRP
                             DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation, "Pistole (12000$)", "");
                             //DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation, "Pistole 50 (8000$)", "");
                             DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation, "Schwere Pistole (17000$)", "");
-                            
+
                             DialogMigrator.OpenUserMenu(iPlayer, Dialogs.menu_shop_ammunation);
                             break;
                         case 1: // ammo
@@ -1923,9 +1912,9 @@ namespace GVRP
                             DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_ammo, MSG.General.Close(), "");
                             DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_ammo, MSG.General.Back(), "");
                             DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_ammo, "Pistole Ammo (150$)", "");
-                           // DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_ammo, "Pistole 50 Ammo (500$)", "");
+                            // DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_ammo, "Pistole 50 Ammo (500$)", "");
                             DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_ammo, "Schwere Pistole Ammo (300$)", "");
-                            
+
                             DialogMigrator.OpenUserMenu(iPlayer, Dialogs.menu_shop_ammunation_ammo);
                             break;
                         default:
@@ -2068,7 +2057,7 @@ namespace GVRP
                             if (iPlayer.Lic_Taxi[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie besitzen bereits eine Taxilizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_taxi);
                                 break;
@@ -2130,7 +2119,7 @@ namespace GVRP
                             if (xPlayer.Lic_Car[0] < 0)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Spieler hat eine Sperre fuer diese Lizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2139,7 +2128,7 @@ namespace GVRP
                             if (xPlayer.Lic_Car[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.License.PlayerAlreadyOwnLic(Content.License.Car));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2148,7 +2137,7 @@ namespace GVRP
                             if (!xPlayer.TakeMoney(Price.License.Car))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.PlayerNotEnoughMoney(Price.License.Car));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 return;
@@ -2177,7 +2166,7 @@ namespace GVRP
                             if (xPlayer.Lic_LKW[0] < 0)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Spieler hat eine Sperre fuer diese Lizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2194,7 +2183,7 @@ namespace GVRP
                             if (xPlayer.Lic_LKW[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.License.PlayerAlreadyOwnLic(Content.License.Lkw));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2203,7 +2192,7 @@ namespace GVRP
                             if (!xPlayer.TakeMoney(Price.License.Lkw))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.PlayerNotEnoughMoney(Price.License.Lkw));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 return;
@@ -2232,7 +2221,7 @@ namespace GVRP
                             if (xPlayer.Lic_Bike[0] < 0)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Spieler hat eine Sperre fuer diese Lizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2249,7 +2238,7 @@ namespace GVRP
                             if (xPlayer.Lic_Bike[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.License.PlayerAlreadyOwnLic(Content.License.Bike));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2258,7 +2247,7 @@ namespace GVRP
                             if (!xPlayer.TakeMoney(Price.License.Bike))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.PlayerNotEnoughMoney(Price.License.Bike));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 return;
@@ -2287,7 +2276,7 @@ namespace GVRP
                             if (xPlayer.Lic_Boot[0] < 0)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Spieler hat eine Sperre fuer diese Lizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2304,7 +2293,7 @@ namespace GVRP
                             if (xPlayer.Lic_Boot[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.License.PlayerAlreadyOwnLic(Content.License.Boot));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2313,7 +2302,7 @@ namespace GVRP
                             if (!xPlayer.TakeMoney(Price.License.Boot))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.PlayerNotEnoughMoney(Price.License.Boot));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 return;
@@ -2342,7 +2331,7 @@ namespace GVRP
                             if (xPlayer.Lic_PlaneA[0] < 0)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Spieler hat eine Sperre fuer diese Lizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2359,7 +2348,7 @@ namespace GVRP
                             if (xPlayer.Lic_PlaneA[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.License.PlayerAlreadyOwnLic(Content.License.PlaneA));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2368,7 +2357,7 @@ namespace GVRP
                             if (!xPlayer.TakeMoney(Price.License.PlaneA))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.PlayerNotEnoughMoney(Price.License.PlaneA));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 return;
@@ -2397,7 +2386,7 @@ namespace GVRP
                             if (xPlayer.Lic_PlaneB[0] < 0)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Spieler hat eine Sperre fuer diese Lizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2414,7 +2403,7 @@ namespace GVRP
                             if (xPlayer.Lic_PlaneB[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.License.PlayerAlreadyOwnLic(Content.License.PlaneB));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2423,7 +2412,7 @@ namespace GVRP
                             if (!xPlayer.TakeMoney(Price.License.PlaneB))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.PlayerNotEnoughMoney(Price.License.PlaneB));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 return;
@@ -2453,7 +2442,7 @@ namespace GVRP
                             if (xPlayer.Lic_Transfer[0] < 0)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Spieler hat eine Sperre fuer diese Lizenz!");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2470,7 +2459,7 @@ namespace GVRP
                             if (xPlayer.Lic_Transfer[0] == 1)
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.License.PlayerAlreadyOwnLic(Content.License.Transfer));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 break;
@@ -2479,7 +2468,7 @@ namespace GVRP
                             if (!xPlayer.TakeMoney(Price.License.Transfer))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.PlayerNotEnoughMoney(Price.License.Transfer));
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_givelicenses);
                                 return;
@@ -2538,7 +2527,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.Car)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.Car));
                                     return;
                                 }
@@ -2546,7 +2535,7 @@ namespace GVRP
                                 if (xPlayer.Lic_Car[0] == 1 || xPlayer.Lic_Car[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.Car));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2555,7 +2544,7 @@ namespace GVRP
                                 xPlayer.Lic_Car[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.Car);
-                             //   iPlayer.JobSkillsIncrease();
+                                //   iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2572,7 +2561,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.Car + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2585,7 +2574,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.Lkw)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.Lkw));
                                     return;
                                 }
@@ -2593,7 +2582,7 @@ namespace GVRP
                                 if (xPlayer.Lic_LKW[0] == 1 || xPlayer.Lic_LKW[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.Lkw));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2602,7 +2591,7 @@ namespace GVRP
                                 xPlayer.Lic_LKW[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.Lkw);
-                              //  iPlayer.JobSkillsIncrease();
+                                //  iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2619,7 +2608,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.Lkw + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2632,7 +2621,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.Bike)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.Bike));
                                     return;
                                 }
@@ -2640,7 +2629,7 @@ namespace GVRP
                                 if (xPlayer.Lic_Bike[0] == 1 || xPlayer.Lic_Bike[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.Bike));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2649,7 +2638,7 @@ namespace GVRP
                                 xPlayer.Lic_Bike[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.Bike);
-                       //         iPlayer.JobSkillsIncrease();
+                                //         iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2666,7 +2655,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.Bike + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2679,7 +2668,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.Boot)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.Boot));
                                     return;
                                 }
@@ -2687,7 +2676,7 @@ namespace GVRP
                                 if (xPlayer.Lic_Boot[0] == 1 || xPlayer.Lic_Boot[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.Boot));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2696,7 +2685,7 @@ namespace GVRP
                                 xPlayer.Lic_Boot[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.Boot);
-                            //    iPlayer.JobSkillsIncrease();
+                                //    iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2713,7 +2702,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.Boot + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2726,7 +2715,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.PlaneA)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.PlaneA));
                                     return;
                                 }
@@ -2734,7 +2723,7 @@ namespace GVRP
                                 if (xPlayer.Lic_PlaneA[0] == 1 || xPlayer.Lic_PlaneA[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.PlaneA));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2743,7 +2732,7 @@ namespace GVRP
                                 xPlayer.Lic_PlaneA[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.PlaneA);
-                            //    iPlayer.JobSkillsIncrease();
+                                //    iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2760,7 +2749,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.PlaneA + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2773,7 +2762,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.PlaneB)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.PlaneB));
                                     return;
                                 }
@@ -2781,7 +2770,7 @@ namespace GVRP
                                 if (xPlayer.Lic_PlaneB[0] == 1 || xPlayer.Lic_PlaneB[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.PlaneB));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2790,7 +2779,7 @@ namespace GVRP
                                 xPlayer.Lic_PlaneB[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.PlaneB);
-                           //     iPlayer.JobSkillsIncrease();
+                                //     iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2807,7 +2796,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.PlaneB + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2820,7 +2809,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] <= JobContent.Plagiat.Requiredskill.Biz)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.Biz));
                                     return;
                                 }
@@ -2828,7 +2817,7 @@ namespace GVRP
                                 if (xPlayer.Lic_Biz[0] == 1 || xPlayer.Lic_Biz[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.Biz));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2837,7 +2826,7 @@ namespace GVRP
                                 xPlayer.Lic_Biz[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.Biz);
-                      //          iPlayer.JobSkillsIncrease();
+                                //          iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2854,7 +2843,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.Biz + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2867,7 +2856,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.Gun)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.Gun));
                                     return;
                                 }
@@ -2875,7 +2864,7 @@ namespace GVRP
                                 if (xPlayer.Lic_Gun[0] == 1 || xPlayer.Lic_Gun[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.Gun));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2884,7 +2873,7 @@ namespace GVRP
                                 xPlayer.Lic_Gun[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.Gun);
-                            //    iPlayer.JobSkillsIncrease();
+                                //    iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2901,7 +2890,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.Gun + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2914,7 +2903,7 @@ namespace GVRP
                                 if (iPlayer.jobskill[0] < JobContent.Plagiat.Requiredskill.Transfer)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.Job.NotEnoughSkill(JobContent.Plagiat.Requiredskill.Transfer));
                                     return;
                                 }
@@ -2922,7 +2911,7 @@ namespace GVRP
                                 if (xPlayer.Lic_Transfer[0] == 1 || xPlayer.Lic_Transfer[0] == 2)
                                 {
                                     iPlayer.SendNewNotification(
-                                        
+
                                         MSG.License.PlayerAlreadyOwnLic(Content.License.Transfer));
                                     DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
                                     break;
@@ -2931,7 +2920,7 @@ namespace GVRP
                                 xPlayer.Lic_Transfer[0] = 2;
                                 iPlayer.Container.RemoveItem(24,
                                     JobContent.Plagiat.Materials.Transfer);
-                             //   iPlayer.JobSkillsIncrease();
+                                //   iPlayer.JobSkillsIncrease();
                                 xPlayer.SendNewNotification(
                                      MSG.License.HasCreateYouLicense(
                                         iPlayer.GetName(),
@@ -2948,7 +2937,7 @@ namespace GVRP
                             else
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     "Sie haben nicht genuegend Materialien, benoetigt (" +
                                     JobContent.Plagiat.Materials.Transfer + ")");
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_job_createlicenses);
@@ -2969,7 +2958,7 @@ namespace GVRP
                     if (xPlayer == null || xPlayer.Player.Position.DistanceTo(player.Position) > 5.0f)
                     {
                         iPlayer.SendNewNotification(
-                            
+
                             "Spieler muss in Ihrer Naehe sein");
                         return;
                     }
@@ -3162,7 +3151,7 @@ namespace GVRP
                 }
                 else if (menuid == Dialogs.menu_show_wanteds)
                 {
-                    if(index == 0)
+                    if (index == 0)
                     {
                         DialogMigrator.CloseUserMenu(player, Dialogs.menu_show_wanteds);
                         return;
@@ -3258,7 +3247,7 @@ namespace GVRP
                             iPlayer.uni_points[0] = iPlayer.uni_points[0] - 1;
                             iPlayer.uni_economy[0] = iPlayer.uni_economy[0] + 1;
 
-                            iPlayer.SendNewNotification( "Sie sind nun Sparfuchs Stufe " +
+                            iPlayer.SendNewNotification("Sie sind nun Sparfuchs Stufe " +
                                 iPlayer.uni_economy[0] + ". Sparrate: " + (iPlayer.uni_economy[0] * 2) +
                                 "%");
                             iPlayer.SendNewNotification(
@@ -3298,7 +3287,7 @@ namespace GVRP
                             if (!iPlayer.TakeMoney(5000 * academicpoints))
                             {
                                 iPlayer.SendNewNotification(
-                                    
+
                                     MSG.Money.NotEnoughMoney(5000 * academicpoints));
                                 return;
                             }
@@ -3407,7 +3396,7 @@ namespace GVRP
                                     if (!iPlayer.TakeMoney(l_Price))
                                     {
                                         iPlayer.SendNewNotification(
-                                            
+
                                             MSG.Money.NotEnoughMoney(l_Price));
                                         return;
                                     }
@@ -3516,7 +3505,7 @@ namespace GVRP
                     int interval = 0;
                     foreach (Dealer dealer in DealerModule.Instance.GetAll().Values.Where(dealer => dealer.Alert == true))
                     {
-                        if ((index-1) == interval)
+                        if ((index - 1) == interval)
                         {
                             Vector3 position = dealer.Position;
                             position = Utils.GenerateRandomPosition(position, 400);
@@ -3527,7 +3516,7 @@ namespace GVRP
                             if (dealer.LastSeller != null)
                             {
                                 bool found = false;
-                                if(dealer.LastSeller.IsFemale())
+                                if (dealer.LastSeller.IsFemale())
                                 {
                                     message = "Die Verkäuferin trug folgende Kleidung: ";
                                 }
@@ -3760,7 +3749,7 @@ namespace GVRP
 
                             if (iPlayer.TeamId == (int)teams.TEAM_CIVILIAN)
                             {
-                                iPlayer.SendNewNotification( MSG.Error.NoTeam());
+                                iPlayer.SendNewNotification(MSG.Error.NoTeam());
                                 DialogMigrator.CloseUserMenu(player, Dialogs.menu_help);
                                 break;
                             }
@@ -3930,7 +3919,7 @@ namespace GVRP
                             }
                             else
                             {
-                                iPlayer.SendNewNotification( MSG.Error.NoJob());
+                                iPlayer.SendNewNotification(MSG.Error.NoJob());
                             }
 
                             DialogMigrator.CloseUserMenu(player, Dialogs.menu_help);
@@ -4021,7 +4010,7 @@ namespace GVRP
                                     if (!iPlayer.TakeMoney(price))
                                     {
                                         iPlayer.SendNewNotification(
-                                            
+
                                             MSG.Money.NotEnoughMoney(price));
                                         return;
                                     }
@@ -4089,29 +4078,29 @@ namespace GVRP
                             var price = Vehicle.Price;
                             var discount = 0;
 
-                            
-                            
+
+
                             if (price < 0) return;
 
-                            if(!Vehicle.CanPurchased())
+                            if (!Vehicle.CanPurchased())
                             {
                                 iPlayer.SendNewNotification("Dieses Fahrzeug ist limitiert und derzeit nicht erhältlich!");
                                 return;
                             }
 
-                            if(!cShop.TeamCarShop)
+                            if (!cShop.TeamCarShop)
                             {
                                 int couponPercent = 0;
                                 uint whatCoupon = 0;
 
-                                if(cShop.Id == 1001 && Vehicle.IsSpecialCar)
+                                if (cShop.Id == 1001 && Vehicle.IsSpecialCar)
                                 {
-                                    if(cShop.PlayerIds.Contains((int)iPlayer.Id))
+                                    if (cShop.PlayerIds.Contains((int)iPlayer.Id))
                                     {
                                         iPlayer.SendNewNotification("Du hast bei mir bereits ein Fahrzeug gekauft.");
                                         return;
                                     }
-                                    if(!GuentherModule.DbPlayers.Contains(iPlayer))
+                                    if (!GuentherModule.DbPlayers.Contains(iPlayer))
                                     {
                                         iPlayer.SendNewNotification("Du bist scheinbar nicht richtig hier reingekommen!");
                                         MySQLHandler.ExecuteAsync($"INSERT INTO `log_guentherclub` (`player_id`, `info`) VALUES ('{iPlayer.Id}', 'Versuchter Kauf: {Vehicle.Name} ({Vehicle.Price} $)');");
@@ -4234,7 +4223,7 @@ namespace GVRP
                             {
                                 string query = String.Format(
                                     "INSERT INTO `fvehicles` (`vehiclehash`, `team`, `color1`, `color2`, `inGarage`, `model`, `fuel`) VALUES ('{0}', '{1}', '{2}', '{3}', '1', '{4}', '100');",
-                                    Vehicle.Data.modded_car == 1 ? Vehicle.Data.mod_car_name : Vehicle.Data.Model, iPlayer.TeamId, iPlayer.Team.ColorId, iPlayer.Team.ColorId, 
+                                    Vehicle.Data.modded_car == 1 ? Vehicle.Data.mod_car_name : Vehicle.Data.Model, iPlayer.TeamId, iPlayer.Team.ColorId, iPlayer.Team.ColorId,
                                     Vehicle.Data.Id);
                                 MySQLHandler.Execute(query);
                                 Logger.AddVehiclePurchaseLog(iPlayer.Id, cShop.Id, Vehicle.Data.Id, price, iPlayer.TeamId);
@@ -4269,7 +4258,7 @@ namespace GVRP
 
                                 iPlayer.SendNewNotification(
                                     $"Sie haben {Vehicle.Data.Model} fuer Ihre Fraktion gekauft!");
-                                
+
                                 SxVehicle sxVehicle = new SxVehicle()
                                 {
                                     Data = Vehicle.Data,
@@ -4311,17 +4300,17 @@ namespace GVRP
                                     GpsSender = true;
                                     registered = 1;
                                     plate = RegistrationOfficeFunctions.GetRandomPlate(true);
-                                    
+
                                 }
-                                
+
                                 string query = String.Format(
                                         "INSERT INTO `vehicles` (`owner`, `pos_x`, `pos_y`, `pos_z`, `heading`, `color1`, `color2`, `plate`, `model`, `vehiclehash`, `garage_id`,`gps_tracker`,`registered`) VALUES ('{0}', '{1}', '{2}', '{3}', '{4}', '{5}', '{6}', '{7}', '{8}', '{9}', '{10}', '{11}', '{12}');",
                                         iPlayer.Id, x, y, z, heading2,
                                         Vehicle.PrimaryColor,
                                         Vehicle.SecondaryColor,
                                         plate, Vehicle.Data.Id, Vehicle.Data.modded_car == 1 ? Vehicle.Data.mod_car_name : Vehicle.Data.Model, defaultgarage, GpsSender ? 1 : 0, registered);
-                                    MySQLHandler.Execute(query);
-                                    Logger.AddVehiclePurchaseLog(iPlayer.Id, cShop.Id, Vehicle.Data.Id, price, 0);
+                                MySQLHandler.Execute(query);
+                                Logger.AddVehiclePurchaseLog(iPlayer.Id, cShop.Id, Vehicle.Data.Id, price, 0);
 
 
 
@@ -4361,17 +4350,17 @@ namespace GVRP
                                     cShop.SpawnPosition, cShop.SpawnHeading, Vehicle.PrimaryColor,
                                     Vehicle.SecondaryColor, 0, GpsSender, true,
                                     false, 0,
-                                    iPlayer.GetName(), id, 0, iPlayer.Id, 100, VehicleHandler.MaxVehicleHealth, 
+                                    iPlayer.GetName(), id, 0, iPlayer.Id, 100, VehicleHandler.MaxVehicleHealth,
                                     "", "", 0, ContainerManager.LoadContainer(id, ContainerTypes.VEHICLE, Vehicle.Data.InventorySize, Vehicle.Data.InventoryWeight), plate);
                                 iPlayer.OwnVehicles.Add(id, Vehicle.Data.modded_car == 1 ? Vehicle.Data.mod_car_name : Vehicle.Data.Model);
-                                    if (cShop.Id != 12)
-                                    {
-                                        RegistrationOfficeFunctions.GiveVehicleContract(iPlayer, sxVehicle, "Fahrzeugshop " + cShop.Description);
-                                    }
-                                    else
-                                    {
-                                        RegistrationOfficeFunctions.UpdateVehicleRegistrationToDb(sxVehicle, iPlayer, iPlayer, plate, true);
-                                    }
+                                if (cShop.Id != 12)
+                                {
+                                    RegistrationOfficeFunctions.GiveVehicleContract(iPlayer, sxVehicle, "Fahrzeugshop " + cShop.Description);
+                                }
+                                else
+                                {
+                                    RegistrationOfficeFunctions.UpdateVehicleRegistrationToDb(sxVehicle, iPlayer, iPlayer, plate, true);
+                                }
                             }
                             DialogMigrator.CloseUserMenu(player, Dialogs.menu_carshop);
                             iPlayer.Save();
@@ -4400,7 +4389,7 @@ namespace GVRP
             DialogMigrator.AddMenuItem(player, Dialogs.menu_garage_overlay, MSG.General.Close(), "");
             DialogMigrator.AddMenuItem(player, Dialogs.menu_garage_overlay, "Fahrzeug entnehmen", "");
             DialogMigrator.AddMenuItem(player, Dialogs.menu_garage_overlay, "Fahrzeug einlagern", "");
-         
+
             DialogMigrator.OpenUserMenu(iPlayer, Dialogs.menu_garage_overlay);
             iPlayer.SetData("GarageId", garage.Id);
             return;

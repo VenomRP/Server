@@ -1,8 +1,6 @@
-﻿using MySql.Data.MySqlClient;
-using System;
+﻿using GVRP.Module.Configurations;
+using MySql.Data.MySqlClient;
 using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Configurations;
 
 namespace GVRP.Module.Warrants
 {
@@ -35,7 +33,7 @@ namespace GVRP.Module.Warrants
             return base.OnLoad();
         }
 
-        
+
     }
     public static class WarrantFunctions
     {

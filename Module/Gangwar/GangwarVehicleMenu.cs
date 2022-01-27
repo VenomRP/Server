@@ -1,14 +1,7 @@
-﻿using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Freiberuf;
-using GVRP.Module.Freiberuf.Mower;
-using GVRP.Module.Government;
-using GVRP.Module.Houses;
+﻿using GVRP.Handler;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams;
-using GVRP.Module.Vehicles.Data;
 using GVRP.Module.Vehicles.Garages;
 
 namespace GVRP.Module.Gangwar

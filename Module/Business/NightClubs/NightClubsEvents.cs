@@ -1,8 +1,8 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Players;
 using System;
 using System.Linq;
 using System.Text.RegularExpressions;
-using GVRP.Module.Players;
 
 namespace GVRP.Module.Business.NightClubs
 {
@@ -41,7 +41,7 @@ namespace GVRP.Module.Business.NightClubs
         {
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
-            
+
             if (dbPlayer.Player.Dimension == 0 || !dbPlayer.HasData("nightClubItemEdit")) return;
             if (!Int32.TryParse(returnstring, out int price)) return;
             uint itemId = (uint)dbPlayer.GetData("nightClubItemEdit");

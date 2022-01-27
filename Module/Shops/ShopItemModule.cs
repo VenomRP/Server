@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Items;
-using GVRP.Module.Players;
-using GVRP.Module.Spawners;
+﻿using GVRP.Module.Items;
+using System;
 
 namespace GVRP.Module.Shops
 {
@@ -11,7 +7,7 @@ namespace GVRP.Module.Shops
     {
         public override Type[] RequiredModules()
         {
-            return new[] { typeof(ItemModelModule),  typeof(ShopModule) };
+            return new[] { typeof(ItemModelModule), typeof(ShopModule) };
         }
 
         protected override string GetQuery()

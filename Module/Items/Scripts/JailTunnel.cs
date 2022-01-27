@@ -1,20 +1,15 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GVRP.Handler;
 using GVRP.Module.Chat;
-using GVRP.Module.Doors;
-using GVRP.Module.GTAN;
-using GVRP.Module.Injury;
 using GVRP.Module.Jailescape;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.JumpPoints;
-using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Spawners;
 using GVRP.Module.Teams;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -26,7 +21,7 @@ namespace GVRP.Module.Items.Scripts
 
             if (JailescapeModule.Instance.IsInTunnelDiggingRange(iPlayer))
             {
-                if(!JailescapeModule.Instance.CanTunnelDigged())
+                if (!JailescapeModule.Instance.CanTunnelDigged())
                 {
                     iPlayer.SendNewNotification("Es kann zurzeit kein Tunnel gegraben werden, das wäre zu auffällig");
                     return false;
@@ -44,7 +39,7 @@ namespace GVRP.Module.Items.Scripts
                 if (JailescapeModule.jailTunnelEntrance != null)
                 {
                     JumpPointModule.Instance.jumpPoints.Remove(JailescapeModule.jailTunnelEntrance.Id);
-                    if(JailescapeModule.jailTunnelEntrance.ColShape != null)
+                    if (JailescapeModule.jailTunnelEntrance.ColShape != null)
                     {
                         JailescapeModule.jailTunnelEntrance.ColShape?.Delete();
                     }
@@ -109,7 +104,7 @@ namespace GVRP.Module.Items.Scripts
                     JumpPointModule.Instance.jumpPoints.Add(JailescapeModule.jailTunnelEntrance.Id, JailescapeModule.jailTunnelEntrance);
                     JumpPointModule.Instance.jumpPoints.Add(JailescapeModule.jailTunnelEscape.Id, JailescapeModule.jailTunnelEscape);
                 });
-                
+
                 iPlayer.Player.TriggerEvent("freezePlayer", false);
                 iPlayer.SendNewNotification("Du hast den Tunnel gegraben, beeil dich er ist max 2 Minuten geöffnet!");
                 //iPlayer.SendNewNotification("Gehen zu viele Menschen durch, kann der Tunnel einbrechen!");
@@ -123,7 +118,7 @@ namespace GVRP.Module.Items.Scripts
             }
             else iPlayer.SendNewNotification("Hier kann kein Tunnel gegraben werden!");
             return false;
-            
+
         }
     }
 }

@@ -1,12 +1,10 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using GVRP.Module.Configurations;
+﻿using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
 using GVRP.Module.Sync;
+using MySql.Data.MySqlClient;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP
 {
@@ -105,7 +103,7 @@ namespace GVRP
             }
         }
 
-        
+
 
         public static void QueryFailed(Task task)
         {

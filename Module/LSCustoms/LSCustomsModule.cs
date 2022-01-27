@@ -1,20 +1,15 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Spawners;
+using System;
 
 namespace GVRP.Module.LSCustoms
 {
     public class LSCustomsModule : SqlModule<LSCustomsModule, LSCustoms, uint>
     {
         ColShape LSCInteriorColshape;
-        
+
         protected override string GetQuery()
         {
             return "SELECT * FROM `ls_customs`;";
@@ -52,7 +47,8 @@ namespace GVRP.Module.LSCustoms
                         return true;
                     }
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logging.Logger.Crash(ex);
             }

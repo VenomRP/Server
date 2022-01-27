@@ -1,10 +1,7 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Apps;
 using GVRP.Module.Players;
 using Newtonsoft.Json;
-using System;
-using GVRP.Module.Teams;
 
 namespace GVRP.Module.News.App
 {
@@ -31,7 +28,7 @@ namespace GVRP.Module.News.App
         }
 
         [RemoteEvent]
-        public void requestNews(Player player) 
+        public void requestNews(Player player)
         {
             SendNewsList(player);
         }
@@ -66,7 +63,7 @@ namespace GVRP.Module.News.App
                 Main.sendNotificationToPlayersWhoCanReceive("[NEWS] Es wurde eine News veroeffentlicht. Check die News App!", "Weazel News");
         }
 
-        private void SendNewsList(Player player) 
+        private void SendNewsList(Player player)
         {
             TriggerEvent(player, "updateNews", NAPI.Util.ToJson(Main.newsList));
         }

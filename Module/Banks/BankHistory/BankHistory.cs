@@ -1,5 +1,5 @@
-﻿using System;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Banks.BankHistory
 {
@@ -16,5 +16,5 @@ namespace GVRP.Module.Banks.BankHistory
         [JsonIgnore]
         public DateTime Date { get; set; }
     }
-    
+
 }

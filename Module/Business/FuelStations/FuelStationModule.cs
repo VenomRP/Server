@@ -1,12 +1,5 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Handler;
-using GVRP.Module.Business.FuelStations;
-using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.GTAN;
 using GVRP.Module.Items;
@@ -16,6 +9,10 @@ using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.Spawners;
 using GVRP.Module.Vehicles;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Business.FuelStations
 {
@@ -23,7 +20,7 @@ namespace GVRP.Module.Business.FuelStations
     {
         public static uint BenzinModelId = 537;
         public static uint RohoelModelId = 536;
-        
+
         public override Type[] RequiredModules()
         {
             return new[] { typeof(FuelStationGasModule), typeof(BusinessModule) };
@@ -68,7 +65,7 @@ namespace GVRP.Module.Business.FuelStations
 
             return null;
         }
-        
+
         public override bool OnColShapeEvent(DbPlayer dbPlayer, ColShape colShape, ColShapeState colShapeState)
         {
             uint fuelStationId = 0;
@@ -80,12 +77,12 @@ namespace GVRP.Module.Business.FuelStations
                 Dictionary<String, String> temp = new Dictionary<string, string>();
                 switch (colShapeState)
                 {
-                    
+
                     case ColShapeState.Enter:
                         if (fuelStation.IsOwnedByBusines())
-                        {   
+                        {
                             temp.Add("Preis", fuelStation.Price + "$/L");
-                            temp.Add("Verfuegbare Liter", fuelStation.Container.GetInventoryUsedSpace()/1000 + " L");
+                            temp.Add("Verfuegbare Liter", fuelStation.Container.GetInventoryUsedSpace() / 1000 + " L");
                         }
                         else
                         {
@@ -109,7 +106,7 @@ namespace GVRP.Module.Business.FuelStations
                         if (fuelStation.IsOwnedByBusines())
                         {
                             Business business = fuelStation.GetOwnedBusiness();
-                            dbPlayer.SendNewNotification($"${fuelStation.Price}/Liter Besitzer: {business.Name}", title:$"{fuelStation.Name}");
+                            dbPlayer.SendNewNotification($"${fuelStation.Price}/Liter Besitzer: {business.Name}", title: $"{fuelStation.Name}");
                         }
                         else
                         {
@@ -132,25 +129,25 @@ namespace GVRP.Module.Business.FuelStations
 
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
-            if(!dbPlayer.Player.IsInVehicle)
+            if (!dbPlayer.Player.IsInVehicle)
             {
-                if(dbPlayer.HasData("fuelstationId"))
+                if (dbPlayer.HasData("fuelstationId"))
                 {
                     FuelStation fuelStation = FuelStationModule.Instance.Get(dbPlayer.GetData("fuelstationId"));
-                    if(fuelStation != null && fuelStation.Position.DistanceTo(dbPlayer.Player.Position) < 4.0f)
+                    if (fuelStation != null && fuelStation.Position.DistanceTo(dbPlayer.Player.Position) < 4.0f)
                     {
                         MenuManager.Instance.Build(PlayerMenu.FuelStationMenu, dbPlayer).Show(dbPlayer);
                     }
                 }
                 // check for gas stations
                 var fuel = FuelStationModule.Instance.GetStaionByGas(dbPlayer.Player.Position);
-                if(fuel == null)
+                if (fuel == null)
                 {
                     fuel = FuelStationModule.Instance.GetThis(dbPlayer.Player.Position);
                 }
                 if (fuel != null)
                 {
-                    if(dbPlayer.Container.GetItemAmount(180) > 0) // Kanister tanken
+                    if (dbPlayer.Container.GetItemAmount(180) > 0) // Kanister tanken
                     {
                         if (fuel.IsOwnedByBusines() && fuel.Container.GetItemAmount(FuelStationModule.BenzinModelId) < 20)
                         {
@@ -160,7 +157,7 @@ namespace GVRP.Module.Business.FuelStations
                         }
 
                         int price = fuel.Price * 20;
-                        if(!dbPlayer.TakeMoney(price))
+                        if (!dbPlayer.TakeMoney(price))
                         {
                             dbPlayer.SendNewNotification("Kanister kann nicht betankt werden, Geld benoetigt ($" + price + ")");
                             return false; ;
@@ -185,19 +182,19 @@ namespace GVRP.Module.Business.FuelStations
             {
                 // check for gas stations
                 var fuel = FuelStationModule.Instance.GetStaionByGas(dbPlayer.Player.Position);
-                if(fuel == null)
+                if (fuel == null)
                 {
                     fuel = FuelStationModule.Instance.GetThis(dbPlayer.Player.Position);
                 }
-                if(fuel != null)
+                if (fuel != null)
                 {
                     SxVehicle sxVehicle = dbPlayer.Player.Vehicle.GetVehicle();
 
-                    if(sxVehicle != null && sxVehicle.IsValid() && sxVehicle.CanInteract && dbPlayer.CanInteract())
+                    if (sxVehicle != null && sxVehicle.IsValid() && sxVehicle.CanInteract && dbPlayer.CanInteract())
                     {
                         if (VehicleHandler.Instance.GetClosestVehiclesPlayerCanControl(dbPlayer, 11.0f).Where(cp => cp.Container.GetItemAmount(BenzinModelId) > 0).Count() > 0)
                         {
-                            ComponentManager.Get<TextInputBoxWindow>().Show()(dbPlayer, new TextInputBoxWindowObject() { Title = fuel.Name, Callback = "fillfuelstation", Message = $"Wie viel moechten sie abliefern? Platz verfuegbar : {fuel.Container.GetInventoryFreeSpace()/1000}L" });
+                            ComponentManager.Get<TextInputBoxWindow>().Show()(dbPlayer, new TextInputBoxWindowObject() { Title = fuel.Name, Callback = "fillfuelstation", Message = $"Wie viel moechten sie abliefern? Platz verfuegbar : {fuel.Container.GetInventoryFreeSpace() / 1000}L" });
                             return true;
                         }
                     }

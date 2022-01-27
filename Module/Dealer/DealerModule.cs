@@ -1,30 +1,26 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Module.Commands;
 using GVRP.Module.Dealer.Menu;
-using GVRP.Module.Delivery;
-using GVRP.Module.Gangwar;
 using GVRP.Module.Menu;
 using GVRP.Module.NpcSpawner;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Dealer
 {
     public class DealerModule : SqlModule<DealerModule, Dealer, uint>
     {
-        public uint MethItemId          = 1;
-        public uint DiamondItemId       = 21;
-        public uint GoldBarrenItemId    = 487;
-        public int MaxDealerCount       = 1;
-        public int DiamondCap           = 15;
-        public int GoldCap              = 15;
-        public int WeaponsCap           = 5;
+        public uint MethItemId = 1;
+        public uint DiamondItemId = 21;
+        public uint GoldBarrenItemId = 487;
+        public int MaxDealerCount = 1;
+        public int DiamondCap = 15;
+        public int GoldCap = 15;
+        public int WeaponsCap = 5;
         public static Random random = new Random();
 
         public uint BigDealer = 0;
@@ -33,7 +29,7 @@ namespace GVRP.Module.Dealer
         public int MaxMaulwuerfe = 0;
         public int MaxVehicleClawAmount = 1;
         public List<int> MaulwurfSpawnChances = new List<int> { 8, 28, 48, 68, 78, 86, 92, 97, 100 };
-        
+
         public float MaulwurfAlarmChance = 1.0f;
 
         protected override string GetQuery()
@@ -61,7 +57,7 @@ namespace GVRP.Module.Dealer
 
             Dealer dealer = DealerModule.Instance.GetAll().Values.Where(d => d.Position.DistanceTo(dbPlayer.Player.Position) < 2.0f).FirstOrDefault();
 
-            if(dealer != null)
+            if (dealer != null)
             {
                 dbPlayer.SetData("current_dealer", dealer.Id);
                 MenuManager.Instance.Build(PlayerMenu.DealerSellMenu, dbPlayer).Show(dbPlayer);
@@ -89,7 +85,7 @@ namespace GVRP.Module.Dealer
                 l_Dealer.Alert = false;
             }
         }
-        
+
         public Dealer GetRandomDealer()
         {
             return GetAll().ElementAt(random.Next(0, MaxDealerCount)).Value;
@@ -112,7 +108,7 @@ namespace GVRP.Module.Dealer
             string y = player.Position.Y.ToString().Replace(",", ".");
             string z = player.Position.Z.ToString().Replace(",", ".");
             string heading = player.Rotation.Z.ToString().Replace(",", ".");
-            
+
             Main.ServerNpcs.Add(new Npc(PedHash.Abigail, player.Position, player.Heading, 0));
 
             MySQLHandler.ExecuteAsync($"INSERT INTO dealer (pos_x, pos_y, pos_z, heading, note) VALUES('{MySqlHelper.EscapeString(x)}', '{MySqlHelper.EscapeString(y)}', '{MySqlHelper.EscapeString(z)}', '{MySqlHelper.EscapeString(heading)}', '{MySqlHelper.EscapeString(comment)}')");
@@ -138,7 +134,7 @@ namespace GVRP.Module.Dealer
 
         [CommandPermission(PlayerRankPermission = true)]
         [Command]
-        public void Commandrandomdealer(Player player) 
+        public void Commandrandomdealer(Player player)
         {
             var iPlayer = player.GetPlayer();
 

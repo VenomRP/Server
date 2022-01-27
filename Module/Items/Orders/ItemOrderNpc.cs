@@ -1,11 +1,10 @@
 ﻿
 using GTANetworkAPI;
+using GVRP.Module.NpcSpawner;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GVRP.Module.NpcSpawner;
-using GVRP.Module.Spawners;
 
 namespace GVRP.Module.Items
 {

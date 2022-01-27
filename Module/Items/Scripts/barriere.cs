@@ -1,9 +1,7 @@
-﻿using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -11,7 +9,7 @@ namespace GVRP.Module.Items.Scripts
     {
         public static async Task<bool> barriere(DbPlayer iPlayer, ItemModel ItemData)
         {
-            if (iPlayer.IsCuffed || iPlayer.IsTied ||iPlayer.Player.IsInVehicle || (!iPlayer.Team.IsCops() && !iPlayer.Team.IsDpos() && !iPlayer.Team.IsMedics()))
+            if (iPlayer.IsCuffed || iPlayer.IsTied || iPlayer.Player.IsInVehicle || (!iPlayer.Team.IsCops() && !iPlayer.Team.IsDpos() && !iPlayer.Team.IsMedics()))
             {
                 return false;
             }
@@ -31,10 +29,10 @@ namespace GVRP.Module.Items.Scripts
             iPlayer.PlayAnimation(
                 (int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["fixing"].Split()[0], Main.AnimationList["fixing"].Split()[1]);
             iPlayer.Player.TriggerEvent("freezePlayer", true);
-            await Task.Delay(4000);                
+            await Task.Delay(4000);
             iPlayer.Player.TriggerEvent("freezePlayer", false);
             NAPI.Player.StopPlayerAnimation(iPlayer.Player);
-           
+
             return true;
         }
     }

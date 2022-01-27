@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-using Newtonsoft.Json;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Menu
 {
@@ -42,9 +42,9 @@ namespace GVRP.Module.Menu
 
         public void Show(DbPlayer iPlayer, bool freeze = false)
         {
-            if(iPlayer == null || !iPlayer.IsValid()) return;
-            iPlayer.WatchMenu = (uint) MenuId;
-            iPlayer.Player.TriggerEvent("componentServerEvent", "NativeMenu", "showNativeMenu", JsonConvert.SerializeObject(this), (uint) MenuId);
+            if (iPlayer == null || !iPlayer.IsValid()) return;
+            iPlayer.WatchMenu = (uint)MenuId;
+            iPlayer.Player.TriggerEvent("componentServerEvent", "NativeMenu", "showNativeMenu", JsonConvert.SerializeObject(this), (uint)MenuId);
         }
     }
 

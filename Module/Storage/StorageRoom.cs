@@ -1,10 +1,9 @@
 ﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Linq;
 using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using MySql.Data.MySqlClient;
+using System.Linq;
 
 namespace GVRP.Module.Storage
 {
@@ -59,7 +58,7 @@ namespace GVRP.Module.Storage
 
         public void Upgrade(DbPlayer dbPlayer)
         {
-            if(Ausbaustufe == StorageRoomAusbaustufenModule.Instance.GetAll().Keys.Max())
+            if (Ausbaustufe == StorageRoomAusbaustufenModule.Instance.GetAll().Keys.Max())
             {
                 dbPlayer.SendNewNotification("Maximale Stufe bereits erreicht!");
                 return;
@@ -70,7 +69,7 @@ namespace GVRP.Module.Storage
                 if (storageRoomAusbaustufe == null) return;
                 if (HasRequiredItems(storageRoomAusbaustufe.RequiredItems))
                 {
-                    if(dbPlayer.TakeMoney(storageRoomAusbaustufe.RequiredMoney)) 
+                    if (dbPlayer.TakeMoney(storageRoomAusbaustufe.RequiredMoney))
                     {
                         RemoveRequiredItems(storageRoomAusbaustufe.RequiredItems);
                         Ausbaustufe++;
@@ -115,7 +114,7 @@ namespace GVRP.Module.Storage
                 }
             }
         }
-        
+
         public bool HasRequiredItems(string requiredItemsCocain)
         {
             if (!string.IsNullOrEmpty(requiredItemsCocain))

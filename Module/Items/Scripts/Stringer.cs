@@ -1,9 +1,7 @@
-﻿using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.Chat;
+﻿using GTANetworkAPI;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.PlayerAnimations;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -28,14 +26,14 @@ namespace GVRP.Module.Items.Scripts
             PoliceObjectModule.Instance.Add(1276148988, iPlayer.Player, ItemData, true);
             iPlayer.SendNewNotification(
                  ItemData.Name + " erfolgreich platziert!");
-            
-                iPlayer.PlayAnimation( 
-                    (int) (AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["fixing"].Split()[0], Main.AnimationList["fixing"].Split()[1]); 
-                iPlayer.Player.TriggerEvent("freezePlayer", true); 
-                await Task.Delay(4000); 
-                iPlayer.Player.TriggerEvent("freezePlayer", false); 
-                NAPI.Player.StopPlayerAnimation(iPlayer.Player); 
-            
+
+            iPlayer.PlayAnimation(
+                (int)(AnimationFlags.Loop | AnimationFlags.AllowPlayerControl), Main.AnimationList["fixing"].Split()[0], Main.AnimationList["fixing"].Split()[1]);
+            iPlayer.Player.TriggerEvent("freezePlayer", true);
+            await Task.Delay(4000);
+            iPlayer.Player.TriggerEvent("freezePlayer", false);
+            NAPI.Player.StopPlayerAnimation(iPlayer.Player);
+
             return true;
         }
     }

@@ -1,9 +1,9 @@
-﻿using System;
-using GTANetworkAPI;
-using Newtonsoft.Json;
+﻿using GTANetworkAPI;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Laboratories.Windows
 {
@@ -96,9 +96,9 @@ namespace GVRP.Module.Laboratories.Windows
             {
                 return;
             }
-            
+
             Methlaboratory methlaboratory = MethlaboratoryModule.Instance.GetLaboratoryByDimension(dbPlayer.Player.Dimension);
-            if (methlaboratory == null)  return;
+            if (methlaboratory == null) return;
 
             if (methlaboratory.LastQualityChanged.AddMinutes(5) > DateTime.Now && !Configurations.Configuration.Instance.DevMode)
             {

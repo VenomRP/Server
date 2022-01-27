@@ -1,18 +1,16 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Module.Assets.Tattoo;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Clothes;
-using GVRP.Module.Clothes.Character;
 using GVRP.Module.Einreiseamt;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using Newtonsoft.Json;
+using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Customization
 {
@@ -22,14 +20,14 @@ namespace GVRP.Module.Customization
         public static readonly Vector3 creatorPos = new Vector3(402.8664, -997.5515, -98.5);
         public static readonly Vector3 cameraLookAtPos = new Vector3(402.8664, -996.4108, -98.5);
         public const float FacingAngle = -185.0f;
-        
+
         public static void ApplyCharacter(this DbPlayer iPlayer, bool loadArmorHealthFromDBValue = false)
         {
 
             if (iPlayer.HasData("clonePerson"))
             {
                 DbPlayer target = Players.Players.Instance.GetByDbId(iPlayer.GetData("clonePerson"));
-                if(target != null && target.IsValid())
+                if (target != null && target.IsValid())
                 {
                     ApplyCharacterFromOther(iPlayer, target);
                     return;
@@ -51,7 +49,7 @@ namespace GVRP.Module.Customization
                 armor = iPlayer.Armor[0];
                 health = iPlayer.Hp;
             }
-            if((PedHash)iPlayer.Player.Model != PedHash.FreemodeFemale01 && (PedHash)iPlayer.Player.Model != PedHash.FreemodeMale01) iPlayer.Player.SetSkin(iPlayer.Character.Skin);
+            if ((PedHash)iPlayer.Player.Model != PedHash.FreemodeFemale01 && (PedHash)iPlayer.Player.Model != PedHash.FreemodeMale01) iPlayer.Player.SetSkin(iPlayer.Character.Skin);
 
             iPlayer.Player.Armor = armor;
             iPlayer.Player.Health = health;
@@ -80,7 +78,7 @@ namespace GVRP.Module.Customization
                     Color = (byte)GetHeadOverlayColor(iPlayer.Customization, i)
                 };
             }
-            
+
             List<Decoration> decorations = new List<Decoration>();
             foreach (uint assetsTattooId in iPlayer.Customization.Tattoos)
             {
@@ -249,7 +247,7 @@ namespace GVRP.Module.Customization
             iPlayer.SaveCustomization();
             iPlayer.ApplyDecorations();
         }
-        
+
         public static void RemoveTattoo(this DbPlayer iPlayer, uint tattooId)
         {
             if (iPlayer.Customization.Tattoos.Contains(tattooId)) iPlayer.Customization.Tattoos.Remove(tattooId);
@@ -267,7 +265,7 @@ namespace GVRP.Module.Customization
 
             iPlayer.SetData("lastPosition", player.Position);
             iPlayer.SetData("lastDimension", player.Dimension);
-            
+
             player.Dimension = iPlayer.Id;
             player.Transparency = 255;
             player.Rotation = new Vector3(0f, 0f, FacingAngle);
@@ -348,7 +346,7 @@ namespace GVRP.Module.Customization
             if (iPlayer.HasData("lastPosition"))
             {
                 player.SetPosition((Vector3)iPlayer.GetData("lastPosition"));
-                if(iPlayer.HasData("lastDimension"))
+                if (iPlayer.HasData("lastDimension"))
                 {
                     player.Dimension = iPlayer.GetData("lastDimension");
                 }

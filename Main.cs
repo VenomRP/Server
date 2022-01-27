@@ -1,75 +1,66 @@
-﻿
-
-using System;
-using MySql.Data.MySqlClient;
-using System.Collections.Generic;
-using System.Text;
-using System.Linq;
-using System.IO;
-using System.Threading.Tasks;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module;
 using GVRP.Module.Ammunations;
 using GVRP.Module.Armory;
+using GVRP.Module.AsyncEventTasks;
 using GVRP.Module.Banks;
+using GVRP.Module.Banks.Windows;
 using GVRP.Module.Business;
 using GVRP.Module.Chat;
+using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Clothes;
 using GVRP.Module.Clothes.Character;
+using GVRP.Module.Clothes.Mobile;
 using GVRP.Module.Clothes.Shops;
-using GVRP.Module.Export;
-using GVRP.Module.Houses;
 using GVRP.Module.Configurations;
+using GVRP.Module.Crime;
+using GVRP.Module.Gangwar;
+using GVRP.Module.Houses;
+using GVRP.Module.Injury;
+using GVRP.Module.Items;
 using GVRP.Module.Jobs.Bus;
+using GVRP.Module.Konversations;
+using GVRP.Module.LifeInvader.App;
 using GVRP.Module.Logging;
 using GVRP.Module.Maps;
 using GVRP.Module.Menu;
 using GVRP.Module.Menu.Menus.Account;
+using GVRP.Module.Menu.Menus.Armory;
 using GVRP.Module.Menu.Menus.Business;
+using GVRP.Module.News.App;
+using GVRP.Module.NpcSpawner;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using GVRP.Module.Players.Events;
+using GVRP.Module.Players.Windows;
 using GVRP.Module.Robbery;
+using GVRP.Module.Service;
 using GVRP.Module.Shops;
 using GVRP.Module.Spawners;
 using GVRP.Module.Sync;
 using GVRP.Module.Teams;
+using GVRP.Module.Teams.Shelter;
+using GVRP.Module.VehicleDeath;
+using GVRP.Module.VehicleRent;
 using GVRP.Module.Vehicles;
 using GVRP.Module.Vehicles.Data;
 using GVRP.Module.Vehicles.Garages;
 using GVRP.Module.Vehicles.Mod;
 using GVRP.Module.Vehicles.Shops;
+using GVRP.Module.Vehicles.Windows;
+using GVRP.Module.VehicleSpawner;
+using GVRP.Module.Weather;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using static GVRP.Module.Chat.Chats;
 using Timer = System.Timers.Timer;
 using VehicleData = GVRP.Module.Vehicles.Data.VehicleData;
-using GVRP.Module.Vehicles.Windows;
-using GVRP.Module.Players.Events;
-using GVRP.Module.Banks.Windows;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Injury;
-using GVRP.Module.Items;
-using GVRP.Module.LifeInvader.App;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Crime;
-using GVRP.Module.News.App;
-using static GVRP.Module.Chat.Chats;
-using GVRP.Module.VehicleSpawner;
-using GVRP.Module.Konversations;
-using GVRP.Module.NpcSpawner;
-using System.Net;
-using Newtonsoft.Json;
-using GVRP.Module.Helper;
-using GVRP.Module.Weather;
-using GVRP.Module.Service;
-using GVRP.Module.AsyncEventTasks;
-using GVRP.Module.Menu.Menus.Armory;
-using GVRP.Module.VehicleRent;
-using GVRP.Module.Gangwar;
-using GVRP.Module.Clothes.Mobile;
-using System.Security.Cryptography;
-using GVRP.Module.VehicleDeath;
-using GVRP.Module.Teams.Shelter;
-using GVRP.Module.Logging;
-using GVRP.Module.Players;
 
 namespace GVRP
 {
@@ -549,7 +540,7 @@ namespace GVRP
             // Business Bank
             PlayerNotifications.Instance.Add(new Vector3(248.977, 212.425, 106.287), "Business Beantragung",
                 "Benutze \"E\" um ein Businesse zu erwerben!");
-            
+
             // Alter Punkt
             //PlayerNotifications.Instance.Add(new Vector3(-83.3435, -835.366, 40.5581), "Business Tower",
             //    "Benutze \"E\" um ein Business zu betreten!");
@@ -696,7 +687,7 @@ namespace GVRP
 
             if (xVeh.IsPlayerVehicle() && xVeh.databaseId > 0)
             {
-             //   xVeh.SetPrivateCarGarage(1, xVeh.Data.Classification.ScrapYard);
+                //   xVeh.SetPrivateCarGarage(1, xVeh.Data.Classification.ScrapYard);
             }
             else if (xVeh.IsTeamVehicle())
             {
@@ -881,7 +872,7 @@ namespace GVRP
                     NAPI.Task.Run(() =>
                     {
                         NAPI.Entity.DeleteEntity(player.Handle); //DeleteEntity
-                });
+                    });
                 }
 
                 player.SendNotification("Server verlassen");
@@ -979,7 +970,7 @@ namespace GVRP
         {
             AsyncEventTasks.PlayerEnterVehicleTask(player, vehicle, seat);
             //Der Spieler soll dann seine Emotes abbrechen
-            
+
         }
 
         [ServerEvent(Event.PlayerExitVehicle)]
@@ -1282,7 +1273,7 @@ namespace GVRP
                                             reader.GetInt32("color1"), reader.GetInt32("color2"), 0, reader.GetUInt32("gps_tracker") == 1, true, true,
                                             teamid, reader.GetString("plate"),
                                             reader.GetUInt32("id"), 0, 0, data.Fuel,
-                                            VehicleHandler.MaxVehicleHealth, reader.GetString("tuning"), "", 0, ContainerManager.LoadContainer(reader.GetUInt32("id"), ContainerTypes.FVEHICLE), WheelClamp:reader.GetInt32("WheelClamp"), AlarmSystem:reader.GetInt32("alarm_system") == 1, lastgarageId:garage.Id);
+                                            VehicleHandler.MaxVehicleHealth, reader.GetString("tuning"), "", 0, ContainerManager.LoadContainer(reader.GetUInt32("id"), ContainerTypes.FVEHICLE), WheelClamp: reader.GetInt32("WheelClamp"), AlarmSystem: reader.GetInt32("alarm_system") == 1, lastgarageId: garage.Id);
 
                                         xVeh.SetTeamCarGarage(false);
                                         return xVeh.entity;
@@ -2092,22 +2083,23 @@ namespace GVRP
 
         public static async void TriggerPlayer_L(DbPlayer iPlayer)
         {
-            try { 
-            if(iPlayer == null | !iPlayer.IsValid())
+            try
             {
-                return;
-            }
-            if (!iPlayer.HasData("canlool"))
-            {
-                iPlayer.SendNewNotification("Spawn Spammschutz!", PlayerNotification.NotificationType.ERROR, "", 1000);
-                return;
-            }
-            if (!iPlayer.CanInteract()) return;
+                if (iPlayer == null | !iPlayer.IsValid())
+                {
+                    return;
+                }
+                if (!iPlayer.HasData("canlool"))
+                {
+                    iPlayer.SendNewNotification("Spawn Spammschutz!", PlayerNotification.NotificationType.ERROR, "", 1000);
+                    return;
+                }
+                if (!iPlayer.CanInteract()) return;
 
-            if (await Modules.Instance.OnKeyPressed(iPlayer, Key.L)) return;
-            if (await HouseModule.Instance.PlayerLockHouse(iPlayer)) return;
+                if (await Modules.Instance.OnKeyPressed(iPlayer, Key.L)) return;
+                if (await HouseModule.Instance.PlayerLockHouse(iPlayer)) return;
 
-            return;   //thats other thing its because the weapon lab
+                return;   //thats other thing its because the weapon lab
             }
             catch (Exception e) // when does it error, when u click E? yes
             {
@@ -2131,21 +2123,22 @@ namespace GVRP
 
         public static async void TriggerPlayer_J(DbPlayer iPlayer)
         {
-            try { 
-            if (iPlayer == null | !iPlayer.IsValid())
+            try
             {
-                return;
-            }
-            if (!iPlayer.HasData("canlool"))
-            {
-                iPlayer.SendNewNotification("Spawn Spammschutz!", PlayerNotification.NotificationType.ERROR, "", 1000);
-                return;
-            }
-            if (!iPlayer.CanInteract()) return;
+                if (iPlayer == null | !iPlayer.IsValid())
+                {
+                    return;
+                }
+                if (!iPlayer.HasData("canlool"))
+                {
+                    iPlayer.SendNewNotification("Spawn Spammschutz!", PlayerNotification.NotificationType.ERROR, "", 1000);
+                    return;
+                }
+                if (!iPlayer.CanInteract()) return;
 
-            if (await Modules.Instance.OnKeyPressed(iPlayer, Key.J)) return;
+                if (await Modules.Instance.OnKeyPressed(iPlayer, Key.J)) return;
 
-            return;
+                return;
             }
             catch (Exception e)
             {
@@ -2232,7 +2225,7 @@ namespace GVRP
             else
             {
                 if (ArmoryModule.Instance.TriggerPoint(iPlayer)) return;
-                
+
                 // AD Punkt
                 if (IsPlayerInRangeOfPoint(player, 5.0f,
                     new Vector3(-1051.296, -238.987, 45.02107)))
@@ -2248,7 +2241,7 @@ namespace GVRP
                         return;
                     }
                 }
-                
+
                 if (iPlayer.HasData("clothShopId"))
                 {
                     DialogMigrator.CreateMenu(player, Dialogs.menu_shop_clothes, "Kleiderladen", "");
@@ -2288,18 +2281,18 @@ namespace GVRP
 
                 if (iPlayer.HasData("ammunationId"))
                 {
-                           Ammunation ammunation = Ammunations.Instance.Get(iPlayer.GetData("ammunationId"));
-                          if (ammunation != null)
-                          {
-                            
-                    //Waffenshop
-                    DialogMigrator.CreateMenu(player, Dialogs.menu_shop_ammunation_main, "Ammunation", "");
-                            DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_main, "Waffen", "");
-                            DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_main, "Munition", "");
-                             DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_main, MSG.General.Close(), "");
-                             DialogMigrator.OpenUserMenu(iPlayer, Dialogs.menu_shop_ammunation_main);
-                             return;
-                       }
+                    Ammunation ammunation = Ammunations.Instance.Get(iPlayer.GetData("ammunationId"));
+                    if (ammunation != null)
+                    {
+
+                        //Waffenshop
+                        DialogMigrator.CreateMenu(player, Dialogs.menu_shop_ammunation_main, "Ammunation", "");
+                        DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_main, "Waffen", "");
+                        DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_main, "Munition", "");
+                        DialogMigrator.AddMenuItem(player, Dialogs.menu_shop_ammunation_main, MSG.General.Close(), "");
+                        DialogMigrator.OpenUserMenu(iPlayer, Dialogs.menu_shop_ammunation_main);
+                        return;
+                    }
                 }
 
                 if (iPlayer.HasData("garageId"))
@@ -2443,7 +2436,7 @@ namespace GVRP
 
 
                 }
-                                
+
                 // Business weil wegen doofen menu
                 if (iPlayer.Player.Position.DistanceTo(new Vector3(-79.7095, -811.279, 243.386)) < 3.0f)
                 {

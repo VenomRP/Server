@@ -1,9 +1,4 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Items;
@@ -11,6 +6,10 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
 using GVRP.Module.Vehicles;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.VehicleRent
 {
@@ -58,7 +57,7 @@ namespace GVRP.Module.VehicleRent
                             return;
                         }
 
-                        if(!targetPlayer.Container.CanInventoryItemAdded(VehicleRentModule.VehicleRentItemId))
+                        if (!targetPlayer.Container.CanInventoryItemAdded(VehicleRentModule.VehicleRentItemId))
                         {
                             dbPlayer.SendNewNotification("Spieler hat nicht genug Platz im Inventar für den Mietvertrag!");
                             return;
@@ -67,7 +66,7 @@ namespace GVRP.Module.VehicleRent
 
                         DateTime mietDate = DateTime.Now;
                         DateTime endMietDate = mietDate.AddDays(days);
-                        
+
                         Dictionary<string, dynamic> DataInfo = new Dictionary<string, dynamic>();
                         DataInfo.Add("info", $"Kunde: {targetPlayer.GetName()} | Vermieter: {dbPlayer.GetName()} | " +
                             $"Fahrzeug: ({sxVeh.databaseId}) {(sxVeh.Data.mod_car_name == "" ? sxVeh.Data.Model : sxVeh.Data.mod_car_name)} | Datum: {mietDate.ToString("dd.MM.yyyy HH:mm")} - {endMietDate.ToString("dd.MM.yyyy HH:mm")}");
@@ -82,7 +81,7 @@ namespace GVRP.Module.VehicleRent
                     }
                     return;
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     return;
                 }
@@ -96,8 +95,8 @@ namespace GVRP.Module.VehicleRent
             {
                 var dbPlayer = player.GetPlayer();
                 if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                
-                if(!Int32.TryParse(returnstring, out int days))
+
+                if (!Int32.TryParse(returnstring, out int days))
                 {
                     dbPlayer.SendNewNotification("Falsche Anzahl an Tagen!");
                     return;

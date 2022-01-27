@@ -1,11 +1,11 @@
 ﻿using GTANetworkAPI;
-using Newtonsoft.Json;
-using System;
 using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Customization;
 using GVRP.Module.Logging;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using Newtonsoft.Json;
+using System;
 
 namespace GVRP.Module.Barber.Windows
 {
@@ -54,52 +54,52 @@ namespace GVRP.Module.Barber.Windows
         [RemoteEvent]
         public async void barberShopBuy(Player client, int cost, String responseString)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
-                try
+
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+            try
+            {
+                var newCustomization = JsonConvert.DeserializeObject<dynamic>(responseString);
+                if (dbPlayer.TakeMoney(cost))
                 {
-                    var newCustomization = JsonConvert.DeserializeObject<dynamic>(responseString);
-                    if (dbPlayer.TakeMoney(cost))
-                    {
-                        dbPlayer.Customization.Hair.Hair = (int)newCustomization.hair;
-                        dbPlayer.Customization.Hair.Color = (byte)newCustomization.hairColor;
-                        dbPlayer.Customization.Hair.HighlightColor = (byte)newCustomization.hairColor2;
+                    dbPlayer.Customization.Hair.Hair = (int)newCustomization.hair;
+                    dbPlayer.Customization.Hair.Color = (byte)newCustomization.hairColor;
+                    dbPlayer.Customization.Hair.HighlightColor = (byte)newCustomization.hairColor2;
 
-                        dbPlayer.Customization.BeardColor = (int)newCustomization.beardColor;
-                        dbPlayer.Customization.Appearance[1] = new AppearanceItem((byte)newCustomization.beard, (float)newCustomization.beardOpacity);
+                    dbPlayer.Customization.BeardColor = (int)newCustomization.beardColor;
+                    dbPlayer.Customization.Appearance[1] = new AppearanceItem((byte)newCustomization.beard, (float)newCustomization.beardOpacity);
 
-                        dbPlayer.Customization.ChestHairColor = (int)newCustomization.chestHairColor;
-                        dbPlayer.Customization.Appearance[10] = new AppearanceItem((byte)newCustomization.chestHair, (float)newCustomization.chestHairOpacity);
+                    dbPlayer.Customization.ChestHairColor = (int)newCustomization.chestHairColor;
+                    dbPlayer.Customization.Appearance[10] = new AppearanceItem((byte)newCustomization.chestHair, (float)newCustomization.chestHairOpacity);
 
-                        dbPlayer.SaveCustomization();
-                        dbPlayer.SendNewNotification($"Du hast {cost}$ bezahlt", title: "Info", notificationType: PlayerNotification.NotificationType.INFO);
-                    }
-                    else
-                    {
-                        dbPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(cost), notificationType: PlayerNotification.NotificationType.ERROR);
-                        dbPlayer.ApplyCharacter();
-                        return;
-                    }
-
+                    dbPlayer.SaveCustomization();
+                    dbPlayer.SendNewNotification($"Du hast {cost}$ bezahlt", title: "Info", notificationType: PlayerNotification.NotificationType.INFO);
+                }
+                else
+                {
+                    dbPlayer.SendNewNotification(MSG.Money.NotEnoughMoney(cost), notificationType: PlayerNotification.NotificationType.ERROR);
                     dbPlayer.ApplyCharacter();
+                    return;
                 }
-                catch (Exception ex)
-                {
-                    Logger.Crash(ex);
-                }
-            
+
+                dbPlayer.ApplyCharacter();
+            }
+            catch (Exception ex)
+            {
+                Logger.Crash(ex);
+            }
+
         }
 
         [RemoteEvent]
         public async void barberShopExit(Player client)
         {
-            
-                var dbPlayer = client.GetPlayer();
-                if (dbPlayer == null || !dbPlayer.IsValid()) return;
 
-                dbPlayer.ApplyCharacter();
-            
+            var dbPlayer = client.GetPlayer();
+            if (dbPlayer == null || !dbPlayer.IsValid()) return;
+
+            dbPlayer.ApplyCharacter();
+
         }
 
         public class BarberPlayerObject

@@ -1,7 +1,7 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.NpcSpawner;
 using MySql.Data.MySqlClient;
 using System;
-using GVRP.Module.NpcSpawner;
 
 namespace GVRP.Module.Schwarzgeld
 {

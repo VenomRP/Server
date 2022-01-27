@@ -2,7 +2,6 @@
 using GVRP.Handler;
 using GVRP.Module.Freiberuf;
 using GVRP.Module.Freiberuf.Mower;
-using GVRP.Module.Houses;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
@@ -45,7 +44,7 @@ namespace GVRP
 
                         iPlayer.RemoveJobVehicleIfExist(MowerModule.MowerJobVehMarkId);
 
-                        if(!iPlayer.IsJobVehicleAtPoint(MowerModule.MowerGetPoint))
+                        if (!iPlayer.IsJobVehicleAtPoint(MowerModule.MowerGetPoint))
                         {
                             // Spawning Vehicle
                             SxVehicle xVeh = VehicleHandler.Instance.CreateServerVehicle(VehicleDataModule.Instance.GetData((uint)VehicleHash.Mower).Id, false,
@@ -58,7 +57,7 @@ namespace GVRP
                         break;
                     case 1:
                         SxVehicle sxVehicle = iPlayer.GetJobVehicle(MowerModule.MowerJobVehMarkId);
-                        if(sxVehicle != null)
+                        if (sxVehicle != null)
                         {
                             int loadage = sxVehicle.entity.GetData<int>("loadage");
                             int verdienst = loadage * 10;

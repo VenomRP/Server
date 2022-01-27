@@ -1,13 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
-using Newtonsoft.Json;
-using GVRP.Module.Configurations;
-using GVRP.Module.Items;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
-
-namespace GVRP.Module.Players.Buffs
+﻿namespace GVRP.Module.Players.Buffs
 {
     public class PlayerBuffs
     {
@@ -19,7 +10,7 @@ namespace GVRP.Module.Players.Buffs
         public int DrugBuildUsed { get; set; }
         public uint LastDrugId { get; set; }
 
-        public PlayerBuffs() 
+        public PlayerBuffs()
         {
             DrugsInfected = 0;
             JointBuff = 0;

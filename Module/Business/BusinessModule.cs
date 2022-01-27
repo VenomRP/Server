@@ -1,18 +1,15 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Banks.Windows;
+using GVRP.Module.ClientUI.Components;
+using GVRP.Module.Menu;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
 using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
-using GVRP.Module.Banks.BankHistory;
-using GVRP.Module.Banks.Windows;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Logging;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Business
 {
@@ -27,7 +24,7 @@ namespace GVRP.Module.Business
         private static readonly Vector3 BusinessBankPosition = new Vector3(248.977, 212.425, 106.287);
 
         private static readonly Vector3 BusinessTresurePosition = new Vector3(-59.5738, -812.895, 243.386);
-        
+
         protected override string GetQuery()
         {
             return "SELECT * FROM `business`;";
@@ -64,7 +61,7 @@ namespace GVRP.Module.Business
                 string.Equals(b.Value.Name, name, StringComparison.CurrentCultureIgnoreCase)
                 || b.Value.Name.ToLower().Contains(name.ToLower())).Value;
         }
-        
+
         public override bool OnColShapeEvent(DbPlayer dbPlayer, ColShape colShape, ColShapeState colShapeState)
         {
             if (colShapeState == ColShapeState.Enter)
@@ -80,7 +77,7 @@ namespace GVRP.Module.Business
             }
             return false;
         }
-        
+
         public async Task CreatePlayerBusiness(DbPlayer iPlayer)
         {
             try
@@ -104,7 +101,8 @@ namespace GVRP.Module.Business
                     iPlayer.ActiveBusiness = business;
                     await conn.CloseAsync();
                 }
-            } catch(Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logging.Logger.Crash(ex);
             }
@@ -180,7 +178,8 @@ namespace GVRP.Module.Business
 
                     return false;
                 }
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Logging.Logger.Crash(ex);
             }

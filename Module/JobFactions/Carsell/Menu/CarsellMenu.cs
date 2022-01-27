@@ -1,17 +1,5 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
-using GVRP.Module.Vehicles.Data;
 
 namespace GVRP.Module.Carsell.Menu
 {
@@ -31,7 +19,7 @@ namespace GVRP.Module.Carsell.Menu
             l_Menu.Add($"Lieferfahrzeuge");
 
             l_Menu.Add($"Schließen");
-            
+
             return l_Menu;
         }
 
@@ -44,7 +32,7 @@ namespace GVRP.Module.Carsell.Menu
         {
             public bool OnSelect(int index, DbPlayer dbPlayer)
             {
-                if(index == 0)
+                if (index == 0)
                 {
                     Module.Menu.MenuManager.Instance.Build(GVRP.Module.Menu.PlayerMenu.CarsellBuyMenu, dbPlayer).Show(dbPlayer);
                     return false;

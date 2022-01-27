@@ -1,14 +1,13 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.Configurations;
+using GVRP.Module.Items;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Shops.Windows;
 using MySql.Data.MySqlClient;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GVRP.Module.Configurations;
-using GVRP.Module.Items;
-using GVRP.Module.Logging;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Shops.Windows;
 
 namespace GVRP.Module.Business.NightClubs
 {
@@ -35,7 +34,7 @@ namespace GVRP.Module.Business.NightClubs
         public bool Locked { get; set; }
         public bool GarageLocked { get; set; }
         public Container Container { get; set; }
-        public List<NightClubItem> NightClubShopItems{ get; set; }
+        public List<NightClubItem> NightClubShopItems { get; set; }
         public List<DbPlayer> PlayersInsideClub = new List<DbPlayer>();
 
         public NightClub(MySqlDataReader reader) : base(reader)
@@ -64,7 +63,7 @@ namespace GVRP.Module.Business.NightClubs
 
             GarageColShape = Spawners.ColShapes.Create(GaragePosition, 3.0f);
             GarageColShape.SetData("nightclubId", Id);
-            
+
             OwnerBusiness = BusinessModule.Instance.GetAll().Values.FirstOrDefault(b => b.BusinessBranch.NightClubId == Id);
 
             Main.ServerBlips.Add(Spawners.Blips.Create(Position, "Nightclub", 93, 1.0f));
@@ -256,7 +255,7 @@ namespace GVRP.Module.Business.NightClubs
         {
             List<ShopItemX> shopItems = new List<ShopItemX>();
 
-            foreach(NightClubItem nightClubItem in NightClubShopItems)
+            foreach (NightClubItem nightClubItem in NightClubShopItems)
             {
                 ShopItemX shopItemX = new ShopItemX(nightClubItem.ItemId, nightClubItem.Name, nightClubItem.Price);
                 shopItems.Add(shopItemX);

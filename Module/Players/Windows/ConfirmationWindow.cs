@@ -1,9 +1,7 @@
-﻿using System;
-using System.Security.Principal;
+﻿using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Players.Db;
-using GTANetworkAPI;
 using Newtonsoft.Json;
-using GVRP.Module.ClientUI.Windows;
+using System;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -32,10 +30,10 @@ namespace GVRP.Module.Players.Windows
     public class ConfirmationObject
     {
         public string Title { get; set; }
-        public string Message  { get; set; }
-        public string Callback  { get; set; }
-        public string Arg1  { get; set; }
-        public string Arg2  { get; set; }
+        public string Message { get; set; }
+        public string Callback { get; set; }
+        public string Arg1 { get; set; }
+        public string Arg2 { get; set; }
 
         public ConfirmationObject(string title, string message, string callback, string arg1 = "", string arg2 = "")
         {

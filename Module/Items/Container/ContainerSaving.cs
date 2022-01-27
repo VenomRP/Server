@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace GVRP.Module.Items
 {
@@ -15,7 +14,7 @@ namespace GVRP.Module.Items
 
             return SaveQuery;
         }
-        
+
         public static void SaveMetaData(this Container container)
         {
 
@@ -63,9 +62,9 @@ namespace GVRP.Module.Items
                 {
                     if (!saveItems.ContainsKey(i)) saveItems.Add(i, new List<SaveItem>());
                 }
-                
+
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logging.Logger.Crash(ex);
             }

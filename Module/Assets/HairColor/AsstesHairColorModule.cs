@@ -1,7 +1,4 @@
-﻿using System;
-using GVRP.Module.Barber;
-
-namespace GVRP.Module.Assets.HairColor
+﻿namespace GVRP.Module.Assets.HairColor
 {
     public class AssetsHairColorModule : SqlModule<AssetsHairColorModule, AssetsHairColor, uint>
     {

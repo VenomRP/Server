@@ -1,22 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GTANetworkAPI;
-using GVRP.Handler;
-using GVRP.Module.Assets.Hair;
-using GVRP.Module.Assets.HairColor;
+﻿using GTANetworkAPI;
 using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Barber.Windows;
 using GVRP.Module.Business;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Customization;
 using GVRP.Module.GTAN;
-using GVRP.Module.Logging;
 using GVRP.Module.Menu;
-using GVRP.Module.Players;
-
 using GVRP.Module.Players.Db;
 using GVRP.Module.Tattoo.Windows;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Tattoo
 {
@@ -81,7 +73,7 @@ namespace GVRP.Module.Tattoo
                 foreach (TattooAddedItem tattooAddedItem in tattooShop.tattooLicenses)
                 {
                     AssetsTattoo assetsTattoo = AssetsTattooModule.Instance.Get((uint)tattooAddedItem.AssetsTattooId);
-                    if(assetsTattoo.GetHashForPlayer(dbPlayer) != "")
+                    if (assetsTattoo.GetHashForPlayer(dbPlayer) != "")
                     {
                         cTattooList.Add(new ClientTattoo(assetsTattoo.GetHashForPlayer(dbPlayer), assetsTattoo.ZoneId, assetsTattoo.Price, assetsTattoo.Name));
                     }
@@ -100,7 +92,7 @@ namespace GVRP.Module.Tattoo
             {
                 case ColShapeState.Enter:
                     dbPlayer.SetData("tattooShopId", tattooShopId);
-                    
+
                     return false;
                 case ColShapeState.Exit:
                     if (!dbPlayer.HasData("tattooShopId")) return false;
@@ -108,12 +100,12 @@ namespace GVRP.Module.Tattoo
 
                     // Resett Tattoo Sync
                     dbPlayer.ApplyCharacter();
-                    
+
                     return false;
                 default:
                     return false;
             }
         }
-        
+
     }
 }

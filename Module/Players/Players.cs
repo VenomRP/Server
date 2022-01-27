@@ -1,16 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
+using GVRP.Module.Configurations;
 using GVRP.Module.Crime;
 using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.PlayerAnimations;
 using GVRP.Module.Players.Ranks;
 using GVRP.Module.Weapons;
-using GVRP.Module.Configurations;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Players
 {

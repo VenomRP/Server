@@ -1,14 +1,8 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Banks.BankHistory;
 using GVRP.Module.Banks.Windows;
 using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Commands;
 using GVRP.Module.Dealer;
 using GVRP.Module.Gangwar;
-using GVRP.Module.Injury;
 using GVRP.Module.Items;
 using GVRP.Module.Laboratories;
 using GVRP.Module.Menu;
@@ -16,6 +10,9 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Buffs;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teamfight;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Teams.Shelter
 {
@@ -51,7 +48,7 @@ namespace GVRP.Module.Teams.Shelter
                     menu.Add($"{FingerPrintedWeaponCount} Fingerabdrücke für ${price} entfernen");
                 }
             }
-            
+
             return menu;
         }
 

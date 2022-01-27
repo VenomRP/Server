@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace GVRP.Module.Konversations
 {
@@ -19,10 +18,10 @@ namespace GVRP.Module.Konversations
         protected override void OnItemLoaded(Konversation konversation)
         {
             Conversation l_Conversation = new Conversation();
-            l_Conversation.Id           = konversation.Id;
-            l_Conversation.LastUpdated  = konversation.LastUpdated;
-            l_Conversation.Player1      = konversation.Player1;
-            l_Conversation.Player2      = konversation.Player2;
+            l_Conversation.Id = konversation.Id;
+            l_Conversation.LastUpdated = konversation.LastUpdated;
+            l_Conversation.Player1 = konversation.Player1;
+            l_Conversation.Player2 = konversation.Player2;
 
             KonversationsModule.Instance.konversations.Add(l_Conversation, new List<ConvMessage>());
         }

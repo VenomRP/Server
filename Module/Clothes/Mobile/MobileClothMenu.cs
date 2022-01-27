@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Clothes.Props;
+﻿using GVRP.Module.Clothes.Props;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Clothes.Mobile
 {
@@ -24,11 +19,11 @@ namespace GVRP.Module.Clothes.Mobile
             menu.Add(MSG.General.Close());
             if (iPlayer.Character == null || iPlayer.Character.Clothes == null || iPlayer.Character.ActiveClothes == null || iPlayer.Character.Clothes.Count <= 0) return null;
 
-            foreach(KeyValuePair<int,uint> kvp in iPlayer.Character.Clothes)
+            foreach (KeyValuePair<int, uint> kvp in iPlayer.Character.Clothes)
             {
                 if (!iPlayer.Character.ActiveClothes.ContainsKey(kvp.Key))
                 {
-                    if(kvp.Key == 1)
+                    if (kvp.Key == 1)
                         iPlayer.Character.ActiveClothes.Add(kvp.Key, false);
                     else
                         iPlayer.Character.ActiveClothes.Add(kvp.Key, true);
@@ -38,7 +33,7 @@ namespace GVRP.Module.Clothes.Mobile
             {
                 if (!iPlayer.Character.ActiveProps.ContainsKey(kvp.Key))
                 {
-                        iPlayer.Character.ActiveProps.Add(kvp.Key, true);
+                    iPlayer.Character.ActiveProps.Add(kvp.Key, true);
                 }
             }
             menu.Add("Maskierung", ""); //ComponentID 1
@@ -66,7 +61,7 @@ namespace GVRP.Module.Clothes.Mobile
                 }
                 int accsoire = -1;
                 int choice = -1;
-                switch(index)
+                switch (index)
                 {
                     case 1:
                         choice = 1; //Maskierung
@@ -170,7 +165,7 @@ namespace GVRP.Module.Clothes.Mobile
                         iPlayer.Character.ActiveClothes[choice] = true;
                     }
                 }
-                else if(accsoire != -1)
+                else if (accsoire != -1)
                 {
                     if (!iPlayer.Character.EquipedProps.ContainsKey(accsoire)) return false;
                     if (!iPlayer.Character.ActiveProps.ContainsKey(accsoire)) return false;
@@ -184,7 +179,7 @@ namespace GVRP.Module.Clothes.Mobile
                         {
                             iPlayer.Player.ClearAccessory(0);
                         }
-                        
+
                         iPlayer.Character.ActiveProps[accsoire] = false;
                     }
                     else //Spieler hat das Kleidungsstück nicht an

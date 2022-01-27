@@ -1,7 +1,7 @@
-﻿using System.Runtime.CompilerServices;
-using GVRP.Module.Injury;
+﻿using GVRP.Module.Injury;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System.Runtime.CompilerServices;
 
 namespace GVRP.Module.Commands
 {

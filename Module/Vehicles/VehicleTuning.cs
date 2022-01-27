@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Logging;
+using System;
 
 namespace GVRP.Module.Vehicles
 {
@@ -14,7 +12,7 @@ namespace GVRP.Module.Vehicles
             try
             {
                 if (sxVeh == null) return;
-                
+
                 // Remove all Veh Mods
                 sxVeh.entity.Neons = false;
 

@@ -1,10 +1,8 @@
 ﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
+using System;
+using System.Linq;
 
 namespace GVRP.Module.Teams.AmmoPackageOrder
 {
@@ -38,7 +36,7 @@ namespace GVRP.Module.Teams.AmmoPackageOrder
         public override void OnServerBeforeRestart()
         {
             // Sonntags 16 Uhr wende
-            if(DateTime.Now.DayOfWeek == DayOfWeek.Sunday && DateTime.Now.Hour == 15)
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Sunday && DateTime.Now.Hour == 15)
             {
                 foreach (DbTeam dbTeam in TeamModule.Instance.GetAll().Values.ToList())
                 {

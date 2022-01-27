@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace GVRP.Module.Configurations
 {
@@ -9,7 +7,7 @@ namespace GVRP.Module.Configurations
         public static ServerFeatures Instance { get; } = new ServerFeatures();
         public static List<string> inactiveServerFeatures;
 
-        private ServerFeatures() 
+        private ServerFeatures()
         {
             inactiveServerFeatures = new List<string>();
             inactiveServerFeatures.Add("acpupdate");

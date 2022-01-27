@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.Business.Raffinery;
-using GVRP.Module.ClientUI.Components;
+﻿using GVRP.Handler;
 using GVRP.Module.Farming;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 using GVRP.Module.Vehicles;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Business.Raffinery
 {
@@ -32,14 +22,14 @@ namespace GVRP.Module.Business.Raffinery
             menu.Add($"Schließen");
 
             List<SxVehicle> sxVehicles = VehicleHandler.Instance.GetClosestVehiclesPlayerCanControl(iPlayer, 20.0f);
-            if(sxVehicles != null && sxVehicles.Count() > 0)
+            if (sxVehicles != null && sxVehicles.Count() > 0)
             {
-                foreach(SxVehicle sxVehicle in sxVehicles)
+                foreach (SxVehicle sxVehicle in sxVehicles)
                 {
                     menu.Add($"{sxVehicle.GetName()} ({sxVehicle.databaseId}) verarbeiten");
                 }
             }
-            
+
             return menu;
         }
 

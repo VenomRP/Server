@@ -1,5 +1,5 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Clothes.Character
 {
@@ -18,8 +18,8 @@ namespace GVRP.Module.Clothes.Character
         public List<uint> Wardrobe;
 
         public List<uint> Props;
-        
+
         public PedHash Skin { get; set; }
-        
+
     }
 }

@@ -1,8 +1,6 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using MySql.Data.MySqlClient;
-using GVRP.Module.Items;
-using GVRP.Module.Logging;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Vehicles.Data
 {
@@ -71,7 +69,7 @@ namespace GVRP.Module.Vehicles.Data
             }
             else
             {
-                Offset = new Vector3(0,0,0);
+                Offset = new Vector3(0, 0, 0);
             }
 
             AllowedItems = new HashSet<uint>();

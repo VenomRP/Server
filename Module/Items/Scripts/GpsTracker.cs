@@ -1,8 +1,4 @@
-﻿using GTANetworkMethods;
-using System;
-using GVRP.Module.Chat;
-using System.Threading.Tasks;
-
+﻿
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
@@ -15,9 +11,9 @@ namespace GVRP.Module.Items.Scripts
         {
             if (!iPlayer.Player.IsInVehicle) return false;
             {
-                if (iPlayer.job[0] != (int) jobs.JOB_MECH)
+                if (iPlayer.job[0] != (int)jobs.JOB_MECH)
                 {
-                    iPlayer.SendNewNotification( MSG.Error.NoPermissions());
+                    iPlayer.SendNewNotification(MSG.Error.NoPermissions());
                     return false;
                 }
 
@@ -31,7 +27,7 @@ namespace GVRP.Module.Items.Scripts
                     MySQLHandler.ExecuteAsync($"UPDATE {table} SET gps_tracker = 1 WHERE id = {vehicle.databaseId}");
                     vehicle.GpsTracker = true;
                     iPlayer.SendNewNotification("Der GPS-Tracker wurde eingebaut.");
-       //             iPlayer.JobSkillsIncrease(2);
+                    //             iPlayer.JobSkillsIncrease(2);
                 }
                 else
                 {

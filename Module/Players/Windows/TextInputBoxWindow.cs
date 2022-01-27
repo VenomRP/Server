@@ -1,8 +1,7 @@
-﻿using System;
+﻿using GVRP.Module.ClientUI.Windows;
 using GVRP.Module.Players.Db;
-using GTANetworkAPI;
 using Newtonsoft.Json;
-using GVRP.Module.ClientUI.Windows;
+using System;
 
 namespace GVRP.Module.Players.Windows
 {
@@ -31,8 +30,8 @@ namespace GVRP.Module.Players.Windows
     public class TextInputBoxWindowObject
     {
         public string Title { get; set; }
-        public string Message  { get; set; }
-        public string Callback  { get; set; }
+        public string Message { get; set; }
+        public string Callback { get; set; }
         public object CustomData { get; set; }
     }
 }

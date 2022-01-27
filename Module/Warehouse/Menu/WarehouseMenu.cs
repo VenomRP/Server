@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using GVRP.Module.Assets.Tattoo;
-using GVRP.Module.Business;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.GTAN;
-using GVRP.Module.Houses;
-using GVRP.Module.Items;
-using GVRP.Module.Menu;
-using GVRP.Module.Players;
+﻿using GVRP.Module.Menu;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
-using GVRP.Module.Tattoo;
 
 namespace GVRP.Module.Warehouse
 {
@@ -50,7 +38,7 @@ namespace GVRP.Module.Warehouse
                     MenuManager.DismissCurrent(iPlayer);
                     return false;
                 }
-                else if(index == 1) // ankauf Menu
+                else if (index == 1) // ankauf Menu
                 {
                     MenuManager.Instance.Build(PlayerMenu.WarehouseBuyMenu, iPlayer).Show(iPlayer);
                     return false;

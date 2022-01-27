@@ -15,7 +15,7 @@ namespace GVRP.Module.Business.NightClubs
             if (!iPlayer.TryData("nightclubId", out uint nightClubId)) return null;
             NightClub nightClub = NightClubModule.Instance.Get(nightClubId);
             if (nightClub == null) return null;
-            
+
             var menu = new Menu.Menu(Menu, nightClub.Name);
 
             menu.Add($"Schließen");

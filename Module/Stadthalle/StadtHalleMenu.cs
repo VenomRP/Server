@@ -1,9 +1,4 @@
-﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Business.FuelStations;
-using GVRP.Module.ClientUI.Components;
+﻿using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Configurations;
 using GVRP.Module.Houses;
 using GVRP.Module.Items;
@@ -11,6 +6,8 @@ using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
+using MySql.Data.MySqlClient;
+using System;
 
 namespace GVRP.Module.Stadthalle
 {
@@ -61,7 +58,7 @@ namespace GVRP.Module.Stadthalle
                 }
                 else if (index == 1)
                 {
-                    if(dbPlayer.IsTenant())
+                    if (dbPlayer.IsTenant())
                     {
                         HouseRent tenant = dbPlayer.GetTenant();
                         dbPlayer.SendNewNotification($"Sie haben Ihren Mietvertag der Immobilie {tenant.HouseId} gekündigt!");
@@ -85,16 +82,20 @@ namespace GVRP.Module.Stadthalle
                     else
                     {
                         kosten = dbPlayer.Level * 50000;
-                        ComponentManager.Get<TextInputBoxWindow>().Show()(dbPlayer, new TextInputBoxWindowObject() { Title = $"Namensänderung beantragen | Kosten: ${kosten}", Callback = "NameChange",
+                        ComponentManager.Get<TextInputBoxWindow>().Show()(dbPlayer, new TextInputBoxWindowObject()
+                        {
+                            Title = $"Namensänderung beantragen | Kosten: ${kosten}",
+                            Callback = "NameChange",
                             Message = "Die Kosten sind 50.000$ * Visumsstufe Grundgebuehr, solltest du einen Doppelnamen wollen (z.B. Max_Mustermann-Klein >!Titel sind verboten!<) kostet der Doppelte Teil pro Buchstabe 150.000$ extra. " +
                             "Bei erfolgreicher Namensänderung wirst du automatisch vom Server getrennt. Vergiss nicht deinen neuen Namen in den RageMP-Launcher einzutragen! " +
-                            "Vorname_Nachname und zwar auch hier mit einem Unterstrich." });
+                            "Vorname_Nachname und zwar auch hier mit einem Unterstrich."
+                        });
                     }
 
                 }
                 else if (index == 3)
                 {
-                    if(dbPlayer.LastPhoneNumberChange.AddMonths(StadthalleModule.PhoneNumberChangingMonths) > DateTime.Now)
+                    if (dbPlayer.LastPhoneNumberChange.AddMonths(StadthalleModule.PhoneNumberChangingMonths) > DateTime.Now)
                     {
                         dbPlayer.SendNewNotification("Du kannst deine Telefonnummer nur alle 4 Monate ändern!");
                         return false;
@@ -152,7 +153,7 @@ namespace GVRP.Module.Stadthalle
                                 }
                                 conn.Close();
                             }
-                            
+
                             kosten = (dbPlayer.Level + marryLevel) * 40000 / 2;
                             ComponentManager.Get<ConfirmationWindow>().Show()(dbPlayer, new ConfirmationObject($"Scheidung beantragen | Kosten: ${kosten}", "Die Kosten belaufen sich auf (Visumsstufen der Eheleute) 40.000 $ * (Ehepartner1 + Ehepartner2) / 2 . Beispiel : Visumsstufe 1 und Visumsstufe 50 -> 40.000 $ * (1 + 50) / 2 = 1020000 $! Diese Entscheidung ist einmalig & endgültig.", "DivorceConfirm", "", ""));
                         }

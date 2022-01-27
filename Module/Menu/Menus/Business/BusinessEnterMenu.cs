@@ -1,7 +1,6 @@
 ﻿using GVRP.Module.Business;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Warrants;
 
 namespace GVRP.Module.Menu.Menus.Business
 {
@@ -34,7 +33,7 @@ namespace GVRP.Module.Menu.Menus.Business
                 if (biz.Locked) menu.Add(biz.Name, "");
                 else menu.Add(biz.Name, "");
             }
-            
+
             return menu;
         }
 
@@ -71,7 +70,7 @@ namespace GVRP.Module.Menu.Menus.Business
 
                     point++;
                 }
-                
+
                 return true;
             }
         }

@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles.Data;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Geschenk
 {
@@ -168,11 +166,11 @@ namespace GVRP.Module.Geschenk
                 value = vehModel.Price;
             }
             else if (money != 0)
-            { 
+            {
                 dbPlayer.GiveMoney(money);
                 value = money;
             }
-            else if(itemId != 0)
+            else if (itemId != 0)
             {
                 dbPlayer.Container.AddItem((uint)itemId, 1);
             }
@@ -187,7 +185,7 @@ namespace GVRP.Module.Geschenk
         {
 
             string query = $"INSERT INTO `vehicles` (`owner`, `garage_id`, `inGarage`, `plate`, `model`, `vehiclehash`, `note`) VALUES ('{dbPlayer.Id}', '1', '1', 'GESCHENK', '{vehModel.Id}', '{vehModel.Model}', 'Teamgeschenk');";
-            
+
             MySQLHandler.ExecuteAsync(query);
         }
     }

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using MySql.Data.MySqlClient;
+﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Chat;
 using GVRP.Module.Configurations;
@@ -13,6 +7,11 @@ using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Teams;
 using GVRP.Module.Vehicles;
+using MySql.Data.MySqlClient;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.JobFactions.Mine
 {
@@ -22,7 +21,7 @@ namespace GVRP.Module.JobFactions.Mine
 
         public Vector3 AbbauPosition = new Vector3(2953.53, 2787.5, 40.7504);
         public Vector3 StorageLoadPosition = new Vector3(2681.83, 2796.3, 40.698);
-        
+
         public Vector3 ContainerAluPosition = new Vector3(2592.48, 2832.17, 31.6245);
         public float ContainerAliRange = 12.0f;
 
@@ -116,9 +115,9 @@ namespace GVRP.Module.JobFactions.Mine
                         sxVehicle.SyncExtension.SetEngineStatus(true);
 
                         Container TeamMineSchmelzContainer = TeamModule.Instance.Get(dbPlayer.TeamId).MineContainerSchmelze;
-                        foreach(Item item in TeamMineSchmelzContainer.Slots.Values.ToList())
+                        foreach (Item item in TeamMineSchmelzContainer.Slots.Values.ToList())
                         {
-                            if(sxVehicle.Container.CanInventoryItemAdded(item.Model, item.Amount))
+                            if (sxVehicle.Container.CanInventoryItemAdded(item.Model, item.Amount))
                             {
                                 sxVehicle.Container.AddItem(item.Model, item.Amount, item.Data, -1, true);
                                 TeamMineSchmelzContainer.RemoveItem(item.Model, item.Amount, true);
@@ -171,12 +170,12 @@ namespace GVRP.Module.JobFactions.Mine
 
             if (sxVehicle.Data.Hash == (uint)VehicleHash.Bulldozer && dbPlayer.Player.Position.DistanceTo(AbbauPosition) < 20.0f)
             {
-                if(sxVehicle.entity.HasData("mine1_loadage"))
+                if (sxVehicle.entity.HasData("mine1_loadage"))
                 {
                     dbPlayer.SendNewNotification("Die Schaufel ist bereits vollgeladen!");
                     return false;
                 }
-                else if(dbPlayer.CanInteract() && sxVehicle.CanInteract)
+                else if (dbPlayer.CanInteract() && sxVehicle.CanInteract)
                 {
                     NAPI.Task.Run(async () =>
                     {
@@ -232,7 +231,7 @@ namespace GVRP.Module.JobFactions.Mine
                         sxVehicle.entity.ResetData("mine1_loadage");
 
                         AddPlayerMineStorageAmount(dbPlayer, amount);
-                        
+
                         dbPlayer.SendNewNotification($">> {amount} kg Steingemisch entladen. (Bestand: {GetPlayerStorageAmount(dbPlayer)} kg)");
                         return;
                     });
@@ -253,7 +252,8 @@ namespace GVRP.Module.JobFactions.Mine
 
         public int GetPlayerStorageAmount(DbPlayer dbPlayer)
         {
-            if (PlayerSourceStorage.ContainsKey(dbPlayer.Id)) {
+            if (PlayerSourceStorage.ContainsKey(dbPlayer.Id))
+            {
                 return PlayerSourceStorage[dbPlayer.Id];
             }
             else

@@ -1,12 +1,11 @@
 ﻿using GTANetworkAPI;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using GVRP.Handler;
 using GVRP.Module.Delivery;
-using GVRP.Module.Events.Halloween;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.AsyncEventTasks
 {
@@ -64,8 +63,8 @@ namespace GVRP.Module.AsyncEventTasks
             {
                 await Task.Delay(1000);// Workaround for locked vehs
 
-            // Resync Entity Lock & Engine Status
-            if (sxVeh.SyncExtension != null)
+                // Resync Entity Lock & Engine Status
+                if (sxVeh.SyncExtension != null)
                 {
                     NAPI.Vehicle.SetVehicleEngineStatus(sxVeh.entity, sxVeh.SyncExtension.EngineOn);
                     NAPI.Vehicle.SetVehicleLocked(sxVeh.entity, sxVeh.SyncExtension.Locked);

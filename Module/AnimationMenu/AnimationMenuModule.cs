@@ -1,10 +1,4 @@
-﻿using GTANetworkAPI;
-using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
+﻿using System.Collections.Generic;
 
 namespace GVRP.Module.AnimationMenu
 {
@@ -18,7 +12,7 @@ namespace GVRP.Module.AnimationMenu
     public sealed class AnimationMenuModule : Module<AnimationMenuModule>
     {
         public Dictionary<uint, int> animFlagDic = new Dictionary<uint, int>();
-        
+
         public override bool Load(bool reload = false)
         {
             animFlagDic = new Dictionary<uint, int>();

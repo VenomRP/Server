@@ -1,18 +1,11 @@
-﻿using GTANetworkAPI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Handler;
+﻿using GVRP.Handler;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Menu;
-using GVRP.Module.NSA.Observation;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Telefon.App;
 using GVRP.Module.Vehicles;
-using GVRP.Module.Vehicles.Data;
+using System;
 
 namespace GVRP.Module.Carsell.Menu
 {
@@ -77,7 +70,7 @@ namespace GVRP.Module.Carsell.Menu
                 else if (index == 4) // Preisschild
                 {
                     MenuManager.DismissCurrent(dbPlayer);
-                    ComponentManager.Get<TextInputBoxWindow>().Show()(dbPlayer, new TextInputBoxWindowObject() { Title = "Preisschild ändern", Callback = "JobCarsellSetPriceAttach", Message = $"Geben Sie einen Pries zwischen ${Convert.ToInt32(sxVehicle.Data.Price*0.8)} und {Convert.ToInt32(sxVehicle.Data.Price * 1.1)}:" });
+                    ComponentManager.Get<TextInputBoxWindow>().Show()(dbPlayer, new TextInputBoxWindowObject() { Title = "Preisschild ändern", Callback = "JobCarsellSetPriceAttach", Message = $"Geben Sie einen Pries zwischen ${Convert.ToInt32(sxVehicle.Data.Price * 0.8)} und {Convert.ToInt32(sxVehicle.Data.Price * 1.1)}:" });
                     return true;
                 }
                 return true;

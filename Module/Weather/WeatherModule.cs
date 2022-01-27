@@ -1,9 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using GTANetworkAPI;
+﻿using GTANetworkAPI;
 using GVRP.Module.Configurations;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
+using System;
+using System.Collections.Generic;
 
 namespace GVRP.Module.Weather
 {
@@ -37,7 +37,7 @@ namespace GVRP.Module.Weather
         {
             var l_Time = DateTime.Now;
             DayOfWeek l_Day = l_Time.DayOfWeek;
-            var l_Hour = (uint) l_Time.Hour;
+            var l_Hour = (uint)l_Time.Hour;
 
             foreach (KeyValuePair<uint, Weather> kvp in GetAll())
             {
@@ -47,14 +47,14 @@ namespace GVRP.Module.Weather
                 if (kvp.Value.Hour != l_Hour)
                     continue;
 
-                if(!Main.WeatherOverride) Main.m_CurrentWeather = kvp.Value.NWeather;
+                if (!Main.WeatherOverride) Main.m_CurrentWeather = kvp.Value.NWeather;
                 break;
             }
 
             NAPI.World.SetTime((int)l_Hour, l_Time.Minute, l_Time.Second);
             if (!Configuration.Instance.DevMode) NAPI.World.SetWeather(Main.m_CurrentWeather);
         }
-        
+
         public override void OnPlayerFirstSpawn(DbPlayer dbPlayer)
         {
             dbPlayer.Player.TriggerEvent("setBlackout", Blackout);
@@ -64,7 +64,7 @@ namespace GVRP.Module.Weather
         public void SetBlackout(bool blackout)
         {
             Blackout = blackout;
-            foreach(DbPlayer iPlayer in Players.Players.Instance.GetValidPlayers())
+            foreach (DbPlayer iPlayer in Players.Players.Instance.GetValidPlayers())
             {
                 iPlayer.Player.TriggerEvent("setBlackout", Blackout);
             }
@@ -80,4 +80,4 @@ namespace GVRP.Module.Weather
             }
         }
     }
-}  
+}

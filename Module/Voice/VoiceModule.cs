@@ -1,16 +1,16 @@
-﻿using System;
+﻿using GTANetworkAPI;
+using GVRP.Module.FIB;
+using GVRP.Module.Injury;
+using GVRP.Module.Items;
+using GVRP.Module.Logging;
+using GVRP.Module.Players;
+using GVRP.Module.Players.Db;
+using GVRP.Module.Spawners;
+using GVRP.Module.Teams;
+using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using MySql.Data.MySqlClient;
-using GVRP.Module.Logging;
-using GVRP.Module.Players.Db;
-using GVRP.Module.Items;
-using GVRP.Module.Teams;
-using GTANetworkAPI;
-using GVRP.Module.Spawners;
-using GVRP.Module.Players;
-using GVRP.Module.Injury;
-using GVRP.Module.FIB;
 
 namespace GVRP.Module.Voice
 {
@@ -64,7 +64,7 @@ namespace GVRP.Module.Voice
 
         public override void OnPlayerDeath(DbPlayer dbPlayer, NetHandle killer, uint weapon)
         {
-            if(dbPlayer.isInjured()) 
+            if (dbPlayer.isInjured())
                 Instance.turnOffFunk(dbPlayer);
         }
 
@@ -143,7 +143,7 @@ namespace GVRP.Module.Voice
 
         private void actualizeFrequenzDataString(double frequenz)
         {
-            if(frequenz < 1)
+            if (frequenz < 1)
             {
                 voiceFQDataStrings[frequenz] = "";
                 return;
@@ -251,7 +251,7 @@ namespace GVRP.Module.Voice
         public void RemoveFromVoice(DbPlayer dbPlayer)
         {
             // Remove From Radio Frequenz
-            if(hasPlayerRadio(dbPlayer))
+            if (hasPlayerRadio(dbPlayer))
             {
                 double frequenz = getPlayerFrequenz(dbPlayer);
                 CheckFrequenz(frequenz);
@@ -309,9 +309,9 @@ namespace GVRP.Module.Voice
                     return;
                 }
 
-                if(Convert.ToInt32(frequenz) == AdminFunkFrequenz)
+                if (Convert.ToInt32(frequenz) == AdminFunkFrequenz)
                 {
-                    if(!dbPlayer.Rank.Features.Contains("adminfunk"))
+                    if (!dbPlayer.Rank.Features.Contains("adminfunk"))
                     {
                         dbPlayer.SendNewNotification("Warum du auch immer hier rein willst, du darfst das aber nicht!");
                         return;
@@ -320,7 +320,7 @@ namespace GVRP.Module.Voice
 
                 // Remove From Old Frequenz
                 refreshFQVoiceForFrequenz(getPlayerFrequenz(dbPlayer));
-                if(voiceFQ.ContainsKey(getPlayerFrequenz(dbPlayer))) voiceFQ[getPlayerFrequenz(dbPlayer)].Remove(dbPlayer);
+                if (voiceFQ.ContainsKey(getPlayerFrequenz(dbPlayer))) voiceFQ[getPlayerFrequenz(dbPlayer)].Remove(dbPlayer);
 
                 // Change Item to new
                 dbPlayer.Container.EditFirstItemData(ItemModelModule.Instance.GetByType(ItemModelTypes.Radio), "Fq", frequenz);
@@ -336,7 +336,7 @@ namespace GVRP.Module.Voice
 
         public bool hasPlayerRadio(DbPlayer dbPlayer)
         {
-            if(dbPlayer.Container.GetItemAmount(ItemModelModule.Instance.GetByType(ItemModelTypes.Radio)) > 0) return true;
+            if (dbPlayer.Container.GetItemAmount(ItemModelModule.Instance.GetByType(ItemModelTypes.Radio)) > 0) return true;
             else
             {
                 dbPlayer.Player.TriggerEvent("setRadioChatPlayers", "");
@@ -349,7 +349,7 @@ namespace GVRP.Module.Voice
         {
             double fq = 0.0;
 
-            if(hasPlayerRadio(dbPlayer))
+            if (hasPlayerRadio(dbPlayer))
             {
                 try
                 {

@@ -1,11 +1,9 @@
 ﻿using GTANetworkAPI;
+using GVRP.Module.NpcSpawner;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GVRP.Handler;
-using GVRP.Module.Items;
-using GVRP.Module.NpcSpawner;
 
 namespace GVRP.Module.Export
 {
@@ -55,9 +53,9 @@ namespace GVRP.Module.Export
             if (itemExport.Price <= itemExport.MinPrice) return;
 
             int diff = Convert.ToInt32((double)itemExport.Price * 0.03); // -3% als Diff
-            
+
             // Wenn Price - Diff unter MinPrice dann setze Diff auf (aktuell bis Minprice)
-            if(itemExport.Price - diff < itemExport.MinPrice)
+            if (itemExport.Price - diff < itemExport.MinPrice)
             {
                 diff = itemExport.Price - itemExport.MinPrice;
             }
@@ -66,7 +64,7 @@ namespace GVRP.Module.Export
             itemExport.Price -= diff;
 
             // Setze die +1% auf alle anderen Items drauf
-            foreach(ItemExport item in this.ItemExportList)
+            foreach (ItemExport item in this.ItemExportList)
             {
                 if (item.Item.Id == itemExport.Item.Id) continue;
 

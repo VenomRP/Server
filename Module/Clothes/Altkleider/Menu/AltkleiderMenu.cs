@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using GVRP.Module.ClientUI.Components;
-using GVRP.Module.Clothes.Props;
-using GVRP.Module.Items;
+﻿using GVRP.Module.Items;
 using GVRP.Module.Menu;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GVRP.Module.Players.Windows;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GVRP.Module.Clothes.Altkleider
 {
@@ -49,7 +45,7 @@ namespace GVRP.Module.Clothes.Altkleider
                     ClothModule.SaveCharacter(iPlayer);
                     return false;
                 }
-                
+
                 int idx = 1;
 
                 foreach (var clothId in iPlayer.Character.Wardrobe.ToList())
@@ -60,7 +56,7 @@ namespace GVRP.Module.Clothes.Altkleider
 
                     if (idx == index)
                     {
-                        if(!iPlayer.Container.CanInventoryItemAdded(AltkleiderModule.AltkleiderSackId, 1))
+                        if (!iPlayer.Container.CanInventoryItemAdded(AltkleiderModule.AltkleiderSackId, 1))
                         {
                             iPlayer.SendNewNotification("Du hast kein Platz im Inventar!");
                             return false;

@@ -1,9 +1,4 @@
-﻿using System.Collections.Generic;
-using GTANetworkAPI;
-using GVRP.Module.ClientUI.Apps;
-using GVRP.Module.Players;
-using Newtonsoft.Json;
-using System;
+﻿using GVRP.Module.ClientUI.Apps;
 
 namespace GVRP.Module.Funk.App
 {

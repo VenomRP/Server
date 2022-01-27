@@ -1,7 +1,4 @@
-﻿using System;
-using GVRP.Module.Logging;
-
-namespace GVRP.Module.Crime
+﻿namespace GVRP.Module.Crime
 {
     public class CrimeCategoryModule : SqlModule<CrimeCategoryModule, CrimeCategory, uint>
     {

@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using GVRP.Module.ClientUI.Components;
+using GVRP.Module.Guenther;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using System.Threading.Tasks;
-using GTANetworkAPI;
-using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Players.Windows;
-using GVRP.Module.Guenther;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace GVRP.Module.Items.Scripts
 {
@@ -17,7 +14,7 @@ namespace GVRP.Module.Items.Scripts
         {
             if (!dbPlayer.IsValid()) return false;
 
-            if(dbPlayer.Player.Dimension == 0)
+            if (dbPlayer.Player.Dimension == 0)
             {
                 if (true)
                 {
@@ -33,10 +30,10 @@ namespace GVRP.Module.Items.Scripts
                     return false;
                 }
 
-                dbPlayer.Character.Clothes.TryGetValue(6,out uint shoe);
-                dbPlayer.Character.Clothes.TryGetValue(4,out uint leg);
-                dbPlayer.Character.Clothes.TryGetValue(11,out uint top);
-                if(shoe == 0 || leg == 0 || top == 0)
+                dbPlayer.Character.Clothes.TryGetValue(6, out uint shoe);
+                dbPlayer.Character.Clothes.TryGetValue(4, out uint leg);
+                dbPlayer.Character.Clothes.TryGetValue(11, out uint top);
+                if (shoe == 0 || leg == 0 || top == 0)
                 {
                     dbPlayer.SendNewNotification("In Johanns Club kommst du nur mit einem seriösen Outfit rein");
                     return false;

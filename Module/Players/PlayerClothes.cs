@@ -1,6 +1,5 @@
 ﻿using GTANetworkAPI;
 using GVRP.Module.Clothes;
-using GVRP.Module.GTAN;
 using GVRP.Module.Outfits;
 using GVRP.Module.Players.Db;
 
@@ -62,7 +61,7 @@ namespace GVRP.Module.Players
             {
                 iPlayer.SetClothes(2, iPlayer.Customization.Hair.Hair, 0);
             }
-            
+
             if (iPlayer.jailtime[0] > 0)
             {
                 iPlayer.SetOutfit(OutfitTypes.Jail);
@@ -264,7 +263,7 @@ namespace GVRP.Module.Players
                             break;
                     }
                 }
-                
+
             }
             else if (iPlayer.Armor[0] <= 99)
             {
