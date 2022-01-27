@@ -44,7 +44,7 @@ namespace GVRP.Module.AsyncEventTasks
 
             if (sxVeh.jobid > 0)
             {
-                if (player.VehicleSeat == -1 && sxVeh.jobid != iPlayer.job[0] && sxVeh.jobid != 99 &&
+                if (player.VehicleSeat == 0 && sxVeh.jobid != iPlayer.job[0] && sxVeh.jobid != 99 &&
                     sxVeh.jobid != 999 && sxVeh.jobid != -1)
                 {
                     if (sxVeh.jobid == 999 && (iPlayer.RankId == 0))

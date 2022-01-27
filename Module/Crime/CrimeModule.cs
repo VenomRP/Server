@@ -34,7 +34,7 @@ namespace GVRP.Module.Crime
             if (!sxVeh.IsValid() || sxVeh.teamid != dbPlayer.TeamId || (dbPlayer.TeamId != (int)teams.TEAM_POLICE && dbPlayer.TeamId != (int)teams.TEAM_COUNTYPD)) return false;
             try
             {
-                if ((dbPlayer.TeamRank < 6 && sxVeh.GetSpeed() > 0) || (dbPlayer.Player.VehicleSeat == -1 && dbPlayer.TeamRank < 6))
+                if ((dbPlayer.TeamRank < 6 && sxVeh.GetSpeed() > 0) || (dbPlayer.Player.VehicleSeat == 0 && dbPlayer.TeamRank < 6))
                 {
                     dbPlayer.SendNewNotification("Messungen während der Fahrt sind erst ab rang 6 erlaubt.");
                     return false;
@@ -57,7 +57,7 @@ namespace GVRP.Module.Crime
                 foreach (DbPlayer tpl in targetPlayers)
                 {
                     if (!tpl.Player.IsInVehicle) continue;
-                    if (dbPlayer.Player.Vehicle == tpl.Player.Vehicle || tpl.Player.VehicleSeat != -1) continue;
+                    if (dbPlayer.Player.Vehicle == tpl.Player.Vehicle || tpl.Player.VehicleSeat != 0) continue;
                     SxVehicle targetVeh = tpl.Player.Vehicle.GetVehicle();
                     if (!targetVeh.IsValid() || targetVeh.GetSpeed() <= 0) continue;
                     if (!msgsend)

@@ -96,14 +96,15 @@
   <ItemGroup>
 
 
-	  <Reference Include="Bootstrapper">
-      <HintPath>..\..\RageMP\Own Testserver\server-files\1.1\dotnet\runtime\Bootstrapper.dll</HintPath>
-    </Reference>
-
 
 	  <!--<Reference Include="Bootstrapper">
 	    <HintPath>C:\Users\mahru\.nuget\packages\gtanetwork.api\0.3.5\lib\netcoreapp2.0\Bootstrapper.dll</HintPath>
 	  </Reference>-->
+
+
+	  <Reference Include="Bootstrapper">
+	    <HintPath>Bootstrapper.dll</HintPath>
+	  </Reference>
 
 
 	  <Reference Include="MySql.Data">

@@ -92,7 +92,7 @@ namespace GVRP.Module.Business.Raffinery
                                 iPlayer.SendNewNotification("Der Kofferaum muss zugeschlossen sein!");
                                 return false;
                             }
-                            if (iPlayer.Player.VehicleSeat != -1)
+                            if (iPlayer.Player.VehicleSeat != 0)
                             {
                                 iPlayer.SendNewNotification("Sie müssen Fahrer sein!");
                                 return false;
