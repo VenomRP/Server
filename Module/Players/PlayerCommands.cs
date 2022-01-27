@@ -2615,7 +2615,7 @@ namespace GVRP.Module.Players
                 var dbPlayer = player.GetPlayer();
                 if (!dbPlayer.CanAccessMethod()) return;
 
-                if (dbPlayer.Player.VehicleSeat != -1)
+                if (dbPlayer.Player.VehicleSeat != 0)
                 {
                     dbPlayer.SendNewNotification(
                         "Sie muessen Fahrer des Fahrzeuges sein!");

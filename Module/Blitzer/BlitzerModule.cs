@@ -133,7 +133,7 @@ namespace GVRP.Module.Blitzer
                             }
 
                             // Nur wenn fahrer
-                            if (dbPlayer.Player.VehicleSeat == -1)
+                            if (dbPlayer.Player.VehicleSeat == 0)
                             {
                                 SxVehicle sxVeh = dbPlayer.Player.Vehicle.GetVehicle();
                                 if (sxVeh == null)

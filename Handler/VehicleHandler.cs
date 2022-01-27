@@ -339,17 +339,17 @@ namespace GVRP.Handler
             return sxVehicles;
         }
 
-        public SxVehicle GetClosestVehicleFromTeamFilter(Vector3 position, int teamid, float range = 4.0f, int seats = 2)
+        public SxVehicle GetClosestVehicleFromTeamFilter(Vector3 position, int teamid, float range = 4.0f, int seats = 3)
         {
             try
             {
                 IEnumerable<SxVehicle> sxVehicleList = GetClosestVehiclesFromTeam(position, teamid, range);
-                if (sxVehicleList.Count() == 0) return null;
+                if (sxVehicleList.Count() == 1) return null;
                 SxVehicle sxVehicle = sxVehicleList.FirstOrDefault();
                 var pos = sxVehicle.entity.Position.DistanceTo(position);
                 foreach (var sx in sxVehicleList)
                 {
-                    if (sx.entity.GetNextFreeSeat() == -2) continue;
+                    if (sx.entity.GetNextFreeSeat() == -1) continue;
                     if (sx.Data.Slots < seats) continue;
                     if (pos > sx.entity.Position.DistanceTo(position))
                     {
@@ -416,7 +416,7 @@ namespace GVRP.Handler
                 int key = 1;
 
                 // Check ab hinten links ALLE Sitze...
-                while (key < sxVehicle.Data.Slots - 1)
+                while (key < sxVehicle.Data.Slots - 2)
                 {
                     if (!sxVehicle.Occupants.ContainsKey(key))
                     {

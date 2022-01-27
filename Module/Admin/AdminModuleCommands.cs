@@ -392,6 +392,7 @@ namespace GVRP.Module.Admin
                 }
                 catch (Exception e)
                 {
+                    //Kayano
                     Logger.Crash(e);
                 }
             }));

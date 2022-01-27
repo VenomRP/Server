@@ -89,7 +89,7 @@ namespace GVRP.Module.Freiberuf.Mower
 
                 if (iPlayer.Player.IsInVehicle)
                 {
-                    if (iPlayer.Player.VehicleSeat == -1 && iPlayer.Player.Vehicle.GetModel().Equals(VehicleHash.Tug))
+                    if (iPlayer.Player.VehicleSeat == 0 && iPlayer.Player.Vehicle.GetModel().Equals(VehicleHash.Tug))
                     {
                         SxVehicle sxVehicle = iPlayer.Player.Vehicle.GetVehicle();
                         if (sxVehicle != null && sxVehicle.IsValid() && sxVehicle.GetSpeed() > 8.0f && (sxVehicle.IsPlayerVehicle() || sxVehicle.IsTeamVehicle()))

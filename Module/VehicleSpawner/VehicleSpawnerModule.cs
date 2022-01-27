@@ -19,7 +19,7 @@ namespace GVRP.Module.VehicleSpawner
 
             if (dbPlayer.Player.IsInVehicle)
             {
-                if(dbPlayer.Player.VehicleSeat == -1) // driver
+                if(dbPlayer.Player.VehicleSeat == 0) // driver
                 {
                     SxVehicle sxVehicle = dbPlayer.Player.Vehicle.GetVehicle();
                     if(sxVehicle != null && sxVehicle.GetSpeed() > 0 && sxVehicle.entity.Position.Z > 20.0f) 
@@ -30,7 +30,7 @@ namespace GVRP.Module.VehicleSpawner
                             Task.Run(async () =>
                             {
                                 await Task.Delay(60000);
-                                if (sxVehicle != null && sxVehicle.entity.IsSeatFree(-1))
+                                if (sxVehicle != null && sxVehicle.entity.IsSeatFree(0))
                                 {
                                     if (sxVehicle.IsPlayerVehicle()) sxVehicle.SetPrivateCarGarage(1);
                                     if (sxVehicle.IsTeamVehicle()) sxVehicle.SetTeamCarGarage(true);
