@@ -37,7 +37,7 @@ namespace GVRP.Module.Gangwar
                 switch (index)
                 {
                     case 0: return true;
-                    case 1: model = 8976; break;
+                    case 1: model = 405; break;
                     //case 2: model = 40; break;
                     default: return true;
                 }

@@ -106,7 +106,7 @@ namespace GVRP.Module.Gangwar
         {
             if (GangwarTownModule.Instance.GetOwnedTownsCount(attacker.Team) >= GangwarModule.Instance.GangwarTownLimit)
             {
-                attacker.SendNewNotification("Genug Gebite macht mal RolEPLAY DUDE!");
+                attacker.SendNewNotification("Genug Gebiete macht mal RolEPLAY DUDE!");
                 return;
             }
 
