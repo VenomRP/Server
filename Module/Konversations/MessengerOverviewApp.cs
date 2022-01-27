@@ -42,6 +42,14 @@ namespace GVRP.Module.Konversations
             if (l_DbPlayer == null)
                 return;
 
+            if (l_DbPlayer.SmsCount > 10)
+            {
+                l_DbPlayer.SendNewNotification("Du schreibst zu viel!", PlayerNotification.NotificationType.ERROR);
+                return;
+            }
+
+            l_DbPlayer.SmsCount++;
+
             if (l_DbPlayer.HasData("nsa_smclone")) return;
             // Disable SMS Function for Leitstellen Module
             if (LeitstellenPhoneModule.TeamNumberPhones.ContainsKey((int) p_Receiver)) return;

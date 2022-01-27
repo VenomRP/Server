@@ -382,6 +382,8 @@ namespace GVRP.Module.Players.Db
 
         public int RacingBestTimeSeconds { get; set; }
 
+        public uint SmsCount { get; set; }
+
         public Dictionary<EventListIds, int> EventDoneList = new Dictionary<EventListIds, int>();
 
         public DbPlayer(MySqlDataReader reader)

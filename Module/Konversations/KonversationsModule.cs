@@ -43,6 +43,14 @@ namespace GVRP.Module.Konversations
 
             MySQLHandler.ExecuteAsync(l_KonversationsQuery);
             MySQLHandler.ExecuteAsync(l_MessagesQuery);
+
+            foreach (var user in Players.Players.Instance.GetValidPlayers())
+            {
+                if (user != null)
+                    continue;
+
+                user.SmsCount = 0;
+            }
         }
 
         public void SaveConversation(Conversation conversation, ConvMessage message)
