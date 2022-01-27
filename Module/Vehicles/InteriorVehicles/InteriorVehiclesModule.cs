@@ -42,7 +42,7 @@ namespace GVRP.Module.Vehicles.InteriorVehicles
 
                         DbPlayer coPilot = null;
                         // Check if pilot is existing
-                        if (dbPlayer.Player.VehicleSeat == -1 && sxVeh.Occupants.ContainsKey(0) && sxVeh.Occupants[0] != null && sxVeh.Occupants[0].IsValid())
+                        if (dbPlayer.Player.VehicleSeat == 0 && sxVeh.Occupants.ContainsKey(0) && sxVeh.Occupants[0] != null && sxVeh.Occupants[0].IsValid())
                         {
                             coPilot = sxVeh.Occupants[0];
                         }

@@ -139,7 +139,7 @@ namespace GVRP.Module.Sync
                         //Wichtig @Kayano
                         //DbPlayer player = occupants.GetPlayer();
 
-                        var driver = occupants2.Player.VehicleSeat == -1;
+                        var driver = occupants2.Player.VehicleSeat == 0;
                         if (!driver)
                         {
                             sxVeh.fuel -= sxVeh.Data.FuelConsumption / 100.0;

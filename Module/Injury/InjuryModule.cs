@@ -290,7 +290,7 @@ namespace GVRP.Module.Injury
                     if (injuryDelivery == null) return false;
 
                     // Get Driver of Vehicle
-                    DbPlayer medic = sxVehicle.Occupants.Values.Where(p => p.Player.VehicleSeat == -1).FirstOrDefault();
+                    DbPlayer medic = sxVehicle.Occupants.Values.Where(p => p.Player.VehicleSeat == 0).FirstOrDefault();
                     if (medic == null || !medic.IsValid()) return false;
 
                     // Check Bad Medic and license stuff

@@ -3872,7 +3872,7 @@ namespace GVRP.Module.Players
             var dbPlayer = player.GetPlayer();
             if (!dbPlayer.CanAccessMethod()) return;
 
-            if (!dbPlayer.Player.IsInVehicle || dbPlayer.Player.VehicleSeat == -1) return;
+            if (!dbPlayer.Player.IsInVehicle || dbPlayer.Player.VehicleSeat == 0) return;
             var vehicle = dbPlayer.Player.Vehicle.GetVehicle();
             if (vehicle.entity.GetModel() != VehicleHash.Taxi) return;
             if (vehicle.ownerId != dbPlayer.Id) return;
@@ -3901,7 +3901,7 @@ namespace GVRP.Module.Players
             var dbPlayer = player.GetPlayer();
             if (!dbPlayer.CanAccessMethod()) return;
 
-            if (!dbPlayer.Player.IsInVehicle || dbPlayer.Player.VehicleSeat == -1) return;
+            if (!dbPlayer.Player.IsInVehicle || dbPlayer.Player.VehicleSeat == 0) return;
             var vehicle = dbPlayer.Player.Vehicle.GetVehicle();
             if (vehicle.entity.GetModel() != VehicleHash.Taxi) return;
             if (vehicle.ownerId != dbPlayer.Id) return;

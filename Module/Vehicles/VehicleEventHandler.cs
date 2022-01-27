@@ -436,7 +436,7 @@ namespace GVRP.Module.Vehicles
         public void REQUEST_VEHICLE_TOGGLE_INDICATORS(Player Player)
         {
             var dbPlayer = Player.GetPlayer();
-            if (!dbPlayer.CanAccessRemoteEvent() || !Player.IsInVehicle || Player.VehicleSeat != -1) return;
+            if (!dbPlayer.CanAccessRemoteEvent() || !Player.IsInVehicle || Player.VehicleSeat != 0) return;
             var dbVehicle = Player.Vehicle.GetVehicle();
             if (!dbVehicle.IsValid()) return;
 
