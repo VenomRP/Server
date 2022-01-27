@@ -1,14 +1,10 @@
 {
   "profiles": {
-    "Venom-Roleplay": {
+    "Venom": {
       "commandName": "Executable",
-      "executablePath": "C:\\Users\\mahru\\OneDrive\\Desktop\\öl\\ragemp-server.exe",
-      "workingDirectory": "C:\\Users\\mahru\\OneDrive\\Desktop\\öl\\dotnet\\resources\\GVRP"
-    },
-    "Profil \"1\"": {
-      "commandName": "Executable",
-      "executablePath": "C:\\Users\\mahru\\OneDrive\\Desktop\\öl\\ragemp-server.exe",
-      "workingDirectory": "C:\\Users\\mahru\\OneDrive\\Desktop\\öl"
+      "executablePath": "../server-files/ragemp-server.exe",
+      "workingDirectory": "../server-files/",
+      "remoteDebugEnabled": false
     }
   }
 }
