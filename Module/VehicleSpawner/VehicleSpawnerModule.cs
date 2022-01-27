@@ -50,29 +50,31 @@ namespace GVRP.Module.VehicleSpawner
         {
             try
             {
-                foreach (SxVehicle sxVehicle in VehicleHandler.Instance.GetAllVehicles())
-                {
-                    if (sxVehicle == null || !sxVehicle.IsValid()) return;
-
-                    if (sxVehicle == null || !sxVehicle.IsValid()) continue;
-
-                    if (sxVehicle.IsPlayerVehicle() || sxVehicle.IsTeamVehicle())
+                NAPI.Task.Run(() => {
+                    foreach (SxVehicle sxVehicle in VehicleHandler.Instance.GetAllVehicles())
                     {
-                        if (sxVehicle.entity.HasData("lastSavedPos"))
+                        if (sxVehicle == null || !sxVehicle.IsValid()) return;
+
+                        if (sxVehicle == null || !sxVehicle.IsValid()) continue;
+
+                        if (sxVehicle.IsPlayerVehicle() || sxVehicle.IsTeamVehicle())
                         {
-                            if (sxVehicle.entity == null) continue;
-                            Vector3 lastSavedPos = (Vector3)sxVehicle.entity.GetData<Vector3>("lastSavedPos");
-                            if (lastSavedPos.DistanceTo(sxVehicle.entity.Position) > 5.0f)
+                            if (sxVehicle.entity.HasData("lastSavedPos"))
+                            {
+                                if (sxVehicle.entity == null) continue;
+                                Vector3 lastSavedPos = (Vector3)sxVehicle.entity.GetData<Vector3>("lastSavedPos");
+                                if (lastSavedPos.DistanceTo(sxVehicle.entity.Position) > 5.0f)
+                                {
+                                    SaveVehiclePosition(sxVehicle);
+                                }
+                            }
+                            else
                             {
                                 SaveVehiclePosition(sxVehicle);
                             }
                         }
-                        else
-                        {
-                            SaveVehiclePosition(sxVehicle);
-                        }
                     }
-                }
+                });
             }
             catch (Exception e)
             {

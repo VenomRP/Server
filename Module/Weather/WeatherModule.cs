@@ -50,9 +50,8 @@ namespace GVRP.Module.Weather
                 if (!Main.WeatherOverride) Main.m_CurrentWeather = kvp.Value.NWeather;
                 break;
             }
-
-            NAPI.World.SetTime((int)l_Hour, l_Time.Minute, l_Time.Second);
-            if (!Configuration.Instance.DevMode) NAPI.World.SetWeather(Main.m_CurrentWeather);
+            NAPI.Task.Run(() => NAPI.World.SetTime((int)l_Hour, l_Time.Minute, l_Time.Second));
+            if (!Configuration.Instance.DevMode) NAPI.Task.Run(() => NAPI.World.SetWeather(Main.m_CurrentWeather));
         }
 
         public override void OnPlayerFirstSpawn(DbPlayer dbPlayer)
