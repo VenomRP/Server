@@ -335,8 +335,9 @@ namespace GVRP.Module.Teamfight
             player.Health = 100;
             player.Armor = 100;
 
-            dbPlayer.Container.AddItem(655, 5);
-            dbPlayer.Container.AddItem(654, 5);
+            // Items got replaced with unlimited westen & medkit in gangwar dimension
+            //dbPlayer.Container.AddItem(655, 5);
+            //dbPlayer.Container.AddItem(654, 5);
         }
 
         public static void RemoveFromGangware(DbPlayer dbPlayer)

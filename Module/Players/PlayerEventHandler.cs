@@ -5,6 +5,7 @@ using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Clothes.Props;
 using GVRP.Module.Configurations;
+using GVRP.Module.Gangwar;
 using GVRP.Module.Injury;
 using GVRP.Module.Items;
 using GVRP.Module.Kasino;
@@ -25,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using GVRP.Module.Items.Scripts;
 
 namespace GVRP.Module.Players
 {
@@ -1048,7 +1050,15 @@ namespace GVRP.Module.Players
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsCuffed || dbPlayer.IsTied) return;
             if (!dbPlayer.CanInteract()) return;
-            await new ItemsModuleEvents().useInventoryItem(player, 4);
+
+            GangwarTown gangwarTown = GangwarTownModule.Instance.GetByPosition(dbPlayer.Player.Position);
+            if (dbPlayer.DimensionType[0] == DimensionType.Gangwar)
+            {
+                await ItemScript.medikit(dbPlayer, null);
+            } else
+            {
+                await new ItemsModuleEvents().useInventoryItem(player, 4);
+            }
         }
 
         [RemoteEvent]
@@ -1057,7 +1067,15 @@ namespace GVRP.Module.Players
             var dbPlayer = player.GetPlayer();
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsCuffed || dbPlayer.IsTied) return;
             if (!dbPlayer.CanInteract()) return;
-            await new ItemsModuleEvents().useInventoryItem(player, 5);
+
+            if (dbPlayer.DimensionType[0] == DimensionType.Gangwar)
+            {
+                await ItemScript.Armor(dbPlayer, null);
+            }
+            else
+            {
+                await new ItemsModuleEvents().useInventoryItem(player, 5);
+            }
         }
 
         [RemoteEvent]

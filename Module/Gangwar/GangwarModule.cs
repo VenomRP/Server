@@ -70,14 +70,17 @@ namespace GVRP.Module.Gangwar
         public override bool OnKeyPressed(DbPlayer dbPlayer, Key key)
         {
             if (dbPlayer.Player.IsInVehicle) return false;
-            if (key != Key.E) return false;
 
-            GangwarTown gangwarTown = GangwarTownModule.Instance.GetByPosition(dbPlayer.Player.Position);
-            if (gangwarTown != null && dbPlayer.Team.IsGangsters())
+            if (key == Key.E)
             {
-                MenuManager.Instance.Build(PlayerMenu.GangwarInfo, dbPlayer).Show(dbPlayer);
-                return true;
+                GangwarTown gangwarTown = GangwarTownModule.Instance.GetByPosition(dbPlayer.Player.Position);
+                if (gangwarTown != null && dbPlayer.Team.IsGangsters())
+                {
+                    MenuManager.Instance.Build(PlayerMenu.GangwarInfo, dbPlayer).Show(dbPlayer);
+                    return true;
+                }
             }
+
             return false;
         }
 
