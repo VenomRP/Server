@@ -58,7 +58,7 @@ namespace GVRP.Module.Players.Phone.Apps
             var settings = "{\"id\":\"SettingsApp\",\"name\":\"Settings\",\"icon\": \"SettingsApp.png\"}, ";
             var rechner = "{\"id\":\"CalculatorApp\",\"name\":\"Rechner\",\"icon\": \"CalculatorApp.png\"}, ";
             var service = "{\"id\":\"ServiceRequestApp\",\"name\":\"Services\",\"icon\": \"ServiceApp.png\"}, ";
-            var bank = "{\"id\":\"Bank\",\"name\":\"BankApp\",\"icon\": \"BankingApp.png\"}, ";
+            var bank = "{\"id\":\"BankingApp\",\"name\":\"BankApp\",\"icon\": \"BankingApp.png\"}, ";
 
             if (dbPlayer == null || !dbPlayer.IsValid()) return;
             if (dbPlayer.TeamId != 0)

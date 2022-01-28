@@ -378,7 +378,24 @@ namespace GVRP.Module.Players
 
 
                 //ravage
-                var handy = 1275 + iPlayer.Id;
+                uint handy = (uint)reader.GetInt32("handy");
+               // var handy = 1275 + iPlayer.Id;
+                var number = reader.GetInt32("phone");
+                if (handy == 0)
+                {
+                    handy = TryNumberOrNew(iPlayer, 1275 + iPlayer.Id);
+                    using (MySqlConnection con = new MySqlConnection(Configuration.Instance.GetMySqlConnection()))
+                    {
+                        con.Open();
+                        MySqlCommand cmd = con.CreateCommand();
+                        cmd.CommandText = "UPDATE player SET handy=@numb WHERE id=@id;";
+                        cmd.Parameters.AddWithValue("@numb", handy);
+                        cmd.Parameters.AddWithValue("@id", iPlayer.Id);
+                        cmd.ExecuteNonQuery();
+                        con.Clone();
+                    }
+
+                }
 
                 iPlayer.handy = new uint[2];
                 iPlayer.handy[1] = handy;

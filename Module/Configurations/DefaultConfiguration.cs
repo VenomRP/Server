@@ -71,8 +71,8 @@ namespace GVRP.Module.Configurations
             MaxPlayers = data.ContainsKey("max_players") ? int.Parse(data["max_players"]) : 1000;
 
             // Damage Multipliers
-            MeeleDamageMultiplier = 0.5f;
-            WeaponDamageMultipier = 0.75f; // Rage default vermutlich so 0.3 iwas
+            MeeleDamageMultiplier = 0.35f;
+            WeaponDamageMultipier = 0.25f; // Rage default vermutlich so 0.3 iwas
 
             disableAPILogin = false;
             LipsyncActive = data.ContainsKey("lipsync") ? bool.Parse(data["lipsync"]) : false;
