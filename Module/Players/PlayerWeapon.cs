@@ -191,7 +191,7 @@ namespace GVRP.Module.Players
             var weaponPlayer = iPlayer.Weapons.FirstOrDefault(w => w.WeaponDataId == l_WeaponID);
             if (weaponPlayer != null)
             {
-                weaponPlayer.Ammo = ammo;
+                weaponPlayer.Ammo += ammo;
             }
         }
 

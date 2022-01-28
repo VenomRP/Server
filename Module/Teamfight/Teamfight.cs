@@ -174,8 +174,7 @@ namespace GVRP.Module.Teamfight
             {
                 foreach (var weapon in dbPlayer.Weapons.ToList())
                 {
-                    // Get weapon data
-                    WeaponData weaponData = WeaponDataModule.Instance[weapon.WeaponDataId];
+                    WeaponData weaponData = WeaponDataModule.Instance.GetAll().First(key => key.Key == weapon.WeaponDataId).Value;
                     if (weaponData == null) continue;
 
                     var gun = ItemModelModule.Instance.GetByScript("w_" + Convert.ToString(weaponData.Name));
@@ -190,12 +189,10 @@ namespace GVRP.Module.Teamfight
                     if (ammo > 0)
                     {
                         // Get magazine data
-                        var magazin = ItemModelModule.Instance.GetByScript("ammo_" + Convert.ToString(gun.Name));
+                        var magazin = ItemModelModule.Instance.GetByScript("ammo_" + Convert.ToString(gun.Name).ToLower());
                         if (magazin == null) continue;
 
-                        var magazinAmmo = Convert.ToInt32(magazin.Script.ToLower().Replace("ammo_", "").Split('_')[1]);
-
-                        var magazines = ammo / magazinAmmo;
+                        var magazines = ammo / 32;
                         // Add magazines
                         dbPlayer.TeamFightContainer.AddItem(magazin, magazines);
                     }
@@ -237,7 +234,11 @@ namespace GVRP.Module.Teamfight
                             var magazin = ItemModelModule.Instance.GetByScript("ammo_" + Convert.ToString(gun.Name));
                             if (magazin == null) continue;
 
-                            var magazinAmmo = Convert.ToInt32(magazin.Script.ToLower().Replace("ammo_", "").Split('_')[1]);
+                            var split = magazin.Script.ToLower().Replace("ammo_", "").Split('_');
+
+                            if (split.Length < 2) continue;
+
+                            var magazinAmmo = Convert.ToInt32(split[1]);
 
                             var magazines = ammo / magazinAmmo;
 

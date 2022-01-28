@@ -202,12 +202,10 @@ namespace GVRP.Module.Teams.Shelter
                     else if (index == 4)
                     {
                         //Join Gangwar
-
                         if (GangwarTownModule.Instance.IsTeamInGangwar(dbPlayer.Team))
                         {
                             if (CanPlayerJoinGangwar(dbPlayer))
                             {
-                                Vector3 pos = teamShelter.MenuPosition;
                                 dbPlayer.Player.SetPosition(dbPlayer.Team.TeamSpawns.FirstOrDefault().Value.Position);
                                 TeamfightFunctions.SetToGangware(dbPlayer);
                             }
