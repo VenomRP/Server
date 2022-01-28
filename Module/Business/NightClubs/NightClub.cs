@@ -257,7 +257,8 @@ namespace GVRP.Module.Business.NightClubs
 
             foreach (NightClubItem nightClubItem in NightClubShopItems)
             {
-                ShopItemX shopItemX = new ShopItemX(nightClubItem.ItemId, nightClubItem.Name, nightClubItem.Price);
+                
+                ShopItemX shopItemX = new ShopItemX(nightClubItem.ItemId, nightClubItem.Name, nightClubItem.Price, ItemModelModule.Instance.Get(nightClubItem.ItemId).ImagePath);
                 shopItems.Add(shopItemX);
             }
 

@@ -66,7 +66,7 @@ namespace GVRP.Module.Shops
                     List<ShopItemX> Items = new List<ShopItemX>();
                     foreach (var item in shop.ShopItems)
                     {
-                        Items.Add(new ShopItemX(item.ItemId, item.Name, item.Price)); // TODO
+                        Items.Add(new ShopItemX(item.ItemId, item.Name, item.Price, ItemModelModule.Instance.Get(item.ItemId).ImagePath)); // TODO
                     }
                     ComponentManager.Get<ShopWindow>().Show()(dbPlayer, shop.Name, (int)shop.Id, Items);
                     return true;

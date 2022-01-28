@@ -22,13 +22,18 @@ namespace GVRP.Module.Shops.Windows
         [JsonProperty(PropertyName = "name")]
         public string Name { get; }
         [JsonProperty(PropertyName = "price")]
+
+        public string Img { get; }
+        [JsonProperty(PropertyName = "img")]
         public int Price { get; }
 
-        public ShopItemX(uint id, string name, int price)
+        public ShopItemX(uint id, string name, int price, string img)
         {
             Id = id;
             Name = name;
             Price = price;
+            Img = img;
+
         }
     }
 
