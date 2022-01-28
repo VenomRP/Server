@@ -1482,7 +1482,7 @@ namespace GVRP
 
                     Module.Launcher.APIModule.Instance.ClearWhitelist();
 
-                    MySQLHandler.Execute("DELETE FROM whitelist.whitelisted_ips2");
+                    MySQLHandler.Execute("DELETE FROM whitelisted_ips2");
                     return;
                 }
 
@@ -1552,7 +1552,7 @@ namespace GVRP
                         else if (min == 58)
                         {
                             // Clear Whitelist
-                            MySQLHandler.Execute("DELETE FROM whitelist.whitelisted_ips2");
+                            MySQLHandler.Execute("DELETE FROM whitelisted_ips2");
 
                             Console.WriteLine(
                                 "Alle Tasks wurden beendet, Server darf nun ausgeschaltet werden!");
