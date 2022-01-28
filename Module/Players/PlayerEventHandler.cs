@@ -1051,7 +1051,6 @@ namespace GVRP.Module.Players
             if (dbPlayer == null || !dbPlayer.IsValid() || dbPlayer.IsCuffed || dbPlayer.IsTied) return;
             if (!dbPlayer.CanInteract()) return;
 
-            GangwarTown gangwarTown = GangwarTownModule.Instance.GetByPosition(dbPlayer.Player.Position);
             if (dbPlayer.DimensionType[0] == DimensionType.Gangwar)
             {
                 await ItemScript.medikit(dbPlayer, null);
