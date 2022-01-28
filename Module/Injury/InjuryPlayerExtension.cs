@@ -195,7 +195,7 @@ namespace GVRP.Module.Injury
                     return;
                 }
 
-                if ((medic.IsAMedic() && medic.Duty) || (medic.ParamedicLicense && (!medic.IsAGangster() || dbPlayer.TeamId == medic.TeamId)))
+                if ((medic.IsAMedic() && medic.Duty) || (medic.ParamedicLicense && (!medic.IsAGangster() || dbPlayer.TeamId == medic.TeamId)) || medic.IsACop() && medic.ParamedicLicense)
                 {
 
                     if (dbPlayer.Injury.ItemToStabilizeId != 0 || dbPlayer.Player.Dimension == 0)

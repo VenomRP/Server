@@ -614,7 +614,7 @@ namespace GVRP.Module.Players
                     InjuryPlayerExtension.Medicate(destinationDbPlayer, dbPlayer);
                 }
 
-                if (destinationDbPlayer.HasData("Stabilize") && !dbPlayer.IsAMedic() || destinationDbPlayer.HasData("Istimnegerkh") && !dbPlayer.IsAMedic())
+                if (destinationDbPlayer.HasData("Stabilize") && (!dbPlayer.IsAMedic() || !dbPlayer.IsAGangster() || (dbPlayer.IsAMedic() && !dbPlayer.IsInDuty()) || (dbPlayer.IsAGangster() && !dbPlayer.ParamedicLicense) || dbPlayer.IsACop() && !dbPlayer.ParamedicLicense ) || destinationDbPlayer.HasData("Istimnegerkh") && (!dbPlayer.IsAMedic() || !dbPlayer.IsAGangster() || (dbPlayer.IsAMedic() && !dbPlayer.IsInDuty()) || (dbPlayer.IsAGangster() && !dbPlayer.ParamedicLicense)))
                 {
                     dbPlayer.SendNewNotification($"Stabilisierten {destinationDbPlayer.Injury.Name} können sie nicht behandeln!");
                     return;
