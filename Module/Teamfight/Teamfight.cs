@@ -192,7 +192,7 @@ namespace GVRP.Module.Teamfight
                         var magazin = ItemModelModule.Instance.GetByScript("ammo_" + Convert.ToString(gun.Name).ToLower());
                         if (magazin == null) continue;
 
-                        var magazines = ammo / 32;
+                        var magazines = (int)ammo / 32;
                         // Add magazines
                         dbPlayer.TeamFightContainer.AddItem(magazin, magazines);
                     }
