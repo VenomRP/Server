@@ -50,7 +50,7 @@ namespace GVRP.Module.Items.Scripts
                     NAPI.Player.StopPlayerAnimation(iPlayer.Player);
                     var l_Ammo = l_Details.Ammo + 32;
                     iPlayer.Player.TriggerEvent("updateWeaponAmmo", l_Details.WeaponDataId, l_Ammo);
-                    iPlayer.SetWeaponAmmo((WeaponHash)weaponData.Hash, l_Ammo);
+                    iPlayer.SetWeaponAmmo((WeaponHash)weaponData.Hash, 32);
                 }
                 iPlayer.Player.TriggerEvent("freezePlayer", false);
                 iPlayer.SetData("no-packgun", false);
