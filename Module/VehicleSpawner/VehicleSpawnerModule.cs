@@ -1,7 +1,6 @@
 ﻿using GTANetworkAPI;
 using GVRP.Handler;
 using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 using GVRP.Module.Vehicles;
 using System;
 
@@ -11,24 +10,25 @@ namespace GVRP.Module.VehicleSpawner
     {
         public override void OnPlayerDisconnected(Player player, string reason)
         {
-            try {
+            try
+            {
                 if (player == null || !player.Exists)
                     return;
 
                 var dbPlayer = player.GetPlayer();
 
                 if (dbPlayer == null || !dbPlayer.IsValid())
-                        return;
+                    return;
 
                 if (player.IsInVehicle)
                 {
-                    if(player.VehicleSeat == 0) // driver
+                    if (player.VehicleSeat == 0) // driver
                     {
                         SxVehicle sxVehicle = player.Vehicle.GetVehicle();
-                        if(sxVehicle != null && sxVehicle.GetSpeed() > 0 && sxVehicle.entity.Position.Z > 20.0f) 
+                        if (sxVehicle != null && sxVehicle.GetSpeed() > 0 && sxVehicle.entity.Position.Z > 20.0f)
                         {
                             // Parke helis & flugzeuge ein...
-                            if(sxVehicle.Data.ClassificationId == 9 || sxVehicle.Data.ClassificationId == 8)
+                            if (sxVehicle.Data.ClassificationId == 9 || sxVehicle.Data.ClassificationId == 8)
                             {
                                 NAPI.Task.Run(() =>
                                 {
@@ -54,7 +54,8 @@ namespace GVRP.Module.VehicleSpawner
         {
             try
             {
-                NAPI.Task.Run(() => {
+                NAPI.Task.Run(() =>
+                {
                     foreach (SxVehicle sxVehicle in VehicleHandler.Instance.GetAllVehicles())
                     {
                         if (sxVehicle == null || !sxVehicle.IsValid()) return;

@@ -1,6 +1,5 @@
 ﻿using GTANetworkAPI;
 using GVRP.Module.Players;
-using GVRP.Module.Players.Db;
 
 namespace GVRP.Module.Pet
 {

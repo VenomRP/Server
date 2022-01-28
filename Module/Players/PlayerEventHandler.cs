@@ -5,9 +5,9 @@ using GVRP.Module.Chat;
 using GVRP.Module.ClientUI.Components;
 using GVRP.Module.Clothes.Props;
 using GVRP.Module.Configurations;
-using GVRP.Module.Gangwar;
 using GVRP.Module.Injury;
 using GVRP.Module.Items;
+using GVRP.Module.Items.Scripts;
 using GVRP.Module.Kasino;
 using GVRP.Module.Keys;
 using GVRP.Module.Keys.Windows;
@@ -26,7 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using GVRP.Module.Items.Scripts;
 
 namespace GVRP.Module.Players
 {
@@ -1054,7 +1053,8 @@ namespace GVRP.Module.Players
             if (dbPlayer.DimensionType[0] == DimensionType.Gangwar)
             {
                 await ItemScript.medikit(dbPlayer, null);
-            } else
+            }
+            else
             {
                 await new ItemsModuleEvents().useInventoryItem(player, 4);
             }

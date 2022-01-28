@@ -1,7 +1,7 @@
-﻿using GVRP.Module.Items;
+﻿using GTANetworkAPI;
+using GVRP.Module.Items;
 using GVRP.Module.Players;
 using GVRP.Module.Players.Db;
-using GTANetworkAPI;
 using GVRP.Module.Teams.Spawn;
 using MySql.Data.MySqlClient;
 using System;

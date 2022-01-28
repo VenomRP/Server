@@ -1,7 +1,7 @@
-﻿using GVRP.Module.Configurations;
+﻿using GTANetworkAPI;
+using GVRP.Module.Configurations;
 using GVRP.Module.Logging;
 using GVRP.Module.Players.Db;
-using GTANetworkAPI;
 using System;
 using System.Collections.Generic;
 
