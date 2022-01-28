@@ -46,7 +46,7 @@ namespace GVRP.Module.Clothes.Shops
                     if (!reader.HasRows) return shopList;
                     while (reader.Read())
                     {
-                        var shopId = 1;
+                        var shopId = reader.GetUInt32(0);
                         var shopSlotClothes = new Dictionary<Tuple<int, uint, int>, List<Cloth>>();
                         var shopSlotProps = new Dictionary<Tuple<int, uint, int>, List<Prop>>();
                         var shopPropsSlots = new Dictionary<int, string>();
