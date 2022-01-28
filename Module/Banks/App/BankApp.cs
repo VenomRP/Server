@@ -77,7 +77,7 @@ namespace nexus.Module.Banks.App
                 iPlayer.SendNewNotification("Spieler nicht gefunden!");
                 return;
             }
-            break;
+            
         }
     }
 
