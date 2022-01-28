@@ -39,7 +39,9 @@ namespace nexus.Module.Banks.App
             var iPlayer = player.GetPlayer();
             if (iPlayer == null || !iPlayer.IsValid()) return;
 
-            player.TriggerEvent("updateBankingapp", iPlayer.bank_money[0], iPlayer.BankHistory);
+            Console.WriteLine("BANKINGAPP: " + iPlayer.bank_money[0]);
+
+            player.TriggerEvent("updateBankingapp", iPlayer.bank_money[0], NAPI.Util.ToJson(iPlayer.BankHistory));
 
         }
 
